@@ -10,6 +10,7 @@ public class RelativGrav : MonoBehaviour {
 	public float currentfallSpeed = 0.0f;
 	private bool isGrounded;
 	private float airTime;
+	float surfaceAngleZ;
 	Collider floor;
 	Vector3 dwnL;
 	Vector3 posRun;
@@ -29,10 +30,11 @@ public class RelativGrav : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		posRun = this.transform.position;
+
 		FloorMeasure ();
-		//Debug.Log ("floorDist: " + floorDist);
+		Debug.Log (isGrounded);
 		FallTowards();
-		//Debug.Log ("air time: "+airTime);
+
 		if (isGrounded == false) {
 			airTime += Time.deltaTime;
 		}
@@ -66,10 +68,15 @@ public class RelativGrav : MonoBehaviour {
 		//this.GetComponent<Rigidbody> ().transform.position += this.GetComponent<Rigidbody> ().transform.forward * currentfallSpeed * Time.deltaTime;
 		this.GetComponent<Rigidbody> ().transform.Translate (Vector3.down*currentfallSpeed*Time.deltaTime);
 	}
+	public float currentSurfaceAngle_z(){
+		return surfaceAngleZ;
+	}
 	void FloorMeasure(){
 		RaycastHit hit;
 		if (Physics.Raycast(posRun, dwnL, out hit)){
 			floorDist = hit.distance;
+			surfaceAngleZ = Vector3.Angle(hit.normal,-dwnL);
+
 		}
 	}
 }
