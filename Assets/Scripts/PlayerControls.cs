@@ -36,7 +36,7 @@ public class PlayerControls : MonoBehaviour {
 		surfaceAngle = JumpingC.currentSurfaceAngle();
 		//finds angle of camera relative to world & angle of surface
 		float cameraRot = Camera_Rot.rotation.eulerAngles.y;
-		Debug.Log (surfaceAngle.eulerAngles);
+		//Debug.Log (surfaceAngle.eulerAngles);
 		float EulerX = -surfaceAngle.eulerAngles.x;
 		float EulerZ = -surfaceAngle.eulerAngles.z;
 		//Debug.Log (EulerX + "," + EulerZ);
@@ -48,7 +48,7 @@ public class PlayerControls : MonoBehaviour {
 		Quaternion q = qx * qz * qy;
 
 		Vector3 rotatedDirection = q * moveDirection;
-		Debug.DrawLine (Vector3.zero, rotatedDirection, Color.green);
+		//Debug.DrawLine (Vector3.zero, rotatedDirection, Color.green);
 		//applies the direction to GamePbject Player rigidbody
 		Prb.transform.Translate (rotatedDirection*moveSpeed);
 	}

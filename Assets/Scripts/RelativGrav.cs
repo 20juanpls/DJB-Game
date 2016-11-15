@@ -32,7 +32,7 @@ public class RelativGrav : MonoBehaviour {
 		posRun = this.transform.position;
 
 		FloorMeasure ();
-		Debug.Log (isGrounded);
+		//Debug.Log (isGrounded);
 		FallTowards();
 
 		if (isGrounded == false) {
