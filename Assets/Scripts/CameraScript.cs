@@ -19,10 +19,10 @@ public class CameraScript : MonoBehaviour {
 	{
 		//Camera following
 		//Debug.Log (offsetY);
-		this.transform.position = player.transform.position + offset;
+		//this.transform.position = player.transform.position + offset;
 
 		//CameraOrbits --V
-		/*if (Input.GetKey(KeyCode.I)) {
+		if (Input.GetKey(KeyCode.I)) {
 			CamRotSpeed = SetCamRotSpeed;
 		}
 		else if (Input.GetKey (KeyCode.O)) {
@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour {
 		//to look at player--Vs
 		relativePos = player.position - this.transform.position;
 		rotset = Quaternion.LookRotation (relativePos);
-		this.transform.rotation = rotset;*/
+		this.transform.rotation = rotset;
 
 	}
 }

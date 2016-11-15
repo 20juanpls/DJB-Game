@@ -9,7 +9,7 @@ public class PlayerControls : MonoBehaviour {
 	public float jumpSpeed = -10.0f;
 	private Vector3 moveDirection = Vector3.zero;
 	private Vector3 moveAngle = Vector3.zero;
-	float surfaceAngle_z;
+	Quaternion surfaceAngle;
 	public float moveSpeed = 0.5f;
 	private bool canitjump;
 	// Use this for initialization
@@ -33,24 +33,22 @@ public class PlayerControls : MonoBehaviour {
 	void ControlOrientation(){
 		float HorizMov = Input.GetAxis ("Horizontal");
 		float VertMov = Input.GetAxis ("Vertical");
-		surfaceAngle_z = JumpingC.currentSurfaceAngle_z();
+		surfaceAngle = JumpingC.currentSurfaceAngle();
 		//finds angle of camera relative to world & angle of surface
 		float cameraRot = Camera_Rot.rotation.eulerAngles.y;
-		Debug.Log (surfaceAngle_z);
-		//float EulerX = surfaceAngle.eulerAngles.x;
-		//float EulerZ = surfaceAngle.eulerAngles.z;
+		Debug.Log (surfaceAngle.eulerAngles);
+		float EulerX = -surfaceAngle.eulerAngles.x;
+		float EulerZ = -surfaceAngle.eulerAngles.z;
+		//Debug.Log (EulerX + "," + EulerZ);
 		//converts floats to horizontal and vertical value depending on camera orientation
 		moveDirection = new Vector3(HorizMov, 0, VertMov);
-		//Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
-		//Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward); 
-		//Quaternion q1 = qx * qz;
-		//Vector3 rotatedAngle = q1 * moveDirection;
-		//moveAngle = new Vector3 (EulerX, 0, EulerZ);
+		Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
+		Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward); 
+		Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
+		Quaternion q = qx * qz * qy;
 
-		Quaternion qy =  Quaternion.AngleAxis(cameraRot, Vector3.up);
-
-		Vector3 rotatedDirection = qy * moveDirection;
-		Debug.DrawLine (Vector3.zero, moveDirection, Color.green);
+		Vector3 rotatedDirection = q * moveDirection;
+		Debug.DrawLine (Vector3.zero, rotatedDirection, Color.green);
 		//applies the direction to GamePbject Player rigidbody
 		Prb.transform.Translate (rotatedDirection*moveSpeed);
 	}
