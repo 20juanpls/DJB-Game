@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
 	Rigidbody Prb;
+	Transform TransP;
 	Transform Camera_Rot;
 	RelativGrav JumpingC;
 	private float angle_1;
 	public float jumpSpeed = -10.0f;
 	private Vector3 moveDirection = Vector3.zero;
 	private Vector3 rotatedDirection;
+	private Vector3 rtXZ;
+	private Vector3 forwardDirection;
 	private Quaternion _lookRotation;
 	Quaternion surfaceAngle;
 	public float moveSpeed = 0.5f;
@@ -17,6 +20,7 @@ public class PlayerControls : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Prb = this.GetComponent<Rigidbody> ();
+		TransP = this.GetComponent<Transform> ();
 		Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
 		JumpingC = this.GetComponent<RelativGrav>();
 		canitjump = false;
@@ -57,13 +61,18 @@ public class PlayerControls : MonoBehaviour {
 		Quaternion q = qx * qz * qy;
 
 		rotatedDirection = q * moveDirection;
+		rtXZ = qy * moveDirection;
+		forwardDirection = qz * moveDirection;
 		//Debug.DrawLine (Vector3.zero, rotatedDirection, Color.green);
 		//applies the direction to GamePbject Player rigidbody
 		//_lookRotation =  new Quaternion(0.0f,Quaternion.LookRotation(rotatedDirection).y,0.0f,0.0f);
+		//_lookRotation = Quaternion.LookRotation(rtXZ);
 		//Debug.Log (_lookRotation);
-		//this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
-		//this.transform.rotation = Quaternion.LookRotation (new Vector3(rotatedDirection.x,0.0f,0.0));
+		//TransP.transform.rotation = Quaternion.Slerp(this.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+		//this.transform.rotation = Quaternion.LookRotation (rtXZ);
+
 		Prb.transform.Translate (rotatedDirection*moveSpeed);
+
 		//Debug.Log ("this rotation:"+this.transform.rotation);
 	}
 	void PlayerMeshOrientation(){
