@@ -50,7 +50,7 @@ public class RelativGrav : MonoBehaviour {
 	public void setInitialSpeed(float innitspeed){
 		if (isGrounded == true)
 			initialSpeed = innitspeed;
-		Debug.Log ("initial jumps speed = " + initialSpeed);
+		//Debug.Log ("initial jumps speed = " + initialSpeed);
 	}
 	public bool IsItGrounded(){
 		return isGrounded;

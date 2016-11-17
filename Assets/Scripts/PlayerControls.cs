@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour {
 	private float angle_1;
 	public float jumpSpeed = -10.0f;
 	private Vector3 moveDirection = Vector3.zero;
-	private Vector3 rotatedDirection = Vector3.zero;
+	private Vector3 rotatedDirection;
 	private Quaternion _lookRotation;
 	Quaternion surfaceAngle;
 	public float moveSpeed = 0.5f;
@@ -31,11 +31,13 @@ public class PlayerControls : MonoBehaviour {
 		
 		ControlOrientation ();
 
-		//PlayerMeshOrientation (); <Dont use this just yet...>
+		//PlayerMeshOrientation (); //<Dont use this just yet...>
 
-		if (Input.GetKeyDown ("space") && canitjump == true) {
-			Debug.Log ("is this touched");
+		if (Input.GetKeyDown("space")) {
 			JumpingC.setInitialSpeed(jumpSpeed);
+			}
+		if (canitjump == false) {
+			JumpingC.setInitialSpeed(0.0f);
 		}
 		canitjump = JumpingC.IsItGrounded();
 	
@@ -57,7 +59,12 @@ public class PlayerControls : MonoBehaviour {
 		rotatedDirection = q * moveDirection;
 		//Debug.DrawLine (Vector3.zero, rotatedDirection, Color.green);
 		//applies the direction to GamePbject Player rigidbody
+		//_lookRotation =  new Quaternion(0.0f,Quaternion.LookRotation(rotatedDirection).y,0.0f,0.0f);
+		//Debug.Log (_lookRotation);
+		//this.transform.rotation = Quaternion.Slerp(this.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+		//this.transform.rotation = Quaternion.LookRotation (new Vector3(rotatedDirection.x,0.0f,0.0));
 		Prb.transform.Translate (rotatedDirection*moveSpeed);
+		//Debug.Log ("this rotation:"+this.transform.rotation);
 	}
 	void PlayerMeshOrientation(){
 		_lookRotation =  new Quaternion(0.0f,Quaternion.LookRotation(rotatedDirection).y,0.0f,0.0f);
