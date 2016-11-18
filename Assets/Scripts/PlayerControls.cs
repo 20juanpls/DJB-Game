@@ -6,12 +6,12 @@ public class PlayerControls : MonoBehaviour {
 	Transform TransP;
 	Transform Camera_Rot;
 	RelativGrav JumpingC;
-	private float angle_1;
 	public float jumpSpeed = -10.0f;
 	private Vector3 moveDirection = Vector3.zero;
 	private Vector3 lookDirection = Vector3.zero;
 	private Vector3 rotatedDirection;
 	private Vector3 rtY;
+    private Vector3 TmD;
 	private Quaternion _lookRotation;
 	Quaternion surfaceAngle;
 	public float moveSpeed = 0.5f;
@@ -20,6 +20,8 @@ public class PlayerControls : MonoBehaviour {
 	private float HorizLook;
 	private float VertLook;
 	// Use this for initialization
+    //11/17/16 - Make sure that if this game object is NOT grounded, rotatedDirection is switched to moveDirection on Air
+    //so that the tiny air boosts don't happen... OK()
 	void Start () {
 		Prb = this.GetComponent<Rigidbody> ();
 		TransP = this.GetComponent<Transform> ();
@@ -35,14 +37,12 @@ public class PlayerControls : MonoBehaviour {
 		if (HorizMov!=0.00f||VertMov!=0.00f) {
 			HorizLook = HorizMov;
 			VertLook = VertMov;
-		} 
-	
+		}
 		moveDirection = new Vector3(HorizMov, 0, VertMov);
 		lookDirection = new Vector3 (HorizLook, 0, VertLook);
 
 		ControlOrientation ();
 
-		//PlayerMeshOrientation (); //<Dont use this just yet...>
 
 		if (Input.GetKeyDown("space")) {
 			JumpingC.setInitialSpeed(jumpSpeed);
@@ -63,32 +63,28 @@ public class PlayerControls : MonoBehaviour {
 		//Debug.Log (surfaceAngle.eulerAngles);
 		float EulerX = -surfaceAngle.eulerAngles.x;
 		float EulerZ = -surfaceAngle.eulerAngles.z;
-		//Debug.Log (EulerX + "," + EulerZ);
-		//converts floats to horizontal and vertical value depending on camera orientation
-		Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
+
+        /*float oldCameraRotation = cameraRot;
+        if (rotatedDirection * moveSpeed == Vector3.zero)
+        {
+            cameraRot = oldCameraRotation;
+        }*/
+        //^-- Failed attempt at trying to get the player stay still when camera is rotating :'(
+        //converts floats to horizontal and vertical value depending on camera orientation
+
+        Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
 		Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward); 
 		Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
-		Quaternion q = qx * qz * qy;
-		Quaternion q1 = qx * qz;
+        Quaternion q = qx * qz * qy;
 
-		//rotatedDirection = q * moveDirection;
-		rotatedDirection = q1 * moveforward;
 		rtY = qy * lookDirection;
 
-		Debug.DrawLine (Vector3.zero, rotatedDirection, Color.green);
-		//applies the direction to GamePbject Player rigidbody
-		//_lookRotation =  new Quaternion(0.0f,Quaternion.LookRotation(rotatedDirection).y,0.0f,0.0f);
-		_lookRotation = Quaternion.LookRotation (rtY);
-		//Debug.Log (_lookRotation);
-		TransP.transform.rotation = Quaternion.Slerp(TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
-		//this.transform.rotation = Quaternion.LookRotation (rtXZ);
-		//Debug.Log (rotatedDirection.y);
-		TransP.transform.Translate (rotatedDirection*moveSpeed);
+        TmD = q*moveDirection;
 
-		//Debug.Log ("this rotation:"+this.transform.rotation);
-	}
-	void PlayerMeshOrientation(){
-		_lookRotation =  new Quaternion(0.0f,Quaternion.LookRotation(rotatedDirection).y,0.0f,0.0f);
-		this.transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+		_lookRotation = Quaternion.LookRotation (rtY);
+
+		TransP.transform.rotation = Quaternion.Slerp(TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+        rotatedDirection = new Vector3( moveforward.x, TmD.y, moveforward.z);
+        TransP.transform.Translate (rotatedDirection*moveSpeed);
 	}
 }
