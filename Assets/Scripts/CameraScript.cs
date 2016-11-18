@@ -4,8 +4,6 @@ using System.Collections;
 public class CameraScript : MonoBehaviour {
 	Transform player;
 
-	Vector3 thisPos;
-
 	private Vector3 offset;
 
 	public float DistY = 8.0f;
@@ -20,7 +18,6 @@ public class CameraScript : MonoBehaviour {
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<Transform>();
-		thisPos = this.transform.position;
 		offset = new Vector3(player.position.x, player.position.y + DistY, player.position.z + DistX);
 	}
 	

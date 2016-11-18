@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
-	Rigidbody Prb;
 	Transform TransP;
 	Transform Camera_Rot;
 	RelativGrav JumpingC;
@@ -12,6 +11,7 @@ public class PlayerControls : MonoBehaviour {
 	private Vector3 rotatedDirection;
 	private Vector3 rtY;
     private Vector3 TmD;
+	private Vector3 FinalDirection;
 	private Quaternion _lookRotation;
 	Quaternion surfaceAngle;
 	public float moveSpeed = 0.5f;
@@ -23,7 +23,6 @@ public class PlayerControls : MonoBehaviour {
     //11/17/16 - Make sure that if this game object is NOT grounded, rotatedDirection is switched to moveDirection on Air
     //so that the tiny air boosts don't happen... OK()
 	void Start () {
-		Prb = this.GetComponent<Rigidbody> ();
 		TransP = this.GetComponent<Transform> ();
 		Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
 		JumpingC = this.GetComponent<RelativGrav>();
@@ -70,29 +69,44 @@ public class PlayerControls : MonoBehaviour {
             cameraRot = oldCameraRotation;
         }*/
         //^-- Failed attempt at trying to get the player stay still when camera is rotating :'(
-        //converts floats to horizontal and vertical value depending on camera orientation
+        
+		//converts floats to horizontal and vertical value depending on camera orientation
 
         Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
 		Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward); 
 		Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
         Quaternion q = qx * qz * qy;
 
-		Debug.Log (EulerX+", EulerZ:"+EulerZ);
-
 		rtY = qy * lookDirection;
 
         TmD = q*moveDirection;
 
+		float TmDyzAngle;
+		if (TmD.y != 0 || TmD.z != 0) {
+			TmDyzAngle = Mathf.Rad2Deg * Mathf.Atan (TmD.y / TmD.z);
+		} else {
+			TmDyzAngle = 0;
+		}
+
+		Debug.Log (TmDyzAngle);
+		Quaternion fialel = Quaternion.AngleAxis (TmDyzAngle,Vector3.forward);
+
 		_lookRotation = Quaternion.LookRotation (rtY);
 		TransP.transform.rotation = Quaternion.Slerp (TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
 
+		rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
 		if (canitjump == true) {
-			rotatedDirection = new Vector3 (moveforward.x, TmD.y, moveforward.z);
-			TransP.transform.Translate (rotatedDirection * moveSpeed);
+			//DON'T MESS WITH THIS, THIS IS JUST TO SPABELIZE THE CHARACTER WHEN ITS GOING DOWNHILL!!!!
+			//if (TmD.y < 0) {
+			//	TmD.y = TmD.y - 0.08f;
+			//}
+			FinalDirection = fialel*rotatedDirection;
+			Debug.Log (FinalDirection.y);
+			TransP.transform.Translate (FinalDirection * moveSpeed);
 		} else {
-			rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
+			//rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
 			TransP.transform.Translate (rotatedDirection * moveSpeed);
 		}
-		Debug.DrawRay (Vector3.zero,rotatedDirection,Color.green);
+		Debug.DrawRay (Vector3.zero,FinalDirection,Color.green);
 	}
 }
