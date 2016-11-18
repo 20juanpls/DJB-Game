@@ -77,14 +77,22 @@ public class PlayerControls : MonoBehaviour {
 		Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
         Quaternion q = qx * qz * qy;
 
+		Debug.Log (EulerX+", EulerZ:"+EulerZ);
+
 		rtY = qy * lookDirection;
 
         TmD = q*moveDirection;
 
 		_lookRotation = Quaternion.LookRotation (rtY);
+		TransP.transform.rotation = Quaternion.Slerp (TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
 
-		TransP.transform.rotation = Quaternion.Slerp(TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
-        rotatedDirection = new Vector3( moveforward.x, TmD.y, moveforward.z);
-        TransP.transform.Translate (rotatedDirection*moveSpeed);
+		if (canitjump == true) {
+			rotatedDirection = new Vector3 (moveforward.x, TmD.y, moveforward.z);
+			TransP.transform.Translate (rotatedDirection * moveSpeed);
+		} else {
+			rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
+			TransP.transform.Translate (rotatedDirection * moveSpeed);
+		}
+		Debug.DrawRay (Vector3.zero,rotatedDirection,Color.green);
 	}
 }
