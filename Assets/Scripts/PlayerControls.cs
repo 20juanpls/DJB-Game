@@ -88,7 +88,7 @@ public class PlayerControls : MonoBehaviour {
 			TmDyzAngle = 0;
 		}
 
-		Debug.Log (TmDyzAngle);
+		//Debug.Log (TmDyzAngle);
 		Quaternion fialel = Quaternion.AngleAxis (TmDyzAngle,Vector3.forward);
 
 		_lookRotation = Quaternion.LookRotation (rtY);
