@@ -1,0 +1,17 @@
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/Nore5515/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll
+/Users/Nore5515/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/UnityEditor.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Unity.DataContract.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/Nore5515/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Mdb.dll
