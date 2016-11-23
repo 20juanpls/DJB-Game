@@ -9,8 +9,7 @@ public class NPC_Follow : MonoBehaviour {
 	public float minDistance;
 	public float atkDistance;
 	//Around ~25 seems to be good
-	public float atkSpeed;
-	Camera main;
+	public float atkForce;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +18,7 @@ public class NPC_Follow : MonoBehaviour {
 		distance = 100.0f;
 		minDistance = 20.0f;
 		atkDistance = 10.0f;
-		atkSpeed = 25.0f;
-		main = Camera.main;
+		atkForce = 5000.0f;
 	}
 	
 	// Update is called once per frame
@@ -31,17 +29,14 @@ public class NPC_Follow : MonoBehaviour {
 		//if distance between player and npc is less than mindistance...
 		if (distance <= minDistance) {
 
-
 			//npc looks at player 
 			rb.transform.LookAt (prb.transform.position);
-			//Player looks at npc: BROKEN, character movement becomes relative to the NPC, but camera is not moivng. --Noah
-			//main.transform.LookAt(rb.transform.position);
 			//npc rotation locked  to y only
 			rb.transform.rotation = new Quaternion (0.0f, rb.transform.rotation.y, 0.0f, rb.transform.rotation.w);
 
 			//if player is being watched and gets too close...
 			if (distance <= atkDistance) {
-				rb.AddForce (rb.transform.forward * atkSpeed);
+				rb.AddForce (rb.transform.forward * atkForce);
 			}
 		}
 	}
