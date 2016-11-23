@@ -47,19 +47,26 @@ public class RelativGrav : MonoBehaviour {
 			isGrounded = false;
 		}
 	}
-	public void setInitialSpeed(float innitspeed){
+
+    public void setInitialSpeed(float innitvalue){
 		if (isGrounded == true)
-			initialSpeed = innitspeed;
+			initialSpeed = innitvalue;
 		//Debug.Log ("initial jumps speed = " + initialSpeed);
 	}
-	public bool IsItGrounded(){
+
+    public void setCurrentFallSpeed(float innitvalue) {
+        currentfallSpeed = innitvalue;
+    }
+
+    public bool IsItGrounded(){
 		return isGrounded;
 	}
-	void FallTowards(){
-		if (currentfallSpeed <= terminalSpeed) 
-			currentfallSpeed = initialSpeed + (fallAccel * airTime);
-		else
-			currentfallSpeed = terminalSpeed;
+
+    void FallTowards(){
+            if (currentfallSpeed <= terminalSpeed)
+                currentfallSpeed = initialSpeed + (fallAccel * airTime);
+            else
+                currentfallSpeed = terminalSpeed;
 		/*this.GetComponent<Rigidbody> ().transform.rotation = Quaternion.Slerp (
 			this.GetComponent<Rigidbody> ().transform.rotation, 
 			Quaternion.LookRotation (CenterG.transform.position -this.GetComponent<Rigidbody> ().transform.position),
@@ -68,10 +75,12 @@ public class RelativGrav : MonoBehaviour {
 		//this.GetComponent<Rigidbody> ().transform.position += this.GetComponent<Rigidbody> ().transform.forward * currentfallSpeed * Time.deltaTime;
 		this.GetComponent<Rigidbody> ().transform.Translate (Vector3.down*currentfallSpeed*Time.deltaTime);
 	}
-	public Quaternion currentSurfaceAngle(){
+
+    public Quaternion currentSurfaceAngle(){
 		return surfaceAngle;
 	}
-	void FloorMeasure(){
+
+    void FloorMeasure(){
 		RaycastHit hit;
 		if (Physics.Raycast(posRun, dwnL, out hit)){
 			floorDist = hit.distance;

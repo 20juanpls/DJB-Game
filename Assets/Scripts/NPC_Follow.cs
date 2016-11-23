@@ -15,7 +15,7 @@ public class NPC_Follow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = this.GetComponent<Rigidbody> ();
-		prb = GameObject.Find ("Player_mesh-er...");
+		prb = GameObject.Find ("Player");
 		distance = 100.0f;
 		minDistance = 20.0f;
 		atkDistance = 10.0f;
