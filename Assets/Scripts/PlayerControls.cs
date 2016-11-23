@@ -53,6 +53,7 @@ public class PlayerControls : MonoBehaviour {
 	
 	}
 	void ControlOrientation(){
+		//Creates a Vector3 that only has a Z of the magnitude of both the Input Axis --Noah
 		float VectMeasure = moveDirection.magnitude;
 		Vector3 moveforward = new Vector3 (0.0f, 0.0f, VectMeasure);
 
@@ -72,7 +73,6 @@ public class PlayerControls : MonoBehaviour {
 
         TmD = q*moveDirection;
 
-<<<<<<< HEAD
 		float TmDyzAngle;
 		if (TmD.y != 0 || TmD.z != 0) {
 			TmDyzAngle = Mathf.Rad2Deg * Mathf.Atan (TmD.y / TmD.z);
@@ -84,9 +84,9 @@ public class PlayerControls : MonoBehaviour {
 		Quaternion fialel = Quaternion.AngleAxis (TmDyzAngle,Vector3.forward);
 
 		_lookRotation = Quaternion.LookRotation (rtY);
-=======
+
         _lookRotation = Quaternion.LookRotation (rtY);
->>>>>>> 57810ad4f7974b89f2a28dbff858ce661acf8657
+
 		TransP.transform.rotation = Quaternion.Slerp (TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
 
 		rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
