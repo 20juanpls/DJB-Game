@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\ButtonActivator.cs" />
      <Compile Include="Assets\PlayerButtonActivator.cs" />
+     <Compile Include="Assets\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\CoinSpinner.cs" />
      <Compile Include="Assets\Scripts\NPC_Follow.cs" />
