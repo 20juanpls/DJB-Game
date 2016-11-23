@@ -94,6 +94,7 @@ public class PlayerControls : MonoBehaviour {
 
         _lookRotation = Quaternion.LookRotation (rtY);
 
+
 		TransP.transform.rotation = Quaternion.Slerp (TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
         // Check this
 		rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
