@@ -19,6 +19,7 @@ public class PlayerControls : MonoBehaviour {
     private Quaternion _lookRotation, surfaceAngle, templookRotation;
 
     private bool canitjump, isMove, CanMove;
+    public bool PlayerActiveMove;
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
@@ -29,42 +30,52 @@ public class PlayerControls : MonoBehaviour {
         canitjump = false;
         isMove = false;
         CanMove = true;
+        PlayerActiveMove = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float HorizMov = Input.GetAxis ("Horizontal");
-		float VertMov = Input.GetAxis ("Vertical");
+        if (PlayerActiveMove == true)
+        {
+            float HorizMov = Input.GetAxis("Horizontal");
+            float VertMov = Input.GetAxis("Vertical");
 
-        if (HorizMov != 0.00f || VertMov != 0.00f){
-            HorizLook = HorizMov;
-            VertLook = VertMov;
-            isMove = false;
-        }else{
-            isMove = true;
-        }
+            if (HorizMov != 0.00f || VertMov != 0.00f)
+            {
+                HorizLook = HorizMov;
+                VertLook = VertMov;
+                isMove = false;
+            }
+            else
+            {
+                isMove = true;
+            }
 
-        moveDirection = new Vector3(HorizMov, 0, VertMov);
-        lookDirection = new Vector3(HorizLook, 0, VertLook);
+            moveDirection = new Vector3(HorizMov, 0, VertMov);
+            lookDirection = new Vector3(HorizLook, 0, VertLook);
 
-		ControlOrientation ();
-        ForwardMeasure();
+            ControlOrientation();
+            ForwardMeasure();
 
-        if (forwardDist <= 0.6f){
+            if (forwardDist <= 0.6f)
+            {
                 CanMove = false;
             }
 
-        if (VertLook <= -0.01 || forwardDist > 0.6f){
+            if (VertLook <= -0.01 || forwardDist > 0.6f)
+            {
                 CanMove = true;
             }
 
-        if (CanMove == false){
+            if (CanMove == false)
+            {
                 rotatedDirection = Vector3.zero;
                 FinalDirection = Vector3.zero;
             }
 
-        ApplyingDirection();
-        JumpNow();
+            ApplyingDirection();
+            JumpNow();
+        }
 	
 	}
 
@@ -150,5 +161,8 @@ public class PlayerControls : MonoBehaviour {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
         }
         canitjump = JumpingC.IsItGrounded();
+    }
+    public void setPlayerActivity(bool OnOrOff) {
+        PlayerActiveMove = OnOrOff;
     }
 }
