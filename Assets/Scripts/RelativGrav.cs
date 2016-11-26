@@ -4,6 +4,7 @@ using System.Collections;
 public class RelativGrav : MonoBehaviour {
 	//Transform PlayerMesh;
 	public float fallAccel = 2.0f;
+    private float currentFallAccel;
 	public float initialSpeed = 0.0f;
 	public float currentRotSpeed = 2.0f;
 	public float terminalSpeed = 2.0f;
@@ -12,16 +13,18 @@ public class RelativGrav : MonoBehaviour {
 	private float airTime;
 	Quaternion surfaceAngle;
 	Collider floor;
-	Vector3 dwnL;
+	Vector3 dwnL,UpL;
 	Vector3 posRun;
 	//Vector3 posFloor;
-	float floorDist;
+	float floorDist, CeilDist;
 	//Use this for initialization
 	void Start () {
-		//CenterG = GameObject.FindGameObjectWithTag ("GravP").GetComponent<Rigidbody>();
-		//PlayerMesh = GameObject.Find ("PlayerMesh").GetComponent<Transform> ();
-		airTime = 0.0f;
+        currentFallAccel = fallAccel;
+        //CenterG = GameObject.FindGameObjectWithTag ("GravP").GetComponent<Rigidbody>();
+        //PlayerMesh = GameObject.Find ("PlayerMesh").GetComponent<Transform> ();
+        airTime = 0.0f;
 		dwnL = transform.TransformDirection (Vector3.down);
+        UpL = transform.TransformDirection(Vector3.up);
 		//isGrounded = false;
 		//floor = GameObject.FindGameObjectWithTag ("Ground").GetComponent<Collider> ();
 		//posFloor = floor.transform.position.y;
@@ -32,27 +35,40 @@ public class RelativGrav : MonoBehaviour {
 		posRun = this.transform.position;
 
 		FloorMeasure ();
-		//Debug.Log (isGrounded);
 		FallTowards();
 
 		if (isGrounded == false) {
 			airTime += Time.deltaTime;
 		}
+        if (currentFallAccel == 0.0f) {
+            airTime = 0.0f;
+        }
 		if (floorDist <= 1.2f) {
 			currentfallSpeed = 0.0f;
 			isGrounded = true;
 			airTime = 0.0f;
-			//initialSpeed = 0.0f;
 		} else if(floorDist > 1.2f){
 			isGrounded = false;
 		}
+        if (CeilDist <= 1.2f && CeilDist!=0.0f) {
+            initialSpeed = 0.0f;
+            currentfallSpeed = 0.0f;
+        }
 	}
 
-    public void setInitialSpeed(float innitvalue){
-		if (isGrounded == true)
-			initialSpeed = innitvalue;
+    public void setInitialSpeed(float innitvalue, bool isPriority){
+        if (isGrounded == true && isPriority == false)
+        {
+            initialSpeed = innitvalue;
+        }
+        if (isPriority == true) {
+            initialSpeed = innitvalue;
+        }
 		//Debug.Log ("initial jumps speed = " + initialSpeed);
 	}
+    public void setFallAcceleration(float fallAcc) {
+        currentFallAccel = fallAcc;
+    }
 
     public void setCurrentFallSpeed(float innitvalue) {
         currentfallSpeed = innitvalue;
@@ -64,7 +80,7 @@ public class RelativGrav : MonoBehaviour {
 
     void FallTowards(){
             if (currentfallSpeed <= terminalSpeed)
-                currentfallSpeed = initialSpeed + (fallAccel * airTime);
+                currentfallSpeed = initialSpeed + (currentFallAccel * airTime);
             else
                 currentfallSpeed = terminalSpeed;
 		/*this.GetComponent<Rigidbody> ().transform.rotation = Quaternion.Slerp (
@@ -82,10 +98,15 @@ public class RelativGrav : MonoBehaviour {
 
     void FloorMeasure(){
 		RaycastHit hit;
-		if (Physics.Raycast(posRun, dwnL, out hit)){
+        RaycastHit hit_2;
+
+        if (Physics.Raycast(posRun, dwnL, out hit)){
 			floorDist = hit.distance;
 			surfaceAngle = Quaternion.FromToRotation(hit.normal,-dwnL);
-
 		}
+
+        if (Physics.Raycast(posRun,UpL,out hit_2)) {
+            CeilDist = hit_2.distance;
+        }
 	}
 }

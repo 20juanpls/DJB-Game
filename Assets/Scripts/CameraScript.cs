@@ -9,18 +9,18 @@ public class CameraScript : MonoBehaviour {
 	public float DistY = 6.0f;
 	public float DistX = 10.0f;
     public float MinDist = 6.0f;
-    public float MaxDist = 10.0f;
+    public float MaxDist = 12.0f;
     public float MinHeight = -5.0f;
-    public float MaxHeight = 6.0f;
+    public float MaxHeight = 2.0f;
 
 	//private Vector3 relativePos;
 	//private Quaternion rotset;
-	public float SetCamRotSpeed = 1.0f;
+	public float SetCamRotSpeed = 2.3f;
     private float CamRotSpeed = 0.0f;
-    public float ZoomSpeedY = 0.4f;
+    public float ZoomSpeedY = 0.2f;
     private float ZoomPosY = 0.0f;
     private float XZDist = 0.0f;
-    public float ZoomSpeedXZ = 0.4f;
+    public float ZoomSpeedXZ = 0.2f;
     private float CurrentZoomSpeedDist;
     //private float yOrigOffset;
     float XDist;
@@ -31,7 +31,7 @@ public class CameraScript : MonoBehaviour {
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<Transform>();
-        offset = new Vector3(player.position.x, player.position.y + DistY, player.position.z + DistX);
+        offset = new Vector3(0.0f, DistY, DistX);
     }
 	
 	void LateUpdate ()
@@ -47,9 +47,8 @@ public class CameraScript : MonoBehaviour {
         transform.LookAt(player.position);
 
 
-		//Camera following
-		//this.transform.position = playerPos-thisPos;
-		//this.transform.Translate (offset);
+        //Camera following
+        //Debug.Log(player.position);
 		//CameraOrbits --V
 
 

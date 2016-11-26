@@ -8,7 +8,7 @@ public class PlayerKnockback : MonoBehaviour {
     Rigidbody npcRB;
     Rigidbody TransP;
 
-    private bool collided, onGround;
+    private bool collided;
     private Vector3 KnockBackOrientation;
 
 	// Use this for initialization
@@ -23,11 +23,11 @@ public class PlayerKnockback : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (collided == true) {
-            TransP.AddForce(KnockBackOrientation*150.0f);
-            JumpingC.setInitialSpeed(-10.0f);
-            StartCoroutine(KnockBackTime(0.7f));
+            TransP.AddForce(KnockBackOrientation*200.0f);
+            JumpingC.setInitialSpeed(-15.0f,false);
+            StartCoroutine(KnockBackTime(0.4f));
         }
-        onGround = JumpingC.IsItGrounded();
+        //JumpingC.IsItGrounded();
 
     }
 
@@ -35,8 +35,7 @@ public class PlayerKnockback : MonoBehaviour {
 
 		//check for collision with anything tagged "NPC_Collider"
 		if (other.tag == "NPC_Collider") {
-			Debug.Log ("Collision with player from NPC face detected!");
-
+			//Debug.Log ("Collision with player from NPC face detected!");
             collided = true;
 			//Get NPC Rigidbody then reverse it's velocity
 			npcRB = other.GetComponentInParent<Rigidbody>();
