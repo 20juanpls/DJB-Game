@@ -9,14 +9,16 @@ public class RelativGrav : MonoBehaviour {
 	public float currentRotSpeed = 2.0f;
 	public float terminalSpeed = 2.0f;
 	public float currentfallSpeed = 0.0f;
+    public float minGroundDistance = 1.2f;
 	private bool isGrounded;
 	private float airTime;
 	Quaternion surfaceAngle;
 	Collider floor;
 	Vector3 dwnL,UpL;
 	Vector3 posRun;
-	//Vector3 posFloor;
-	float floorDist, CeilDist;
+    //Vector3 posFloor;
+    public float floorDist;
+	float CeilDist;
 	//Use this for initialization
 	void Start () {
         currentFallAccel = fallAccel;
@@ -43,14 +45,15 @@ public class RelativGrav : MonoBehaviour {
         if (currentFallAccel == 0.0f) {
             airTime = 0.0f;
         }
-		if (floorDist <= 1.2f) {
+		if (floorDist <= minGroundDistance) {
 			currentfallSpeed = 0.0f;
 			isGrounded = true;
 			airTime = 0.0f;
-		} else if(floorDist > 1.2f){
+		} else if(floorDist > minGroundDistance)
+        {
 			isGrounded = false;
 		}
-        if (CeilDist <= 1.2f && CeilDist!=0.0f) {
+        if (CeilDist <= minGroundDistance && CeilDist!=0.0f) {
             initialSpeed = 0.0f;
             currentfallSpeed = 0.0f;
         }

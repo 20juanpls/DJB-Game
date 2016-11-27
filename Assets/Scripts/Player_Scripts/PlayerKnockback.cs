@@ -8,7 +8,7 @@ public class PlayerKnockback : MonoBehaviour {
     Rigidbody npcRB;
     Rigidbody TransP;
 
-    private bool collided;
+    public bool collided, itStoppedMoving;
     private Vector3 KnockBackOrientation;
 
 	// Use this for initialization
@@ -22,7 +22,9 @@ public class PlayerKnockback : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (collided == true) {
+        //Debug.Log("collided "+collided);
+        if (collided == true )//&& itStoppedMoving == false)
+        {
             TransP.AddForce(KnockBackOrientation*200.0f);
             JumpingC.setInitialSpeed(-15.0f,false);
             StartCoroutine(KnockBackTime(0.4f));
@@ -35,13 +37,19 @@ public class PlayerKnockback : MonoBehaviour {
 
 		//check for collision with anything tagged "NPC_Collider"
 		if (other.tag == "NPC_Collider") {
-			//Debug.Log ("Collision with player from NPC face detected!");
             collided = true;
 			//Get NPC Rigidbody then reverse it's velocity
 			npcRB = other.GetComponentInParent<Rigidbody>();
-			npcRB.velocity = -npcRB.velocity*0.8f;
+            /*if (npcRB.velocity.magnitude < 2.0f)
+            {
+                itStoppedMoving = true;
+            }
+            else {
+                itStoppedMoving = false;
+            }*/
+            npcRB.velocity = -npcRB.velocity;//*0.8f;
             KnockBackOrientation = npcRB.transform.rotation*Vector3.forward;
-
+            //Debug.Log(KnockBackOrientation.magnitude);
         }
 	}
     void OnTriggerExit(Collider other)
@@ -49,12 +57,12 @@ public class PlayerKnockback : MonoBehaviour {
         //check for collision with anything tagged "NPC_Collider"
         if (other.tag == "NPC_Collider")
         {
-            Debug.Log("Collision with player from NPC face detected!");
+            //Debug.Log("Collision with player from NPC face detected!");
 
             collided = false;
         }
     }
-    
+
     IEnumerator KnockBackTime( float KnockTime){
         PlayerP.setPlayerActivity(false);
         yield return new WaitForSeconds(KnockTime);

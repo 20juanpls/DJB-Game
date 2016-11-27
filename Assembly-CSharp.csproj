@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\CoinSpinner.cs" />
+     <Compile Include="Assets\Scripts\MovingPlataform\NPC_Stomper.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
      <Compile Include="Assets\Scripts\PlayerButtonActivator.cs" />

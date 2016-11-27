@@ -65,7 +65,7 @@ public class PlayerControls : MonoBehaviour {
                 {
                     CanMove = false;
                 }
-                if (VertLook <= -0.01 || forwardDist > 0.6f||hasLedgeGrabbed == true)
+                if (VertLook <= -0.01 || forwardDist > 0.6f || forwardDist == 0.0f || hasLedgeGrabbed == true)
                 {
                     CanMove = true;
                 }
@@ -149,7 +149,7 @@ public class PlayerControls : MonoBehaviour {
 
         if (Physics.Raycast(new Vector3((ForwardRotatedDirection.x / 2) + TransP.transform.position.x, TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z / 2) + TransP.transform.position.z), Vector3.down * 2, out hit_2)) {
             downLedgeDist = hit_2.distance;
-            //surfaceAngleD = Quaternion.FromToRotation(hit.normal, -Vector3.down * 2);<--NotYeet either
+            //surfaceAngleD = Quaternion.FromToRotation(hit.normal, -Vector3.down * 2);
         }
     }
 
@@ -189,15 +189,15 @@ public class PlayerControls : MonoBehaviour {
             else {
                     Amistake = false;
                 }*/
-        if (isGrounded == false && forwardDist <= 0.6f && surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
+        if (isGrounded == false && forwardDist <= 0.6f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
         {
             LedgeGrabbableF = true;
         }
         else {
             LedgeGrabbableF = false;
         }
-
-        if (isGrounded == false && downLedgeDist <= 1.0f && downLedgeDist >= 0.8f && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
+        //Debug.Log(surfaceAngleD.eulerAngles.x);
+        if (isGrounded == false && downLedgeDist <= 1.0f && downLedgeDist >= 0.8f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
         {
             LedgeGrabbableD = true;
         }
@@ -206,7 +206,7 @@ public class PlayerControls : MonoBehaviour {
             LedgeGrabbableD = false;
         }
 
-        if (LedgeGrabbableF == true && LedgeGrabbableD == true)
+        if (LedgeGrabbableF == true && LedgeGrabbableD == true && JumpingC.floorDist > 4.0f)
         {
             //Debug.Log("ledge grabbed");
             JumpingC.setFallAcceleration(0.0f);
