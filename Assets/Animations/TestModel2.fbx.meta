@@ -1,0 +1,542 @@
+fileFormatVersion: 2
+guid: bdaa7853c9fdd4b999e58ba67fdba803
+timeCreated: 1480373776
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Abs_Control
+    100002: Back_Control
+    100004: Belt_Fix1_grp
+    100006: Belt_Fix2_grp
+    100008: Belt_Fix3_grp
+    100010: Chest_Control
+    100012: Clavicle_grp
+    100014: Clothes_Fix_grp
+    100016: Clothes_grp
+    100018: cluster_Abs
+    100020: cluster_Back
+    100022: cluster_Chest
+    100024: cluster_Hip
+    100026: curve1
+    100028: Global_Control
+    100030: group1
+    100032: group2
+    100034: group3
+    100036: group4
+    100038: grp_All
+    100040: grp_All_Curve_Controls
+    100042: grp_IK_Handles
+    100044: grp_Joints
+    100046: Head_Control
+    100048: Head_End_joint
+    100050: Head_ik_handle
+    100052: Head_joint
+    100054: Hip_Control
+    100056: Hip_Shake_Control
+    100058: Human_Base
+    100060: Human_Base_Peasant_Male
+    100062: Jog
+    100064: L_Ankle_joint
+    100066: L_Clavicle_Control
+    100068: L_Clavicle_joint
+    100070: L_Elbow_Control
+    100072: L_Elbow_joint
+    100074: L_Foot_joint
+    100076: L_Hand_Control
+    100078: L_Hand_End_joint
+    100080: L_Hand_joint
+    100082: L_Hip_joint
+    100084: L_ik_Ankle_handle
+    100086: L_ik_Clavicle_handle
+    100088: L_ik_Elbow_Control
+    100090: L_ik_Foot_handle
+    100092: L_ik_Hand_handle
+    100094: L_ik_Toe_handle
+    100096: L_Knee_Control
+    100098: L_Knee_joint
+    100100: L_Leg_Control
+    100102: L_legLock_joint1
+    100104: L_legLock_joint2
+    100106: L_legLock_joint3
+    100108: L_legLock_joint4
+    100110: L_Shoulder_Control
+    100112: L_Shoulder_joint
+    100114: L_Toe_joint
+    100116: L_Wrist_Control
+    100118: L_Wrist_Control_grp
+    100120: L_Wrist_joint
+    100122: motionTrail1Handle
+    100124: motionTrail2Handle
+    100126: motionTrail3Handle
+    100128: motionTrail4Handle
+    100130: Neck_ik_handle
+    100132: Neck_joint
+    100134: R_Ankle_joint
+    100136: R_Clavicle_Control
+    100138: R_Clavicle_joint
+    100140: R_Elbow_Control
+    100142: R_Elbow_joint
+    100144: R_Foot_joint
+    100146: R_Hand_Control
+    100148: R_Hand_End_joint
+    100150: R_Hand_joint
+    100152: R_Hip_joint
+    100154: R_ik_Ankle_handle
+    100156: R_ik_Clavicle_handle
+    100158: R_ik_Elbow_Control
+    100160: R_ik_Foot_handle
+    100162: R_ik_Hand_handle
+    100164: R_ik_Toe_handle
+    100166: R_Knee_Control
+    100168: R_Knee_joint
+    100170: R_Leg_Control
+    100172: R_legLock_joint1
+    100174: R_legLock_joint2
+    100176: R_legLock_joint3
+    100178: R_legLock_joint4
+    100180: R_Shoulder_Control
+    100182: R_Shoulder_joint
+    100184: R_Toe_joint
+    100186: R_Wrist_Control
+    100188: R_Wrist_Control_grp
+    100190: R_Wrist_joint
+    100192: Root_joint
+    100194: Spine1_joint
+    100196: Spine2_joint
+    100198: Spine3_joint
+    100200: Spine4_joint
+    100202: Spine5_joint
+    100204: Spine_ik_handle
+    100206: //RootNode
+    100208: transform1
+    100210: transform2
+    100212: transform3
+    100214: transform4
+    100216: transform5
+    100218: transform6
+    400000: Abs_Control
+    400002: Back_Control
+    400004: Belt_Fix1_grp
+    400006: Belt_Fix2_grp
+    400008: Belt_Fix3_grp
+    400010: Chest_Control
+    400012: Clavicle_grp
+    400014: Clothes_Fix_grp
+    400016: Clothes_grp
+    400018: cluster_Abs
+    400020: cluster_Back
+    400022: cluster_Chest
+    400024: cluster_Hip
+    400026: curve1
+    400028: Global_Control
+    400030: group1
+    400032: group2
+    400034: group3
+    400036: group4
+    400038: grp_All
+    400040: grp_All_Curve_Controls
+    400042: grp_IK_Handles
+    400044: grp_Joints
+    400046: Head_Control
+    400048: Head_End_joint
+    400050: Head_ik_handle
+    400052: Head_joint
+    400054: Hip_Control
+    400056: Hip_Shake_Control
+    400058: Human_Base
+    400060: Human_Base_Peasant_Male
+    400062: Jog
+    400064: L_Ankle_joint
+    400066: L_Clavicle_Control
+    400068: L_Clavicle_joint
+    400070: L_Elbow_Control
+    400072: L_Elbow_joint
+    400074: L_Foot_joint
+    400076: L_Hand_Control
+    400078: L_Hand_End_joint
+    400080: L_Hand_joint
+    400082: L_Hip_joint
+    400084: L_ik_Ankle_handle
+    400086: L_ik_Clavicle_handle
+    400088: L_ik_Elbow_Control
+    400090: L_ik_Foot_handle
+    400092: L_ik_Hand_handle
+    400094: L_ik_Toe_handle
+    400096: L_Knee_Control
+    400098: L_Knee_joint
+    400100: L_Leg_Control
+    400102: L_legLock_joint1
+    400104: L_legLock_joint2
+    400106: L_legLock_joint3
+    400108: L_legLock_joint4
+    400110: L_Shoulder_Control
+    400112: L_Shoulder_joint
+    400114: L_Toe_joint
+    400116: L_Wrist_Control
+    400118: L_Wrist_Control_grp
+    400120: L_Wrist_joint
+    400122: motionTrail1Handle
+    400124: motionTrail2Handle
+    400126: motionTrail3Handle
+    400128: motionTrail4Handle
+    400130: Neck_ik_handle
+    400132: Neck_joint
+    400134: R_Ankle_joint
+    400136: R_Clavicle_Control
+    400138: R_Clavicle_joint
+    400140: R_Elbow_Control
+    400142: R_Elbow_joint
+    400144: R_Foot_joint
+    400146: R_Hand_Control
+    400148: R_Hand_End_joint
+    400150: R_Hand_joint
+    400152: R_Hip_joint
+    400154: R_ik_Ankle_handle
+    400156: R_ik_Clavicle_handle
+    400158: R_ik_Elbow_Control
+    400160: R_ik_Foot_handle
+    400162: R_ik_Hand_handle
+    400164: R_ik_Toe_handle
+    400166: R_Knee_Control
+    400168: R_Knee_joint
+    400170: R_Leg_Control
+    400172: R_legLock_joint1
+    400174: R_legLock_joint2
+    400176: R_legLock_joint3
+    400178: R_legLock_joint4
+    400180: R_Shoulder_Control
+    400182: R_Shoulder_joint
+    400184: R_Toe_joint
+    400186: R_Wrist_Control
+    400188: R_Wrist_Control_grp
+    400190: R_Wrist_joint
+    400192: Root_joint
+    400194: Spine1_joint
+    400196: Spine2_joint
+    400198: Spine3_joint
+    400200: Spine4_joint
+    400202: Spine5_joint
+    400204: Spine_ik_handle
+    400206: //RootNode
+    400208: transform1
+    400210: transform2
+    400212: transform3
+    400214: transform4
+    400216: transform5
+    400218: transform6
+    4300000: Human_Base_Peasant_Male
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Human_Base_Peasant_Male
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Clothes_grp
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/Belt_Fix1_grp
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/Belt_Fix1_grp/transform3
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/Belt_Fix2_grp
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/Belt_Fix2_grp/transform2
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/Belt_Fix3_grp
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/Belt_Fix3_grp/transform4
+        weight: 1
+      - path: Clothes_grp/Clothes_Fix_grp/transform1
+        weight: 1
+      - path: Clothes_grp/transform6
+        weight: 1
+      - path: Global_Control
+        weight: 1
+      - path: grp_All
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Abs_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/Back_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/Back_Control/Head_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/Clavicle_grp
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/Clavicle_grp/L_Clavicle_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/Clavicle_grp/R_Clavicle_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Hip_Shake_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Hand_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_ik_Elbow_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Knee_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_ik_Toe_handle
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3/L_ik_Foot_handle
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3/L_legLock_joint4
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3/L_legLock_joint4/L_ik_Ankle_handle
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Shoulder_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Shoulder_Control/L_Elbow_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Wrist_Control_grp
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/L_Wrist_Control_grp/L_Wrist_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Hand_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_ik_Elbow_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Knee_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_ik_Toe_handle
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3/R_ik_Foot_handle
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3/R_legLock_joint4
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3/R_legLock_joint4/R_ik_Ankle_handle
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Shoulder_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Shoulder_Control/R_Elbow_Control
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Wrist_Control_grp
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls/R_Wrist_Control_grp/R_Wrist_Control
+        weight: 1
+      - path: grp_All/grp_IK_Handles
+        weight: 1
+      - path: grp_All/grp_IK_Handles/L_ik_Clavicle_handle
+        weight: 1
+      - path: grp_All/grp_IK_Handles/L_ik_Hand_handle
+        weight: 1
+      - path: grp_All/grp_IK_Handles/Neck_ik_handle
+        weight: 1
+      - path: grp_All/grp_IK_Handles/Neck_ik_handle/Head_ik_handle
+        weight: 1
+      - path: grp_All/grp_IK_Handles/R_ik_Clavicle_handle
+        weight: 1
+      - path: grp_All/grp_IK_Handles/R_ik_Hand_handle
+        weight: 1
+      - path: grp_All/grp_IK_Handles/Spine_ik_handle
+        weight: 1
+      - path: grp_All/grp_Joints
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/curve1
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group1
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group1/cluster_Hip
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group2
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group2/cluster_Abs
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group3
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group3/cluster_Chest
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group4
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/group4/cluster_Back
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint/L_Ankle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint/L_Ankle_joint/L_Foot_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint/L_Ankle_joint/L_Foot_joint/L_Toe_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint/R_Ankle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint/R_Ankle_joint/R_Foot_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint/R_Ankle_joint/R_Foot_joint/R_Toe_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint/L_Hand_End_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/Neck_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/Neck_joint/Head_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/Neck_joint/Head_joint/Head_End_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint/R_Hand_End_joint
+        weight: 1
+      - path: Human_Base
+        weight: 1
+      - path: Human_Base/transform5
+        weight: 1
+      - path: Jog
+        weight: 1
+      - path: Jog/Human_Base_Peasant_Male
+        weight: 1
+      - path: motionTrail1Handle
+        weight: 1
+      - path: motionTrail2Handle
+        weight: 1
+      - path: motionTrail3Handle
+        weight: 1
+      - path: motionTrail4Handle
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

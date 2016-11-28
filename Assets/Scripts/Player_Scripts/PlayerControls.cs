@@ -24,6 +24,10 @@ public class PlayerControls : MonoBehaviour {
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
+	public GameObject theRunningGuy;
+	Animation runner;
+
+
 	void Start () {
         TransP = this.GetComponent<Rigidbody> ();
 		Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
@@ -33,11 +37,15 @@ public class PlayerControls : MonoBehaviour {
         CanMove = true;
         PlayerActiveMove = true;
         PlayerCanMove = true;
+		runner = theRunningGuy.GetComponent<Animation> ();
+
 
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		runner.Play ();
         if (PlayerActiveMove == true)
         {
             float HorizMov = Input.GetAxis("Horizontal");
@@ -138,7 +146,7 @@ public class PlayerControls : MonoBehaviour {
    void ForwardMeasure() {
         RaycastHit hit;
         RaycastHit hit_2;
-        //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x/2) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z/2) + TransP.transform.position.z), Vector3.down*2,Color.green);
+        Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
         //Debug.DrawRay(TransP.transform.position, ForwardRotatedDirection, Color.red);
         //IMPORTANT: If I want to add a collider in front of player, I need to make sure the raycast ignores that collider...Tagging is key.
         if (Physics.Raycast(TransP.transform.position, ForwardRotatedDirection, out hit))
@@ -147,7 +155,7 @@ public class PlayerControls : MonoBehaviour {
             //surfaceAngleF = Quaternion.FromToRotation(hit.normal, -ForwardRotatedDirection);<--NotYet
         }
 
-        if (Physics.Raycast(new Vector3((ForwardRotatedDirection.x / 2) + TransP.transform.position.x, TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z / 2) + TransP.transform.position.z), Vector3.down * 2, out hit_2)) {
+        if (Physics.Raycast(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x, TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down * 2, out hit_2)) {
             downLedgeDist = hit_2.distance;
             //surfaceAngleD = Quaternion.FromToRotation(hit.normal, -Vector3.down * 2);
         }
@@ -189,7 +197,7 @@ public class PlayerControls : MonoBehaviour {
             else {
                     Amistake = false;
                 }*/
-        if (isGrounded == false && forwardDist <= 0.6f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
+        if (isGrounded == false && forwardDist <= 1.5f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
         {
             LedgeGrabbableF = true;
         }
