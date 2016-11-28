@@ -1,4 +1,5 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
+<<<<<<< Updated upstream
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player_Scripts/PlayerControls.cs">
     <Files>
@@ -6,6 +7,13 @@
       <File FileName="Assets/Scripts/CameraScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RelativGrav.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/PlayerScore.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerLavaDeath.cs">
+    <Files>
+      <File FileName="Assets/Scripts/PlayerLavaDeath.cs" Line="28" Column="73" />
+      <File FileName="Assets/Checkpoint.cs" Line="19" Column="100" />
+>>>>>>> Stashed changes
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
