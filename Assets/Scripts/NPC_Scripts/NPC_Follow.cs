@@ -39,7 +39,12 @@ public class NPC_Follow : MonoBehaviour {
         CurrentSpikeSpeed = spikeSpeed;
 
     }
-	
+
+	//ANother Noah Squeeze
+	public void AssignPlayer(GameObject p){
+		prb = p;
+	}
+
 	// Update is called once per frame
 	void Update () {
         //Debug.Log(SpikesChild.position);

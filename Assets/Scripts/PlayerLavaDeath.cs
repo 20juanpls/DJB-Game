@@ -7,14 +7,14 @@ using System.Collections.Generic;
 public class PlayerLavaDeath : MonoBehaviour {
 
 	public GameObject loseScreen;
-	GameObject player;
+	public GameObject player;
 	Transform respawn;
 
 	// Use this for initialization
 	void Start () {
 		loseScreen = GameObject.Find ("LoseScreenCanvas");
 		loseScreen.SetActive (false);
-		player = GameObject.Find ("Player_folder");
+		player = this.gameObject.transform.parent.gameObject;
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -29,6 +29,12 @@ public class PlayerLavaDeath : MonoBehaviour {
 	}
 
 	public void Restart(){
-		Instantiate (player, respawn);
+		GameObject _p = (GameObject)Instantiate (player, respawn);
+		Destroy (this.gameObject.transform.parent.gameObject);
+		Camera.main.GetComponent<CameraScript> ().AssignPlayer (_p);
+		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC");
+		for (int x = 0; x < listOfNPCs.Length; x++) {
+			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
+		}
 	}
 }

@@ -33,7 +33,12 @@ public class CameraScript : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<Transform>();
         offset = new Vector3(0.0f, DistY, DistX);
     }
-	
+
+	//Noah Squeeze for player assignment
+	public void AssignPlayer(GameObject p){
+		player = p.transform;
+	}
+
 	void LateUpdate ()
 	{
         CamRotation ();
