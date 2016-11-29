@@ -66,10 +66,11 @@ public class PlayerControls : MonoBehaviour {
             if (PlayerCanMove == true)
             {
                 ControlOrientation();
-
+				//Debug.Log (CanMove);
+				//Debug.Log (forwardDist);
                 //Forward Movement
                 ForwardMeasure();
-                if (forwardDist <= 0.4f)
+                if (forwardDist <= 1.5f)
                 {
                     CanMove = false;
                 }
