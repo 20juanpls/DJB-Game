@@ -10,6 +10,7 @@ public class PlayerKnockback : MonoBehaviour {
 
     public bool collided, itStoppedMoving;
     private Vector3 KnockBackOrientation;
+	public float knockbackMultiplier;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +26,7 @@ public class PlayerKnockback : MonoBehaviour {
         //Debug.Log("collided "+collided);
         if (collided == true )//&& itStoppedMoving == false)
         {
-            TransP.AddForce(KnockBackOrientation*200.0f);
+			TransP.AddForce(KnockBackOrientation*knockbackMultiplier);
             JumpingC.setInitialSpeed(-15.0f,false);
             StartCoroutine(KnockBackTime(0.4f));
         }

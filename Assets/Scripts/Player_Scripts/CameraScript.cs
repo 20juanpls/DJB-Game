@@ -45,7 +45,7 @@ public class CameraScript : MonoBehaviour {
         SetZoomYSet();
         SetZoomXZSet();
         directionZoom = Quaternion.Euler(transform.rotation.x,0.0f,0.0f)* Vector3.forward;
-        Debug.DrawRay(transform.position,directionZoom,Color.green);
+        //Debug.DrawRay(transform.position,directionZoom,Color.green);
         offset = Quaternion.AngleAxis (CamRotSpeed, Vector3.up) * offset;
 		transform.position = player.position + offset;
         CamSetter();
@@ -59,13 +59,21 @@ public class CameraScript : MonoBehaviour {
 
 	}
 	void CamRotation(){
+
+		//Debug.Log (Input.GetAxis ("XB1_RightLeft"));
+		CamRotSpeed = Input.GetAxis("XB1_RightLeft") * SetCamRotSpeed;
+		if (Input.GetAxis ("XB1_RightLeft") <= 0.1 && Input.GetAxis("XB1_RightLeft") >= -0.1) {
+			CamRotSpeed = 0.0f;
+		}
+
+		//for keyboard input
 		if (Input.GetKey(KeyCode.I)) {
 			CamRotSpeed = SetCamRotSpeed;
 		}
 		else if (Input.GetKey (KeyCode.O)) {
 			CamRotSpeed = -SetCamRotSpeed;
 		} else {
-			CamRotSpeed = 0.0f;
+			//CamRotSpeed = 0.0f;
 		}
 	}
     void SetZoomYSet() {

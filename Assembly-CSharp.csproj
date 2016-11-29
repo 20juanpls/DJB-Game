@@ -45,21 +45,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Checkpoint.cs" />
-     <Compile Include="Assets\Scripts\ButtonActivator.cs" />
-     <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\CoinSpinner.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\CoinSpinner.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\RelativGrav.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\NPC_Stomper.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
-     <Compile Include="Assets\Scripts\PlayerButtonActivator.cs" />
-     <Compile Include="Assets\Scripts\PlayerDash.cs" />
-     <Compile Include="Assets\Scripts\PlayerLavaDeath.cs" />
-     <Compile Include="Assets\Scripts\PlayerScore.cs" />
+     <Compile Include="Assets\Scripts\Player_Scripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerControls.cs" />
+     <Compile Include="Assets\Scripts\Player_Scripts\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerKnockback.cs" />
-     <Compile Include="Assets\Scripts\RelativGrav.cs" />
+     <Compile Include="Assets\Scripts\Player_Scripts\PlayerLavaDeath.cs" />
+     <Compile Include="Assets\Scripts\Player_Scripts\PlayerScore.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

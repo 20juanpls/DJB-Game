@@ -143,8 +143,8 @@ public class NPC_Follow : MonoBehaviour {
     void RayForMeasure(){
         RaycastHit hit;
         RaycastHit hitdos;
-        //Debug.DrawRay(new Vector3((thisForward.x*6.0f) + rb.transform.position.x, rb.transform.position.y + 1.0f, (thisForward.z*6.0f) + rb.transform.position.z), Vector3.down * 2.5f, Color.green);
-        //Debug.DrawRay(rb.transform.position, rb.transform.rotation*Vector3.forward*minDistance, Color.red);
+        Debug.DrawRay(new Vector3((thisForward.x*6.0f) + rb.transform.position.x, rb.transform.position.y + 1.0f, (thisForward.z*6.0f) + rb.transform.position.z), Vector3.down * 2.5f, Color.green);
+        Debug.DrawRay(rb.transform.position, rb.transform.rotation*Vector3.forward*minDistance, Color.red);
         if (Physics.Raycast(new Vector3 (rb.transform.position.x, rb.transform.position.y, rb.transform.position.z), rb.transform.rotation * Vector3.forward, out hitdos))
         {
             if (hitdos.transform.tag == "PlayerMesh")

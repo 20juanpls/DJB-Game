@@ -163,7 +163,7 @@ public class PlayerControls : MonoBehaviour {
     }
 
     void JumpNow() {
-        if (Input.GetKeyDown("space")){
+		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")){
             JumpingC.setInitialSpeed(jumpSpeed, false);
         }
 
