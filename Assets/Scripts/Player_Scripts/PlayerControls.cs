@@ -69,11 +69,11 @@ public class PlayerControls : MonoBehaviour {
             if (PlayerCanMove == true)
             {
                 ControlOrientation();//Orients the inputs to forward movement for player
-                ForwardMeasure();//Finds if there is anything in front of the player using raycast
+                //ForwardMeasure();//Finds if there is anything in front of the player using raycast
                 MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
                 ApplyingDirection();//Applies direction to rotated forward vector
             }
-
+			ForwardMeasure();
             LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
             JumpNow();//jump at any time...pls
         }
@@ -139,13 +139,17 @@ public class PlayerControls : MonoBehaviour {
         //IMPORTANT: If I want to add a collider in front of player, I need to make sure the raycast ignores that collider...Tagging is key.
         if (Physics.Raycast(TransP.transform.position, ForwardRotatedDirection, out hit))
         {
-            forwardDist = hit.distance;
+			if (hit.transform.tag != "Coin") {
+				forwardDist = hit.distance;
             //surfaceAngleF = Quaternion.FromToRotation(hit.normal, -ForwardRotatedDirection);<--NotYet
+			}
         }
 
         if (Physics.Raycast(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x, TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down * 2, out hit_2)) {
-            downLedgeDist = hit_2.distance;
-            //surfaceAngleD = Quaternion.FromToRotation(hit.normal, -Vector3.down * 2);
+			if (hit_2.transform.tag != "Coin") {
+				downLedgeDist = hit_2.distance;
+				//surfaceAngleD = Quaternion.FromToRotation(hit.normal, -Vector3.down * 2);
+			}
         }
     }
 
@@ -234,6 +238,7 @@ public class PlayerControls : MonoBehaviour {
         PlayerActiveMove = OnOrOff;
     }
     void MoveSpeedDecider() {
+		//Debug.Log (forwardDist);
         if (forwardDist <= 1.1f)
         {
             CanMove = false;
