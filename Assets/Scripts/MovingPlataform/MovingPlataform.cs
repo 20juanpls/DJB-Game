@@ -18,7 +18,7 @@ public class MovingPlataform : MonoBehaviour {
         //Debug.Log(Vector3.Distance(thisPlataform.position, originalPos));
         whereIsIt();
 
-        Debug.Log(forwardOrBack);
+        //Debug.Log(forwardOrBack);
 
         if (forwardOrBack == false) {
             thisPlataform.AddRelativeForce(Vector3.forward *-1*MoveForce);

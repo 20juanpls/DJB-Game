@@ -1,14 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player_Scripts/PlayerControls.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC_Scripts/NPC_Follow.cs">
     <Files>
-<<<<<<< Updated upstream
-      <File FileName="Assets/Scripts/PlayerLavaDeath.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player_Scripts/PlayerControls.cs" Line="69" Column="16" />
-=======
-      <File FileName="Assets/Checkpoint.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerLavaDeath.cs" Line="2" Column="1" />
->>>>>>> Stashed changes
+      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Follow.cs" Line="67" Column="29" />
+      <File FileName="Assets/Scripts/MovingPlataform/MovingPlataform.cs" Line="21" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

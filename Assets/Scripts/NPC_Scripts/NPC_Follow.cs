@@ -60,7 +60,7 @@ public class NPC_Follow : MonoBehaviour {
         if (distance <= minDistance) {
 
             //npc looks at player 
-            if (rb.velocity == Vector3.zero)
+			if (rb.velocity == Vector3.zero)
             {
                 //ChilDCollin.SetActive(false);
                 rb.transform.rotation = Quaternion.Slerp(
@@ -96,9 +96,9 @@ public class NPC_Follow : MonoBehaviour {
                 StartCoroutine(WaitingForNextAttack(2.0f));
             }
 
-        //Debug.Log(isActive);
+		//Debug.Log(ColIn.IsHitting());
 
-        if (LedgeDist >= 1.95f && LedgeDist <= 2.05f)
+		if (LedgeDist >= 2.15f && LedgeDist <= 2.25f)//(LedgeDist >= 1.95f && LedgeDist <= 2.05f)<-- FOR ORIGINAL CUBE
         {
             InHeightRange = true;
         }
@@ -107,9 +107,9 @@ public class NPC_Follow : MonoBehaviour {
         }
         if (InHeightRange == false || IsitBehindMe == true)
         {
-            StartCoroutine(WaitingForNextAttack(2.0f));
+            //StartCoroutine(WaitingForNextAttack(0.1f));
             atkForce = 0.0f;
-            StartCoroutine(WaitingToTurn(1.0f));
+            //StartCoroutine(WaitingToTurn(0.1f));
         }
         else if (playerFound == true)
         {
@@ -117,8 +117,11 @@ public class NPC_Follow : MonoBehaviour {
         }
     }
     IEnumerator WaitingForNextAttack( float waitTime) {
+		//if (Time.deltaTime>= 1.0f)
+		//	Debug.Log (Time.deltaTime);
         atkForce = 0.0f;
         yield return new WaitForSeconds(waitTime);
+		//atkForce = 0.0f;
 
     }
     IEnumerator WaitingToTurn(float waitTime) {
@@ -143,8 +146,8 @@ public class NPC_Follow : MonoBehaviour {
     void RayForMeasure(){
         RaycastHit hit;
         RaycastHit hitdos;
-        Debug.DrawRay(new Vector3((thisForward.x*6.0f) + rb.transform.position.x, rb.transform.position.y + 1.0f, (thisForward.z*6.0f) + rb.transform.position.z), Vector3.down * 2.5f, Color.green);
-        Debug.DrawRay(rb.transform.position, rb.transform.rotation*Vector3.forward*minDistance, Color.red);
+        //Debug.DrawRay(new Vector3((thisForward.x*6.0f) + rb.transform.position.x, rb.transform.position.y + 1.0f, (thisForward.z*6.0f) + rb.transform.position.z), Vector3.down * 2.5f, Color.green);
+        //Debug.DrawRay(rb.transform.position, rb.transform.rotation*Vector3.forward*minDistance, Color.red);
         if (Physics.Raycast(new Vector3 (rb.transform.position.x, rb.transform.position.y, rb.transform.position.z), rb.transform.rotation * Vector3.forward, out hitdos))
         {
             if (hitdos.transform.tag == "PlayerMesh")
@@ -183,7 +186,7 @@ public class NPC_Follow : MonoBehaviour {
         {
             //new Vector3((thisForward.x * 5.0f) + rb.transform.position.x, rb.transform.position.y + 1.0f, (thisForward.z * 5.0f) + rb.transform.position.z)
             SpikesChild.Translate(Vector3.forward * CurrentSpikeSpeed, Space.Self);
-            if (Vector3.Distance(SpikesChild.transform.position, rb.transform.position) >= 1.0f)
+            if (Vector3.Distance(SpikesChild.transform.position, rb.transform.position) >= 1.5f)
             {
                 CurrentSpikeSpeed = 0.0f;
             }
