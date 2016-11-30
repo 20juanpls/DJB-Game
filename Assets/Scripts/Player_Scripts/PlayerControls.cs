@@ -8,6 +8,9 @@ public class PlayerControls : MonoBehaviour {
 
 	public float jumpSpeed = -10.0f;
     public float moveSpeed = 0.5f;
+    //test
+    private float OrigMoveSpeed;
+    //end test
     public float rotationSpeed = 1.0f;
     private float forwardDist,downLedgeDist;
     public int InitialmidAirJumpCount = 1;
@@ -38,11 +41,11 @@ public class PlayerControls : MonoBehaviour {
         PlayerActiveMove = true;
         PlayerCanMove = true;
 		runner = theRunningGuy.GetComponent<Animation> ();
+        OrigMoveSpeed = moveSpeed;
 
 
     }
-	
-	// Update is called once per frame
+
 	void Update () 
 	{
 		runner.Play ();
@@ -65,30 +68,14 @@ public class PlayerControls : MonoBehaviour {
 
             if (PlayerCanMove == true)
             {
-                ControlOrientation();
-				//Debug.Log (CanMove);
-				//Debug.Log (forwardDist);
-                //Forward Movement
-                ForwardMeasure();
-                if (forwardDist <= 1.5f)
-                {
-                    CanMove = false;
-                }
-                if (VertLook <= -0.01 || forwardDist > 0.6f || forwardDist == 0.0f || hasLedgeGrabbed == true)
-                {
-                    CanMove = true;
-                }
-                if (CanMove == false)
-                {
-                    rotatedDirection = Vector3.zero;
-                    FinalDirection = Vector3.zero;
-                }
-                ApplyingDirection();
+                ControlOrientation();//Orients the inputs to forward movement for player
+                ForwardMeasure();//Finds if there is anything in front of the player using raycast
+                MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
+                ApplyingDirection();//Applies direction to rotated forward vector
             }
 
-            LedgeGrab();
-
-            JumpNow();
+            LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
+            JumpNow();//jump at any time...pls
         }
 	
 	}
@@ -144,10 +131,10 @@ public class PlayerControls : MonoBehaviour {
         }
     }
 
-   void ForwardMeasure() {
+    void ForwardMeasure() {
         RaycastHit hit;
         RaycastHit hit_2;
-        Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
+        //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
         //Debug.DrawRay(TransP.transform.position, ForwardRotatedDirection, Color.red);
         //IMPORTANT: If I want to add a collider in front of player, I need to make sure the raycast ignores that collider...Tagging is key.
         if (Physics.Raycast(TransP.transform.position, ForwardRotatedDirection, out hit))
@@ -198,7 +185,8 @@ public class PlayerControls : MonoBehaviour {
             else {
                     Amistake = false;
                 }*/
-        if (isGrounded == false && forwardDist <= 1.5f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
+        //Checks in front of ledge
+        if (isGrounded == false && forwardDist <= 1.7f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
         {
             LedgeGrabbableF = true;
         }
@@ -206,6 +194,7 @@ public class PlayerControls : MonoBehaviour {
             LedgeGrabbableF = false;
         }
         //Debug.Log(surfaceAngleD.eulerAngles.x);
+        //Checks down towards the ledge
         if (isGrounded == false && downLedgeDist <= 1.0f && downLedgeDist >= 0.8f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
         {
             LedgeGrabbableD = true;
@@ -243,5 +232,24 @@ public class PlayerControls : MonoBehaviour {
 
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
+    }
+    void MoveSpeedDecider() {
+        if (forwardDist <= 1.1f)
+        {
+            CanMove = false;
+        }
+        if (VertLook <= -0.01 || forwardDist > 1.1f || forwardDist == 0.0f || hasLedgeGrabbed == true)
+        {
+            CanMove = true;
+        }
+
+        if (CanMove == false)
+        {
+            moveSpeed = 0.0f;
+        }
+        else
+        {
+            moveSpeed = OrigMoveSpeed;
+        }
     }
 }
