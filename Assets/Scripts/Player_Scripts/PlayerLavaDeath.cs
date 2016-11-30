@@ -14,10 +14,15 @@ public class PlayerLavaDeath : MonoBehaviour {
 	void Start () {
 		loseScreen = GameObject.Find ("LoseScreenCanvas");
 		loseScreen.SetActive (false);
-		player = this.gameObject.transform.parent.gameObject;
+		Button b = loseScreen.transform.GetChild (0).transform.GetChild (1).GetComponent<Button> ();
+		Debug.Log (b);
+		b.onClick.AddListener (delegate {
+			Restart ();
+		});
 	}
 
 	void OnTriggerEnter(Collider other){
+		//on trigger collision with tagged "kill"
 		if (other.tag == "Kill") {
 			loseScreen.gameObject.SetActive (true);
 		}
@@ -25,16 +30,28 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public void checkpointReached(GameObject checkpointReached){
 		respawn = checkpointReached.transform;
-		Debug.Log ("Respawn point is now assigned to " + respawn.ToString ());
 	}
 
 	public void Restart(){
-		GameObject _p = (GameObject)Instantiate (player, respawn);
-		Destroy (this.gameObject.transform.parent.gameObject);
+		//assign player to the new object (aka "Player")
+		player = this.gameObject;
+		Debug.Log ("new player assigneD");
+		//New instance of Player is assigned to _p
+		GameObject _p = (GameObject)Instantiate(player);
+		_p.transform.position = respawn.transform.position;
+		Debug.Log ("New Player Instantiated at " + respawn.transform.position);
+		//destroy the old player, leaves the folder(?)
+		Destroy (this.gameObject);
+		Debug.Log ("Old player destroyed");
+		//assignes to main camera script the new player, _p
 		Camera.main.GetComponent<CameraScript> ().AssignPlayer (_p);
+		Debug.Log ("Camera re-assigned");
+
+		//for each player, assign new player
 		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC");
 		for (int x = 0; x < listOfNPCs.Length; x++) {
 			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
+			Debug.Log ("Assignment attempted");
 		}
 	}
 }
