@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\Player_Scripts\ColliderIndicatorPlayer.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerDash.cs" />

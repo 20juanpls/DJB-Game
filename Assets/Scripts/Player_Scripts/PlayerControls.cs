@@ -5,12 +5,14 @@ public class PlayerControls : MonoBehaviour {
 	Rigidbody TransP;
 	Transform Camera_Rot;
 	RelativGrav JumpingC;
+    GameObject punchHitBox;
 
 	public float jumpSpeed = -10.0f;
     public float jumpSpeed_2 = -10.0f;
     public float moveSpeed = 0.5f;
+    public float punchForce = 100.0f;
     //test
-    private float OrigMoveSpeed;
+    private float punchCounter, OrigMoveSpeed;
     //end test
     public float rotationSpeed = 1.0f;
     private float forwardDist,downLedgeDist, oldforwardDist, forwardDistcounter;
@@ -23,8 +25,8 @@ public class PlayerControls : MonoBehaviour {
 
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
-    private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, hasLedgeGrabbed;
-    public bool PlayerActiveMove, PlayerCanMove, CanMove;
+    private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive; //hasLedgeGrabbed,
+    public bool PlayerActiveMove, PlayerCanMove;//, CanMove;
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
@@ -36,13 +38,15 @@ public class PlayerControls : MonoBehaviour {
         TransP = this.GetComponent<Rigidbody> ();
 		Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         JumpingC = this.GetComponent<RelativGrav>();
+        punchHitBox = this.gameObject.transform.GetChild(0).gameObject;
         isGrounded = false;
         isMove = false;
-        CanMove = true;
+        //CanMove = true;
         PlayerActiveMove = true;
         PlayerCanMove = true;
 		runner = theRunningGuy.GetComponent<Animation> ();
         OrigMoveSpeed = moveSpeed;
+        punchHitBox.SetActive(false);
 
 
     }
@@ -68,17 +72,18 @@ public class PlayerControls : MonoBehaviour {
             lookDirection = new Vector3(HorizLook, 0, VertLook);
 
             ForwardMeasure();
-            ForwardChecker();
+            //ForwardChecker();
+            Punching();//player can punch
+            //MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
+            LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
             if (PlayerCanMove == true)
             {
                 ControlOrientation();//Orients the inputs to forward movement for player
                 //ForwardMeasure();//Finds if there is anything in front of the player using raycast
-                MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
                 ApplyingDirection();//Applies direction to rotated forward vector
             }
-            LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
             JumpNow();//jump at any time...pls
-            oldforwardDist = forwardDist;
+            //oldforwardDist = forwardDist;<dont use this
         }
 	
 	}
@@ -126,11 +131,15 @@ public class PlayerControls : MonoBehaviour {
             }
             FinalDirection = new Vector3(rotatedDirection.x, TmD.y, rotatedDirection.z);
 
-            TransP.transform.Translate(FinalDirection * moveSpeed);
+            //TransP.transform.Translate(FinalDirection * moveSpeed);
+            TransP.AddRelativeForce(FinalDirection * moveSpeed);
+            //Debug.Log(FinalDirection * moveSpeed);
         }
         else
         {
-            TransP.transform.Translate(rotatedDirection * moveSpeed);
+            //TransP.transform.Translate(rotatedDirection * moveSpeed);
+            //Debug.Log(rotatedDirection* moveSpeed);
+            TransP.AddRelativeForce(rotatedDirection * moveSpeed);
         }
     }
 
@@ -161,7 +170,7 @@ public class PlayerControls : MonoBehaviour {
             JumpingC.setInitialSpeed(jumpSpeed, false);
         }
 
-        if (Input.GetKeyDown("space") && isGrounded == false && CurrentMidAirJumpCount > 0)
+        if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
             //Debug.Log("is this getting reached?");
             JumpingC.setFallAcceleration(0.0f);
@@ -204,7 +213,7 @@ public class PlayerControls : MonoBehaviour {
         }
         //Debug.Log(surfaceAngleD.eulerAngles.x);
         //Checks down towards the ledge
-        if (isGrounded == false && downLedgeDist <= 1.0f && downLedgeDist >= 0.8f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
+        if (isGrounded == false && downLedgeDist <= 1.2f && downLedgeDist >= 0.7f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
         {
             LedgeGrabbableD = true;
         }
@@ -219,43 +228,51 @@ public class PlayerControls : MonoBehaviour {
             JumpingC.setFallAcceleration(0.0f);
             JumpingC.setInitialSpeed(0.0f, true);
             PlayerCanMove = false;
-            hasLedgeGrabbed = true;
+            //moveSpeed = 0.0f;
+            //hasLedgeGrabbed = true;
             //if (Input.GetKey(KeyCode.S))
             //if (lDy.eulerAngles.y == FDy.eulerAngles.y - 5.0f )
             if (lDy.eulerAngles.y >= FDy.eulerAngles.y - 5.0f && lDy.eulerAngles.y <= FDy.eulerAngles.y + 5.0f)
             {
                 PlayerCanMove = true;
+                //moveSpeed = OrigMoveSpeed;
                 JumpingC.setFallAcceleration(JumpingC.fallAccel);
             }
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11"))
             {
                 PlayerCanMove = true;
+                //moveSpeed = OrigMoveSpeed;
                 JumpingC.setInitialSpeed(jumpSpeed, true);
                 JumpingC.setFallAcceleration(JumpingC.fallAccel);
             }
         }
         else {
             JumpingC.setFallAcceleration(JumpingC.fallAccel);
+            //moveSpeed = OrigMoveSpeed;
             PlayerCanMove = true;
         }
-        //^ new else addition
-        if(isGrounded == true) {
+        //^ new else addition pls
+        /*if(isGrounded == true) {
             hasLedgeGrabbed = false;
-        }
+        }*/
     }
 
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
-    void MoveSpeedDecider() {
+    /*void MoveSpeedDecider() {
 		//Debug.Log (forwardDist);
-        if (forwardDist <= 1.1f)
+        if (forwardDist < 1.5f)
         {
-            CanMove = false;
+            //CanMove = false;
+            PlayerCanMove = false;
+            //moveSpeed = 0.0f;
         }
-        if (VertLook <= -0.01 || forwardDist > 1.1f || forwardDist == 0.0f || hasLedgeGrabbed == true)
+        if (VertLook <= -0.01 || forwardDist > 1.5f || forwardDist == 0.0f || hasLedgeGrabbed == true)
         {
-            CanMove = true;
+            //CanMove = true;
+            PlayerCanMove = true;
+            //moveSpeed = OrigMoveSpeed;
         }
 
         if (CanMove == false)
@@ -266,9 +283,9 @@ public class PlayerControls : MonoBehaviour {
         {
             moveSpeed = OrigMoveSpeed;
         }
-    }
+    }*/
     //this checks if the forward dist remains trash for more than 3 frames, and sets the forwardist to zero;
-    void ForwardChecker() {
+    /*void ForwardChecker() {
         if (forwardDist == oldforwardDist)
         {
             forwardDistcounter++;
@@ -280,6 +297,33 @@ public class PlayerControls : MonoBehaviour {
         if (forwardDistcounter >= 3 && forwardDist < 1.1f)
         {
             forwardDist = 0.0f;
+        }
+    }*/
+    void Punching() {
+        if (Input.GetKeyDown(KeyCode.Semicolon))
+        {
+            //Debug.Log("is this a thing?");
+            punchHitBox.SetActive(true);
+            punchActive = true;
+            //TransP.velocity = Vector3.zero;
+        }
+
+        if (punchActive == true) {
+            //TransP.velocity = Vector3.zero;
+            moveSpeed = punchForce;
+            PlayerCanMove = false;
+            punchCounter++;
+        } else
+        {
+            punchCounter = 0.0f;
+        }
+
+        if (punchCounter >= 15.0f) {
+            PlayerCanMove = true;
+            moveSpeed = OrigMoveSpeed;
+            TransP.velocity = Vector3.zero;
+            punchHitBox.SetActive(false);
+            punchActive = false;
         }
     }
 }
