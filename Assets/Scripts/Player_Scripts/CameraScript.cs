@@ -48,6 +48,7 @@ public class CameraScript : MonoBehaviour {
         //Debug.DrawRay(transform.position,directionZoom,Color.green);
         offset = Quaternion.AngleAxis (CamRotSpeed, Vector3.up) * offset;
 		transform.position = player.position + offset;
+
         CamSetter();
         transform.LookAt(player.position);
 
