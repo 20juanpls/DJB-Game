@@ -7,12 +7,13 @@ public class PlayerControls : MonoBehaviour {
 	RelativGrav JumpingC;
 
 	public float jumpSpeed = -10.0f;
+    public float jumpSpeed_2 = -10.0f;
     public float moveSpeed = 0.5f;
     //test
     private float OrigMoveSpeed;
     //end test
     public float rotationSpeed = 1.0f;
-    private float forwardDist,downLedgeDist;
+    private float forwardDist,downLedgeDist, oldforwardDist, forwardDistcounter;
     public int InitialmidAirJumpCount = 1;
     private float HorizLook, VertLook;
 
@@ -22,8 +23,8 @@ public class PlayerControls : MonoBehaviour {
 
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
-    private bool isGrounded, isMove, CanMove, LedgeGrabbableF, LedgeGrabbableD, hasLedgeGrabbed;
-    public bool PlayerActiveMove, PlayerCanMove;
+    private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, hasLedgeGrabbed;
+    public bool PlayerActiveMove, PlayerCanMove, CanMove;
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
@@ -66,6 +67,8 @@ public class PlayerControls : MonoBehaviour {
             moveDirection = new Vector3(HorizMov, 0, VertMov);
             lookDirection = new Vector3(HorizLook, 0, VertLook);
 
+            ForwardMeasure();
+            ForwardChecker();
             if (PlayerCanMove == true)
             {
                 ControlOrientation();//Orients the inputs to forward movement for player
@@ -73,9 +76,9 @@ public class PlayerControls : MonoBehaviour {
                 MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
                 ApplyingDirection();//Applies direction to rotated forward vector
             }
-			ForwardMeasure();
             LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
             JumpNow();//jump at any time...pls
+            oldforwardDist = forwardDist;
         }
 	
 	}
@@ -158,10 +161,12 @@ public class PlayerControls : MonoBehaviour {
             JumpingC.setInitialSpeed(jumpSpeed, false);
         }
 
-        if (Input.GetKeyDown("space") && isGrounded == false && CurrentMidAirJumpCount >= 0)
+        if (Input.GetKeyDown("space") && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
+            //Debug.Log("is this getting reached?");
+            JumpingC.setFallAcceleration(0.0f);
             JumpingC.setCurrentFallSpeed(0.0f);
-                JumpingC.setInitialSpeed(jumpSpeed, false);
+                JumpingC.setInitialSpeed(jumpSpeed_2, false);
             CurrentMidAirJumpCount--;
         }
 
@@ -210,14 +215,14 @@ public class PlayerControls : MonoBehaviour {
 
         if (LedgeGrabbableF == true && LedgeGrabbableD == true && JumpingC.floorDist > 4.0f)
         {
-            //Debug.Log("ledge grabbed");
+           // Debug.Log("ledge grabbed");
             JumpingC.setFallAcceleration(0.0f);
             JumpingC.setInitialSpeed(0.0f, true);
             PlayerCanMove = false;
             hasLedgeGrabbed = true;
             //if (Input.GetKey(KeyCode.S))
             //if (lDy.eulerAngles.y == FDy.eulerAngles.y - 5.0f )
-            if (lDy.eulerAngles.y >= FDy.eulerAngles.y-5.0f&& lDy.eulerAngles.y <= FDy.eulerAngles.y + 5.0f)
+            if (lDy.eulerAngles.y >= FDy.eulerAngles.y - 5.0f && lDy.eulerAngles.y <= FDy.eulerAngles.y + 5.0f)
             {
                 PlayerCanMove = true;
                 JumpingC.setFallAcceleration(JumpingC.fallAccel);
@@ -229,6 +234,11 @@ public class PlayerControls : MonoBehaviour {
                 JumpingC.setFallAcceleration(JumpingC.fallAccel);
             }
         }
+        else {
+            JumpingC.setFallAcceleration(JumpingC.fallAccel);
+            PlayerCanMove = true;
+        }
+        //^ new else addition
         if(isGrounded == true) {
             hasLedgeGrabbed = false;
         }
@@ -255,6 +265,21 @@ public class PlayerControls : MonoBehaviour {
         else
         {
             moveSpeed = OrigMoveSpeed;
+        }
+    }
+    //this checks if the forward dist remains trash for more than 3 frames, and sets the forwardist to zero;
+    void ForwardChecker() {
+        if (forwardDist == oldforwardDist)
+        {
+            forwardDistcounter++;
+        }
+        else
+        {
+            forwardDistcounter = 0.0f;
+        }
+        if (forwardDistcounter >= 3 && forwardDist < 1.1f)
+        {
+            forwardDist = 0.0f;
         }
     }
 }

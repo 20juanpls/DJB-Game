@@ -10,7 +10,7 @@ public class PlayerKnockback : MonoBehaviour {
 
     public bool collided, itStoppedMoving;
     private Vector3 KnockBackOrientation;
-	public float knockbackMultiplier;
+	public float knockbackMultiplier, collidedTrueCounter;
 
 	// Use this for initialization
 	void Start () {
@@ -23,10 +23,16 @@ public class PlayerKnockback : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log("collided "+collided);
+        //Debug.Log("iscollided: "+collided);
         if (collided == true )//&& itStoppedMoving == false)
         {
-			TransP.AddForce(KnockBackOrientation*knockbackMultiplier);
+            collidedTrueCounter++;
+            //this is just to stop pushing me off to neverland
+            if (collidedTrueCounter >= 4.0f) {
+                collided = false;
+                collidedTrueCounter = 0.0f;
+            }
+            TransP.AddForce(KnockBackOrientation*knockbackMultiplier);
             JumpingC.setInitialSpeed(-15.0f,false);
             StartCoroutine(KnockBackTime(0.4f));
         }
