@@ -146,8 +146,8 @@ public class PlayerControls : MonoBehaviour {
     void ForwardMeasure() {
         RaycastHit hit;
         RaycastHit hit_2;
-        Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
-        Debug.DrawRay(TransP.transform.position, ForwardRotatedDirection, Color.red);
+        //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
+        //Debug.DrawRay(TransP.transform.position, ForwardRotatedDirection, Color.red);
         //IMPORTANT: If I want to add a collider in front of player, I need to make sure the raycast ignores that collider...Tagging is key.
         if (Physics.Raycast(TransP.transform.position, ForwardRotatedDirection, out hit))
         {
