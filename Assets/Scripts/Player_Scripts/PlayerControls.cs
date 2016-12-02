@@ -25,8 +25,8 @@ public class PlayerControls : MonoBehaviour {
 
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
-    private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive; //hasLedgeGrabbed,
-    public bool PlayerActiveMove, PlayerCanMove;//, CanMove;
+	private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive, hasLedgeGrabbed;
+	public bool PlayerActiveMove , PlayerCanMove, CanMove;
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
@@ -41,7 +41,7 @@ public class PlayerControls : MonoBehaviour {
         punchHitBox = this.gameObject.transform.GetChild(0).gameObject;
         isGrounded = false;
         isMove = false;
-        //CanMove = true;
+        CanMove = true;
         PlayerActiveMove = true;
         PlayerCanMove = true;
 		runner = theRunningGuy.GetComponent<Animation> ();
@@ -50,10 +50,11 @@ public class PlayerControls : MonoBehaviour {
 
 
     }
-
-	void Update () 
+	void FixedUpdate () 
 	{
 		runner.Play ();
+
+		ForwardMeasure();
         if (PlayerActiveMove == true)
         {
             float HorizMov = Input.GetAxis("Horizontal");
@@ -71,10 +72,9 @@ public class PlayerControls : MonoBehaviour {
             moveDirection = new Vector3(HorizMov, 0, VertMov);
             lookDirection = new Vector3(HorizLook, 0, VertLook);
 
-            ForwardMeasure();
             //ForwardChecker();
             Punching();//player can punch
-            //MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
+            MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
             LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
             if (PlayerCanMove == true)
             {
@@ -131,29 +131,32 @@ public class PlayerControls : MonoBehaviour {
             }
             FinalDirection = new Vector3(rotatedDirection.x, TmD.y, rotatedDirection.z);
 
-            //TransP.transform.Translate(FinalDirection * moveSpeed);
-            TransP.AddRelativeForce(FinalDirection * moveSpeed);
+			TransP.transform.Translate(FinalDirection * moveSpeed*0.005f);
+            //TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
             //Debug.Log(FinalDirection * moveSpeed);
         }
         else
         {
-            //TransP.transform.Translate(rotatedDirection * moveSpeed);
+            TransP.transform.Translate(rotatedDirection * moveSpeed*0.005f);
             //Debug.Log(rotatedDirection* moveSpeed);
-            TransP.AddRelativeForce(rotatedDirection * moveSpeed);
+            //TransP.AddRelativeForce(rotatedDirection * moveSpeed);
         }
     }
 
     void ForwardMeasure() {
         RaycastHit hit;
         RaycastHit hit_2;
-        //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
-        //Debug.DrawRay(TransP.transform.position, ForwardRotatedDirection, Color.red);
+        Debug.DrawRay(new Vector3((ForwardRotatedDirection.x) + TransP.transform.position.x,TransP.transform.position.y + 1.0f, (ForwardRotatedDirection.z) + TransP.transform.position.z), Vector3.down*2,Color.green);
+        Debug.DrawRay(TransP.transform.position, ForwardRotatedDirection, Color.red);
         //IMPORTANT: If I want to add a collider in front of player, I need to make sure the raycast ignores that collider...Tagging is key.
         if (Physics.Raycast(TransP.transform.position, ForwardRotatedDirection, out hit))
         {
 			if (hit.transform.tag != "Coin") {
 				forwardDist = hit.distance;
             //surfaceAngleF = Quaternion.FromToRotation(hit.normal, -ForwardRotatedDirection);<--NotYet
+			}else{
+				//Debug.Log("nothing hit :(");
+				forwardDist = 0.0f;
 			}
         }
 
@@ -196,13 +199,6 @@ public class PlayerControls : MonoBehaviour {
         Quaternion lDy = Quaternion.LookRotation(lookDirection, Vector3.up);
         Quaternion FDy = Quaternion.LookRotation(-ForwardRotatedDirection, Vector3.up);
 
-            /*if (surfaceAngleF.eulerAngles.y >= 30.0f && surfaceAngleF.eulerAngles.y <= 330.0f)
-                {
-                    Amistake = true;
-                }
-            else {
-                    Amistake = false;
-                }*/
         //Checks in front of ledge
         if (isGrounded == false && forwardDist <= 1.7f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
         {
@@ -213,7 +209,7 @@ public class PlayerControls : MonoBehaviour {
         }
         //Debug.Log(surfaceAngleD.eulerAngles.x);
         //Checks down towards the ledge
-        if (isGrounded == false && downLedgeDist <= 1.2f && downLedgeDist >= 0.7f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
+        if (isGrounded == false && downLedgeDist <= 1.5f && downLedgeDist >= 0.5f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
         {
             LedgeGrabbableD = true;
         }
@@ -221,57 +217,53 @@ public class PlayerControls : MonoBehaviour {
         {
             LedgeGrabbableD = false;
         }
-
+		//Debug.Log (JumpingC.floorDist);
         if (LedgeGrabbableF == true && LedgeGrabbableD == true && JumpingC.floorDist > 4.0f)
         {
            // Debug.Log("ledge grabbed");
             JumpingC.setFallAcceleration(0.0f);
             JumpingC.setInitialSpeed(0.0f, true);
             PlayerCanMove = false;
-            //moveSpeed = 0.0f;
-            //hasLedgeGrabbed = true;
+            hasLedgeGrabbed = true;
             //if (Input.GetKey(KeyCode.S))
             //if (lDy.eulerAngles.y == FDy.eulerAngles.y - 5.0f )
             if (lDy.eulerAngles.y >= FDy.eulerAngles.y - 5.0f && lDy.eulerAngles.y <= FDy.eulerAngles.y + 5.0f)
             {
                 PlayerCanMove = true;
-                //moveSpeed = OrigMoveSpeed;
                 JumpingC.setFallAcceleration(JumpingC.fallAccel);
             }
             if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11"))
             {
                 PlayerCanMove = true;
-                //moveSpeed = OrigMoveSpeed;
                 JumpingC.setInitialSpeed(jumpSpeed, true);
                 JumpingC.setFallAcceleration(JumpingC.fallAccel);
             }
         }
         else {
             JumpingC.setFallAcceleration(JumpingC.fallAccel);
-            //moveSpeed = OrigMoveSpeed;
             PlayerCanMove = true;
         }
-        //^ new else addition pls
-        /*if(isGrounded == true) {
+        if(isGrounded == true) {
             hasLedgeGrabbed = false;
-        }*/
+        }
     }
 
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
-    /*void MoveSpeedDecider() {
+    void MoveSpeedDecider() {
+		//Debug.Log (moveSpeed);
 		//Debug.Log (forwardDist);
-        if (forwardDist < 1.5f)
+		if (forwardDist < 1.5f)
         {
-            //CanMove = false;
-            PlayerCanMove = false;
+            CanMove = false;
+            //PlayerCanMove = false;
             //moveSpeed = 0.0f;
         }
-        if (VertLook <= -0.01 || forwardDist > 1.5f || forwardDist == 0.0f || hasLedgeGrabbed == true)
+		if (VertLook <= -0.01 || forwardDist > 1.5f || forwardDist == 0.0f || hasLedgeGrabbed == true)
         {
-            //CanMove = true;
-            PlayerCanMove = true;
+            CanMove = true;
+            //PlayerCanMove = true;
             //moveSpeed = OrigMoveSpeed;
         }
 
@@ -279,26 +271,30 @@ public class PlayerControls : MonoBehaviour {
         {
             moveSpeed = 0.0f;
         }
-        else
+		else if (CanMove == true)
         {
             moveSpeed = OrigMoveSpeed;
         }
-    }*/
+		//Debug.Log (CanMove);
+	}
+    
     //this checks if the forward dist remains trash for more than 3 frames, and sets the forwardist to zero;
-    /*void ForwardChecker() {
+    void ForwardChecker() {
         if (forwardDist == oldforwardDist)
         {
             forwardDistcounter++;
         }
         else
         {
-            forwardDistcounter = 0.0f;
+            //forwardDistcounter = 0.0f;
+			CanMove = true;
         }
         if (forwardDistcounter >= 3 && forwardDist < 1.1f)
         {
-            forwardDist = 0.0f;
+            //forwardDist = 0.0f;
+			CanMove = true;
         }
-    }*/
+    }
     void Punching() {
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
@@ -318,7 +314,7 @@ public class PlayerControls : MonoBehaviour {
             punchCounter = 0.0f;
         }
 
-        if (punchCounter >= 15.0f) {
+        if (punchCounter >= 10.0f) {
             PlayerCanMove = true;
             moveSpeed = OrigMoveSpeed;
             TransP.velocity = Vector3.zero;
