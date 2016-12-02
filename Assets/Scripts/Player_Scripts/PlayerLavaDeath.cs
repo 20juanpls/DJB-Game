@@ -35,17 +35,26 @@ public class PlayerLavaDeath : MonoBehaviour {
 	public void Restart(){
 		//assign player to the new object (aka "Player")
 		player = this.gameObject;
-		Debug.Log ("new player assigneD");
+		//Debug.Log ("new player assigneD");
 		//New instance of Player is assigned to _p
 		GameObject _p = (GameObject)Instantiate(player);
+		_p.GetComponent<PlayerLavaDeath> ().checkpointReached (respawn.gameObject);
+		Debug.Log (_p.ToString ());
+		Debug.Log (respawn.ToString ());
 		_p.transform.position = respawn.transform.position;
-		Debug.Log ("New Player Instantiated at " + respawn.transform.position);
+		//Debug.Log ("New Player Instantiated at " + respawn.transform.position);
+		//all checkpoints get player updated
+		GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+		for (int x = 0; x < checkpoints.Length; x++) {
+			checkpoints[x].GetComponent<Checkpoint>().updatePlayer(_p);
+		}
+
 		//destroy the old player, leaves the folder(?)
 		Destroy (this.gameObject);
-		Debug.Log ("Old player destroyed");
+		//Debug.Log ("Old player destroyed");
 		//assignes to main camera script the new player, _p
 		Camera.main.GetComponent<CameraScript> ().AssignPlayer (_p);
-		Debug.Log ("Camera re-assigned");
+		//Debug.Log ("Camera re-assigned");
 
 		//for each player, assign new player
 		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC");
