@@ -3,19 +3,24 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerScore : MonoBehaviour {
-	
+
 	public int score;
 	Text scoreText;
-	GameObject[] coins;
+	public GameObject[] coins;
 
 	// Use this for initialization
 	void Start () {
 		score = 0;
 		scoreText = GameObject.Find ("ScoreText").GetComponent<Text> ();
+
+		if (scoreText == null){
+			Debug.Log("Text for score missing! : "+ this.ToString());
+		}
+
 		scoreText.text = "Score: 0";
 		coins = GameObject.FindGameObjectsWithTag("Coin");
 	}
-	
+
 	// ScoreUpdate is called whenever a coin is collected
 	void ScoreUpdate () {
 		score++;
@@ -35,4 +40,5 @@ public class PlayerScore : MonoBehaviour {
 			Destroy (other.gameObject);
 		}
 	}
+
 }
