@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class RelativGrav : MonoBehaviour {
-	//Transform PlayerMesh;
+    Transform Player;
+    PlayerControls PlayerMesh;
 	public float fallAccel = 2.0f;
     private float currentFallAccel;
 	public float initialSpeed = 0.0f;
@@ -11,11 +12,11 @@ public class RelativGrav : MonoBehaviour {
 	public float currentfallSpeed = 0.0f;
     public float minGroundDistance = 1.2f;
 	private bool isGrounded;
-	private float airTime;
+	public float airTime;
 	Quaternion surfaceAngle;
 	Collider floor;
 	Vector3 dwnL,UpL;
-	Vector3 posRun;
+    public Vector3 posRun, fallLenght; //FallingDirection;
     //Vector3 posFloor;
     public float floorDist;
 	float CeilDist;
@@ -23,10 +24,12 @@ public class RelativGrav : MonoBehaviour {
 	void Start () {
         currentFallAccel = fallAccel;
         //CenterG = GameObject.FindGameObjectWithTag ("GravP").GetComponent<Rigidbody>();
-        //PlayerMesh = GameObject.Find ("PlayerMesh").GetComponent<Transform> ();
+        PlayerMesh = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<PlayerControls> ();
+        Player = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
         airTime = 0.0f;
 		dwnL = transform.TransformDirection (Vector3.down);
         UpL = transform.TransformDirection(Vector3.up);
+        //FallingDirection = transform.TransformDirection(Vector3.zero);
 		//isGrounded = false;
 		//floor = GameObject.FindGameObjectWithTag ("Ground").GetComponent<Collider> ();
 		//posFloor = floor.transform.position.y;
@@ -86,14 +89,26 @@ public class RelativGrav : MonoBehaviour {
                 currentfallSpeed = initialSpeed + (currentFallAccel * airTime);
             else
                 currentfallSpeed = terminalSpeed;
-		/*this.GetComponent<Rigidbody> ().transform.rotation = Quaternion.Slerp (
+        /*this.GetComponent<Rigidbody> ().transform.rotation = Quaternion.Slerp (
 			this.GetComponent<Rigidbody> ().transform.rotation, 
 			Quaternion.LookRotation (CenterG.transform.position -this.GetComponent<Rigidbody> ().transform.position),
 			currentRotSpeed * Time.deltaTime);*/
-		
-		//this.GetComponent<Rigidbody> ().transform.position += this.GetComponent<Rigidbody> ().transform.forward * currentfallSpeed * Time.deltaTime;
-		this.GetComponent<Rigidbody> ().transform.Translate (Vector3.down*currentfallSpeed*Time.deltaTime);
-	}
+
+        //this.GetComponent<Rigidbody> ().transform.position += this.GetComponent<Rigidbody> ().transform.forward * currentfallSpeed * Time.deltaTime;
+        //Debug.Log(fallLenght);
+        fallLenght = Vector3.down * currentfallSpeed * Time.deltaTime;
+        //FallingDirection = PlayerMesh.rotatedDirection* PlayerMesh.moveSpeed + fallLenght;
+
+       // if (PlayerMesh.IWantToJump == true)
+            //Player.GetComponent<Rigidbody>().transform.Translate(FallingDirection);
+
+        if (transform != Player) {
+            this.GetComponent<Rigidbody>().transform.Translate(Vector3.down * currentfallSpeed * Time.deltaTime);
+        }
+        //Debug.DrawRay(Vector3.zero, Vector3.down * currentfallSpeed * Time.deltaTime, Color.red);
+        //Debug.Log(fallLenght);
+
+    }
 
     public Quaternion currentSurfaceAngle(){
 		return surfaceAngle;

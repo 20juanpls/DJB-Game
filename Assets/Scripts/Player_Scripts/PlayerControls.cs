@@ -21,12 +21,13 @@ public class PlayerControls : MonoBehaviour {
 
     private Vector3 moveDirection = Vector3.zero;
 	private Vector3 lookDirection = Vector3.zero;
-	private Vector3 rotatedDirection, rtY, TmD, FinalDirection,ForwardRotatedDirection;
+	private Vector3 rtY, TmD, FinalDirection,ForwardRotatedDirection, FallingDirection;
+    public Vector3 rotatedDirection;
 
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
 	private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive, hasLedgeGrabbed;
-	public bool PlayerActiveMove , PlayerCanMove, CanMove;
+	public bool PlayerActiveMove , PlayerCanMove, CanMove, IWantToJump, hasJumped;
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
@@ -85,8 +86,9 @@ public class PlayerControls : MonoBehaviour {
             JumpNow();//jump at any time...pls
             //oldforwardDist = forwardDist;<dont use this
         }
-	
-	}
+        //Physics.gravity = new Vector3(0.0f, -200.0f, 0.0f);
+
+    }
 
 	void ControlOrientation(){
 		//Creates a Vector3 that only has a Z of the magnitude of both the Input Axis --Noah
@@ -122,8 +124,16 @@ public class PlayerControls : MonoBehaviour {
 	}
 
     void ApplyingDirection() {
-        if (isGrounded == true)
+        Debug.DrawRay(Vector3.zero, JumpingC.fallLenght, Color.green);
+
+        if (IWantToJump == true||isGrounded == false) {
+            //Debug.Log("air is reached");
+            FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
+            TransP.transform.Translate(FallingDirection);
+        }
+        if (isGrounded == true )
         {
+            //Debug.Log("ground is reached");
             //DON'T MESS WITH THIS, THIS IS JUST TO SPABELIZE THE CHARACTER WHEN ITS GOING DOWNHILL!!!!
             if (TmD.y < 0)
             {
@@ -131,16 +141,11 @@ public class PlayerControls : MonoBehaviour {
             }
             FinalDirection = new Vector3(rotatedDirection.x, TmD.y, rotatedDirection.z);
 
-			TransP.transform.Translate(FinalDirection * moveSpeed*0.005f);
+			TransP.transform.Translate(FinalDirection * moveSpeed);
             //TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
             //Debug.Log(FinalDirection * moveSpeed);
         }
-        else
-        {
-            TransP.transform.Translate(rotatedDirection * moveSpeed*0.005f);
-            //Debug.Log(rotatedDirection* moveSpeed);
-            //TransP.AddRelativeForce(rotatedDirection * moveSpeed);
-        }
+
     }
 
     void ForwardMeasure() {
@@ -171,7 +176,11 @@ public class PlayerControls : MonoBehaviour {
     void JumpNow() {
 		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")){
             JumpingC.setInitialSpeed(jumpSpeed, false);
+            IWantToJump = true;
+            //isJumping = true;
+            //TransP.AddForce(Vector3.up * jumpSpeed);
         }
+        
 
         if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
@@ -180,14 +189,28 @@ public class PlayerControls : MonoBehaviour {
             JumpingC.setCurrentFallSpeed(0.0f);
                 JumpingC.setInitialSpeed(jumpSpeed_2, false);
             CurrentMidAirJumpCount--;
+            IWantToJump = true;
         }
+
+        if (JumpingC.airTime > 0.0f && isGrounded == false)
+        {
+            hasJumped = true;
+        }
+        /*else {
+            hasJumped = false;
+        }*/
 
         if (isGrounded == false){
             JumpingC.setInitialSpeed(0.0f ,false);
+            //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
+            //TransP.transform.Translate(FallingDirection);
         }
 
-        if (isGrounded == true) {
+        if (isGrounded == true && hasJumped == true) {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
+            IWantToJump = false;
+            hasJumped = false;
+            //isJumping = false;
         }
         isGrounded = JumpingC.IsItGrounded();
     }
@@ -247,7 +270,6 @@ public class PlayerControls : MonoBehaviour {
             hasLedgeGrabbed = false;
         }
     }
-
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
@@ -277,7 +299,6 @@ public class PlayerControls : MonoBehaviour {
         }
 		//Debug.Log (CanMove);
 	}
-    
     //this checks if the forward dist remains trash for more than 3 frames, and sets the forwardist to zero;
     void ForwardChecker() {
         if (forwardDist == oldforwardDist)

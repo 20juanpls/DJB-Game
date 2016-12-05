@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 	Transform player;
+    Rigidbody thisrb;
 
 	private Vector3 offset;
 
@@ -30,6 +31,7 @@ public class CameraScript : MonoBehaviour {
 	
 	void Start ()
 	{
+        thisrb = this.GetComponent<Rigidbody>();
 		player = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<Transform>();
         offset = new Vector3(0.0f, DistY, DistX);
     }
@@ -48,6 +50,7 @@ public class CameraScript : MonoBehaviour {
         //Debug.DrawRay(transform.position,directionZoom,Color.green);
         offset = Quaternion.AngleAxis (CamRotSpeed, Vector3.up) * offset;
 		transform.position = player.position + offset;
+        //thisrb.AddForce(offset);
 
         CamSetter();
         transform.LookAt(player.position);
@@ -126,5 +129,6 @@ public class CameraScript : MonoBehaviour {
     void CamSetter() {
         transform.Translate(directionZoom * CurrentZoomSpeedDist);
         transform.position = new Vector3(transform.position.x, transform.position.y + ZoomPosY, transform.position.z);
+        //thisrb.AddForce(Vector3.up*ZoomPosY*1000);
     }
 }
