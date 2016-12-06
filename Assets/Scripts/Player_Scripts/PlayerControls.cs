@@ -21,8 +21,8 @@ public class PlayerControls : MonoBehaviour {
 
     private Vector3 moveDirection = Vector3.zero;
 	private Vector3 lookDirection = Vector3.zero;
-	private Vector3 rtY, TmD, FinalDirection,ForwardRotatedDirection, FallingDirection;
-    public Vector3 rotatedDirection;
+	private Vector3 rtY, TmD, /*FinalDirection,*/ForwardRotatedDirection, FallingDirection;
+    public Vector3 rotatedDirection, FinalDirection;
 
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
@@ -125,6 +125,7 @@ public class PlayerControls : MonoBehaviour {
 
     void ApplyingDirection() {
         Debug.DrawRay(Vector3.zero, JumpingC.fallLenght, Color.green);
+        Debug.Log(isGrounded);
 
         if (IWantToJump == true||isGrounded == false) {
             //Debug.Log("air is reached");
@@ -174,7 +175,8 @@ public class PlayerControls : MonoBehaviour {
     }
 
     void JumpNow() {
-		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")){
+		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") && isGrounded == true)
+        {
             JumpingC.setInitialSpeed(jumpSpeed, false);
             IWantToJump = true;
             //isJumping = true;
@@ -205,11 +207,17 @@ public class PlayerControls : MonoBehaviour {
             //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
             //TransP.transform.Translate(FallingDirection);
         }
+        if (isGrounded == true) {
+            JumpingC.setCurrentFallSpeed(0.0f);
+            JumpingC.setFallAcceleration(0.0f);
+            //JumpingC.setInitialSpeed(0.0f, true);
+        }
 
         if (isGrounded == true && hasJumped == true) {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
             IWantToJump = false;
             hasJumped = false;
+            JumpingC.setInitialSpeed(0.0f, true);
             //isJumping = false;
         }
         isGrounded = JumpingC.IsItGrounded();
@@ -273,6 +281,8 @@ public class PlayerControls : MonoBehaviour {
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
+    //Make sure that when the player cant move, means that the x and z vectors aren't allowed to move, but the y is!!!
+    //v--- (12/6/16) Please Check this out ASAP!!!!!
     void MoveSpeedDecider() {
 		//Debug.Log (moveSpeed);
 		//Debug.Log (forwardDist);
@@ -300,7 +310,7 @@ public class PlayerControls : MonoBehaviour {
 		//Debug.Log (CanMove);
 	}
     //this checks if the forward dist remains trash for more than 3 frames, and sets the forwardist to zero;
-    void ForwardChecker() {
+    /*void ForwardChecker() {
         if (forwardDist == oldforwardDist)
         {
             forwardDistcounter++;
@@ -308,14 +318,16 @@ public class PlayerControls : MonoBehaviour {
         else
         {
             //forwardDistcounter = 0.0f;
-			CanMove = true;
+            CanMove = true;
+            //PlayerCanMove = true;
         }
         if (forwardDistcounter >= 3 && forwardDist < 1.1f)
         {
             //forwardDist = 0.0f;
 			CanMove = true;
+            //PlayerCanMove = true;
         }
-    }
+    }*/
     void Punching() {
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
