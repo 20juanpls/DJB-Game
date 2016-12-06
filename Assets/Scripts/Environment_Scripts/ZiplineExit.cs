@@ -47,6 +47,11 @@ public class ZiplineExit : MonoBehaviour {
     winCan.SetActive(true);
   }
 
+    public void AssignPlayer(GameObject p)
+    {
+        player = p;
+    }
+
 
 
 

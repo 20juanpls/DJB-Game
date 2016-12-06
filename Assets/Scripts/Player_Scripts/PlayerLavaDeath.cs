@@ -48,6 +48,12 @@ public class PlayerLavaDeath : MonoBehaviour {
 		for (int x = 0; x < checkpoints.Length; x++) {
 			checkpoints[x].GetComponent<Checkpoint>().updatePlayer(_p);
 		}
+        GameObject exit = GameObject.FindGameObjectWithTag("Exit");
+        if (exit == null)
+        {
+            Debug.Log("Exit not initailized! :" + this.ToString());
+        }
+        exit.GetComponent<ZiplineExit>().AssignPlayer(_p);
 
 		//destroy the old player, leaves the folder(?)
 		Destroy (this.gameObject);
