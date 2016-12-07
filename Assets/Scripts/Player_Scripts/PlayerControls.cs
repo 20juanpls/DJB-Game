@@ -76,13 +76,18 @@ public class PlayerControls : MonoBehaviour {
             //ForwardChecker();
             Punching();//player can punch
             MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
-            LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
-            if (PlayerCanMove == true)
-            {
-                ControlOrientation();//Orients the inputs to forward movement for player
+            //LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
+            // if (/*Player*/CanMove == true)
+            // {
+            //if (CanMove == true) {
+            //   rotatedDirection.x = 0.0f;
+            //    rotatedDirection.y = 0.0f;
+            //}
+            ControlOrientation();//Orients the inputs to forward movement for player
                 //ForwardMeasure();//Finds if there is anything in front of the player using raycast
-                ApplyingDirection();//Applies direction to rotated forward vector
-            }
+
+            ApplyingDirection();//Applies direction to rotated forward vector
+            //}
             JumpNow();//jump at any time...pls
             //oldforwardDist = forwardDist;<dont use this
         }
@@ -178,13 +183,13 @@ public class PlayerControls : MonoBehaviour {
 		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") && isGrounded == true)
         {
             JumpingC.setInitialSpeed(jumpSpeed, false);
-            IWantToJump = true;
+            //IWantToJump = true;
             //isJumping = true;
             //TransP.AddForce(Vector3.up * jumpSpeed);
         }
         
 
-        if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+        /*if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
             //Debug.Log("is this getting reached?");
             JumpingC.setFallAcceleration(0.0f);
@@ -203,27 +208,28 @@ public class PlayerControls : MonoBehaviour {
         }*/
 
         if (isGrounded == false){
+            JumpingC.setFallAcceleration(JumpingC.fallAccel);
             JumpingC.setInitialSpeed(0.0f ,false);
             //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
             //TransP.transform.Translate(FallingDirection);
         }
-        if (isGrounded == true) {
-            JumpingC.setCurrentFallSpeed(0.0f);
-            JumpingC.setFallAcceleration(0.0f);
-            //JumpingC.setInitialSpeed(0.0f, true);
-        }
+        //if (isGrounded == true) {
+            //JumpingC.setCurrentFallSpeed(0.0f);
+        //    JumpingC.setFallAcceleration(0.0f);
+        //    JumpingC.setInitialSpeed(0.0f, true);
+       // }
 
-        if (isGrounded == true && hasJumped == true) {
+        /*if (isGrounded == true && hasJumped == true) {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
             IWantToJump = false;
             hasJumped = false;
             JumpingC.setInitialSpeed(0.0f, true);
             //isJumping = false;
-        }
+        }*/
         isGrounded = JumpingC.IsItGrounded();
     }
 
-    void LedgeGrab() {
+   /* void LedgeGrab() {
         //Debug.Log(surfaceAngleF.eulerAngles.y);
         // bool Amistake = false;
         //Debug.Log(LedgeGrabbableF+","+ LedgeGrabbableD);
@@ -277,7 +283,7 @@ public class PlayerControls : MonoBehaviour {
         if(isGrounded == true) {
             hasLedgeGrabbed = false;
         }
-    }
+    }*/
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
@@ -286,13 +292,13 @@ public class PlayerControls : MonoBehaviour {
     void MoveSpeedDecider() {
 		//Debug.Log (moveSpeed);
 		//Debug.Log (forwardDist);
-		if (forwardDist < 1.5f)
+		if (forwardDist < 1.4f)
         {
             CanMove = false;
             //PlayerCanMove = false;
             //moveSpeed = 0.0f;
         }
-		if (VertLook <= -0.01 || forwardDist > 1.5f || forwardDist == 0.0f || hasLedgeGrabbed == true)
+		if (VertLook <= -0.01 || forwardDist > 1.4f || forwardDist == 0.0f || hasLedgeGrabbed == true)
         {
             CanMove = true;
             //PlayerCanMove = true;
