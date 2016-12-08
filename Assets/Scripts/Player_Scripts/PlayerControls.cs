@@ -24,11 +24,12 @@ public class PlayerControls : MonoBehaviour {
 	private Vector3 rtY, TmD, /*FinalDirection,*/ForwardRotatedDirection, FallingDirection;
     public Vector3 rotatedDirection, FinalDirection;
 
-    private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
+    private Quaternion _lookRotation, surfaceAngle, surfaceAngleF,surfaceAngleD;
 
-	private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive, hasLedgeGrabbed;
-	public bool PlayerActiveMove , PlayerCanMove, CanMove, IWantToBelieve, hasJumped;
+	private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive, hasLedgeGrabbed, saveFlag;
+	public bool PlayerActiveMove , PlayerCanMove, CanMove, IWantToBelieve, hasJumped, isJumping;
     private int CurrentMidAirJumpCount = 0;
+    static Quaternion templookRotation;
 	// Use this for initialization
 
 	public GameObject theRunningGuy;
@@ -53,7 +54,8 @@ public class PlayerControls : MonoBehaviour {
     }
 	void FixedUpdate ()
 	{
-		runner.Play ();
+        JumpingC.setCurrentFallSpeed(0.0f);
+        runner.Play ();
 
 		ForwardMeasure();
         if (PlayerActiveMove == true)
@@ -131,13 +133,9 @@ public class PlayerControls : MonoBehaviour {
     void ApplyingDirection() {
         Debug.DrawRay(Vector3.zero, JumpingC.fallLenght, Color.green);
         //Debug.Log(isGrounded);
+        //FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
 
-        //if (IWantToJump == true||isGrounded == false) {
-            //Debug.Log("air is reached");
-           // FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
-            //TransP.transform.Translate(FallingDirection);
-        //}
-        /* if(isGrounded == true )
+        if (isGrounded == true)
         {
             //Debug.Log("ground is reached");
             //DON'T MESS WITH THIS, THIS IS JUST TO SPABELIZE THE CHARACTER WHEN ITS GOING DOWNHILL!!!!
@@ -145,37 +143,24 @@ public class PlayerControls : MonoBehaviour {
             {
                 TmD.y = TmD.y - 0.08f;
             }
-            FinalDirection = new Vector3(rotatedDirection.x, TmD.y, rotatedDirection.z);
 
-			TransP.transform.Translate(FinalDirection * moveSpeed);
+            if (IWantToBelieve == true)
+            {
+                FinalDirection = new Vector3(rotatedDirection.x * moveSpeed, 0.0f, rotatedDirection.z * moveSpeed) + JumpingC.fallLenght;
+            }
+            else
+            {
+                FinalDirection = new Vector3(rotatedDirection.x * moveSpeed, TmD.y*moveSpeed, rotatedDirection.z * moveSpeed);
+            }
+            FallingDirection = FinalDirection;
             //TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
             //Debug.Log(FinalDirection * moveSpeed);
-        }*/
-
-		/*if (IWantToJump == true||isGrounded == false) {
-            //Debug.Log("air is reached");
-            FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
-            //TransP.transform.Translate(FallingDirection);
-        }*/
-		FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
-		
-		if (isGrounded == true) {
-			//Debug.Log("ground is reached");
-			//DON'T MESS WITH THIS, THIS IS JUST TO SPABELIZE THE CHARACTER WHEN ITS GOING DOWNHILL!!!!
-			if (TmD.y < 0) {
-				TmD.y = TmD.y - 0.08f;
-			}
-
-			if (IWantToBelieve == true) {
-				FinalDirection = rotatedDirection + JumpingC.fallLenght;
-			} else {
-				FinalDirection = new Vector3 (rotatedDirection.x, TmD.y, rotatedDirection.z);
-			}
-			FallingDirection = FinalDirection * moveSpeed;
-			//TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
-			//Debug.Log(FinalDirection * moveSpeed);
-		}
-		TransP.transform.Translate(FallingDirection);
+        }
+        else {
+            FallingDirection = new Vector3(rotatedDirection.x*moveSpeed, 0.0f, rotatedDirection.z*moveSpeed) + JumpingC.fallLenght;
+        }
+        //FallingDirection = FinalDirection * moveSpeed;
+        TransP.transform.Translate(FallingDirection);
 
 
     }
@@ -206,11 +191,13 @@ public class PlayerControls : MonoBehaviour {
     }
 
     void JumpNow() {
+        //Debug.Log("Do I believe?:" + IWantToBelieve);
 		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") && isGrounded == true)
         {
             JumpingC.setInitialSpeed(jumpSpeed, false);
             IWantToBelieve= true;
             //isJumping = true;
+            //hasJumped = true;
             //TransP.AddForce(Vector3.up * jumpSpeed);
         }
 
@@ -218,11 +205,11 @@ public class PlayerControls : MonoBehaviour {
         if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
             Debug.Log("is this getting reached?");
-            JumpingC.setFallAcceleration(0.0f);
-            JumpingC.setCurrentFallSpeed(0.0f);
-                JumpingC.setInitialSpeed(jumpSpeed_2, false);
-            CurrentMidAirJumpCount--;
             IWantToBelieve = true;
+            JumpingC.setFallAcceleration(0.0f);
+            //JumpingC.setCurrentFallSpeed(0.0f);
+                //JumpingC.setInitialSpeed(jumpSpeed_2, false);
+            CurrentMidAirJumpCount--;
         }
 
         /*if (JumpingC.airTime > 0.0f && isGrounded == false)
@@ -236,7 +223,7 @@ public class PlayerControls : MonoBehaviour {
         if (isGrounded == false){
             JumpingC.setFallAcceleration(JumpingC.fallAccel);
             JumpingC.setInitialSpeed(0.0f ,false);
-			IWantToBelieve = false;
+		    IWantToBelieve = false;
             //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
             //TransP.transform.Translate(FallingDirection);
         }
@@ -249,6 +236,7 @@ public class PlayerControls : MonoBehaviour {
 			CurrentMidAirJumpCount = InitialmidAirJumpCount;
 			//IWantToBelieve = false;
 		}
+
         /*if (isGrounded == true && hasJumped == true) {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
             IWantToJump = false;
@@ -320,28 +308,53 @@ public class PlayerControls : MonoBehaviour {
     //Make sure that when the player cant move, means that the x and z vectors aren't allowed to move, but the y is!!!
     //v--- (12/6/16) Please Check this out ASAP!!!!!
     void MoveSpeedDecider() {
-		//Debug.Log (moveSpeed);
-		//Debug.Log (forwardDist);
-		if (forwardDist < 1.4f)
+        Vector3 thisDown = new Vector3(TransP.transform.position.x, -1.0f, TransP.transform.position.z);
+        Vector3 downward = surfaceAngle* thisDown;
+        float AngleDiff = Vector3.Angle(thisDown, downward);
+        float AngleDiff2 = templookRotation.eulerAngles.y - TransP.transform.rotation.eulerAngles.y;
+        Debug.Log (AngleDiff2);
+        if (forwardDist < 1.4f)
         {
             CanMove = false;
+            //saveFlag = true;
+            //Debug.Log(templookRotation.eulerAngles.y - TransP.transform.rotation.eulerAngles.y);
+            //templookRotation = TransP.transform.rotation;
+            //Debug.Log(templookRotation.eulerAngles.y);
             //PlayerCanMove = false;
             //moveSpeed = 0.0f;
         }
-		if (VertLook <= -0.01 || forwardDist > 1.4f || forwardDist == 0.0f || hasLedgeGrabbed == true)
+       // else {
+        //    templookRotation = TransP.transform.rotation;
+        //}
+
+        if (AngleDiff >= 55.0f) {
+            CanMove = false;
+            Debug.Log("Too Steep!");
+            //JumpingC.setFallAcceleration(0.0f);
+        }
+        if (-AngleDiff2 < 45.0f && -AngleDiff2 >0.0f|| -AngleDiff2 > 315.0f&& -AngleDiff2< 360.0f||AngleDiff2 < 45.0f && AngleDiff2 > 0.0f || AngleDiff2 > 315.0f && AngleDiff2 < 360.0f||forwardDist == 0.0f) {
+           CanMove = true;
+        }
+        /*if (VertLook <= -0.01 || forwardDist > 1.4f || forwardDist == 0.0f /*||AngleDiff <= 55.0f)
         {
             CanMove = true;
             //PlayerCanMove = true;
             //moveSpeed = OrigMoveSpeed;
-        }
+        }*/
+        //if (saveFlag == true) {
+        //    templookRotation = TransP.transform.rotation;
+        //}
 
         if (CanMove == false)
         {
             moveSpeed = 0.0f;
+           // saveFlag = false;
+            //templookRotation = TransP.transform.rotation;
         }
 		else if (CanMove == true)
         {
             moveSpeed = OrigMoveSpeed;
+            templookRotation = TransP.transform.rotation;
         }
 		//Debug.Log (CanMove);
 	}

@@ -51,6 +51,7 @@ public class RelativGrav : MonoBehaviour {
             airTime = 0.0f;
             //initialSpeed = 0.0f;
             currentfallSpeed = 0.0f;
+            currentFallAccel = 0.0f;
 
         }
 
@@ -61,10 +62,12 @@ public class RelativGrav : MonoBehaviour {
 			currentfallSpeed = 0.0f;
 			isGrounded = true;
 			airTime = 0.0f;
-		} else if(floorDist > minGroundDistance)
+
+        } else if(floorDist > minGroundDistance)
         {
 			isGrounded = false;
-		}
+            currentFallAccel = fallAccel;
+        }
         if (CeilDist <= minGroundDistance && CeilDist!=0.0f) {
             //airTime = 0.0f;
             initialSpeed = 0.0f;
