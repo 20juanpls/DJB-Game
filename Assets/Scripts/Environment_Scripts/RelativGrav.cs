@@ -5,7 +5,7 @@ public class RelativGrav : MonoBehaviour {
     Transform Player;
     PlayerControls PlayerMesh;
 	public float fallAccel = 2.0f;
-    private float currentFallAccel;
+    public float currentFallAccel;
 	public float initialSpeed = 0.0f;
 	public float currentRotSpeed = 2.0f;
 	public float terminalSpeed = 2.0f;

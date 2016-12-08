@@ -27,7 +27,7 @@ public class PlayerControls : MonoBehaviour {
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
 	private bool isGrounded, isMove, LedgeGrabbableF, LedgeGrabbableD, punchActive, hasLedgeGrabbed;
-	public bool PlayerActiveMove , PlayerCanMove, CanMove, IWantToJump, hasJumped;
+	public bool PlayerActiveMove , PlayerCanMove, CanMove, IWantToBelieve, hasJumped;
     private int CurrentMidAirJumpCount = 0;
 	// Use this for initialization
 
@@ -130,12 +130,12 @@ public class PlayerControls : MonoBehaviour {
 
     void ApplyingDirection() {
         Debug.DrawRay(Vector3.zero, JumpingC.fallLenght, Color.green);
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
 
         //if (IWantToJump == true||isGrounded == false) {
             //Debug.Log("air is reached");
-            FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
-            TransP.transform.Translate(FallingDirection);
+           // FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
+            //TransP.transform.Translate(FallingDirection);
         //}
         /* if(isGrounded == true )
         {
@@ -151,6 +151,32 @@ public class PlayerControls : MonoBehaviour {
             //TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
             //Debug.Log(FinalDirection * moveSpeed);
         }*/
+
+		/*if (IWantToJump == true||isGrounded == false) {
+            //Debug.Log("air is reached");
+            FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
+            //TransP.transform.Translate(FallingDirection);
+        }*/
+		FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
+		
+		if (isGrounded == true) {
+			//Debug.Log("ground is reached");
+			//DON'T MESS WITH THIS, THIS IS JUST TO SPABELIZE THE CHARACTER WHEN ITS GOING DOWNHILL!!!!
+			if (TmD.y < 0) {
+				TmD.y = TmD.y - 0.08f;
+			}
+
+			if (IWantToBelieve == true) {
+				FinalDirection = rotatedDirection + JumpingC.fallLenght;
+			} else {
+				FinalDirection = new Vector3 (rotatedDirection.x, TmD.y, rotatedDirection.z);
+			}
+			FallingDirection = FinalDirection * moveSpeed;
+			//TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
+			//Debug.Log(FinalDirection * moveSpeed);
+		}
+		TransP.transform.Translate(FallingDirection);
+
 
     }
 
@@ -183,26 +209,26 @@ public class PlayerControls : MonoBehaviour {
 		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") && isGrounded == true)
         {
             JumpingC.setInitialSpeed(jumpSpeed, false);
-            //IWantToJump = true;
+            IWantToBelieve= true;
             //isJumping = true;
             //TransP.AddForce(Vector3.up * jumpSpeed);
         }
 
 
-        /*if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+        if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
-            //Debug.Log("is this getting reached?");
+            Debug.Log("is this getting reached?");
             JumpingC.setFallAcceleration(0.0f);
             JumpingC.setCurrentFallSpeed(0.0f);
                 JumpingC.setInitialSpeed(jumpSpeed_2, false);
             CurrentMidAirJumpCount--;
-            IWantToJump = true;
+            IWantToBelieve = true;
         }
 
-        if (JumpingC.airTime > 0.0f && isGrounded == false)
+        /*if (JumpingC.airTime > 0.0f && isGrounded == false)
         {
             hasJumped = true;
-        }
+        }*/
         /*else {
             hasJumped = false;
         }*/
@@ -210,6 +236,7 @@ public class PlayerControls : MonoBehaviour {
         if (isGrounded == false){
             JumpingC.setFallAcceleration(JumpingC.fallAccel);
             JumpingC.setInitialSpeed(0.0f ,false);
+			IWantToBelieve = false;
             //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
             //TransP.transform.Translate(FallingDirection);
         }
@@ -218,7 +245,10 @@ public class PlayerControls : MonoBehaviour {
         //    JumpingC.setFallAcceleration(0.0f);
         //    JumpingC.setInitialSpeed(0.0f, true);
        // }
-
+		if (isGrounded == true){
+			CurrentMidAirJumpCount = InitialmidAirJumpCount;
+			//IWantToBelieve = false;
+		}
         /*if (isGrounded == true && hasJumped == true) {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
             IWantToJump = false;
