@@ -19,7 +19,7 @@ public class RelativGrav : MonoBehaviour {
     public Vector3 posRun, fallLenght; //FallingDirection;
     //Vector3 posFloor;
     public float floorDist;
-	float CeilDist;
+    float CeilDist;
 	//Use this for initialization
 	void Start () {
         currentFallAccel = fallAccel;
@@ -42,9 +42,18 @@ public class RelativGrav : MonoBehaviour {
 		FloorMeasure ();
 		FallTowards();
 
-		if (isGrounded == false) {
-			airTime += Time.deltaTime;
-		}
+        if (isGrounded == false)
+        {
+            airTime += Time.deltaTime;
+        }
+        else if (isGrounded == true)
+        {
+            airTime = 0.0f;
+            //initialSpeed = 0.0f;
+            currentfallSpeed = 0.0f;
+
+        }
+
         if (currentFallAccel == 0.0f) {
             airTime = 0.0f;
         }
@@ -57,6 +66,7 @@ public class RelativGrav : MonoBehaviour {
 			isGrounded = false;
 		}
         if (CeilDist <= minGroundDistance && CeilDist!=0.0f) {
+            //airTime = 0.0f;
             initialSpeed = 0.0f;
             currentfallSpeed = 0.0f;
         }
@@ -95,7 +105,7 @@ public class RelativGrav : MonoBehaviour {
 			currentRotSpeed * Time.deltaTime);*/
 
         //this.GetComponent<Rigidbody> ().transform.position += this.GetComponent<Rigidbody> ().transform.forward * currentfallSpeed * Time.deltaTime;
-        //Debug.Log(fallLenght);
+        //Debug.Log(fallLenght.magnitude);
         fallLenght = Vector3.down * currentfallSpeed * Time.deltaTime;
         //FallingDirection = PlayerMesh.rotatedDirection* PlayerMesh.moveSpeed + fallLenght;
 

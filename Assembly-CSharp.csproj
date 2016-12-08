@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Brutus State Machine\BrutusMechanimInputs.cs" />
+     <Compile Include="Assets\FollowNPCSpawn.cs" />
+     <Compile Include="Assets\PlayerNPCKill.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\CoinSpinner.cs" />
@@ -54,6 +56,7 @@
      <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\NPC_Stomper.cs" />
+     <Compile Include="Assets\Scripts\NPC_Death.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\CameraScript.cs" />

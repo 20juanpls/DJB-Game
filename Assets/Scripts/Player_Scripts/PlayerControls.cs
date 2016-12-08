@@ -21,8 +21,8 @@ public class PlayerControls : MonoBehaviour {
 
     private Vector3 moveDirection = Vector3.zero;
 	private Vector3 lookDirection = Vector3.zero;
-	private Vector3 rtY, TmD, FinalDirection,ForwardRotatedDirection, FallingDirection;
-    public Vector3 rotatedDirection;
+	private Vector3 rtY, TmD, /*FinalDirection,*/ForwardRotatedDirection, FallingDirection;
+    public Vector3 rotatedDirection, FinalDirection;
 
     private Quaternion _lookRotation, surfaceAngle, templookRotation, surfaceAngleF,surfaceAngleD;
 
@@ -51,7 +51,7 @@ public class PlayerControls : MonoBehaviour {
 
 
     }
-	void FixedUpdate () 
+	void FixedUpdate ()
 	{
 		runner.Play ();
 
@@ -76,13 +76,18 @@ public class PlayerControls : MonoBehaviour {
             //ForwardChecker();
             Punching();//player can punch
             MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
-            LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
-            if (PlayerCanMove == true)
-            {
-                ControlOrientation();//Orients the inputs to forward movement for player
+            //LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
+            // if (/*Player*/CanMove == true)
+            // {
+            //if (CanMove == true) {
+            //   rotatedDirection.x = 0.0f;
+            //    rotatedDirection.y = 0.0f;
+            //}
+            ControlOrientation();//Orients the inputs to forward movement for player
                 //ForwardMeasure();//Finds if there is anything in front of the player using raycast
-                ApplyingDirection();//Applies direction to rotated forward vector
-            }
+
+            ApplyingDirection();//Applies direction to rotated forward vector
+            //}
             JumpNow();//jump at any time...pls
             //oldforwardDist = forwardDist;<dont use this
         }
@@ -103,7 +108,7 @@ public class PlayerControls : MonoBehaviour {
 		float EulerZ = -surfaceAngle.eulerAngles.z;
 
         Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
-		Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward); 
+		Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward);
 		Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
         Quaternion q = qx * qz * qy;
 
@@ -125,13 +130,14 @@ public class PlayerControls : MonoBehaviour {
 
     void ApplyingDirection() {
         Debug.DrawRay(Vector3.zero, JumpingC.fallLenght, Color.green);
+        Debug.Log(isGrounded);
 
-        if (IWantToJump == true||isGrounded == false) {
+        //if (IWantToJump == true||isGrounded == false) {
             //Debug.Log("air is reached");
             FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
             TransP.transform.Translate(FallingDirection);
-        }
-        if (isGrounded == true )
+        //}
+        /* if(isGrounded == true )
         {
             //Debug.Log("ground is reached");
             //DON'T MESS WITH THIS, THIS IS JUST TO SPABELIZE THE CHARACTER WHEN ITS GOING DOWNHILL!!!!
@@ -144,7 +150,7 @@ public class PlayerControls : MonoBehaviour {
 			TransP.transform.Translate(FinalDirection * moveSpeed);
             //TrzansP.AddRelativeForce(FinalDirection * moveSpeed);
             //Debug.Log(FinalDirection * moveSpeed);
-        }
+        }*/
 
     }
 
@@ -174,15 +180,16 @@ public class PlayerControls : MonoBehaviour {
     }
 
     void JumpNow() {
-		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")){
+		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") && isGrounded == true)
+        {
             JumpingC.setInitialSpeed(jumpSpeed, false);
-            IWantToJump = true;
+            //IWantToJump = true;
             //isJumping = true;
             //TransP.AddForce(Vector3.up * jumpSpeed);
         }
-        
 
-        if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+
+        /*if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
         {
             //Debug.Log("is this getting reached?");
             JumpingC.setFallAcceleration(0.0f);
@@ -201,21 +208,28 @@ public class PlayerControls : MonoBehaviour {
         }*/
 
         if (isGrounded == false){
+            JumpingC.setFallAcceleration(JumpingC.fallAccel);
             JumpingC.setInitialSpeed(0.0f ,false);
             //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
             //TransP.transform.Translate(FallingDirection);
         }
+        //if (isGrounded == true) {
+            //JumpingC.setCurrentFallSpeed(0.0f);
+        //    JumpingC.setFallAcceleration(0.0f);
+        //    JumpingC.setInitialSpeed(0.0f, true);
+       // }
 
-        if (isGrounded == true && hasJumped == true) {
+        /*if (isGrounded == true && hasJumped == true) {
             CurrentMidAirJumpCount = InitialmidAirJumpCount;
             IWantToJump = false;
             hasJumped = false;
+            JumpingC.setInitialSpeed(0.0f, true);
             //isJumping = false;
-        }
+        }*/
         isGrounded = JumpingC.IsItGrounded();
     }
 
-    void LedgeGrab() {
+   /* void LedgeGrab() {
         //Debug.Log(surfaceAngleF.eulerAngles.y);
         // bool Amistake = false;
         //Debug.Log(LedgeGrabbableF+","+ LedgeGrabbableD);
@@ -269,20 +283,22 @@ public class PlayerControls : MonoBehaviour {
         if(isGrounded == true) {
             hasLedgeGrabbed = false;
         }
-    }
+    }*/
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
+    //Make sure that when the player cant move, means that the x and z vectors aren't allowed to move, but the y is!!!
+    //v--- (12/6/16) Please Check this out ASAP!!!!!
     void MoveSpeedDecider() {
 		//Debug.Log (moveSpeed);
 		//Debug.Log (forwardDist);
-		if (forwardDist < 1.5f)
+		if (forwardDist < 1.4f)
         {
             CanMove = false;
             //PlayerCanMove = false;
             //moveSpeed = 0.0f;
         }
-		if (VertLook <= -0.01 || forwardDist > 1.5f || forwardDist == 0.0f || hasLedgeGrabbed == true)
+		if (VertLook <= -0.01 || forwardDist > 1.4f || forwardDist == 0.0f || hasLedgeGrabbed == true)
         {
             CanMove = true;
             //PlayerCanMove = true;
@@ -300,7 +316,7 @@ public class PlayerControls : MonoBehaviour {
 		//Debug.Log (CanMove);
 	}
     //this checks if the forward dist remains trash for more than 3 frames, and sets the forwardist to zero;
-    void ForwardChecker() {
+    /*void ForwardChecker() {
         if (forwardDist == oldforwardDist)
         {
             forwardDistcounter++;
@@ -308,14 +324,16 @@ public class PlayerControls : MonoBehaviour {
         else
         {
             //forwardDistcounter = 0.0f;
-			CanMove = true;
+            CanMove = true;
+            //PlayerCanMove = true;
         }
         if (forwardDistcounter >= 3 && forwardDist < 1.1f)
         {
             //forwardDist = 0.0f;
 			CanMove = true;
+            //PlayerCanMove = true;
         }
-    }
+    }*/
     void Punching() {
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
