@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
-	Rigidbody TransP;
+	Transform TransP;
 	Transform Camera_Rot;
 	RelativGrav JumpingC;
     GameObject punchHitBox;
@@ -37,7 +37,7 @@ public class PlayerControls : MonoBehaviour {
 
 
 	void Start () {
-        TransP = this.GetComponent<Rigidbody> ();
+		TransP = this.GetComponent<Transform> ();
 		Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         JumpingC = this.GetComponent<RelativGrav>();
         punchHitBox = this.gameObject.transform.GetChild(0).gameObject;
@@ -54,8 +54,16 @@ public class PlayerControls : MonoBehaviour {
     }
 	void FixedUpdate ()
 	{
-        JumpingC.setCurrentFallSpeed(0.0f);
-        runner.Play ();
+		JumpingC.setCurrentFallSpeed(0.0f);
+
+
+		//FOUND MAJOR THREAT... USING RIGIDBOD WITHOUD PROGRAMER'S PREMISSION!!!!
+		//Debug.Log (TransP.velocity);
+		//TransP.velocity = new Vector3 (0.0f, 0.0f, 0.0f);
+		//FOUND MAJOR THREAT...ETC
+        
+
+		runner.Play ();
 
 		ForwardMeasure();
         if (PlayerActiveMove == true)
@@ -76,8 +84,8 @@ public class PlayerControls : MonoBehaviour {
             lookDirection = new Vector3(HorizLook, 0, VertLook);
 
             //ForwardChecker();
-            Punching();//player can punch
-            MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
+            //Punching();//player can punch
+            //MoveSpeedDecider();//Desides if distance from wall is suffecient enough to not move
             //LedgeGrab();// responsible for ledge grabbing(will only be activated on ledges and player cannot move on ledges)
             // if (/*Player*/CanMove == true)
             // {
@@ -101,6 +109,7 @@ public class PlayerControls : MonoBehaviour {
 		//Creates a Vector3 that only has a Z of the magnitude of both the Input Axis --Noah
 		float VectMeasure = moveDirection.magnitude;
 		Vector3 moveforward = new Vector3 (0.0f, 0.0f, VectMeasure);
+		rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
 
 		surfaceAngle = JumpingC.currentSurfaceAngle();
 		//finds angle of camera relative to world & angle of surface
@@ -126,15 +135,17 @@ public class PlayerControls : MonoBehaviour {
 
 		TransP.transform.rotation = Quaternion.Slerp (TransP.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
         // Check this
-		rotatedDirection = new Vector3 (moveforward.x, 0.0f, moveforward.z);
+		//
+
         ForwardRotatedDirection = _lookRotation*Vector3.forward*2;
 	}
 
     void ApplyingDirection() {
-        Debug.DrawRay(Vector3.zero, JumpingC.fallLenght, Color.green);
+		Debug.DrawRay(Vector3.zero, FallingDirection, Color.green);
         //Debug.Log(isGrounded);
         //FallingDirection = rotatedDirection * moveSpeed + JumpingC.fallLenght;
 
+		//does not affect glitch
         if (isGrounded == true)
         {
             //Debug.Log("ground is reached");
@@ -194,6 +205,7 @@ public class PlayerControls : MonoBehaviour {
         //Debug.Log("Do I believe?:" + IWantToBelieve);
 		if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") && isGrounded == true)
         {
+			//NOT CALLING INIT SPEED IN GLITCH
             JumpingC.setInitialSpeed(jumpSpeed, false);
             IWantToBelieve= true;
             //isJumping = true;
@@ -220,13 +232,20 @@ public class PlayerControls : MonoBehaviour {
             hasJumped = false;
         }*/
 
+
+		//POTENTIAL THREAT
         if (isGrounded == false){
             JumpingC.setFallAcceleration(JumpingC.fallAccel);
-            JumpingC.setInitialSpeed(0.0f ,false);
+			//POTENTIAL THREAT 
+            //JumpingC.setInitialSpeed(0.0f ,false);
+			
 		    IWantToBelieve = false;
             //FallingDirection = rotatedDirection * moveSpeed * 0.005f + JumpingC.fallLenght;
             //TransP.transform.Translate(FallingDirection);
         }
+		//POTENTIAL THREAT
+
+
         //if (isGrounded == true) {
             //JumpingC.setCurrentFallSpeed(0.0f);
         //    JumpingC.setFallAcceleration(0.0f);
@@ -246,62 +265,7 @@ public class PlayerControls : MonoBehaviour {
         }*/
         isGrounded = JumpingC.IsItGrounded();
     }
-
-   /* void LedgeGrab() {
-        //Debug.Log(surfaceAngleF.eulerAngles.y);
-        // bool Amistake = false;
-        //Debug.Log(LedgeGrabbableF+","+ LedgeGrabbableD);
-        Quaternion lDy = Quaternion.LookRotation(lookDirection, Vector3.up);
-        Quaternion FDy = Quaternion.LookRotation(-ForwardRotatedDirection, Vector3.up);
-
-        //Checks in front of ledge
-        if (isGrounded == false && forwardDist <= 1.7f )//&& surfaceAngle.eulerAngles.y==0.0f)//surfaceAngleF.eulerAngles.y <= 10.0f && Amistake==false)
-        {
-            LedgeGrabbableF = true;
-        }
-        else {
-            LedgeGrabbableF = false;
-        }
-        //Debug.Log(surfaceAngleD.eulerAngles.x);
-        //Checks down towards the ledge
-        if (isGrounded == false && downLedgeDist <= 1.5f && downLedgeDist >= 0.5f)// && surfaceAngle.eulerAngles.z == 0.0f)//surfaceAngleD.eulerAngles.z == 0.0f)
-        {
-            LedgeGrabbableD = true;
-        }
-        else
-        {
-            LedgeGrabbableD = false;
-        }
-		//Debug.Log (JumpingC.floorDist);
-        if (LedgeGrabbableF == true && LedgeGrabbableD == true && JumpingC.floorDist > 4.0f)
-        {
-           // Debug.Log("ledge grabbed");
-            JumpingC.setFallAcceleration(0.0f);
-            JumpingC.setInitialSpeed(0.0f, true);
-            PlayerCanMove = false;
-            hasLedgeGrabbed = true;
-            //if (Input.GetKey(KeyCode.S))
-            //if (lDy.eulerAngles.y == FDy.eulerAngles.y - 5.0f )
-            if (lDy.eulerAngles.y >= FDy.eulerAngles.y - 5.0f && lDy.eulerAngles.y <= FDy.eulerAngles.y + 5.0f)
-            {
-                PlayerCanMove = true;
-                JumpingC.setFallAcceleration(JumpingC.fallAccel);
-            }
-            if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11"))
-            {
-                PlayerCanMove = true;
-                JumpingC.setInitialSpeed(jumpSpeed, true);
-                JumpingC.setFallAcceleration(JumpingC.fallAccel);
-            }
-        }
-        else {
-            JumpingC.setFallAcceleration(JumpingC.fallAccel);
-            PlayerCanMove = true;
-        }
-        if(isGrounded == true) {
-            hasLedgeGrabbed = false;
-        }
-    }*/
+	
     public void setPlayerActivity(bool OnOrOff) {
         PlayerActiveMove = OnOrOff;
     }
@@ -312,8 +276,8 @@ public class PlayerControls : MonoBehaviour {
         Vector3 downward = surfaceAngle* thisDown;
         float AngleDiff = Vector3.Angle(thisDown, downward);
         float AngleDiff2 = templookRotation.eulerAngles.y - TransP.transform.rotation.eulerAngles.y;
-        Debug.Log (AngleDiff2);
-        if (forwardDist < 1.4f)
+        //Debug.Log (AngleDiff2);
+        /*if (forwardDist < 1.4f)
         {
             CanMove = false;
             //saveFlag = true;
@@ -322,19 +286,19 @@ public class PlayerControls : MonoBehaviour {
             //Debug.Log(templookRotation.eulerAngles.y);
             //PlayerCanMove = false;
             //moveSpeed = 0.0f;
-        }
+        }*/
        // else {
         //    templookRotation = TransP.transform.rotation;
         //}
 
-        if (AngleDiff >= 55.0f) {
+		/*if (AngleDiff >= 55.0f&&isGrounded == true) {
             CanMove = false;
             Debug.Log("Too Steep!");
             //JumpingC.setFallAcceleration(0.0f);
-        }
-        if (-AngleDiff2 < 45.0f && -AngleDiff2 >0.0f|| -AngleDiff2 > 315.0f&& -AngleDiff2< 360.0f||AngleDiff2 < 45.0f && AngleDiff2 > 0.0f || AngleDiff2 > 315.0f && AngleDiff2 < 360.0f||forwardDist == 0.0f) {
+        }*/
+        /*if (-AngleDiff2 < 45.0f && -AngleDiff2 >0.0f|| -AngleDiff2 > 315.0f&& -AngleDiff2< 360.0f||AngleDiff2 < 45.0f && AngleDiff2 > 0.0f || AngleDiff2 > 315.0f && AngleDiff2 < 360.0f||forwardDist == 0.0f) {
            CanMove = true;
-        }
+        }*/
         /*if (VertLook <= -0.01 || forwardDist > 1.4f || forwardDist == 0.0f /*||AngleDiff <= 55.0f)
         {
             CanMove = true;
@@ -399,7 +363,7 @@ public class PlayerControls : MonoBehaviour {
         if (punchCounter >= 10.0f) {
             PlayerCanMove = true;
             moveSpeed = OrigMoveSpeed;
-            TransP.velocity = Vector3.zero;
+            //TransP.velocity = Vector3.zero;
             punchHitBox.SetActive(false);
             punchActive = false;
         }
