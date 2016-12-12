@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Bugfixer.unity
+- path: Assets/Scenes/DJB_0_0_2.unity
   isLoaded: 1
   isActive: 1

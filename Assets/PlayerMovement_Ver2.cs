@@ -7,7 +7,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed;
 
-    private bool isMove, isGrounded, lastYSpeed, hasJumped;
+    private bool isMove, isGrounded, lastYSpeed, hasJumped, touching;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
@@ -22,9 +22,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float JumpSpeed = 10.0f;
     public float currentfallSpeed;
     public float terminalSpeed = 10.0f;
+	public float InitialMidAirJumpCount = 1.0f;
 
     float currentFallAccel;
-    private float initialAirSpeed = 0.0f;
+	private float initialAirSpeed = 0.0f;
+	float CurrentMidAirJumpCount;
     public float airTime;
 
     public float floorDist;
@@ -41,11 +43,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
 		hasJumped = false;
+		CurrentMidAirJumpCount = InitialMidAirJumpCount;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+		//Debug.Log("is it grounded?: "+isGrounded);
         GravityApplyer();
 
         Animator();
@@ -72,9 +75,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         ApplyingDirection();
         JumpNow();
 
-        Vector3 vel = PlayerRb.velocity;
-
-        //Debug.Log(vel.y);
         //Debug.Log(TmD.y);
 
         //PlayerRb.velocity = vel;
@@ -96,6 +96,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 initialAirSpeed = 0.0f;
                 hasJumped = false;
             }
+			CurrentMidAirJumpCount = InitialMidAirJumpCount;
         }
         else {
             airTime += Time.deltaTime;
@@ -152,14 +153,32 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     void ApplyingDirection()
     {
-       // if (TmD.y < 0)
-        //{
-       //     TmD.y = TmD.y;// - 0.08f;
-       // }
-        Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y, rotatedDirection.z);
-        finalDirection = _lookRotation*finalDirection + fallLenght;
+
+		Debug.DrawRay (PlayerRb.position, PlayerRb.velocity, Color.green);
+		Debug.DrawRay (PlayerRb.position, _lookRotation *rotatedDirection * ActualSpeed, Color.red);
+
+		Vector3 vel = PlayerRb.velocity;
+
+		Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y+fallLenght.y, rotatedDirection.z);
+		finalDirection = _lookRotation * finalDirection;
+		//Debug.Log (fallLenght.y);
+		//Debug.Log ("TmD.y = " + TmD.y);
         //PlayerRb.AddRelativeForce(finalDirection *ActualSpeed);
-        PlayerRb.velocity = finalDirection * ActualSpeed;
+        vel = finalDirection * ActualSpeed;
+		if (touching == true) {
+			if (isGrounded == false) {
+				//Debug.Log ("WallKick?");
+				vel = new Vector3 (0.0f, finalDirection.y, 0.0f) * ActualSpeed;
+			}
+
+
+			/*if (isGrounded == false && airTime >= 0.01f) {
+				this.GetComponent<CapsuleCollider> ().enabled = false;
+			} else {
+				this.GetComponent<CapsuleCollider>().enabled = true;
+			}*/
+		}
+		PlayerRb.velocity = vel;
 
     }
 
@@ -170,6 +189,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
 		if (airTime >= 0.01f) {
 			hasJumped = true;
+		}
+			
+		if ((Input.GetKeyDown ("space") || Input.GetKeyDown ("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0) {
+			initialAirSpeed = JumpSpeed;
+			airTime = 0.0f;
+			CurrentMidAirJumpCount--;
 		}
     }
 
@@ -214,6 +239,18 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         else
             currentfallSpeed = terminalSpeed;
 
-        fallLenght = Vector3.down * currentfallSpeed * Time.deltaTime;
+		fallLenght = Vector3.down * currentfallSpeed;
+
     }
+	void OnCollisionEnter(Collision collision){
+		Debug.Log (collision.relativeVelocity);
+		if (collision.relativeVelocity.magnitude > 0.05) {
+			touching = true;
+		}	
+	}
+	void OnCollisionExit(Collision collision){
+		if (collision.relativeVelocity.magnitude > 0.05) {
+			touching = false;
+		}	
+	}
 }
