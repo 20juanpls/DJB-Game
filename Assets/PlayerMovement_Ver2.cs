@@ -40,7 +40,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
-
+		hasJumped = false;
     }
 	
 	// Update is called once per frame
@@ -91,11 +91,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             }*/
             //PlayerRb.drag = GroundDrag;
             //ActualSpeed = GroundSpeed;
-            /*if (hasJumped == true)
+            if (hasJumped == true)
             {
                 initialAirSpeed = 0.0f;
                 hasJumped = false;
-            }*/
+            }
         }
         else {
             airTime += Time.deltaTime;
@@ -167,8 +167,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0"))
         {
             initialAirSpeed = JumpSpeed;
-            hasJumped = true;
         }
+		if (airTime >= 0.01f) {
+			hasJumped = true;
+		}
     }
 
     void FloorMeasure()
