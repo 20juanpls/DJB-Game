@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class RelativGrav : MonoBehaviour {
-	Rigidbody Player;
+    Rigidbody Player;
+    //Transform Player;
     PlayerControls PlayerMesh;
 	public float fallAccel = 2.0f;
     public float currentFallAccel;
@@ -38,11 +39,14 @@ public class RelativGrav : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//FOUND MAJOR THREAT... USING RIGIDBOD WITHOUD PROGRAMER'S PREMISSION!!!!
-		Debug.Log (Player.velocity);
-		Player.velocity = Vector3.zero;
-		//TransP.velocity = new Vector3 (0.0f, 0.0f, 0.0f);
-		//FOUND MAJOR THREAT...ETC
+        //FOUND MAJOR THREAT... USING RIGIDBOD WITHOUD PROGRAMER'S PREMISSION!!!!
+        Debug.Log (Player.velocity);
+        Player.velocity = Vector3.zero;
+        //TransP.velocity = new Vector3 (0.0f, 0.0f, 0.0f);
+        //FOUND MAJOR THREAT...ETC
+
+        //Player.rotation.x = 0.0f;
+
 
 
 
