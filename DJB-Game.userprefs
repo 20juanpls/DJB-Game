@@ -1,24 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Environment_Scripts/Checkpoint.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayerMovement_Ver2.cs">
     <Files>
-      <File FileName="Assets/Scripts/Environment_Scripts/Checkpoint.cs" Line="1" Column="1" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Environment_Scripts\ZiplineExit.cs">
-    <Files>
-<<<<<<< Updated upstream
-      <File FileName="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" Line="36" Column="1" />
-<<<<<<< Updated upstream
->>>>>>> b41621d2aeb41b730531871cf6d00636be14a42e
-=======
-=======
-      <File FileName="Assets/Scripts/Player_Scripts/PlayerControls.cs" Line="149" Column="12" />
-      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Follow.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MovingPlataform/MovingPlataform.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player_Scripts/CameraScript.cs" Line="1" Column="1" />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+      <File FileName="Assets/PlayerMovement_Ver2.cs" Line="158" Column="32" />
+      <File FileName="Assets/Scripts/Player_Scripts/PlayerControls.cs" Line="217" Column="136" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -7,7 +7,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed;
 
-    private bool isMove, isGrounded, lastYSpeed, hasJumped;
+    private bool isMove, isGrounded, lastYSpeed, hasJumped, touching;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
@@ -22,9 +22,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float JumpSpeed = 10.0f;
     public float currentfallSpeed;
     public float terminalSpeed = 10.0f;
+	public float InitialMidAirJumpCount = 1.0f;
 
     float currentFallAccel;
-    private float initialAirSpeed = 0.0f;
+	private float initialAirSpeed = 0.0f, forwardDist;
+	float CurrentMidAirJumpCount;
     public float airTime;
 
     public float floorDist;
@@ -40,12 +42,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
-
+		hasJumped = false;
+		CurrentMidAirJumpCount = InitialMidAirJumpCount;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+		//Debug.Log("is it grounded?: "+isGrounded);
         GravityApplyer();
 
         Animator();
@@ -72,40 +75,21 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         ApplyingDirection();
         JumpNow();
 
-        Vector3 vel = PlayerRb.velocity;
-
-        //Debug.Log(vel.y);
         //Debug.Log(TmD.y);
 
         //PlayerRb.velocity = vel;
         if (isGrounded == true)
         {
             airTime = 0.0f;
-            //PlayerRb.useGravity = false;
-            //vel.y = 0.0f;
-            //PlayerRb.velocity = vel;
-            /*if (surfaceAngle.eulerAngles.x == 0.0f)
-            {
-                vel.y = 0.0f;
-                PlayerRb.velocity = vel;
-            }*/
-            //PlayerRb.drag = GroundDrag;
-            //ActualSpeed = GroundSpeed;
-            /*if (hasJumped == true)
+            if (hasJumped == true)
             {
                 initialAirSpeed = 0.0f;
                 hasJumped = false;
-            }*/
+            }
+			CurrentMidAirJumpCount = InitialMidAirJumpCount;
         }
         else {
             airTime += Time.deltaTime;
-            //lastYSpeed = 
-            //PlayerRb.useGravity = true;
-            //PlayerRb.drag = 0.0f;
-            //vel.x*= AirDrag;
-            //vel.z*= AirDrag;
-            //PlayerRb.velocity = vel;
-            //ActualSpeed = AirSpeed;
         }
 
         //Physics.gravity = new Vector3(0.0f, setGrav, 0.0f);
@@ -152,14 +136,34 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     void ApplyingDirection()
     {
-       // if (TmD.y < 0)
-        //{
-       //     TmD.y = TmD.y;// - 0.08f;
-       // }
-        Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y, rotatedDirection.z);
-        finalDirection = _lookRotation*finalDirection + fallLenght;
+
+		Vector3 vel = PlayerRb.velocity;
+
+		Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y+fallLenght.y, rotatedDirection.z);
+		finalDirection = _lookRotation * finalDirection;
+
+       // Debug.Log (touching);
+
+        //Debug.Log ("TmD.y = " + TmD.y);
+        Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z);
         //PlayerRb.AddRelativeForce(finalDirection *ActualSpeed);
-        PlayerRb.velocity = finalDirection * ActualSpeed;
+        if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f) {
+            airTime = 0.0f;
+            initialAirSpeed = 0.0f;
+        }
+
+        vel = finalDirection * ActualSpeed;
+		if (touching == true || forwardDist <= 1.0f) {
+			if (isGrounded == false) {
+				//Debug.Log ("WallKick?");
+				vel = new Vector3 (0.0f, finalDirection.y, 0.0f) * ActualSpeed;
+                if (forwardDist >= 1.2f) {
+                    vel = finalDirection * ActualSpeed;
+                }
+
+			}
+		}
+		PlayerRb.velocity = vel;
 
     }
 
@@ -167,18 +171,33 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0"))
         {
             initialAirSpeed = JumpSpeed;
-            hasJumped = true;
         }
+		if (airTime >= 0.01f) {
+			hasJumped = true;
+		}
+			
+		if ((Input.GetKeyDown ("space") || Input.GetKeyDown ("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0) {
+			initialAirSpeed = JumpSpeed;
+			airTime = 0.0f;
+			CurrentMidAirJumpCount--;
+		}
     }
 
     void FloorMeasure()
     {
         RaycastHit hit;
+        RaycastHit hit_2;
+
+        Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+        //Debug.DrawRay(PlayerRb.position, _lookRotation * Vector3.forward*10.0f, Color.red);
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
         {
             floorDist = hit.distance;
             surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
+        }
+        if (Physics.Raycast(PlayerRb.position, _lookRotation * Vector3.forward, out hit_2)) {
+            forwardDist = hit_2.distance;
         }
     }
 
@@ -212,6 +231,18 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         else
             currentfallSpeed = terminalSpeed;
 
-        fallLenght = Vector3.down * currentfallSpeed * Time.deltaTime;
+		fallLenght = Vector3.down * currentfallSpeed;
+
     }
+	void OnCollisionEnter(Collision collision){
+		//Debug.Log (collision.relativeVelocity);
+		if (collision.gameObject) {
+			touching = true;
+		}	
+	}
+	void OnCollisionExit(Collision collision){
+		if (collision.gameObject) {
+			touching = false;
+		}	
+	}
 }
