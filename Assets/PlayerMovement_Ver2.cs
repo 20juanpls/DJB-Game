@@ -81,6 +81,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (isGrounded == true)
         {
             airTime = 0.0f;
+
             if (hasJumped == true)
             {
                 initialAirSpeed = 0.0f;
@@ -137,6 +138,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void ApplyingDirection()
     {
 
+
+		Debug.DrawRay (PlayerRb.position, PlayerRb.velocity, Color.green);
+		//Debug.DrawRay (PlayerRb.position, _lookRotation *rotatedDirection * ActualSpeed, Color.red);
+
 		Vector3 vel = PlayerRb.velocity;
 
 		Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y+fallLenght.y, rotatedDirection.z);
@@ -153,16 +158,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
 
         vel = finalDirection * ActualSpeed;
-		if (touching == true || forwardDist <= 1.0f) {
-			if (isGrounded == false) {
-				//Debug.Log ("WallKick?");
-				vel = new Vector3 (0.0f, finalDirection.y, 0.0f) * ActualSpeed;
-                if (forwardDist >= 1.2f) {
+        if (touching == true || forwardDist <= 1.0f)
+        {
+            if (isGrounded == false)
+            {
+                //Debug.Log ("WallKick?");
+                vel = new Vector3(0.0f, finalDirection.y, 0.0f) * ActualSpeed;
+                if (forwardDist >= 1.2f)
+                {
                     vel = finalDirection * ActualSpeed;
                 }
 
-			}
-		}
+            }
+        }
 		PlayerRb.velocity = vel;
 
     }
@@ -188,7 +196,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         RaycastHit hit;
         RaycastHit hit_2;
 
-        Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+        //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
         //Debug.DrawRay(PlayerRb.position, _lookRotation * Vector3.forward*10.0f, Color.red);
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
