@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\Brutus State Machine\BrutusMechanimInputs.cs" />
      <Compile Include="Assets\FollowNPCSpawn.cs" />
-     <Compile Include="Assets\PlayerMovement_Ver2.cs" />
      <Compile Include="Assets\PlayerNPCKill.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
@@ -68,6 +67,7 @@
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerKnockback.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerLavaDeath.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerScore.cs" />
+     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

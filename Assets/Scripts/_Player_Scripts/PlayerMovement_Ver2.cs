@@ -12,7 +12,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
 
-    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght;
+    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght, BottomPlatVel;
 
     private Quaternion _lookRotation, surfaceAngle;
 
@@ -138,10 +138,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void ApplyingDirection()
     {
 
-
-		Debug.DrawRay (PlayerRb.position, PlayerRb.velocity, Color.green);
-		//Debug.DrawRay (PlayerRb.position, _lookRotation *rotatedDirection * ActualSpeed, Color.red);
-
 		Vector3 vel = PlayerRb.velocity;
 
 		Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y+fallLenght.y, rotatedDirection.z);
@@ -150,7 +146,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
        // Debug.Log (touching);
 
         //Debug.Log ("TmD.y = " + TmD.y);
-        Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z);
+        //Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z); -- not yeet
         //PlayerRb.AddRelativeForce(finalDirection *ActualSpeed);
         if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f) {
             airTime = 0.0f;
@@ -171,6 +167,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
             }
         }
+        //Debug.Log(BottomPlatVel);
+        vel = vel + BottomPlatVel;
 		PlayerRb.velocity = vel;
 
     }
@@ -195,18 +193,42 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     {
         RaycastHit hit;
         RaycastHit hit_2;
+        RaycastHit hit_3;
 
         //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
-        //Debug.DrawRay(PlayerRb.position, _lookRotation * Vector3.forward*10.0f, Color.red);
+        //Debug.DrawRay(new Vector3 (PlayerRb.position.x, PlayerRb.position.y-1.0f,PlayerRb.position.z), _lookRotation * Vector3.forward*10.0f, Color.red);
+        //Debug.DrawRay(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward * 10.0f, Color.yellow);
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
         {
             floorDist = hit.distance;
             surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
+            if (hit.rigidbody && isGrounded == true)
+                BottomPlatVel = hit.rigidbody.velocity;
+            else
+                BottomPlatVel = Vector3.zero;
+
         }
-        if (Physics.Raycast(PlayerRb.position, _lookRotation * Vector3.forward, out hit_2)) {
-            forwardDist = hit_2.distance;
+        if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y - 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_2)
+            && Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_3))
+        {
+            if (hit_2.distance < hit_3.distance)
+            {
+                forwardDist = hit_2.distance;
+            }
+            else if (hit_3.distance < hit_2.distance)
+            {
+                forwardDist = hit_3.distance;
+            }
+            else {
+                forwardDist = hit_2.distance;
+            } 
         }
+        /*else
+        if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_3))  {
+            forwardDist = hit_3.distance;
+        }*/
+        //Debug.Log(forwardDist);
     }
 
     void IsGrounded() {
@@ -223,7 +245,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     }
 
     void Animator() {
-        if (PlayerRb.velocity.magnitude >= 2.0f)
+        Vector3 RelativPlayerMove = PlayerRb.velocity - BottomPlatVel;
+        if ( RelativPlayerMove.magnitude >= 2.0f)
         {
             runner.Play();
         }

@@ -49,7 +49,7 @@ public class CameraScript : MonoBehaviour {
         directionZoom = Quaternion.Euler(transform.rotation.x,0.0f,0.0f)* Vector3.forward;
         //Debug.DrawRay(transform.position,directionZoom,Color.green);
         offset = Quaternion.AngleAxis (CamRotSpeed, Vector3.up) * offset;
-		transform.position = player.position + offset;
+		//transform.position = player.position + offset;
         //thisrb.AddForce(offset);
 
         CamSetter();
@@ -83,13 +83,13 @@ public class CameraScript : MonoBehaviour {
     void SetZoomYSet() {
         if (Input.GetKey(KeyCode.U))
         {
-          if (ZoomPosY >= MinHeight)  
-            ZoomPosY = ZoomPosY - ZoomSpeedY;
+            if (ZoomPosY >= MinHeight)
+                ZoomPosY = ZoomPosY - ZoomSpeedY;
         }
         else if (Input.GetKey(KeyCode.P))
         {
-          if(ZoomPosY <= MaxHeight)
-            ZoomPosY = ZoomPosY + ZoomSpeedY;
+            if (ZoomPosY <= MaxHeight)
+                ZoomPosY = ZoomPosY + ZoomSpeedY;
         }
     }
     void SetZoomXZSet() {
@@ -127,8 +127,9 @@ public class CameraScript : MonoBehaviour {
         //Debug.Log(XDist+","+ ZDist);
     }
     void CamSetter() {
-        transform.Translate(directionZoom * CurrentZoomSpeedDist);
-        transform.position = new Vector3(transform.position.x, transform.position.y + ZoomPosY, transform.position.z);
-        //thisrb.AddForce(Vector3.up*ZoomPosY*1000);
+        //transform.Translate(directionZoom * CurrentZoomSpeedDist);
+        Vector3 ZoomXZ = directionZoom * CurrentZoomSpeedDist;
+        transform.position = new Vector3(player.position.x + offset.x ,player.position.y + offset.y + ZoomPosY, player.position.z + offset.z);
+        //Debug.Log(transform.position);
     }
 }
