@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//gameobject should have a flag object attatched to it
+//gameobject MUST BE TAGGED AS CHECKPOINT
+
 public class Checkpoint : MonoBehaviour {
 
 	GameObject flag;
@@ -25,21 +28,19 @@ public class Checkpoint : MonoBehaviour {
 
 	void Update(){
 		//if player is within setDistance away
+		Debug.Log(this.ToString());
+		Debug.Log(player.ToString());
+		Debug.Log(flag.ToString());
 		if (Vector3.Distance (this.transform.position, player.transform.position) <= setDistance && !flag.activeSelf) {
-
-			if (!flag.activeSelf) {
 				Debug.Log ("CHECKPOINT REACHED: " + this.ToString());
-			}
-
-			flag.SetActive (true);
-			player.GetComponent<PlayerLavaDeath> ().checkpointReached (this.gameObject);
-
+				flag.SetActive (true);
+				player.GetComponent<PlayerLavaDeath> ().checkpointReached (this.gameObject);
 		}
 	}
 
 	public void updatePlayer(GameObject _p){
 		player = _p;
 	}
-		
+
 
 }

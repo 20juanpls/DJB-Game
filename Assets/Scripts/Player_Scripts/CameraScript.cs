@@ -28,7 +28,7 @@ public class CameraScript : MonoBehaviour {
     float ZDist;
 
     private Vector3 directionZoom;
-	
+
 	void Start ()
 	{
         thisrb = this.GetComponent<Rigidbody>();
@@ -39,6 +39,7 @@ public class CameraScript : MonoBehaviour {
 	//Noah Squeeze for player assignment
 	public void AssignPlayer(GameObject p){
 		player = p.transform;
+		Debug.Log(player.ToString());
 	}
 
 	void LateUpdate ()
