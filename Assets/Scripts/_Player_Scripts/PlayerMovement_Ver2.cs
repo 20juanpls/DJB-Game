@@ -4,10 +4,14 @@ using System.Collections;
 public class PlayerMovement_Ver2 : MonoBehaviour {
     Rigidbody PlayerRb;
     Transform Camera_Rot;
+    PlayerKnockback KnockBack;
 
-    private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed;
+    private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed, UpHillValue;
 
-    private bool isMove, isGrounded, lastYSpeed, hasJumped, touching;
+    public bool DontMove, forKnockBack;
+
+    private bool isMove, lastYSpeed, touching, canJump;
+    public bool hasJumped, isGrounded;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
@@ -25,9 +29,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	public float InitialMidAirJumpCount = 1.0f;
 
     float currentFallAccel;
-	private float initialAirSpeed = 0.0f, forwardDist;
+	private float forwardDist;
 	float CurrentMidAirJumpCount;
-    public float airTime;
+    public float airTime, initialAirSpeed;
 
     public float floorDist;
 
@@ -40,6 +44,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         PlayerRb = this.GetComponent<Rigidbody>();
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
+        KnockBack = this.GetComponent<PlayerKnockback>();
         runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
 		hasJumped = false;
@@ -68,14 +73,16 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             isMove = true;
         }
+
         moveDirection = new Vector3(HorizMov, 0, VertMov);
         lookDirection = new Vector3(HorizLook, 0, VertLook);
-
         ControlOrientation();
+
         ApplyingDirection();
+
         JumpNow();
 
-        //Debug.Log(TmD.y);
+        //Debug.Log(isGrounded);
 
         //PlayerRb.velocity = vel;
         if (isGrounded == true)
@@ -84,13 +91,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
             if (hasJumped == true)
             {
+                forKnockBack = true;
                 initialAirSpeed = 0.0f;
                 hasJumped = false;
             }
-			CurrentMidAirJumpCount = InitialMidAirJumpCount;
+            else {
+                CurrentMidAirJumpCount = InitialMidAirJumpCount;
+                forKnockBack = false;
+            }
+            canJump = true;
         }
         else {
             airTime += Time.deltaTime;
+            canJump = false;
         }
 
         //Physics.gravity = new Vector3(0.0f, setGrav, 0.0f);
@@ -125,6 +138,15 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         TmD = q * moveDirection;
 
+        // adds uphill/downhill only if on ground
+        if (isGrounded == true)
+            {
+                UpHillValue = TmD.y;
+            }
+            else {
+                UpHillValue = 0.0f;
+            }
+
         _lookRotation = Quaternion.LookRotation(rtY);
 
 
@@ -140,10 +162,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 		Vector3 vel = PlayerRb.velocity;
 
-		Vector3 finalDirection = new Vector3(rotatedDirection.x, TmD.y+fallLenght.y, rotatedDirection.z);
-		finalDirection = _lookRotation * finalDirection;
+		Vector3 finalDirection = new Vector3(rotatedDirection.x, (UpHillValue*ActualSpeed)+fallLenght.y, rotatedDirection.z);
+		FinalDirection = _lookRotation * finalDirection;
 
-       // Debug.Log (touching);
+        //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
 
         //Debug.Log ("TmD.y = " + TmD.y);
         //Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z); -- not yeet
@@ -153,40 +175,54 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             initialAirSpeed = 0.0f;
         }
 
-        vel = finalDirection * ActualSpeed;
+        vel = new Vector3(FinalDirection.x * ActualSpeed, FinalDirection.y , FinalDirection.z * ActualSpeed);
+
         if (touching == true || forwardDist <= 1.0f)
         {
-            if (isGrounded == false)
+            if (isGrounded == false && DontMove == false)
             {
                 //Debug.Log ("WallKick?");
-                vel = new Vector3(0.0f, finalDirection.y, 0.0f) * ActualSpeed;
+                vel = new Vector3(0.0f, FinalDirection.y, 0.0f);
                 if (forwardDist >= 1.2f)
                 {
-                    vel = finalDirection * ActualSpeed;
+                    vel = new Vector3(FinalDirection.x * ActualSpeed, FinalDirection.y, FinalDirection.z * ActualSpeed);
                 }
 
             }
         }
-        //Debug.Log(BottomPlatVel);
+       
+
         vel = vel + BottomPlatVel;
-		PlayerRb.velocity = vel;
+
+        // KnockBack Will move the player instead of the player Itself...
+        if (DontMove == true)
+        {
+            vel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed) + fallLenght.y, KnockBack.FinalKnockBack.z);
+        }
+
+        PlayerRb.velocity = vel;
 
     }
 
     void JumpNow() {
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0"))
+        if (DontMove == false)
         {
-            initialAirSpeed = JumpSpeed;
+            if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && canJump == true)
+            {
+                initialAirSpeed = JumpSpeed;
+            }
+
+            if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+            {
+                initialAirSpeed = JumpSpeed;
+                airTime = 0.0f;
+                CurrentMidAirJumpCount--;
+            }
         }
-		if (airTime >= 0.01f) {
-			hasJumped = true;
-		}
-			
-		if ((Input.GetKeyDown ("space") || Input.GetKeyDown ("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0) {
-			initialAirSpeed = JumpSpeed;
-			airTime = 0.0f;
-			CurrentMidAirJumpCount--;
-		}
+        if (airTime > 0.0f)
+        {
+            hasJumped = true;
+        }
     }
 
     void FloorMeasure()
@@ -195,7 +231,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         RaycastHit hit_2;
         RaycastHit hit_3;
 
-        //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
         //Debug.DrawRay(new Vector3 (PlayerRb.position.x, PlayerRb.position.y-1.0f,PlayerRb.position.z), _lookRotation * Vector3.forward*10.0f, Color.red);
         //Debug.DrawRay(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward * 10.0f, Color.yellow);
 
@@ -212,17 +247,22 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y - 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_2)
             && Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_3))
         {
-            if (hit_2.distance < hit_3.distance)
+            //Debug.Log(hit_2.transform.tag);
+            if (hit_2.transform.tag == "Untagged" || hit_3.transform.tag == "Untagged")
             {
-                forwardDist = hit_2.distance;
+                if (hit_2.distance < hit_3.distance)
+                {
+                    forwardDist = hit_2.distance;
+                }
+                else if (hit_3.distance < hit_2.distance)
+                {
+                    forwardDist = hit_3.distance;
+                }
+                else
+                {
+                    forwardDist = hit_2.distance;
+                }
             }
-            else if (hit_3.distance < hit_2.distance)
-            {
-                forwardDist = hit_3.distance;
-            }
-            else {
-                forwardDist = hit_2.distance;
-            } 
         }
         /*else
         if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_3))  {
@@ -265,12 +305,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 		fallLenght = Vector3.down * currentfallSpeed;
 
     }
+
 	void OnCollisionEnter(Collision collision){
 		//Debug.Log (collision.relativeVelocity);
 		if (collision.gameObject) {
 			touching = true;
 		}	
 	}
+
 	void OnCollisionExit(Collision collision){
 		if (collision.gameObject) {
 			touching = false;
