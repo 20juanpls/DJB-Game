@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: 57f3cb9c600f6924aade57cc8927d15e
+timeCreated: 1483226018
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cylinder002
+    100002: Leaves
+    100004: Leaves001
+    100006: Leaves002
+    100008: Leaves003
+    100010: Leaves004
+    100012: Leaves005
+    100014: Leaves006
+    100016: Leaves007
+    100018: Leaves008
+    100020: Leaves009
+    100022: Leaves010
+    100024: Leaves011
+    100026: Leaves012
+    100028: Leaves013
+    100030: Leaves014
+    100032: Leaves015
+    100034: Leaves016
+    100036: Leaves017
+    100038: Leaves018
+    100040: Leaves019
+    100042: Leaves020
+    100044: Leaves021
+    100046: //RootNode
+    400000: Cylinder002
+    400002: Leaves
+    400004: Leaves001
+    400006: Leaves002
+    400008: Leaves003
+    400010: Leaves004
+    400012: Leaves005
+    400014: Leaves006
+    400016: Leaves007
+    400018: Leaves008
+    400020: Leaves009
+    400022: Leaves010
+    400024: Leaves011
+    400026: Leaves012
+    400028: Leaves013
+    400030: Leaves014
+    400032: Leaves015
+    400034: Leaves016
+    400036: Leaves017
+    400038: Leaves018
+    400040: Leaves019
+    400042: Leaves020
+    400044: Leaves021
+    400046: //RootNode
+    2300000: Cylinder002
+    2300002: Leaves
+    2300004: Leaves001
+    2300006: Leaves002
+    2300008: Leaves003
+    2300010: Leaves004
+    2300012: Leaves005
+    2300014: Leaves006
+    2300016: Leaves007
+    2300018: Leaves008
+    2300020: Leaves009
+    2300022: Leaves010
+    2300024: Leaves011
+    2300026: Leaves012
+    2300028: Leaves013
+    2300030: Leaves014
+    2300032: Leaves015
+    2300034: Leaves016
+    2300036: Leaves017
+    2300038: Leaves018
+    2300040: Leaves019
+    2300042: Leaves020
+    2300044: Leaves021
+    3300000: Cylinder002
+    3300002: Leaves
+    3300004: Leaves001
+    3300006: Leaves002
+    3300008: Leaves003
+    3300010: Leaves004
+    3300012: Leaves005
+    3300014: Leaves006
+    3300016: Leaves007
+    3300018: Leaves008
+    3300020: Leaves009
+    3300022: Leaves010
+    3300024: Leaves011
+    3300026: Leaves012
+    3300028: Leaves013
+    3300030: Leaves014
+    3300032: Leaves015
+    3300034: Leaves016
+    3300036: Leaves017
+    3300038: Leaves018
+    3300040: Leaves019
+    3300042: Leaves020
+    3300044: Leaves021
+    4300000: Cylinder002
+    4300002: Leaves
+    4300004: Leaves001
+    4300006: Leaves002
+    4300008: Leaves003
+    4300010: Leaves004
+    4300012: Leaves005
+    4300014: Leaves006
+    4300016: Leaves007
+    4300018: Leaves008
+    4300020: Leaves009
+    4300022: Leaves010
+    4300024: Leaves011
+    4300026: Leaves012
+    4300028: Leaves013
+    4300030: Leaves014
+    4300032: Leaves015
+    4300034: Leaves016
+    4300036: Leaves017
+    4300038: Leaves018
+    4300040: Leaves019
+    4300042: Leaves020
+    4300044: Leaves021
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

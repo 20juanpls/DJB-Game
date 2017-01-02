@@ -6,7 +6,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     Transform Camera_Rot;
     PlayerKnockback KnockBack;
 
-    private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed, UpHillValue;
+    private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed, UpHillValue, currentRotationSpeed;
 
     public bool DontMove, forKnockBack;
 
@@ -27,6 +27,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float currentfallSpeed;
     public float terminalSpeed = 10.0f;
 	public float InitialMidAirJumpCount = 1.0f;
+    public float AcceptedFloorDist = 1.7f;
 
     float currentFallAccel;
 	private float forwardDist;
@@ -49,6 +50,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         ActualSpeed = MoveSpeed;
 		hasJumped = false;
 		CurrentMidAirJumpCount = InitialMidAirJumpCount;
+        _lookRotation = PlayerRb.transform.rotation;
     }
 	
 	// Update is called once per frame
@@ -147,10 +149,20 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 UpHillValue = 0.0f;
             }
 
-        _lookRotation = Quaternion.LookRotation(rtY);
+        if (rtY.magnitude != 0.0f)
+        {
+            _lookRotation = Quaternion.LookRotation(rtY);
+        }
 
+        if (DontMove == true)
+        {
+            currentRotationSpeed = 0.0f;
+        }
+        else {
+            currentRotationSpeed = rotationSpeed;
+        }
 
-        PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+        PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, _lookRotation, Time.deltaTime * currentRotationSpeed);
         // Check this
         //
 
@@ -162,7 +174,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 		Vector3 vel = PlayerRb.velocity;
 
-		Vector3 finalDirection = new Vector3(rotatedDirection.x, (UpHillValue*ActualSpeed)+fallLenght.y, rotatedDirection.z);
+		Vector3 finalDirection = new Vector3(rotatedDirection.x, (UpHillValue*ActualSpeed*1.05f)+fallLenght.y, rotatedDirection.z);
 		FinalDirection = _lookRotation * finalDirection;
 
         //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
@@ -197,7 +209,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         // KnockBack Will move the player instead of the player Itself...
         if (DontMove == true)
         {
-            vel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed) + fallLenght.y, KnockBack.FinalKnockBack.z);
+            vel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed * 1.05f) + fallLenght.y, KnockBack.FinalKnockBack.z);
         }
 
         PlayerRb.velocity = vel;
@@ -212,7 +224,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 initialAirSpeed = JumpSpeed;
             }
 
-            if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+            if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && isGrounded == false && CurrentMidAirJumpCount > 0)
             {
                 initialAirSpeed = JumpSpeed;
                 airTime = 0.0f;
@@ -236,12 +248,15 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
         {
-            floorDist = hit.distance;
-            surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
-            if (hit.rigidbody && isGrounded == true)
-                BottomPlatVel = hit.rigidbody.velocity;
-            else
-                BottomPlatVel = Vector3.zero;
+            if (hit.transform.tag == "Untagged")
+            {
+                floorDist = hit.distance;
+                surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
+                if (hit.rigidbody && isGrounded == true)
+                    BottomPlatVel = hit.rigidbody.velocity;
+                else
+                    BottomPlatVel = Vector3.zero;
+            }
 
         }
         if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y - 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_2)
@@ -273,7 +288,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     void IsGrounded() {
         //Debug.Log(floorDist);
-        if (floorDist <= 1.7f)
+        if (floorDist <= AcceptedFloorDist)
         {
             isGrounded = true;
         }

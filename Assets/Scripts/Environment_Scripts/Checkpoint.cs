@@ -28,9 +28,9 @@ public class Checkpoint : MonoBehaviour {
 
 	void Update(){
 		//if player is within setDistance away
-		Debug.Log(this.ToString());
-		Debug.Log(player.ToString());
-		Debug.Log(flag.ToString());
+		//Debug.Log(this.ToString());
+		//Debug.Log(player.ToString());
+		//Debug.Log(flag.ToString());
 		if (Vector3.Distance (this.transform.position, player.transform.position) <= setDistance && !flag.activeSelf) {
 				Debug.Log ("CHECKPOINT REACHED: " + this.ToString());
 				flag.SetActive (true);

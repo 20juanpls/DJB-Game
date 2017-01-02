@@ -10,7 +10,7 @@ public class NPC_Death : MonoBehaviour {
 	public NPC_Follow nf;
 	public GameObject collider;
 	int count;
-	bool flag;
+	public bool flag;
 
 	void Start(){
 		if (deathTime == 0.0f){

@@ -18,6 +18,13 @@ public class PlayerLavaDeath : MonoBehaviour {
 		player = this.gameObject;
 	}
 
+    void Update() {
+        if (this.GetComponent<PlayerHealth>().IsDead == true)
+        {
+            loseScreen.gameObject.SetActive(true);
+        }
+    }
+
 	void assignButton(){
 		Button b = loseScreen.transform.GetChild (0).transform.GetChild (1).GetComponent<Button> ();
 		Debug.Log (b);
@@ -51,9 +58,12 @@ public class PlayerLavaDeath : MonoBehaviour {
 		//Debug.Log (_p.ToString ());
 		//Debug.Log (respawn.ToString ());
 		_p.transform.position = respawn.transform.position;
-		//Debug.Log ("New Player Instantiated at " + respawn.transform.position);
-		//all checkpoints get player updated
-		GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+
+        //_p.GetComponent<PlayerHealth>().HealthReset();
+
+        //Debug.Log ("New Player Instantiated at " + respawn.transform.position);
+        //all checkpoints get player updated
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
 		for (int x = 0; x < checkpoints.Length; x++) {
 			Debug.Log("Checking checkpoint " + x);
 			checkpoints[x].GetComponent<Checkpoint>().updatePlayer(_p);
@@ -61,9 +71,11 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 
 		Camera.main.GetComponent<CameraScript> ().AssignPlayer (_p);
+        GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
 
-		//destroy the old player, leaves the folder(?)
-		Destroy (this.gameObject);
+
+        //destroy the old player, leaves the folder(?)
+        Destroy (this.gameObject);
 
 
 		//Debug.Log ("Old player destroyed");

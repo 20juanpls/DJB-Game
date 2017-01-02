@@ -7,7 +7,7 @@ public class PlayerKnockback : MonoBehaviour {
     Transform HazardT;
     Rigidbody PlayerRb;
 
-    public bool collided;
+    public bool collided, Inactive = false;
     public Vector3 FinalKnockBack;
 	public float knockbackMultiplier, RecoverTime, KnockBackJumpForce;
 
@@ -26,20 +26,23 @@ public class PlayerKnockback : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Debug.DrawRay(PlayerRb.position, KnockBackOrientation, Color.red);
-        ThisIsATest();
-
-        if (collided == true)//&& itStoppedMoving == false)
+        //ThisIsATest();
+        if (Inactive == false)
         {
-            PlayerP.DontMove = true;
-            ForceAdder();
-            //JumpingC.setInitialSpeed(-15.0f,false);
-            //StartCoroutine(KnockBackTime(0.4f));
+            if (collided == true)//&& itStoppedMoving == false)
+            {
+                PlayerP.DontMove = true;
+                ForceAdder();
+                //JumpingC.setInitialSpeed(-15.0f,false);
+                //StartCoroutine(KnockBackTime(0.4f));
+            }
+            else
+            {
+                PlayerP.DontMove = false;
+                currentKnockBackJumpForce = KnockBackJumpForce;
+            }
+            //JumpingC.IsItGrounded();
         }
-        else {
-            PlayerP.DontMove = false;
-            currentKnockBackJumpForce = KnockBackJumpForce;
-        }
-        //JumpingC.IsItGrounded();
 
     }
 
@@ -76,15 +79,6 @@ public class PlayerKnockback : MonoBehaviour {
            }
        }
 */
-   
-
-    void ThisIsATest() {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            KnockBackOrientation = Vector3.forward;
-            collided = true;
-        }
-    }
 
     void ForceAdder() {
         TimeLeft -= Time.deltaTime;
