@@ -12,7 +12,7 @@ public class PlayerKnockback : MonoBehaviour {
 	public float knockbackMultiplier, RecoverTime, KnockBackJumpForce;
 
     private float TimeLeft, currentKnockBackJumpForce;
-    private Vector3 KnockBackOrientation;
+    private Vector3 KnockBackOrientation, hitVector;
 
     // Use this for initialization
     void Start () {
@@ -25,14 +25,17 @@ public class PlayerKnockback : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //Debug.DrawRay(PlayerRb.position, KnockBackOrientation, Color.red);
         //ThisIsATest();
+        //Debug.DrawRay(PlayerRb.position, hitVector, Color.red);
+
         if (Inactive == false)
         {
             if (collided == true)//&& itStoppedMoving == false)
             {
+
                 PlayerP.DontMove = true;
                 ForceAdder();
+
                 //JumpingC.setInitialSpeed(-15.0f,false);
                 //StartCoroutine(KnockBackTime(0.4f));
             }
@@ -58,13 +61,23 @@ public class PlayerKnockback : MonoBehaviour {
                KnockBackOrientation = npcRB.transform.rotation*Vector3.forward;
                //Debug.Log(KnockBackOrientation.magnitude);
            }*/
-           if (other.tag == "hazard") {
-               collided = true;
-               HazardT = other.GetComponent<Transform>();
-               KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
-           }
+        if (other.tag == "EpicentralHazard") {
+            collided = true;
+            HazardT = other.GetComponent<Transform>();
+            hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
+            KnockBackOrientation = hitVector*-1.0f;
+            //KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
+        }
+        if (other.tag == "hazard")
+        {
+            collided = true;
+            HazardT = other.GetComponent<Transform>();
+            //hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
+            //KnockBackOrientation = hitVector * -1.0f;
+            KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
+        }
 
-       }
+    }
     /*
       void OnTriggerExit(Collider other)
        {

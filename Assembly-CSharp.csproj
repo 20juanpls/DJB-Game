@@ -66,11 +66,11 @@
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerDash.cs" />
-     <Compile Include="Assets\Scripts\Player_Scripts\PlayerKnockback.cs" />
      <Compile Include="Assets\Scripts\Player_Scripts\PlayerLavaDeath.cs" />
-     <Compile Include="Assets\Scripts\Player_Scripts\PlayerScore.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerKnockback.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />
+     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerScore.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\SpotShadowScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

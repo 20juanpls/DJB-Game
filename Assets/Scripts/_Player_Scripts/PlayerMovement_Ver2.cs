@@ -248,7 +248,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
         {
-            if (hit.transform.tag == "Untagged")
+            if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill")
             {
                 floorDist = hit.distance;
                 surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
