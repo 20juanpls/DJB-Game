@@ -7,9 +7,9 @@ public class PlayerKnockback : MonoBehaviour {
     Transform HazardT;
     Rigidbody PlayerRb;
 
-    public bool collided, Inactive = false;
+    public bool collided, Inactive = false, cantTakeDamage;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-	public float knockbackMultiplier, RecoverTime, KnockBackJumpForce;
+	public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, totalDamage;
 
     private float TimeLeft, currentKnockBackJumpForce;
     private Vector3 KnockBackOrientation, hitVector;
@@ -35,13 +35,14 @@ public class PlayerKnockback : MonoBehaviour {
 
                 PlayerP.DontMove = true;
                 ForceAdder();
-
-                //JumpingC.setInitialSpeed(-15.0f,false);
-                //StartCoroutine(KnockBackTime(0.4f));
+                
             }
             else
             {
-                PlayerP.DontMove = false;
+                if (this.GetComponent<PlayerHealth>().IsDead == false)
+                {
+                    PlayerP.DontMove = false;
+                }
                 currentKnockBackJumpForce = KnockBackJumpForce;
             }
             //JumpingC.IsItGrounded();
@@ -49,7 +50,6 @@ public class PlayerKnockback : MonoBehaviour {
 
     }
 
-    
      void OnTriggerEnter(Collider other){
 
            //check for collision with anything tagged "NPC_Collider"
@@ -63,51 +63,64 @@ public class PlayerKnockback : MonoBehaviour {
            }*/
         if (other.tag == "EpicentralHazard") {
             collided = true;
+           // takeAwayHealth = true;
             HazardT = other.GetComponent<Transform>();
             hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
             KnockBackOrientation = hitVector*-1.0f;
+            if (cantTakeDamage == false)
+            {
+                totalDamage += 1;
+            }
             //KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
         }
         if (other.tag == "hazard")
         {
             collided = true;
+           // takeAwayHealth = true;
             HazardT = other.GetComponent<Transform>();
             //hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
             //KnockBackOrientation = hitVector * -1.0f;
             KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
+            if (cantTakeDamage == false)
+            {
+                totalDamage += 1;
+            }
         }
 
     }
-    /*
-      void OnTriggerExit(Collider other)
+
+    /*  void OnTriggerExit(Collider other)
        {
            //check for collision with anything tagged "NPC_Collider"
-           if (other.tag == "NPC_Collider")
+           if (other.tag == "EpicentralHazard")
            {
-               collided = false;
+            takeAwayHealth = false;
            }
            if (other.tag == "hazard")
            {
-               collided = false;
+            takeAwayHealth = false;
            }
-       }
-*/
+       }*/
 
     void ForceAdder() {
-        TimeLeft -= Time.deltaTime;
-
-        FinalKnockBack = KnockBackOrientation * TimeLeft* knockbackMultiplier;
-        PlayerP.initialAirSpeed = currentKnockBackJumpForce;
-
-        if (PlayerP.forKnockBack == true)
+        if (PlayerP.isGrounded == true)
         {
-            currentKnockBackJumpForce = 0.0f;
-        }
+            TimeLeft -= Time.deltaTime;
+
+            FinalKnockBack = KnockBackOrientation * TimeLeft * knockbackMultiplier;
+            PlayerP.initialAirSpeed = currentKnockBackJumpForce;
+
+            if (PlayerP.forKnockBack == true)
+            {
+                currentKnockBackJumpForce = 0.0f;
+            }
 
 
-        if (TimeLeft <= 0.0f) {
-            TimeLeft = RecoverTime;
-            collided = false;
+            if (TimeLeft <= 0.0f)
+            {
+                TimeLeft = RecoverTime;
+                collided = false;
+            }
         }
     }
 

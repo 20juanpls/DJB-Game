@@ -7,7 +7,8 @@ using System.Collections.Generic;
 public class PlayerLavaDeath : MonoBehaviour {
 
 	public GameObject loseScreen;
-	public GameObject player;
+	public GameObject playerFolder;
+    public GameObject player;
 	Transform respawn;
 
 	// Use this for initialization
@@ -15,14 +16,25 @@ public class PlayerLavaDeath : MonoBehaviour {
 		assignButton();
 		loseScreen = GameObject.Find ("LoseScreenCanvas");
 		loseScreen.SetActive (false);
-		player = this.gameObject;
-	}
+        player = GameObject.FindGameObjectWithTag("PlayerMesh");
+		playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
+    }
 
     void Update() {
-        if (this.GetComponent<PlayerHealth>().IsDead == true)
+        if (player.GetComponent<PlayerHealth>().IsDead == true)
         {
             loseScreen.gameObject.SetActive(true);
         }
+        else {
+            loseScreen.gameObject.SetActive(false);
+        }
+    }
+
+    void AssignPlayer(GameObject p, GameObject pF)
+    {
+        playerFolder = pF.gameObject;
+        player = p.gameObject;
+        Debug.Log(player.ToString());
     }
 
 	void assignButton(){
@@ -33,13 +45,6 @@ public class PlayerLavaDeath : MonoBehaviour {
 		});
 	}
 
-	void OnTriggerEnter(Collider other){
-		//on trigger collision with tagged "kill"
-		if (other.tag == "Kill") {
-			loseScreen.gameObject.SetActive (true);
-		}
-	}
-
 	public void checkpointReached(GameObject checkpointReached){
 		respawn = checkpointReached.transform;
 	}
@@ -48,16 +53,26 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 		Debug.Log("RESTARTING");
 
-		//assign player to the new object (aka "Player")
-		//player = this.gameObject;
-		//Debug.Log ("new player assigneD");
-		//New instance of Player is assigned to _p
-		GameObject _p = (GameObject)Instantiate(player);
+        //assign player to the new object (aka "Player")
+        //player = this.gameObject;
+        //Debug.Log ("new player assigneD");
+        //New instance of Player is assigned to _p
+        //folder is destroyed first!!!
+
+        GameObject pF = (GameObject)Instantiate(playerFolder);
+        //GameObject _p = (GameObject)Instantiate(player);
 		//Debug.Log(_p.ToString());
-		_p.GetComponent<PlayerLavaDeath> ().checkpointReached (respawn.gameObject);
-		//Debug.Log (_p.ToString ());
-		//Debug.Log (respawn.ToString ());
-		_p.transform.position = respawn.transform.position;
+        
+        GameObject _p = pF.transform.FindChild("Player").gameObject;
+        //Debug.Log(_p.ToString());
+
+        //_p.GetComponent<PlayerLavaDeath> ().checkpointReached (respawn.gameObject);
+        checkpointReached(respawn.gameObject);
+        Debug.Log (_p.ToString ());
+        //Debug.Log (respawn.ToString ());
+        _p.transform.position = respawn.transform.position;
+
+        _p.GetComponent<PlayerHealth>().PlayerHealthReset();
 
         //_p.GetComponent<PlayerHealth>().HealthReset();
 
@@ -73,22 +88,22 @@ public class PlayerLavaDeath : MonoBehaviour {
 		Camera.main.GetComponent<CameraScript> ().AssignPlayer (_p);
         GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
 
+        Destroy(playerFolder.gameObject);
+        //loseScreen.gameObject.SetActive(false);
 
-        //destroy the old player, leaves the folder(?)
-        Destroy (this.gameObject);
+        AssignPlayer(_p, pF);
 
+        //Debug.Log ("Old player destroyed");
+        //assignes to main camera script the new player, _p
+        //Debug.Log ("Camera re-assigned");
 
-		//Debug.Log ("Old player destroyed");
-		//assignes to main camera script the new player, _p
-		//Debug.Log ("Camera re-assigned");
-
-		//for each player, assign new player
-		/*
+        //for each player, assign new player
+        /*
 		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC");
 		for (int x = 0; x < listOfNPCs.Length; x++) {
 			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
 			Debug.Log ("Assignment attempted");
 		}
 		*/
-	}
+    }
 }

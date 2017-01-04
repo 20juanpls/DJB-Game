@@ -8,12 +8,15 @@ public class PlayerHealth : MonoBehaviour {
     CapsuleCollider PlayerColl;
     PlayerKnockback KnockKnock;
 
+    public float StartHealth = 3.0f, Deaths;
+
+
     public float CrushSpeedMultiplier = 10.0f;
     public float TimeCrushed = 1.0f;
     public float CrushRealizationTime = 1.0f;
     public bool IsDead = false;
 
-
+    private float currentHealth;
     bool Crushing = false;
 
 	// Use this for initialization
@@ -22,11 +25,22 @@ public class PlayerHealth : MonoBehaviour {
         PlayerTrn = this.GetComponent<Transform>();
         PlayerColl = this.GetComponent<CapsuleCollider>();
         KnockKnock = this.GetComponent<PlayerKnockback>();
+        currentHealth = StartHealth;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
+        currentHealth = StartHealth - KnockKnock.totalDamage;
+
+        if (currentHealth == 0.0f) {
+           if (KnockKnock.collided == false)
+            {
+                IsDead = true;
+            }
+            PlayerScript.DontMove = true;
+        }
+
         ThisIsATest();
         GettingCrushed();
 
@@ -54,10 +68,30 @@ public class PlayerHealth : MonoBehaviour {
                 if (CrushRealizationTime <= 0.0f)
                 {
                     Crushing = false;
-                    //IsDead = true;
+                    IsDead = true;
                 }
             }
         }
         
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        //on trigger collision with tagged "kill"
+        if (other.tag == "Kill")
+        {
+            //loseScreen.gameObject.SetActive(true);
+            IsDead = true;
+        }
+    }
+    public void PlayerHealthReset() {
+        PlayerScript = this.GetComponent<PlayerMovement_Ver2>();
+        PlayerTrn = this.GetComponent<Transform>();
+        PlayerColl = this.GetComponent<CapsuleCollider>();
+        KnockKnock = this.GetComponent<PlayerKnockback>();
+        currentHealth = StartHealth;
+
+        IsDead = false;
+        PlayerScript.DontMove = false;
+        KnockKnock.totalDamage = 0.0f;
     }
 }

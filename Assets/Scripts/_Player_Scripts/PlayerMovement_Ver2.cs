@@ -312,12 +312,18 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     }
 
     void GravityApplyer() {
-        if (currentfallSpeed <= terminalSpeed)
-            currentfallSpeed = initialAirSpeed + (setGrav * airTime);
-        else
-            currentfallSpeed = terminalSpeed;
+        // if (currentfallSpeed <= terminalSpeed)
+        //    
+        //else
+        //    currentfallSpeed = terminalSpeed;
 
-		fallLenght = Vector3.down * currentfallSpeed;
+        currentfallSpeed = initialAirSpeed + (setGrav * airTime);
+
+        fallLenght = Vector3.down * currentfallSpeed;
+
+        if (currentfallSpeed >= terminalSpeed) {
+            fallLenght.y = -terminalSpeed;
+        }
 
     }
 
