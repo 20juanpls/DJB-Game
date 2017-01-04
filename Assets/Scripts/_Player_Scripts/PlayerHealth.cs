@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour {
     CapsuleCollider PlayerColl;
     PlayerKnockback KnockKnock;
 
-    public float StartHealth = 3.0f, Deaths;
+    public int StartHealth = 3, Deaths;
 
 
     public float CrushSpeedMultiplier = 10.0f;
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour {
     public float CrushRealizationTime = 1.0f;
     public bool IsDead = false;
 
-    private float currentHealth;
+	public float currentHealth;
     bool Crushing = false;
 
 	// Use this for initialization
