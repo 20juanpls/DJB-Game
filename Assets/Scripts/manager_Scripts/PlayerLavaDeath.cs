@@ -7,27 +7,36 @@ using System.Collections.Generic;
 public class PlayerLavaDeath : MonoBehaviour {
 
 	public GameObject loseScreen;
+	public GameObject gameOverScreen;
 	public GameObject playerFolder;
     public GameObject player;
 	Transform respawn;
+
+	private int Deaths;
 
 	// Use this for initialization
 	void Start () {
 		assignButton();
 		loseScreen = GameObject.Find ("LoseScreenCanvas");
+		gameOverScreen = GameObject.Find ("GameOverCanvas");
 		loseScreen.SetActive (false);
+		gameOverScreen.SetActive (false);
         player = GameObject.FindGameObjectWithTag("PlayerMesh");
 		playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
     }
 
     void Update() {
-        if (player.GetComponent<PlayerHealth>().IsDead == true)
-        {
-            loseScreen.gameObject.SetActive(true);
-        }
-        else {
-            loseScreen.gameObject.SetActive(false);
-        }
+		Debug.Log ("Deaths:"+Deaths);
+		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
+			gameOverScreen.gameObject.SetActive (true);
+			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+		} else {	
+			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
+				loseScreen.gameObject.SetActive (true);
+			} else {
+				loseScreen.gameObject.SetActive (false);
+			}
+		}
     }
 
     void AssignPlayer(GameObject p, GameObject pF)
@@ -93,6 +102,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         AssignPlayer(_p, pF);
 
+		Deaths++;
         //Debug.Log ("Old player destroyed");
         //assignes to main camera script the new player, _p
         //Debug.Log ("Camera re-assigned");
