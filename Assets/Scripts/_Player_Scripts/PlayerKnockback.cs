@@ -9,7 +9,8 @@ public class PlayerKnockback : MonoBehaviour {
 
     public bool collided, Inactive = false, cantTakeDamage;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-	public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, totalDamage;
+    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce;
+    public int totalDamage;
 
     private float TimeLeft, currentKnockBackJumpForce;
     private Vector3 KnockBackOrientation, hitVector;
@@ -27,6 +28,15 @@ public class PlayerKnockback : MonoBehaviour {
     void Update() {
         //ThisIsATest();
         //Debug.DrawRay(PlayerRb.position, hitVector, Color.red);
+        if (this.GetComponent<PlayerHealth>().IsDead == true)
+        {
+            Inactive = true;
+            KnockBackOrientation = Vector3.zero;
+            ForceAdder();
+        }
+        else {
+            Inactive = false;
+        }
 
         if (Inactive == false)
         {

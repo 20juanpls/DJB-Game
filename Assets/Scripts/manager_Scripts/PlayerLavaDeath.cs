@@ -12,7 +12,7 @@ public class PlayerLavaDeath : MonoBehaviour {
     public GameObject player;
 	Transform respawn;
 
-	private int Deaths;
+	public int Deaths;
 
 	// Use this for initialization
 	void Start () {
@@ -110,6 +110,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<CameraScript> ().AssignPlayer (_p);
         GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
+        GameObject.Find("HealthCanvas").GetComponent<HeartContainer_Script>().PlayerHeartIllustratorReset(_p);
 
         Destroy(playerFolder.gameObject);
         //loseScreen.gameObject.SetActive(false);

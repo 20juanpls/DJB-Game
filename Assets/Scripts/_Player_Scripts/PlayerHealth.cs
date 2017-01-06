@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour {
     public bool IsDead = false;
 	public bool GameOver = false;
 
-	public float currentHealth;
+	public int currentHealth;
     bool Crushing = false;
 
 
@@ -33,23 +33,27 @@ public class PlayerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log ("Deaths:"+ Deaths);
-		//if (Deaths == Lives - 1) {
-		//	GameOver = true;
-		//	Debug.Log ("GG m8");
-		//}
-        currentHealth = StartHealth - KnockKnock.totalDamage;
+        //Debug.Log ("Deaths:"+ Deaths);
+        //if (Deaths == Lives - 1) {
+        //	GameOver = true;
+        //	Debug.Log ("GG m8");
+        //}
+        if (IsDead == false)
+        {
+            currentHealth = StartHealth - KnockKnock.totalDamage;
 
-        if (currentHealth == 0.0f) {
-           if (KnockKnock.collided == false)
+            if (currentHealth == 0.0f)
             {
-                IsDead = true;
+                if (KnockKnock.collided == false)
+                {
+                    IsDead = true;
+                }
+                PlayerScript.DontMove = true;
             }
-            PlayerScript.DontMove = true;
-        }
 
-        ThisIsATest();
-        GettingCrushed();
+            ThisIsATest();
+            GettingCrushed();
+        }
 
 	}
 
@@ -99,6 +103,6 @@ public class PlayerHealth : MonoBehaviour {
 
         IsDead = false;
         PlayerScript.DontMove = false;
-        KnockKnock.totalDamage = 0.0f;
+        KnockKnock.totalDamage = 0;
     }
 }
