@@ -13,8 +13,8 @@ public class InRoomScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        OrigCam = GameObject.Find("Main Camera").GetComponent<CameraScript>();
-        OriginalCam = GameObject.Find("Main Camera").GetComponent<Transform>();
+        OrigCam = GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<CameraScript>();
+        OriginalCam = GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<Transform>();
         Player = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
         CamPositionForThisRoom = CamForThisRoom.transform.position;
     }

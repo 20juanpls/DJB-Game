@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 	public Transform lookAt; // the object the camera is looking at
+    Transform TheCamera;
     Transform CamTransform;
 
     public bool NotControlledByPlayer = false;
@@ -28,6 +29,7 @@ public class CameraScript : MonoBehaviour {
 
 	void Start ()
 	{
+        TheCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         CamTransform = transform;
         lookAt = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
         CamTransform.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
@@ -60,12 +62,16 @@ public class CameraScript : MonoBehaviour {
             Quaternion rotation = Quaternion.Euler(CurrentY, CurrentX, 0.0f);
             FinalCamPosition = lookAt.position + rotation * dir;
             CamTransform.position = Vector3.MoveTowards(CamTransform.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
+            TheCamera.position = CamTransform.position;
+            TheCamera.rotation = CamTransform.rotation;
         }
 
         //CamTransform.position = FinalCamPosition;
         if (CurrentDistance == ZoomInDistance)
         {
             CamTransform.LookAt(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f));
+            TheCamera.position = CamTransform.position;
+            TheCamera.rotation = CamTransform.rotation;
 
             // Smoothly rotate towards the target point.
             //CamTransform.rotation = Quaternion.Slerp(CamTransform.rotation, Quaternion.LookRotation(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f) - CamTransform.position), LookingSpeed * Time.deltaTime);
@@ -74,6 +80,8 @@ public class CameraScript : MonoBehaviour {
         {
             //CamTransform.rotation = Quaternion.Slerp(CamTransform.rotation, Quaternion.LookRotation(lookAt.position - CamTransform.position), LookingSpeed * Time.deltaTime);
             CamTransform.LookAt(lookAt.position);
+            TheCamera.position = CamTransform.position;
+            TheCamera.rotation = CamTransform.rotation;
         }
 
         Debug.DrawRay(CamTransform.position, CamTransform.rotation * Vector3.forward*10.0f, Color.yellow);

@@ -13,7 +13,7 @@ public class PressSpaceToContinue : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			SceneManager.LoadScene ("Bugfixer_0_0_1", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Bugfixer_0_0_1");//, LoadSceneMode.Additive);
 			Destroy (this.gameObject);
 		}
 			

@@ -16,10 +16,10 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		assignButton();
 		loseScreen = GameObject.Find ("LoseScreenCanvas");
 		gameOverScreen = GameObject.Find ("GameOverCanvas");
-		loseScreen.SetActive (false);
+        assignButton();
+        loseScreen.SetActive (false);
 		gameOverScreen.SetActive (false);
         player = GameObject.FindGameObjectWithTag("PlayerMesh");
 		playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
@@ -30,7 +30,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
 			gameOverScreen.gameObject.SetActive (true);
 			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
-		} else {	
+        } else {	
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
 				loseScreen.gameObject.SetActive (true);
 			} else {
@@ -48,15 +48,29 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	void assignButton(){
 		Button b = loseScreen.transform.GetChild (0).transform.GetChild (1).GetComponent<Button> ();
-		Debug.Log (b);
-		b.onClick.AddListener (delegate {
-			Restart ();
-		});
-	}
+        Button reStartHard = gameOverScreen.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>();//GameObject.Find("RestartFromBeginning").GetComponent<Button>();
+        Button BackToMenu = gameOverScreen.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();//GameObject.Find("BackToMenu").GetComponent<Button>();
+
+        //Debug.Log ("Heyo!: "+ gameOverScreen.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>());
+
+        b.onClick.AddListener (delegate {Restart ();});
+        reStartHard.onClick.AddListener(delegate { RestartFromBeginning(); });
+        BackToMenu.onClick.AddListener(delegate { BackToTheMenu(); });
+
+    }
 
 	public void checkpointReached(GameObject checkpointReached){
 		respawn = checkpointReached.transform;
 	}
+
+    public void RestartFromBeginning() {
+        //Reloading scene works ... the buttons I still need to fix tho ;-;
+        SceneManager.LoadScene("Bugfixer_0_0_1");
+    }
+
+    public void BackToTheMenu() {
+        SceneManager.LoadScene("FirstScene");
+    }
 
 	public void Restart(){
 
@@ -94,7 +108,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 		}
 
 
-		Camera.main.GetComponent<CameraScript> ().AssignPlayer (_p);
+        GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<CameraScript> ().AssignPlayer (_p);
         GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
 
         Destroy(playerFolder.gameObject);
