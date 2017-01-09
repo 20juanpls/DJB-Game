@@ -1,22 +1,23 @@
 print "Starting maya loading and fbx conversion \n";
-			
-if (`file -q -exists "C:/Users/Omar/Desktop/DJB-Game/Assets/Prefab/ayy.mb"`)
-{
-	file -o "C:/Users/Omar/Desktop/DJB-Game/Assets/Prefab/ayy.mb";
+	
+if (`file -q -exists "/Users/s106020/Desktop/DJB-Game/Assets/Prefab/ayy.mb"`)
+{		
+	file -o "/Users/s106020/Desktop/DJB-Game/Assets/Prefab/ayy.mb";
 	FBXExportEmbeddedTextures -v false;
 	// FBXExportHardEdges -v true;
 	FBXExportApplyConstantKeyReducer -v false;
 	FBXExportShowUI -v false;
 
 	print "Before fbx export\n";
-	FBXExport -f "C:/Users/Omar/Desktop/DJB-Game/Temp/ExportedFBXFile.fbx";
+	FBXExport -f "/Users/s106020/Desktop/DJB-Game/Temp/ExportedFBXFile.fbx";
 	print "after fbx export\n";
 }
 else
 	print "Could not open Maya file.";
 
-system ("del \"C:\\Users\\Omar\\Desktop\\DJB-Game\\Temp\\CommandPipe\"");
 
-$donepipeKill = `fopen "C:/Users/Omar/Desktop/DJB-Game/Temp/SyncPipeKill" "w"`;
+system ("rm \"/Users/s106020/Desktop/DJB-Game/Temp/CommandPipe\"");
+
+$donepipeKill = `fopen "/Users/s106020/Desktop/DJB-Game/Temp/SyncPipeKill" "w"`;
 fwrite $donepipeKill "Done";
 fclose $donepipeKill;

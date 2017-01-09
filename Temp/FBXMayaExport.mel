@@ -1,13 +1,13 @@
 while (1)
 {	
-	if (`filetest -r "C:/Users/Omar/Desktop/DJB-Game/Temp/CommandPipe"`)
+	if (`filetest -r "/Users/s106020/Desktop/DJB-Game/Temp/CommandPipe"`)
 	{
 		$exportNormals = 0;
 		$exportTangents = 0;
 		$bakeCommand = "";
 	
 		// Parse settings
-		$waitpipe = `fopen "C:/Users/Omar/Desktop/DJB-Game/Temp/CommandPipe" "r"`;
+		$waitpipe = `fopen "/Users/s106020/Desktop/DJB-Game/Temp/CommandPipe" "r"`;
 		$filename = `fgetline $waitpipe`;
 		
 		for ($i = 0; $i < 3; ++$i) 
@@ -136,16 +136,16 @@ while (1)
 				FBXExportShowUI -v false;
 
 				print "Before fbx export\n";
-				FBXExport -f "C:/Users/Omar/Desktop/DJB-Game/Temp/ExportedFBXFile.fbx";
+				FBXExport -f "/Users/s106020/Desktop/DJB-Game/Temp/ExportedFBXFile.fbx";
 				print "after fbx export\n";
 			}
 			else
 				print "Could not open Maya file.";
 
 			// TODO: We should use sysFile, so we don't have to have two separate mel scripts for OSX/Windows
-			system ("del \"C:\\Users\\Omar\\Desktop\\DJB-Game\\Temp\\CommandPipe\"");
+			system ("rm \"/Users/s106020/Desktop/DJB-Game/Temp/CommandPipe\"");
 
-			$donepipe = `fopen "C:/Users/Omar/Desktop/DJB-Game/Temp/SyncPipe" "w"`;
+			$donepipe = `fopen "/Users/s106020/Desktop/DJB-Game/Temp/SyncPipe" "w"`;
 			fwrite $donepipe "Done";
 			fclose $donepipe;
 			print "Finished maya loading and fbx conversion \n";

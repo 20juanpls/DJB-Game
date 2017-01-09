@@ -19,7 +19,10 @@ public class PlayerHealth : MonoBehaviour {
     public float CrushRealizationTime = 1.0f;
     public bool IsDead = false;
 	public bool GameOver = false;
+
     public bool IsInvincible = false;
+
+	public bool isInvincible = false;
 
 	public int currentHealth;
     public bool Crushing = false;
@@ -66,7 +69,15 @@ public class PlayerHealth : MonoBehaviour {
         }
         else if (IsDead == false)
         {
-            currentHealth = StartHealth - KnockKnock.totalDamage;
+			if (isInvincible == false) {
+				currentHealth = StartHealth - KnockKnock.totalDamage;
+			}
+
+			if (KnockKnock.collided == true) {
+				isInvincible = true;
+			} else {
+				isInvincible = false;
+			}
 
             if (KnockKnock.collided == true)
             {
