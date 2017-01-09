@@ -11,6 +11,8 @@ public class PlayerLavaDeath : MonoBehaviour {
 	public GameObject playerFolder;
     public GameObject player;
 	Transform respawn;
+    Quaternion PlayerRot;
+
 
 	public int Deaths;
 
@@ -23,17 +25,20 @@ public class PlayerLavaDeath : MonoBehaviour {
 		gameOverScreen.SetActive (false);
         player = GameObject.FindGameObjectWithTag("PlayerMesh");
 		playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
+        PlayerRot = player.transform.rotation;
     }
 
     void Update() {
-		Debug.Log ("Deaths:"+Deaths);
+		//Debug.Log ("Deaths:"+Deaths);
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
 			gameOverScreen.gameObject.SetActive (true);
 			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+            //Deaths++;
         } else {	
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
 				loseScreen.gameObject.SetActive (true);
-			} else {
+                //Deaths++;
+            } else {
 				loseScreen.gameObject.SetActive (false);
 			}
 		}
@@ -94,6 +99,7 @@ public class PlayerLavaDeath : MonoBehaviour {
         Debug.Log (_p.ToString ());
         //Debug.Log (respawn.ToString ());
         _p.transform.position = respawn.transform.position;
+        _p.transform.rotation = PlayerRot;
 
         _p.GetComponent<PlayerHealth>().PlayerHealthReset();
 
@@ -112,12 +118,20 @@ public class PlayerLavaDeath : MonoBehaviour {
         GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
         GameObject.Find("HealthCanvas").GetComponent<HeartContainer_Script>().PlayerHeartIllustratorReset(_p);
 
+        GameObject[] StompEnemies = GameObject.FindGameObjectsWithTag("StompNPC");
+        for (int i = 0; i < StompEnemies.Length; i++)
+        {
+            StompEnemies[i].GetComponent<NPCStomper>().AssignPlayer(_p);
+        }
+
+
         Destroy(playerFolder.gameObject);
         //loseScreen.gameObject.SetActive(false);
 
+        Deaths++;
+
         AssignPlayer(_p, pF);
 
-		Deaths++;
         //Debug.Log ("Old player destroyed");
         //assignes to main camera script the new player, _p
         //Debug.Log ("Camera re-assigned");

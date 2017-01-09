@@ -39,6 +39,11 @@ public class PlayerScore : MonoBehaviour {
 			ScoreUpdate ();
 			Destroy (other.gameObject);
 		}
-	}
+
+        if (other.tag == "HeartHP")
+        {
+            Destroy(other.gameObject);
+        }
+    }
 
 }

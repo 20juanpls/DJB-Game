@@ -27,11 +27,12 @@ public class PlayerKnockback : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //ThisIsATest();
-        //Debug.DrawRay(PlayerRb.position, hitVector, Color.red);
+        //Debug.Log("Collided?: "+collided);
         if (this.GetComponent<PlayerHealth>().IsDead == true)
         {
             Inactive = true;
             KnockBackOrientation = Vector3.zero;
+            currentKnockBackJumpForce = 0.0f;
             ForceAdder();
         }
         else {
@@ -49,7 +50,7 @@ public class PlayerKnockback : MonoBehaviour {
             }
             else
             {
-                if (this.GetComponent<PlayerHealth>().IsDead == false)
+                if (this.GetComponent<PlayerHealth>().IsDead == false && this.GetComponent<PlayerHealth>().Crushing == false)
                 {
                     PlayerP.DontMove = false;
                 }
@@ -94,6 +95,14 @@ public class PlayerKnockback : MonoBehaviour {
             if (cantTakeDamage == false)
             {
                 totalDamage += 1;
+            }
+        }
+
+        if (other.tag == "HeartHP")
+        {
+            if (totalDamage > 0)
+            {
+                totalDamage -= 1;
             }
         }
 

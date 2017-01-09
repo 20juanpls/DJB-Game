@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraScript : MonoBehaviour {
 	public Transform lookAt; // the object the camera is looking at
     Transform TheCamera;
-    Transform CamTransform;
+    Transform CamRb;
 
     public bool NotControlledByPlayer = false;
 
@@ -16,8 +16,12 @@ public class CameraScript : MonoBehaviour {
     public float MaxHeight = 3.0f;
     public float MinHeight = 0.0f;
     public float RecalibrationSpeed = 1.0f;
+
+    private Vector3 velocity;
     //public float LookingSpeed = 10.0f;
 
+    public float StartX;
+    public float StartY;
     private float CurrentX;
     private float CurrentY;
     private float CurrentCamXSpeed;
@@ -29,24 +33,29 @@ public class CameraScript : MonoBehaviour {
 
 	void Start ()
 	{
+        CurrentX = StartX;
+        CurrentY = StartY;
         TheCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
-        CamTransform = transform;
+        CamRb = this.GetComponent<Transform>();
         lookAt = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
-        CamTransform.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
+        CamRb.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
         CurrentDistance = OrigDistance;
     }
 
 	//Noah Squeeze for player assignment
 	public void AssignPlayer(GameObject p){
-		lookAt = p.transform;
-        CamTransform.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
+        CurrentX = StartX;
+        CurrentY = StartY;
+        lookAt = p.transform;
+        CamRb.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
         CurrentDistance = OrigDistance;
         Debug.Log(lookAt.ToString());
     }
 
 	void Update ()
 	{
-        //Debug.Log(CurrentY);
+        //Debug.Log(CurrentY+","+CurrentX);
+
         CamXRotSpeed();
         CurrentX += CurrentCamXSpeed;
         CamYRotSpeed();
@@ -61,30 +70,37 @@ public class CameraScript : MonoBehaviour {
             Vector3 dir = new Vector3(0.0f, 0.0f, -CurrentDistance);
             Quaternion rotation = Quaternion.Euler(CurrentY, CurrentX, 0.0f);
             FinalCamPosition = lookAt.position + rotation * dir;
-            CamTransform.position = Vector3.MoveTowards(CamTransform.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
-            TheCamera.position = CamTransform.position;
-            TheCamera.rotation = CamTransform.rotation;
+            CamRb.position = Vector3.MoveTowards(CamRb.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
+            //CamRb.position = Vector3.SmoothDamp(CamRb.position, FinalCamPosition, ref velocity,RecalibrationSpeed);
+            //CamRb.transform.Translate(FinalCamPosition * RecalibrationSpeed * Time.deltaTime);
+
+            //CamRb.position = FinalCamPosition;
+
+            //CamRb.position = FinalCamPosition;
+            //TheCamera.position = Vector3.MoveTowards(TheCamera.position, CamRb.position, RecalibrationSpeed * Time.deltaTime);
+            TheCamera.position = CamRb.position;
+            TheCamera.rotation = CamRb.rotation;
         }
 
-        //CamTransform.position = FinalCamPosition;
+        //CamRb.position = FinalCamPosition;
         if (CurrentDistance == ZoomInDistance)
         {
-            CamTransform.LookAt(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f));
-            TheCamera.position = CamTransform.position;
-            TheCamera.rotation = CamTransform.rotation;
+            CamRb.transform.LookAt(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f));
+            TheCamera.position = CamRb.position;
+            TheCamera.rotation = CamRb.rotation;
 
             // Smoothly rotate towards the target point.
-            //CamTransform.rotation = Quaternion.Slerp(CamTransform.rotation, Quaternion.LookRotation(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f) - CamTransform.position), LookingSpeed * Time.deltaTime);
+            //CamRb.rotation = Quaternion.Slerp(CamRb.rotation, Quaternion.LookRotation(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f) - CamRb.position), LookingSpeed * Time.deltaTime);
         }
         else
         {
-            //CamTransform.rotation = Quaternion.Slerp(CamTransform.rotation, Quaternion.LookRotation(lookAt.position - CamTransform.position), LookingSpeed * Time.deltaTime);
-            CamTransform.LookAt(lookAt.position);
-            TheCamera.position = CamTransform.position;
-            TheCamera.rotation = CamTransform.rotation;
+            //CamRb.rotation = Quaternion.Slerp(CamRb.rotation, Quaternion.LookRotation(lookAt.position - CamRb.position), LookingSpeed * Time.deltaTime);
+            CamRb.transform.LookAt(lookAt.position);
+            TheCamera.position = CamRb.position;
+            TheCamera.rotation = CamRb.rotation;
         }
 
-        Debug.DrawRay(CamTransform.position, CamTransform.rotation * Vector3.forward*10.0f, Color.yellow);
+        Debug.DrawRay(CamRb.position, CamRb.rotation * Vector3.forward*10.0f, Color.yellow);
 
     }
 
