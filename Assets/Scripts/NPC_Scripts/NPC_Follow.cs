@@ -74,11 +74,11 @@ public class NPC_Follow : MonoBehaviour {
 				rb.AddForce (rb.transform.forward * atkForce);
 			}
             //Debug.Log(atkForce);
-            if (rb.velocity.magnitude > 0.9f)
+            if (rb.velocity.magnitude > 1.0f)
             {
                 isActive = true;
             }
-            else if (rb.velocity.magnitude < 0.9f) {
+            else if (rb.velocity.magnitude < 1.0f) {
                 isActive = false;
             }
 		}
@@ -92,7 +92,7 @@ public class NPC_Follow : MonoBehaviour {
                 isActive = false;
             }
 
-        if (ColIn.IsHitting() == true) {
+        if (ColIn.AmIHitting == true) {
                 StartCoroutine(WaitingForNextAttack(2.0f));
             }
 
@@ -115,13 +115,17 @@ public class NPC_Follow : MonoBehaviour {
         {
                atkForce = OldAtkForce;
         }
+
+        Physics.gravity = new Vector3(0.0f, -30.0f, 0.0f);
     }
     IEnumerator WaitingForNextAttack( float waitTime) {
 		//if (Time.deltaTime>= 1.0f)
 		//	Debug.Log (Time.deltaTime);
         atkForce = 0.0f;
         yield return new WaitForSeconds(waitTime);
-		//atkForce = 0.0f;
+        ColIn.AmIHitting = false;
+
+        //atkForce = 0.0f;
 
     }
     IEnumerator WaitingToTurn(float waitTime) {
@@ -129,7 +133,6 @@ public class NPC_Follow : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
         RotationSpeed = OldRotationSpeed;
     }
-
     void WhereIsIt() {
         thisForward = rb.transform.rotation*Vector3.forward;
         Vector3 toPlayer = prb.transform.position - rb.transform.position;
@@ -142,7 +145,6 @@ public class NPC_Follow : MonoBehaviour {
         }
 
     }
-
     void RayForMeasure(){
         RaycastHit hit;
         RaycastHit hitdos;
@@ -168,8 +170,7 @@ public class NPC_Follow : MonoBehaviour {
                 LedgeDist = hit.distance;
             }
         }
-    }
-    
+    } 
     void ActiveSpikeSetter(){
         //thisForward = rb.transform.rotation * Vector3.forward;
         Vector3 toSpikes = SpikesChild.transform.position - rb.transform.position;
@@ -187,7 +188,7 @@ public class NPC_Follow : MonoBehaviour {
         {
             //new Vector3((thisForward.x * 5.0f) + rb.transform.position.x, rb.transform.position.y + 1.0f, (thisForward.z * 5.0f) + rb.transform.position.z)
             SpikesChild.Translate(Vector3.forward * CurrentSpikeSpeed, Space.Self);
-            if (Vector3.Distance(SpikesChild.transform.position, rb.transform.position) >= 1.5f)
+            if (Vector3.Distance(SpikesChild.transform.position, rb.transform.position) >= 0.9f)
             {
                 CurrentSpikeSpeed = 0.0f;
             }
@@ -198,7 +199,7 @@ public class NPC_Follow : MonoBehaviour {
         else if (isActive == false)
         {
             SpikesChild.Translate(Vector3.forward * CurrentSpikeSpeed*-1, Space.Self);
-            if (Vector3.Distance(SpikesChild.transform.position, prb.transform.position) >= 1.5f && AreSpikesBehindMe == false)
+            if (Vector3.Distance(SpikesChild.transform.position, prb.transform.position) >= 0.9f && AreSpikesBehindMe == false)
             {
                 CurrentSpikeSpeed = spikeSpeed;
             }

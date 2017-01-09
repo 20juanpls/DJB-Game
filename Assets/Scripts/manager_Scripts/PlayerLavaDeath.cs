@@ -137,12 +137,12 @@ public class PlayerLavaDeath : MonoBehaviour {
         //Debug.Log ("Camera re-assigned");
 
         //for each player, assign new player
-        /*
-		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC");
+        
+		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC_charge");
 		for (int x = 0; x < listOfNPCs.Length; x++) {
 			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
 			Debug.Log ("Assignment attempted");
 		}
-		*/
+		
     }
 }

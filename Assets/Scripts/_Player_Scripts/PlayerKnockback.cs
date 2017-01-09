@@ -63,15 +63,6 @@ public class PlayerKnockback : MonoBehaviour {
 
      void OnTriggerEnter(Collider other){
 
-           //check for collision with anything tagged "NPC_Collider"
-           /*if (other.tag == "NPC_Collider") {
-               collided = true;
-               //Get NPC Rigidbody then reverse it's velocity
-               npcRB = other.GetComponentInParent<Rigidbody>();
-               npcRB.velocity = -npcRB.velocity;//*0.8f;
-               KnockBackOrientation = npcRB.transform.rotation*Vector3.forward;
-               //Debug.Log(KnockBackOrientation.magnitude);
-           }*/
         if (other.tag == "EpicentralHazard") {
             collided = true;
            // takeAwayHealth = true;
