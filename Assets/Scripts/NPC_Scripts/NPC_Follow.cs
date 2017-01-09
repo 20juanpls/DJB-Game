@@ -4,6 +4,7 @@ using System.Collections;
 public class NPC_Follow : MonoBehaviour {
 
     ColliderIndicator ColIn;
+	NPC_Death TheDeath;
     Rigidbody rb;
 	GameObject prb;
     GameObject ChilDCollin;
@@ -26,6 +27,7 @@ public class NPC_Follow : MonoBehaviour {
         
 		rb = this.GetComponent<Rigidbody> ();
         prb = GameObject.Find ("Player");
+		TheDeath = this.GetComponent<NPC_Death> ();
         //ColIn = GameObject.Find("NPC_Collider").GetComponent<ColliderIndicator>();
         ColIn = this.gameObject.transform.GetChild(1).GetComponent<ColliderIndicator>();
         // ChilDCollin = GameObject.Find("NPC_Collider");
@@ -91,6 +93,10 @@ public class NPC_Follow : MonoBehaviour {
             {
                 isActive = false;
             }
+
+		if (TheDeath.flag == false) {
+			isActive = true;
+		}
 
         if (ColIn.AmIHitting == true) {
                 StartCoroutine(WaitingForNextAttack(2.0f));

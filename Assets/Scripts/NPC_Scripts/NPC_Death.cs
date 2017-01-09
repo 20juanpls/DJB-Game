@@ -35,7 +35,9 @@ public class NPC_Death : MonoBehaviour {
 	public void activateDeath(){
 		nf.enabled = false;
 		collider.SetActive(false);
+
 		if (flag){
+			
 			StartCoroutine(deathCycle(deathTime));
 		}
 		flag = false;

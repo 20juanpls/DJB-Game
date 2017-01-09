@@ -1,12 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_Player_Scripts/PlayerHealth.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player_Scripts/PlayerNPCKill.cs">
     <Files>
       <File FileName="Assets/Scripts/Environment_Scripts/CoinSpinner.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player_Scripts/PlayerControls.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Canvas_Scripts/HeartContainer_Script.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="51" Column="26" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Follow.cs" Line="98" Column="10" />
+      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Death.cs" Line="12" Column="12" />
+      <File FileName="Assets/Scripts/Player_Scripts/PlayerNPCKill.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
