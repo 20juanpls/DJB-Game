@@ -10,7 +10,7 @@ public class NPC_Death : MonoBehaviour {
 	public NPC_Follow nf;
 	public GameObject collider;
 	int count;
-	public bool flag;
+	public bool flag, NPCIsDead;
 
 	void Start(){
 		if (deathTime == 0.0f){
@@ -27,18 +27,24 @@ public class NPC_Death : MonoBehaviour {
 		if (collider.name != "JumpCollider"){
 			Debug.Log("Jump Collider not initalized! :" + this.ToString());
 		}
-
-		count = -1;
+        count = -1;
 		flag = true;
 	}
 
+    void Update() {
+        if (flag == false)
+        {
+            NPCIsDead = true;
+        }
+    }
+
+
 	public void activateDeath(){
-		nf.enabled = false;
+		//nf.enabled = false;
 		collider.SetActive(false);
 
 		if (flag){
-			
-			StartCoroutine(deathCycle(deathTime));
+            StartCoroutine(deathCycle(deathTime));
 		}
 		flag = false;
 	}
@@ -49,14 +55,16 @@ public class NPC_Death : MonoBehaviour {
 		count = Mathf.RoundToInt(f);
 
 		while(deathTime >= 0){
-			Debug.Log("Toot: " + deathTime);
+			//Debug.Log("Toot: " + deathTime);
 			yield return new WaitForSeconds(deathInterval);
 			deathTime -= deathInterval;
 			//rotate alon the y axis every interval "angleInterval"
 			this.transform.Rotate(new Vector3(0.0f,angleInterval,0.0f));
 			//reduce size by "sizeInterval" every interval
 			if (this.transform.localScale.magnitude <= 0.01){
-				Destroy(this.gameObject);
+                //Destroy(this.gameObject);
+                nf.enabled = false;
+                this.gameObject.GetComponent<MeshRenderer>().enabled = false;
 			}
 			else{
 				this.transform.localScale -= new Vector3(sizeInterval,sizeInterval,sizeInterval);

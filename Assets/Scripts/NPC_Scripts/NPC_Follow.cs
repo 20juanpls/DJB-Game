@@ -20,14 +20,19 @@ public class NPC_Follow : MonoBehaviour {
 
     private bool IsitBehindMe, InHeightRange, playerFound, isActive, AreSpikesBehindMe;
 
+    public bool Death;
+
     Vector3 thisForward, originalSpikePosition;
+
+    public Vector3 OrigNPCPos, OrigNPCScale;
+    public Quaternion OrigNPCrot;
 
     // Use this for initialization
     void Start () {
         
 		rb = this.GetComponent<Rigidbody> ();
         prb = GameObject.Find ("Player");
-		TheDeath = this.GetComponent<NPC_Death> ();
+		TheDeath = this.gameObject.GetComponent<NPC_Death> ();
         //ColIn = GameObject.Find("NPC_Collider").GetComponent<ColliderIndicator>();
         ColIn = this.gameObject.transform.GetChild(1).GetComponent<ColliderIndicator>();
         // ChilDCollin = GameObject.Find("NPC_Collider");
@@ -40,16 +45,26 @@ public class NPC_Follow : MonoBehaviour {
         spikeSpeed = 0.3f;
         CurrentSpikeSpeed = spikeSpeed;
 
+        OrigNPCPos = rb.transform.position;
+        OrigNPCScale = rb.transform.localScale;
+        OrigNPCrot = rb.transform.rotation;
+
+
     }
 
 	//ANother Noah Squeeze
 	public void AssignPlayer(GameObject p){
-		prb = p;
-	}
+        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        TheDeath.NPCIsDead = false;
+        prb = p;
+        rb.transform.position = OrigNPCPos;
+        rb.transform.localScale = OrigNPCScale;
+        rb.transform.rotation = OrigNPCrot;
+    }
 
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log(SpikesChild.position);
+
         WhereIsIt();
         RayForMeasure();
         //Debug.Log(LedgeDist);
@@ -93,9 +108,9 @@ public class NPC_Follow : MonoBehaviour {
             {
                 isActive = false;
             }
-
-		if (TheDeath.flag == false) {
-			isActive = true;
+       
+		if (TheDeath.NPCIsDead == true) {
+			isActive = false;
 		}
 
         if (ColIn.AmIHitting == true) {
