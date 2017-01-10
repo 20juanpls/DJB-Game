@@ -7,7 +7,7 @@ public class PlayerKnockback : MonoBehaviour {
     Transform HazardT;
     Rigidbody PlayerRb;
 
-    public bool collided, Inactive = false, cantTakeDamage;//, takeAwayHealth;
+    public bool collided, Inactive = false, cantTakeDamage, jumpedOn;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
     public float knockbackMultiplier, RecoverTime, KnockBackJumpForce;
     public int totalDamage;
@@ -56,6 +56,18 @@ public class PlayerKnockback : MonoBehaviour {
                 }
                 currentKnockBackJumpForce = KnockBackJumpForce;
             }
+
+			//Debug.Log (PlayerP.forKnockBack);
+			//Debug.Log ("de jamp:"+jumpedOn);
+			if (jumpedOn == true) {
+				PlayerP.initialAirSpeed = currentKnockBackJumpForce*2.0f;
+
+				if (PlayerP.forKnockBack == true)
+				{
+					PlayerP.initialAirSpeed = 0.0f;
+					jumpedOn = false;
+				}
+			}
             //JumpingC.IsItGrounded();
         }
 
@@ -96,6 +108,11 @@ public class PlayerKnockback : MonoBehaviour {
                 totalDamage -= 1;
             }
         }
+
+		if (other.tag == "JumpCollider") {
+			jumpedOn = true;
+			currentKnockBackJumpForce = KnockBackJumpForce*1.2f;
+		}
 
     }
 

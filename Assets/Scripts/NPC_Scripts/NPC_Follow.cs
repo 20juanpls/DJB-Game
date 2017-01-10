@@ -20,7 +20,7 @@ public class NPC_Follow : MonoBehaviour {
 
     private bool IsitBehindMe, InHeightRange, playerFound, isActive, AreSpikesBehindMe;
 
-    public bool Death;
+    public bool Death, Disabled;
 
     Vector3 thisForward, originalSpikePosition;
 
@@ -56,7 +56,9 @@ public class NPC_Follow : MonoBehaviour {
 	public void AssignPlayer(GameObject p){
         this.gameObject.GetComponent<MeshRenderer>().enabled = true;
         TheDeath.NPCIsDead = false;
+		Disabled = false;
         prb = p;
+
         rb.transform.position = OrigNPCPos;
         rb.transform.localScale = OrigNPCScale;
         rb.transform.rotation = OrigNPCrot;
@@ -64,78 +66,69 @@ public class NPC_Follow : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (Disabled == false) {
+			WhereIsIt ();
+			RayForMeasure ();
+			//Debug.Log(LedgeDist);
+			ActiveSpikeSetter ();
 
-        WhereIsIt();
-        RayForMeasure();
-        //Debug.Log(LedgeDist);
-        ActiveSpikeSetter();
+			distance = Vector3.Distance (rb.transform.position, prb.transform.position);
+			ChilDCollin.SetActive (isActive);
 
-        distance = Vector3.Distance (rb.transform.position, prb.transform.position);
-        ChilDCollin.SetActive(isActive);
+			//if distance between player and npc is less than mindistance...
+			if (distance <= minDistance) {
 
-        //if distance between player and npc is less than mindistance...
-        if (distance <= minDistance) {
+				//npc looks at player 
+				if (rb.velocity == Vector3.zero) {
+					//ChilDCollin.SetActive(false);
+					rb.transform.rotation = Quaternion.Slerp (
+						rb.transform.rotation,
+						Quaternion.LookRotation (new Vector3 (prb.transform.position.x, 0.0f, prb.transform.position.z) - new Vector3 (rb.transform.position.x, 0.0f, rb.transform.position.z)),
+						Time.deltaTime * RotationSpeed);
+				}
 
-            //npc looks at player 
-			if (rb.velocity == Vector3.zero)
-            {
-                //ChilDCollin.SetActive(false);
-                rb.transform.rotation = Quaternion.Slerp(
-                    rb.transform.rotation,
-                    Quaternion.LookRotation(new Vector3(prb.transform.position.x, 0.0f, prb.transform.position.z) - new Vector3(rb.transform.position.x, 0.0f, rb.transform.position.z)),
-                    Time.deltaTime * RotationSpeed);
-            }
-
-			//if player is being watched and gets too close...
-			if (distance <= atkDistance) {
-				rb.AddForce (rb.transform.forward * atkForce);
+				//if player is being watched and gets too close...
+				if (distance <= atkDistance) {
+					rb.AddForce (rb.transform.forward * atkForce);
+				}
+				//Debug.Log(atkForce);
+				if (rb.velocity.magnitude > 1.0f) {
+					isActive = true;
+				} else if (rb.velocity.magnitude < 1.0f) {
+					isActive = false;
+				}
 			}
-            //Debug.Log(atkForce);
-            if (rb.velocity.magnitude > 1.0f)
-            {
-                isActive = true;
-            }
-            else if (rb.velocity.magnitude < 1.0f) {
-                isActive = false;
-            }
+
+			if (distance <= 4.0f && atkForce == 0.0f) {
+				isActive = true;
+			} else if (atkForce == 0.0f) {
+				isActive = false;
+			}
+	       
+			if (TheDeath.NPCIsDead == true) {
+				isActive = false;
+			}
+
+			if (ColIn.AmIHitting == true) {
+				StartCoroutine (WaitingForNextAttack (2.0f));
+			}
+
+			//Debug.Log(ColIn.IsHitting());
+			//Debug.Log(LedgeDist);
+
+			if (LedgeDist >= 2.15f && LedgeDist <= 2.7f) {//(LedgeDist >= 1.95f && LedgeDist <= 2.05f)<-- FOR ORIGINAL CUBE
+				InHeightRange = true;
+			} else {
+				InHeightRange = false;
+			}
+			if (InHeightRange == false || IsitBehindMe == true) {
+				//StartCoroutine(WaitingForNextAttack(0.1f));
+				atkForce = 0.0f;
+				//StartCoroutine(WaitingToTurn(0.1f));
+			} else if (playerFound == true) {
+				atkForce = OldAtkForce;
+			}
 		}
-
-        if (distance <= 4.0f && atkForce == 0.0f)
-            {
-                isActive = true;
-            }
-            else if (atkForce == 0.0f)
-            {
-                isActive = false;
-            }
-       
-		if (TheDeath.NPCIsDead == true) {
-			isActive = false;
-		}
-
-        if (ColIn.AmIHitting == true) {
-                StartCoroutine(WaitingForNextAttack(2.0f));
-            }
-
-		//Debug.Log(ColIn.IsHitting());
-
-		if (LedgeDist >= 2.15f && LedgeDist <= 2.25f)//(LedgeDist >= 1.95f && LedgeDist <= 2.05f)<-- FOR ORIGINAL CUBE
-        {
-            InHeightRange = true;
-        }
-        else {
-            InHeightRange = false;
-        }
-        if (InHeightRange == false || IsitBehindMe == true)
-        {
-            //StartCoroutine(WaitingForNextAttack(0.1f));
-            atkForce = 0.0f;
-            //StartCoroutine(WaitingToTurn(0.1f));
-        }
-        else if (playerFound == true)
-        {
-               atkForce = OldAtkForce;
-        }
 
         Physics.gravity = new Vector3(0.0f, -30.0f, 0.0f);
     }

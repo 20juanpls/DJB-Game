@@ -70,7 +70,9 @@ public class CameraScript : MonoBehaviour {
             Vector3 dir = new Vector3(0.0f, 0.0f, -CurrentDistance);
             Quaternion rotation = Quaternion.Euler(CurrentY, CurrentX, 0.0f);
             FinalCamPosition = lookAt.position + rotation * dir;
-            //preferred one===>//CamRb.position = Vector3.MoveTowards(CamRb.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
+			//Debug.Log (lookAt.position);
+            //preferred one===>//
+			//CamRb.position = Vector3.MoveTowards(CamRb.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
             //CamRb.position = Vector3.SmoothDamp(CamRb.position, FinalCamPosition, ref velocity,RecalibrationSpeed);
             //CamRb.transform.Translate(FinalCamPosition * RecalibrationSpeed * Time.deltaTime);
 

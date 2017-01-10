@@ -63,7 +63,8 @@ public class NPC_Death : MonoBehaviour {
 			//reduce size by "sizeInterval" every interval
 			if (this.transform.localScale.magnitude <= 0.01){
                 //Destroy(this.gameObject);
-                nf.enabled = false;
+                //nf.enabled = false;
+				nf.Disabled  = true;
                 this.gameObject.GetComponent<MeshRenderer>().enabled = false;
 			}
 			else{

@@ -177,7 +177,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 		Vector3 finalDirection = new Vector3(rotatedDirection.x, (UpHillValue*ActualSpeed*1.05f)+fallLenght.y, rotatedDirection.z);
 		FinalDirection = _lookRotation * finalDirection;
 
-        //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+
+
+		///DrawRAY!!!!!!
+        Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
 
         //Debug.Log ("TmD.y = " + TmD.y);
         //Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z); -- not yeet
@@ -248,7 +251,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
         {
-            if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill" || hit.transform.tag == "StompNPC")
+			if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill" || hit.transform.tag == "StompNPC"|| hit.transform.tag == "NPC_charge")
             {
                 floorDist = hit.distance;
                 surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
