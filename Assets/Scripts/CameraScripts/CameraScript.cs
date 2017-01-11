@@ -35,7 +35,7 @@ public class CameraScript : MonoBehaviour {
 	{
         CurrentX = StartX;
         CurrentY = StartY;
-        TheCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
+		TheCamera = null;//GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         CamRb = this.GetComponent<Transform>();
         lookAt = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
         CamRb.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
@@ -71,43 +71,44 @@ public class CameraScript : MonoBehaviour {
     }
 
     void LateUpdate() {
-        if (NotControlledByPlayer == false)
-        {
+		if (TheCamera != null) {
+	        if (NotControlledByPlayer == false)
+	        {
 
-			//Debug.Log (lookAt.position);
-            //preferred one===>//
-			//CamRb.position = Vector3.MoveTowards(CamRb.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
-            //CamRb.position = Vector3.SmoothDamp(CamRb.position, FinalCamPosition, ref velocity,RecalibrationSpeed);
-            //CamRb.transform.Translate(FinalCamPosition * RecalibrationSpeed * Time.deltaTime);
+				//Debug.Log (lookAt.position);
+	            //preferred one===>//
+				//CamRb.position = Vector3.MoveTowards(CamRb.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
+	            //CamRb.position = Vector3.SmoothDamp(CamRb.position, FinalCamPosition, ref velocity,RecalibrationSpeed);
+	            //CamRb.transform.Translate(FinalCamPosition * RecalibrationSpeed * Time.deltaTime);
 
-            CamRb.position = FinalCamPosition;
+	            CamRb.position = FinalCamPosition;
 
 
-            //CamRb.position = FinalCamPosition;
-            //TheCamera.position = Vector3.MoveTowards(TheCamera.position, CamRb.position, RecalibrationSpeed * Time.deltaTime);
-            TheCamera.position = CamRb.position;
-            TheCamera.rotation = CamRb.rotation;
-        }
+	            //CamRb.position = FinalCamPosition;
+	            //TheCamera.position = Vector3.MoveTowards(TheCamera.position, CamRb.position, RecalibrationSpeed * Time.deltaTime);
+	            TheCamera.position = CamRb.position;
+	            TheCamera.rotation = CamRb.rotation;
+	        }
 
-        //CamRb.position = FinalCamPosition;
-        if (CurrentDistance == ZoomInDistance)
-        {
-            CamRb.transform.LookAt(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f));
-            TheCamera.position = CamRb.position;
-            TheCamera.rotation = CamRb.rotation;
+			//CamRb.position = FinalCamPosition;
+			if (CurrentDistance == ZoomInDistance) {
+				CamRb.transform.LookAt (lookAt.position + new Vector3 (0.0f, 1.0f, 0.0f));
+				TheCamera.position = CamRb.position;
+				TheCamera.rotation = CamRb.rotation;
 
-            // Smoothly rotate towards the target point.
-            //CamRb.rotation = Quaternion.Slerp(CamRb.rotation, Quaternion.LookRotation(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f) - CamRb.position), LookingSpeed * Time.deltaTime);
-        }
-        else
-        {
-            //CamRb.rotation = Quaternion.Slerp(CamRb.rotation, Quaternion.LookRotation(lookAt.position - CamRb.position), LookingSpeed * Time.deltaTime);
-            CamRb.transform.LookAt(lookAt.position);
-            TheCamera.position = CamRb.position;
-            TheCamera.rotation = CamRb.rotation;
-        }
+				// Smoothly rotate towards the target point.
+				//CamRb.rotation = Quaternion.Slerp(CamRb.rotation, Quaternion.LookRotation(lookAt.position + new Vector3(0.0f, 1.0f, 0.0f) - CamRb.position), LookingSpeed * Time.deltaTime);
+			} else {
+				//CamRb.rotation = Quaternion.Slerp(CamRb.rotation, Quaternion.LookRotation(lookAt.position - CamRb.position), LookingSpeed * Time.deltaTime);
+				CamRb.transform.LookAt (lookAt.position);
+				TheCamera.position = CamRb.position;
+				TheCamera.rotation = CamRb.rotation;
+			}
+		}
 
-        Debug.DrawRay(CamRb.position, CamRb.rotation * Vector3.forward*10.0f, Color.yellow);
+        
+
+		Debug.DrawRay(CamRb.position, CamRb.rotation * Vector3.forward*10.0f, Color.yellow);
 
     }
 

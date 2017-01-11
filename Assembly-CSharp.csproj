@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerScore.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\SpotShadowScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
+     <Compile Include="Assets\TestCameraMovement.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
