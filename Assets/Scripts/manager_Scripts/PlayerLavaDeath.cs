@@ -9,9 +9,18 @@ public class PlayerLavaDeath : MonoBehaviour {
 	public GameObject loseScreen;
 	public GameObject gameOverScreen;
 	public GameObject playerFolder;
-    public GameObject player;
+  	public GameObject player;
 	Transform respawn;
-    Quaternion PlayerRot;
+  	Quaternion PlayerRot;
+
+	//Coin spawning variables
+	GameObject[] coins;
+	public GameObject coinPrefab;
+
+	//heart spawning variables
+	GameObject[] hearts;
+	public GameObject heartPrefab;
+
 
 
 	public int Deaths;
@@ -26,15 +35,23 @@ public class PlayerLavaDeath : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("PlayerMesh");
 		playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
         PlayerRot = player.transform.rotation;
+
+		//coin resetting stuff
+		coins = GameObject.FindGameObjectsWithTag("Coin");
+
+		//heart resetting stuff
+		hearts = GameObject.FindGameObjectsWithTag("HeartHP");
+
     }
 
     void Update() {
+
 		//Debug.Log ("Deaths:"+Deaths);
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
 			gameOverScreen.gameObject.SetActive (true);
 			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
             //Deaths++;
-        } else {	
+        } else {
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
 				loseScreen.gameObject.SetActive (true);
                 //Deaths++;
@@ -81,6 +98,9 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 		Debug.Log("RESTARTING");
 
+		//Reset coins
+		ResetCollectables();
+
         //assign player to the new object (aka "Player")
         //player = this.gameObject;
         //Debug.Log ("new player assigneD");
@@ -90,7 +110,7 @@ public class PlayerLavaDeath : MonoBehaviour {
         GameObject pF = (GameObject)Instantiate(playerFolder);
         //GameObject _p = (GameObject)Instantiate(player);
 		//Debug.Log(_p.ToString());
-        
+
         GameObject _p = pF.transform.FindChild("Player").gameObject;
         //Debug.Log(_p.ToString());
 
@@ -137,12 +157,24 @@ public class PlayerLavaDeath : MonoBehaviour {
         //Debug.Log ("Camera re-assigned");
 
         //for each player, assign new player
-        
+
 		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC_charge");
 		for (int x = 0; x < listOfNPCs.Length; x++) {
 			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
 			Debug.Log ("Assignment attempted");
 		}
-		
+
     }
+
+
+	void ResetCollectables(){
+		for (int x = 0; x < coins.Length; x++){
+			coins[x].GetComponent<MeshRenderer>().enabled = true;
+		}
+		for (int y = 0; y < hearts.Length; y++){
+			hearts[y].GetComponent<MeshRenderer>().enabled = true;
+		}
+	}
+
+
 }

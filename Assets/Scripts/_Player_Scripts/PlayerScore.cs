@@ -29,14 +29,14 @@ public class PlayerScore : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if (other.tag == "Coin") {
+		if (other.tag == "Coin" && other.gameObject.GetComponent<MeshRenderer>().enabled == true) {
 			ScoreUpdate ();
-			Destroy (other.gameObject);
+			other.gameObject.GetComponent<MeshRenderer>().enabled = false;
 		}
 
-        if (other.tag == "HeartHP")
+        if (other.tag == "HeartHP" && other.gameObject.GetComponent<MeshRenderer>().enabled == true)
         {
-            Destroy(other.gameObject);
+			other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
