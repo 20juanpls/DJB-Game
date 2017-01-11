@@ -62,14 +62,18 @@ public class CameraScript : MonoBehaviour {
         CurrentY += CurrentCamYSpeed;
         CurrentY = Mathf.Clamp(CurrentY, MinHeight, MaxHeight);
         ZoomInOut();
+
+        if (NotControlledByPlayer == false) {
+            Vector3 dir = new Vector3(0.0f, 0.0f, -CurrentDistance);
+            Quaternion rotation = Quaternion.Euler(CurrentY, CurrentX, 0.0f);
+            FinalCamPosition = lookAt.position + rotation * dir;
+        }
     }
 
     void LateUpdate() {
         if (NotControlledByPlayer == false)
         {
-            Vector3 dir = new Vector3(0.0f, 0.0f, -CurrentDistance);
-            Quaternion rotation = Quaternion.Euler(CurrentY, CurrentX, 0.0f);
-            FinalCamPosition = lookAt.position + rotation * dir;
+
 			//Debug.Log (lookAt.position);
             //preferred one===>//
 			//CamRb.position = Vector3.MoveTowards(CamRb.position, FinalCamPosition, RecalibrationSpeed * Time.deltaTime);
@@ -77,6 +81,7 @@ public class CameraScript : MonoBehaviour {
             //CamRb.transform.Translate(FinalCamPosition * RecalibrationSpeed * Time.deltaTime);
 
             CamRb.position = FinalCamPosition;
+
 
             //CamRb.position = FinalCamPosition;
             //TheCamera.position = Vector3.MoveTowards(TheCamera.position, CamRb.position, RecalibrationSpeed * Time.deltaTime);
