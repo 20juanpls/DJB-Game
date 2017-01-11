@@ -26,12 +26,6 @@ public class PlayerScore : MonoBehaviour {
 		score++;
 		scoreText.text = "Score: " + score;
 
-		//VERY TEMP END SCREEN
-		if (score == coins.Length) {
-			scoreText.text = "YOU WIN!";
-		}
-
-
 	}
 
 	void OnTriggerEnter(Collider other){
