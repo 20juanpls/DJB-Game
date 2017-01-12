@@ -1,12 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC_Scripts/NPC_Follow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TestCameraMovement.cs">
     <Files>
-      <File FileName="Assets/Scripts/CameraScripts/CameraScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerKnockback.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Follow.cs" Line="83" Column="5" />
-      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Death.cs" Line="1" Column="1" />
+      <File FileName="Assets/TestCameraMovement.cs" Line="54" Column="31" />
+      <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="140" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
