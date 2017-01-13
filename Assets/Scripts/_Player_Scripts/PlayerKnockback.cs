@@ -7,9 +7,9 @@ public class PlayerKnockback : MonoBehaviour {
     Transform HazardT;
     Rigidbody PlayerRb;
 
-    public bool collided, Inactive = false, cantTakeDamage, jumpedOn;//, takeAwayHealth;
+    public bool collided, Inactive = false, cantTakeDamage, jumpedOn, DangerousFall, HasFallen;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce;
+    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage;
     public int totalDamage;
 
     private float TimeLeft, currentKnockBackJumpForce;
@@ -41,6 +41,10 @@ public class PlayerKnockback : MonoBehaviour {
 
         if (Inactive == false)
         {
+
+			FallDamage ();
+
+
             if (collided == true)//&& itStoppedMoving == false)
             {
 
@@ -73,7 +77,25 @@ public class PlayerKnockback : MonoBehaviour {
 
     }
 
-     void OnTriggerEnter(Collider other){
+	void FallDamage(){
+		//Debug.Log (PlayerRb.velocity.y);
+		if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerRb.velocity.y <= -PlayerP.terminalSpeed){
+			Debug.Log ("Is This True?");
+			DangerousFall = true;
+		}
+
+		if (PlayerRb.velocity.y >= 0.0f && DangerousFall == true && PlayerP.isGrounded == false){
+			DangerousFall = false;
+		}
+
+		if (DangerousFall == true && PlayerP.isGrounded == true) {
+			totalDamage += 1;
+			DangerousFall = false;
+			HasFallen = true;
+		} 
+	}
+
+    void OnTriggerEnter(Collider other){
 
         if (other.tag == "EpicentralHazard") {
             collided = true;

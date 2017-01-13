@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class TestCameraMovement : MonoBehaviour {
-	Transform thisCamera;
+	/*Transform thisCamera;
 	Transform theCamera;
 	Rigidbody PlayerRb;
 	public float CamXSpeed;
@@ -24,7 +24,7 @@ public class TestCameraMovement : MonoBehaviour {
 
 		PlayerRb = p.GetComponent<Rigidbody>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		//CamXRotSpeed();
@@ -48,12 +48,13 @@ public class TestCameraMovement : MonoBehaviour {
 		thisCamera.LookAt (PlayerRb.transform.position);
 
 
+
 		theCamera.position = thisCamera.position;
 		theCamera.rotation = thisCamera.rotation;
 
 		Debug.DrawRay (thisCamera.position, PlayerRb.rotation*PlayerRb.velocity, Color.green);
 	}
-
+			
 	/*void CamXRotSpeed() {
 		if (Input.GetKey(KeyCode.I))
 		{
@@ -62,6 +63,14 @@ public class TestCameraMovement : MonoBehaviour {
 		else if (Input.GetKey(KeyCode.O))
 		{
 			CurrentCamXSpeed = CamXSpeed;
+	void CamXRotSpeed() {
+		if (Input.GetKey(KeyCode.I))
+		{
+			CurrentCamXSpeed = CamXSpeed;
+		}
+		else if (Input.GetKey(KeyCode.O))
+		{
+			CurrentCamXSpeed = -CamXSpeed;
 		}
 		else
 		{
@@ -69,7 +78,8 @@ public class TestCameraMovement : MonoBehaviour {
 		}
 	}*/
 
-	/*public GameObject Target;
+
+	public GameObject Target;
 	public Vector3 CameraOffset = new Vector3 (0.0f, 10.0f, -20.0f);
 	public float CameraSpeed = 10f;
 
@@ -96,5 +106,5 @@ public class TestCameraMovement : MonoBehaviour {
 			_camera.transform.position = Vector3.Lerp (_camera.transform.position, targetPos + offset, CameraSpeed * Time.deltaTime);
 			_camera.transform.LookAt (targetPos);
 		}
-	}*/
+	}
 }

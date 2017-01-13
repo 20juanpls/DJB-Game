@@ -73,13 +73,7 @@ public class PlayerHealth : MonoBehaviour {
 				currentHealth = StartHealth - KnockKnock.totalDamage;
 			}
 
-			if (KnockKnock.collided == true) {
-				isInvincible = true;
-			} else {
-				isInvincible = false;
-			}
-
-            if (KnockKnock.collided == true)
+            if (KnockKnock.collided == true||KnockKnock.HasFallen == true) // use squishing for has fallen later
             {
                 IsInvincible = true;
             }
@@ -162,6 +156,7 @@ public class PlayerHealth : MonoBehaviour {
         currentInviTime -= Time.deltaTime;
         if (currentInviTime <= 0.0f) {
             KnockKnock.cantTakeDamage = false;
+			KnockKnock.HasFallen = false;
             IsInvincible = false;
             Blinking = false;
             //This Is just a placeholder for momentary blinking
