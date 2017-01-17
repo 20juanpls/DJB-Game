@@ -19,14 +19,14 @@ public class Checkpoint : MonoBehaviour {
         player = GameObject.Find("Player");
 
 		if (setDistance == 0.0f) {
-			Debug.Log ("Auto-set 'setDistance' to 10.0f in " + this.ToString ());
+			//Debug.Log ("Auto-set 'setDistance' to 10.0f in " + this.ToString ());
 			setDistance = 10.0f;
 		}
         if (SpawnManager == null) {
-            Debug.Log("SpawnManager not found in " + this.ToString());
+            //Debug.Log("SpawnManager not found in " + this.ToString());
         }
 		if (player == null) {
-			Debug.Log ("player not found in " + this.ToString());
+			//Debug.Log ("player not found in " + this.ToString());
 		}
 	}
 
@@ -37,7 +37,7 @@ public class Checkpoint : MonoBehaviour {
 		//Debug.Log(player.ToString());
 		//Debug.Log(flag.ToString());
 		if (Vector3.Distance (this.transform.position, player.transform.position) <= setDistance && !flag.activeSelf) {
-				Debug.Log ("CHECKPOINT REACHED: " + this.ToString());
+				//Debug.Log ("CHECKPOINT REACHED: " + this.ToString());
 				flag.SetActive (true);
 				SpawnManager.GetComponent<PlayerLavaDeath> ().checkpointReached (this.gameObject);
 		}

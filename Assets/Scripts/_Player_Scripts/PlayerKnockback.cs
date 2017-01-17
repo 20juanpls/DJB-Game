@@ -80,7 +80,6 @@ public class PlayerKnockback : MonoBehaviour {
 	void FallDamage(){
 		//Debug.Log (PlayerRb.velocity.y);
 		if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerRb.velocity.y <= -PlayerP.terminalSpeed){
-			Debug.Log ("Is This True?");
 			DangerousFall = true;
 		}
 

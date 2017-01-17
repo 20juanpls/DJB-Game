@@ -65,7 +65,7 @@ public class PlayerLavaDeath : MonoBehaviour {
     {
         playerFolder = pF.gameObject;
         player = p.gameObject;
-        Debug.Log(player.ToString());
+        //Debug.Log(player.ToString());
     }
 
 	void assignButton(){
@@ -96,7 +96,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public void Restart(){
 
-		Debug.Log("RESTARTING");
+		//Debug.Log("RESTARTING");
 
 		//Reset coins
 		ResetCollectables();
@@ -114,22 +114,27 @@ public class PlayerLavaDeath : MonoBehaviour {
         GameObject _p = pF.transform.FindChild("Player").gameObject;
         //Debug.Log(_p.ToString());
 
+        GameObject _SptSh = pF.transform.FindChild("SpotShadow").gameObject;
+
         //_p.GetComponent<PlayerLavaDeath> ().checkpointReached (respawn.gameObject);
         checkpointReached(respawn.gameObject);
-        Debug.Log (_p.ToString ());
+        //Debug.Log (_p.ToString ());
         //Debug.Log (respawn.ToString ());
+
+
         _p.transform.position = respawn.transform.position;
         _p.transform.rotation = PlayerRot;
 
         _p.GetComponent<PlayerHealth>().PlayerHealthReset();
 
-        //_p.GetComponent<PlayerHealth>().HealthReset();
+        _SptSh.GetComponent<SpotShadowScript>().ResetShadow(_p);
+
 
         //Debug.Log ("New Player Instantiated at " + respawn.transform.position);
         //all checkpoints get player updated
         GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
 		for (int x = 0; x < checkpoints.Length; x++) {
-			Debug.Log("Checking checkpoint " + x);
+			//Debug.Log("Checking checkpoint " + x);
 			checkpoints[x].GetComponent<Checkpoint>().updatePlayer(_p);
 		}
 
@@ -142,6 +147,8 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
         GameObject.Find("HealthCanvas").GetComponent<HeartContainer_Script>().PlayerHeartIllustratorReset(_p);
+
+        //GameObject.FindGameObjectWithTag("P_SpotShadow").GetComponent<SpotShadowScript>().AssignPlayer(_p);
 
         GameObject[] StompEnemies = GameObject.FindGameObjectsWithTag("StompNPC");
         for (int i = 0; i < StompEnemies.Length; i++)
@@ -166,7 +173,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC_charge");
 		for (int x = 0; x < listOfNPCs.Length; x++) {
 			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
-			Debug.Log ("Assignment attempted");
+			//Debug.Log ("Assignment attempted");
 		}
 
     }

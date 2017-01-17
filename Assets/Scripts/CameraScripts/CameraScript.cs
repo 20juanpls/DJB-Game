@@ -49,7 +49,7 @@ public class CameraScript : MonoBehaviour {
         lookAt = p.transform;
         CamRb.position = lookAt.position + Quaternion.Euler(CurrentY, CurrentX, 0.0f) * new Vector3(0.0f, 0.0f, -OrigDistance);
         CurrentDistance = OrigDistance;
-        Debug.Log(lookAt.ToString());
+        //Debug.Log(lookAt.ToString());
     }
 
 	void Update ()

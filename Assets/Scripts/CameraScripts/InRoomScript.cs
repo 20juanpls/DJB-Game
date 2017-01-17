@@ -22,7 +22,7 @@ public class InRoomScript : MonoBehaviour {
     public void AssignPlayer(GameObject p)
     {
         Player = p.transform;
-        Debug.Log(Player.ToString());
+        //Debug.Log(Player.ToString());
     }
 
     // Update is called once per frame

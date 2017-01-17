@@ -22,14 +22,16 @@ public class PlayerHealth : MonoBehaviour {
 
     public bool IsInvincible = false;
 
-	public bool isInvincible = false;
+    public bool ItisInvincible = false;
+
+	public bool SquishWobble = false;
 
 	public int currentHealth;
     public bool Crushing = false;
     bool Blinking = false;
     //bool BlinkOff = false;
 
-    private float currentInviTime;
+    private float currentInviTime,currentSquishWobT, OriginalMoveSpeed, currentMoveSpeed;
     private float CurrentTimeCrushed;
     private float CurrentCrushRealizationTime;
     //I have to make these below public ;-;
@@ -47,11 +49,13 @@ public class PlayerHealth : MonoBehaviour {
         currentHealth = StartHealth;
 
         currentInviTime = InvincibiltyFramesTime;
+        currentSquishWobT = 0.0f;
         CurrentTimeCrushed = TimeCrushed;
         CurrentCrushRealizationTime = CrushRealizationTime;
         OrigAcceptedFloorDist = PlayerScript.AcceptedFloorDist;
         OrigCollRad = PlayerColl.radius;
         OrigScale = PlayerTrn.localScale;
+        OriginalMoveSpeed = PlayerScript.MoveSpeed;
         //Debug.Log("OrigScale:" + OrigScale);
 
     }
@@ -69,23 +73,47 @@ public class PlayerHealth : MonoBehaviour {
         }
         else if (IsDead == false)
         {
-			if (isInvincible == false) {
+           
+            if (ItisInvincible == false) {
 				currentHealth = StartHealth - KnockKnock.totalDamage;
 			}
+                //Activates INvincibility Frames
+                if (KnockKnock.collided == true) 
+                {
+                    IsInvincible = true;
+                }
 
-            if (KnockKnock.collided == true||KnockKnock.HasFallen == true) // use squishing for has fallen later
-            {
-                IsInvincible = true;
-            }
+                if (IsInvincible == true)
+                {
+                    InvinsibilityFrames();
+                }
+            //else {
+            //    currentInviTime = InvincibiltyFramesTime;
+            //}
 
-            if (IsInvincible == true)
-            {
-                InvinsibilityFrames();
-            }
-            else {
+            //Activates SquishWobble
+
+                if (KnockKnock.HasFallen == true)
+                {
+                    SquishWobble = true;
+                }
+
+                if (SquishWobble == true)
+                {
+                    PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.5f);
+                    SquishWobbleFrames();
+                }
+
+            if (IsInvincible == false && SquishWobble == false && Crushing == false) {
                 currentInviTime = InvincibiltyFramesTime;
+                PlayerTrn.localScale = OrigScale;
+                PlayerScript.ActualSpeedSetter(OriginalMoveSpeed);
+                PlayerScript.AcceptedFloorDist = OrigAcceptedFloorDist;
+                //PlayerColl.radius = OrigCollRad;
             }
 
+
+            //Makes sure player doesn't move when dead
             if (currentHealth == 0.0f)
             {
                 if (KnockKnock.collided == false)
@@ -95,6 +123,7 @@ public class PlayerHealth : MonoBehaviour {
                 PlayerScript.DontMove = true;
             }
 
+            //Debug.Log(Crushing);
             GettingCrushed();
         }
 
@@ -153,6 +182,7 @@ public class PlayerHealth : MonoBehaviour {
         if (KnockKnock.collided == false && Blinking == false) { Blinking = true; }
         Blinker();
 
+        //Debug.Log(currentInviTime);
         currentInviTime -= Time.deltaTime;
         if (currentInviTime <= 0.0f) {
             KnockKnock.cantTakeDamage = false;
@@ -172,6 +202,42 @@ public class PlayerHealth : MonoBehaviour {
         if (Blinking == true)
         {
                 PlayerTrn.GetChild(1).gameObject.SetActive(false);
+        }
+    }
+
+    void SquishWobbleFrames()
+    {
+        KnockKnock.cantTakeDamage = true;
+
+        if (Blinking == false) { Blinking = true; }
+        SquishEquation();
+
+        currentInviTime -= Time.deltaTime;
+
+        if (currentInviTime <= 0.0f)
+        {
+            KnockKnock.cantTakeDamage = false;
+            KnockKnock.HasFallen = false;
+            SquishWobble = false;
+            //IsInvincible = false;
+            Blinking = false;
+        }
+
+    }
+
+    void SquishEquation() {
+
+        if (Blinking == true)
+        {
+            currentSquishWobT = (InvincibiltyFramesTime - currentInviTime) / InvincibiltyFramesTime;
+            float SquishMeasure = (1.0f / 10.0f) * ((6.0f * currentSquishWobT) + 3* Mathf.Sin(20 * currentSquishWobT)) + (OrigScale.y / 3);
+            //float CollSquishMeasure = (1.0f / 10.0f) * ((6.0f * currentSquishWobT) + 3 * Mathf.Sin(20 * currentSquishWobT)) + (OrigCollRad / 3);
+            float FloorDistMeasure = (1.0f / 10.0f) * ((6.0f * currentSquishWobT) + 3 * Mathf.Sin(20 * currentSquishWobT)) + (OrigAcceptedFloorDist / 3);
+
+            Vector3 SquishVect = new Vector3(OrigScale.x, SquishMeasure, OrigScale.z);
+
+            PlayerTrn.localScale = SquishVect;
+            PlayerScript.AcceptedFloorDist = FloorDistMeasure;
         }
     }
 

@@ -52,6 +52,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 		CurrentMidAirJumpCount = InitialMidAirJumpCount;
         _lookRotation = PlayerRb.transform.rotation;
     }
+
+    public void ActualSpeedSetter(float MoveSped) {
+        ActualSpeed = MoveSped;
+    }
 	
 	// Update is called once per frame
 	void Update () {
