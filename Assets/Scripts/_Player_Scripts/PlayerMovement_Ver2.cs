@@ -16,7 +16,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
 
-    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght, BottomPlatVel;
+    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght;
+	public Vector3 BottomPlatVel;
 
     private Quaternion _lookRotation, surfaceAngle;
 
@@ -37,7 +38,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float floorDist;
 
     public GameObject theRunningGuy;
-    Animation runner;
+    //Animation runner;
 
 
     // Use this for initialization
@@ -46,7 +47,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         PlayerRb = this.GetComponent<Rigidbody>();
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         KnockBack = this.GetComponent<PlayerKnockback>();
-        runner = theRunningGuy.GetComponent<Animation>();
+        //runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
 		hasJumped = false;
 		CurrentMidAirJumpCount = InitialMidAirJumpCount;
@@ -62,7 +63,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 		//Debug.Log("is it grounded?: "+isGrounded);
         GravityApplyer();
 
-        Animator();
+        //Animator();
 
         FloorMeasure();
         IsGrounded();
@@ -306,7 +307,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     }
 
-    void Animator() {
+    /*void Animator() {
         Vector3 RelativPlayerMove = PlayerRb.velocity - BottomPlatVel;
         if ( RelativPlayerMove.magnitude >= 2.0f)
         {
@@ -316,13 +317,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             runner.Stop();
         }
-    }
+    }*/
 
     void GravityApplyer() {
-        // if (currentfallSpeed <= terminalSpeed)
-        //    
-        //else
-        //    currentfallSpeed = terminalSpeed;
 
         currentfallSpeed = initialAirSpeed + (setGrav * airTime);
 

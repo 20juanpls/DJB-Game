@@ -114,7 +114,9 @@ public class PlayerLavaDeath : MonoBehaviour {
         GameObject _p = pF.transform.FindChild("Player").gameObject;
         //Debug.Log(_p.ToString());
 
-        GameObject _SptSh = pF.transform.FindChild("SpotShadow").gameObject;
+		//>>>>
+        //GameObject _SptSh = pF.transform.FindChild("SpotShadow").gameObject;
+		//<<<<
 
         //_p.GetComponent<PlayerLavaDeath> ().checkpointReached (respawn.gameObject);
         checkpointReached(respawn.gameObject);
@@ -127,8 +129,9 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         _p.GetComponent<PlayerHealth>().PlayerHealthReset();
 
-        _SptSh.GetComponent<SpotShadowScript>().ResetShadow(_p);
-
+		//>>>>
+        //_SptSh.GetComponent<SpotShadowScript>().ResetShadow(_p);
+		//<<<<
 
         //Debug.Log ("New Player Instantiated at " + respawn.transform.position);
         //all checkpoints get player updated

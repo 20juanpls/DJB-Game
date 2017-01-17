@@ -68,7 +68,7 @@ public class PlayerHealth : MonoBehaviour {
         {
             //Debug.Log("GO AWAY!!!");
             //takenaway mb later
-            PlayerTrn.GetChild(1).gameObject.SetActive(true);
+            //PlayerTrn.GetChild(1).gameObject.SetActive(true);
 
         }
         else if (IsDead == false)
@@ -100,7 +100,7 @@ public class PlayerHealth : MonoBehaviour {
 
                 if (SquishWobble == true)
                 {
-                    PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.5f);
+                    PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.1f);
                     SquishWobbleFrames();
                 }
 
@@ -190,7 +190,7 @@ public class PlayerHealth : MonoBehaviour {
             IsInvincible = false;
             Blinking = false;
             //This Is just a placeholder for momentary blinking
-            PlayerTrn.GetChild(1).gameObject.SetActive(true);
+            //PlayerTrn.GetChild(1).gameObject.SetActive(true);
             //BlinkFrameCount = 0;
             //This Is just a placeholder for momentary blinking
             
@@ -201,7 +201,7 @@ public class PlayerHealth : MonoBehaviour {
     void Blinker() {
         if (Blinking == true)
         {
-                PlayerTrn.GetChild(1).gameObject.SetActive(false);
+                //PlayerTrn.GetChild(1).gameObject.SetActive(false);
         }
     }
 
