@@ -15,8 +15,17 @@ public class BrutusMechanimInputs : MonoBehaviour
 		PlayRb = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<Rigidbody> ();
     }
 
+    /*public void AssignPlayer(GameObject p) {
+        Player = p.GetComponent<PlayerMovement_Ver2>();
+        PlayRb = p.GetComponent<Rigidbody>();
+    }*/
+
     void Update () 
     {
+        if (Player == null || PlayRb == null) {
+            Player = this.transform.GetComponentInParent<PlayerMovement_Ver2>();
+            PlayRb = this.transform.GetComponentInParent<Rigidbody>();
+        }
 		/*if(Input.GetButton("Fire1"))
         {
 			Debug.Log("HowMem");

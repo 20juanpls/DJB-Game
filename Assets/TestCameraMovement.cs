@@ -88,7 +88,13 @@ public class TestCameraMovement : MonoBehaviour {
 	void Start(){
 		_camera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
 	}
-	void FixedUpdate (){
+
+    public void AssignPlayer(GameObject p)
+    {
+        Target = p;
+    }
+
+    void FixedUpdate (){
 		if (_camera != null && Target != null) {
 			Vector3 targetPos = Target.transform.position;
 			Vector3 offset = CameraOffset;
