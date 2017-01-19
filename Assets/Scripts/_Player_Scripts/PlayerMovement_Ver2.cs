@@ -8,7 +8,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool DontMove, forKnockBack;
+    public bool DontMove, forKnockBack, GroundCannotKill;
 
     private bool isMove, lastYSpeed, touching, canJump;
     public bool hasJumped, isGrounded;
@@ -176,18 +176,28 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     void ApplyingDirection()
     {
-
 		Vector3 vel = PlayerRb.velocity;
 
-		Vector3 finalDirection = new Vector3(rotatedDirection.x, (UpHillValue*ActualSpeed*1.05f)+fallLenght.y, rotatedDirection.z);
+        //This Helps with uphill and downhill travel
+                float TotalUphillValue;
+                if (FinalDirection.y < 0.0f)
+                {
+                    TotalUphillValue = UpHillValue * ActualSpeed * 1.3f;
+                }
+                else {
+                    TotalUphillValue = UpHillValue * ActualSpeed * 1.05f;
+                }
+        //This Helps with uphill and downhill travel
+
+		Vector3 finalDirection = new Vector3(rotatedDirection.x, TotalUphillValue+fallLenght.y, rotatedDirection.z);
 		FinalDirection = _lookRotation * finalDirection;
 
 
 
-		///DrawRAY!!!!!!
-        Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+		//DrawRAY!!!!!!
+       // Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
 
-        //Debug.Log ("TmD.y = " + TmD.y);
+        //Debug.Log (UpHillValue);
         //Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z); -- not yeet
         //PlayerRb.AddRelativeForce(finalDirection *ActualSpeed);
         if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f) {
@@ -264,6 +274,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                     BottomPlatVel = hit.rigidbody.velocity;
                 else
                     BottomPlatVel = Vector3.zero;
+
+                if (hit.transform.tag != "Untagged")
+                {
+                    GroundCannotKill = false;
+                }
+                else {
+                    GroundCannotKill = true;
+                }
             }
 
         }

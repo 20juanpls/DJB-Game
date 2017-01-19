@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	public int currentHealth;
     public bool Crushing = false;
-    bool Blinking = false;
+    bool Blinking = false, BlinkingF = false;
     //bool BlinkOff = false;
 
     private float currentInviTime,currentSquishWobT, OriginalMoveSpeed, currentMoveSpeed;
@@ -100,7 +100,10 @@ public class PlayerHealth : MonoBehaviour {
 
                 if (SquishWobble == true)
                 {
-                    PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.1f);
+                    if (currentHealth == 0.0f) { PlayerScript.ActualSpeedSetter(0.0f); }
+                    else {
+                        PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.1f);
+                    }
                     SquishWobbleFrames();
                 }
 
@@ -116,7 +119,7 @@ public class PlayerHealth : MonoBehaviour {
             //Makes sure player doesn't move when dead
             if (currentHealth == 0.0f)
             {
-                if (KnockKnock.collided == false)
+                if (KnockKnock.collided == false && BlinkingF == false)
                 {
                     IsDead = true;
                 }
@@ -209,7 +212,7 @@ public class PlayerHealth : MonoBehaviour {
     {
         KnockKnock.cantTakeDamage = true;
 
-        if (Blinking == false) { Blinking = true; }
+        if (BlinkingF == false) { BlinkingF = true; }
         SquishEquation();
 
         currentInviTime -= Time.deltaTime;
@@ -220,14 +223,14 @@ public class PlayerHealth : MonoBehaviour {
             KnockKnock.HasFallen = false;
             SquishWobble = false;
             //IsInvincible = false;
-            Blinking = false;
+            BlinkingF = false;
         }
 
     }
 
     void SquishEquation() {
 
-        if (Blinking == true)
+        if (BlinkingF == true)
         {
             currentSquishWobT = (InvincibiltyFramesTime - currentInviTime) / InvincibiltyFramesTime;
             float SquishMeasure = (1.0f / 10.0f) * ((6.0f * currentSquishWobT) + 3* Mathf.Sin(20 * currentSquishWobT)) + (OrigScale.y / 3);
@@ -259,6 +262,7 @@ public class PlayerHealth : MonoBehaviour {
         CurrentCrushRealizationTime = CrushRealizationTime;
 
         Crushing = false;
+        SquishWobble = false;
         PlayerScript.AcceptedFloorDist = OrigAcceptedFloorDist;
         PlayerColl.radius = OrigCollRad;
         //Debug.Log("OrigScale:" + OrigScale);

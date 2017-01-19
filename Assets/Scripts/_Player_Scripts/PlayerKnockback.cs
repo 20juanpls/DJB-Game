@@ -78,20 +78,23 @@ public class PlayerKnockback : MonoBehaviour {
     }
 
 	void FallDamage(){
-		//Debug.Log (PlayerRb.velocity.y);
-		if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerRb.velocity.y <= -PlayerP.terminalSpeed){
-			DangerousFall = true;
-		}
+        //Debug.Log (PlayerRb.velocity.y);
+            if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerRb.velocity.y <= -PlayerP.terminalSpeed)
+            {
+                DangerousFall = true;
+            }
 
-		if (PlayerRb.velocity.y >= 0.0f && DangerousFall == true && PlayerP.isGrounded == false){
-			DangerousFall = false;
-		}
+            if (PlayerRb.velocity.y >= 0.0f && DangerousFall == true && PlayerP.isGrounded == false)
+            {
+                DangerousFall = false;
+            }
 
-		if (DangerousFall == true && PlayerP.isGrounded == true) {
-			totalDamage += 1;
-			DangerousFall = false;
-			HasFallen = true;
-		} 
+            if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true)
+            {
+                totalDamage += 1;
+                DangerousFall = false;
+                HasFallen = true;
+            }
 	}
 
     void OnTriggerEnter(Collider other){

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestCameraMovement : MonoBehaviour {
-	/*Transform thisCamera;
+public class TestCameraMovement : MonoBehaviour
+{
+    /*Transform thisCamera;
 	Transform theCamera;
 	Rigidbody PlayerRb;
 	public float CamXSpeed;
@@ -55,14 +56,7 @@ public class TestCameraMovement : MonoBehaviour {
 		Debug.DrawRay (thisCamera.position, PlayerRb.rotation*PlayerRb.velocity, Color.green);
 	}
 			
-	/*void CamXRotSpeed() {
-		if (Input.GetKey(KeyCode.I))
-		{
-			CurrentCamXSpeed = -CamXSpeed;
-		}
-		else if (Input.GetKey(KeyCode.O))
-		{
-			CurrentCamXSpeed = CamXSpeed;
+	/*
 	void CamXRotSpeed() {
 		if (Input.GetKey(KeyCode.I))
 		{
@@ -79,38 +73,80 @@ public class TestCameraMovement : MonoBehaviour {
 	}*/
 
 
-	public GameObject Target;
-	public Vector3 CameraOffset = new Vector3 (0.0f, 10.0f, -20.0f);
-	public float CameraSpeed = 10f;
+    public GameObject Target;
+    public Vector3 CameraOffset = new Vector3(0.0f, 10.0f, -20.0f);
+    public float CameraSpeed = 10f;
 
-	private Camera _camera;
+    public float CamXSpeed;
+    public float CamYSpeed;
+    public float MinHeight = 0.0f;
+    public float MaxHeight = 10.0f;
 
-	void Start(){
-		_camera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
-	}
+    private float CurrentCamXSpeed;
+    private float CurrentCamYSpeed;
+
+    private Camera _camera;
+
+    void Start()
+    {
+        _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
 
     public void AssignPlayer(GameObject p)
     {
         Target = p;
     }
 
-    void FixedUpdate (){
-		if (_camera != null && Target != null) {
-			Vector3 targetPos = Target.transform.position;
-			Vector3 offset = CameraOffset;
+    void FixedUpdate()
+    {
+        if (_camera != null && Target != null)
+        {
+            CamXRotSpeed();
+            CamYRotSpeed();
 
-			float cameraAngle = _camera.transform.eulerAngles.y;
-			float targetAngle = Target.transform.eulerAngles.y;
+            CurrentCamYSpeed = Mathf.Clamp(CurrentCamYSpeed, MinHeight, MaxHeight);
 
-			if (Input.GetAxisRaw ("Vertical") < 0.2f) {
-				targetAngle = cameraAngle;
-			}
+            Vector3 targetPos = Target.transform.position;
+            Vector3 offset = CameraOffset;
 
-			targetAngle = Mathf.LerpAngle (cameraAngle, targetAngle, CameraSpeed * Time.deltaTime);
-			offset = Quaternion.Euler (0.0f, targetAngle, 0.0f) * offset;
+            //CurrentCamXSpeed+= CurrentCamXSpeed;
+            //Debug.Log(CurrentCamXSpeed);
+            //notment to be here
 
-			_camera.transform.position = Vector3.Lerp (_camera.transform.position, targetPos + offset, CameraSpeed * Time.deltaTime);
-			_camera.transform.LookAt (targetPos);
-		}
-	}
+            float cameraAngle = _camera.transform.eulerAngles.y;
+            //targetAngle = Target.transform.eulerAngles.y;
+
+            /*if (Input.GetAxisRaw("Vertical") < 0.2f)
+            {
+                targetAngle = cameraAngle;
+            }*/
+            //targetAngle = Mathf.LerpAngle(cameraAngle, targetAngle, CameraSpeed * Time.deltaTime);
+            offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset;
+
+            _camera.transform.position = Vector3.Lerp(_camera.transform.position, targetPos + offset, CameraSpeed * Time.deltaTime);
+            _camera.transform.LookAt(targetPos);
+        }
+    }
+
+    void CamXRotSpeed(){
+        if (Input.GetKey(KeyCode.I))
+        {
+            CurrentCamXSpeed += CamXSpeed;
+        }
+        else if (Input.GetKey(KeyCode.O))
+        {
+            CurrentCamXSpeed -= CamXSpeed;
+        }
+    }
+
+    void CamYRotSpeed() {
+        if (Input.GetKey(KeyCode.U))
+        {
+            CurrentCamYSpeed += CamYSpeed;
+        }
+        else if (Input.GetKey(KeyCode.P))
+        {
+            CurrentCamYSpeed -= CamYSpeed;
+        }
+    }
 }
