@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerKnockback : MonoBehaviour {
 
     PlayerMovement_Ver2 PlayerP;
+    PlayerHealth PlayerH;
     Transform HazardT;
     Rigidbody PlayerRb;
 
@@ -19,6 +20,7 @@ public class PlayerKnockback : MonoBehaviour {
     void Start () {
         PlayerP = this.GetComponent<PlayerMovement_Ver2>();
         PlayerRb = this.GetComponent<Rigidbody>();
+        PlayerH = this.GetComponent<PlayerHealth>();
         collided = false;
 
         TimeLeft = RecoverTime;
@@ -89,12 +91,16 @@ public class PlayerKnockback : MonoBehaviour {
                 DangerousFall = false;
             }
 
-            if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true)
-            {
-                totalDamage += 1;
-                DangerousFall = false;
-                HasFallen = true;
-            }
+        if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true && PlayerH.IsDead != true)
+        {
+            totalDamage += 1;
+            DangerousFall = false;
+            HasFallen = true;
+        }
+        else {
+            DangerousFall = false;
+        }
+
 	}
 
     void OnTriggerEnter(Collider other){

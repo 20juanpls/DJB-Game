@@ -48,6 +48,7 @@
      <Compile Include="Assets\Brutus State Machine\BrutusMechanimInputs.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
+     <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
@@ -74,7 +75,6 @@
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerScore.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\SpotShadowScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
-     <Compile Include="Assets\TestCameraMovement.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

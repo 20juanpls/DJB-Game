@@ -6,15 +6,17 @@ public class InRoomScript : MonoBehaviour {
     Transform Player;
     Vector3 CamPositionForThisRoom;
     Vector3 OriginalCamPos;
-    CameraScript OrigCam;
-    Transform OriginalCam;
+    TestCameraMovement OrigCam;
+    //Transform OriginalCam;
+    Camera OriginalCam;
 
     public bool Activator = false;
 
 	// Use this for initialization
 	void Start () {
-        OrigCam = GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<CameraScript>();
-        OriginalCam = GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<Transform>();
+        OrigCam = GameObject.FindGameObjectWithTag("CamMovement_2.0").GetComponent<TestCameraMovement>();
+        //OriginalCam = GameObject.FindGameObjectWithTag("CamMovement_2.0").GetComponent<Transform>(); 
+        OriginalCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         Player = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
         CamPositionForThisRoom = CamForThisRoom.transform.position;
     }
@@ -30,13 +32,16 @@ public class InRoomScript : MonoBehaviour {
 
         if (Activator == true)
         {
-            OrigCam.NotControlledByPlayer = true;
-            OriginalCam.position = Vector3.MoveTowards(OriginalCam.position, CamPositionForThisRoom, OrigCam.RecalibrationSpeed * Time.deltaTime);
+            OrigCam.DoNotMove = true;
+            OriginalCam.transform.position = Vector3.Lerp(OriginalCam.transform.position, CamPositionForThisRoom, OrigCam.OrigCameraSpeed*0.2f * Time.deltaTime);
+            OriginalCam.transform.LookAt(Player.transform.position);
+
         }
         else {
-            OrigCam.NotControlledByPlayer = false;
+            OrigCam.DoNotMove= false;
         }
 	}
+
     void OnTriggerEnter(Collider other) {
         if (other.tag == "PlayerMesh") {
             Activator = true;
