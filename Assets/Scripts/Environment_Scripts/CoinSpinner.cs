@@ -5,6 +5,11 @@ public class CoinSpinner : MonoBehaviour {
 
     //Transform Cam;
 	GameObject coin;
+    public bool X_axis;
+    public bool Y_axis;
+    public bool Z_axis;
+    public bool DoNotHop;
+
 	public float rotateSpeed = 3.0f;
     public float speedOfHop = 1.0f;
     public float IntensityofHop = 10.0f;
@@ -23,9 +28,26 @@ public class CoinSpinner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (X_axis == true)
+        {
+            coin.transform.Rotate(new Vector3(rotateSpeed, 0.0f, 0.0f));
+        }
+        else if (Z_axis == true)
+        {
+            coin.transform.Rotate(new Vector3(0.0f, 0.0f, rotateSpeed));
+        }
+        else if (Y_axis == true)
+        {
+            coin.transform.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f));
+        }
+        else {
+            coin.transform.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f));
+        }
 
-        coin.transform.Rotate (new Vector3 (0.0f, rotateSpeed, 0.0f));
-        coin.transform.position = new Vector3(0.0f, Mathf.Abs(Mathf.Cos(Time.time * speedOfHop) * (1 / IntensityofHop)*LenghtOfHop),0.0f) + OrigPos;
+        if (DoNotHop != true)
+        {
+            coin.transform.position = new Vector3(0.0f, Mathf.Abs(Mathf.Cos(Time.time * speedOfHop) * (1 / IntensityofHop) * LenghtOfHop), 0.0f) + OrigPos;
+        }
         //coin.transform.LookAt(Cam.position);
 
     }

@@ -5,7 +5,7 @@ public class PlayerKnockback : MonoBehaviour {
 
     PlayerMovement_Ver2 PlayerP;
     PlayerHealth PlayerH;
-    Transform HazardT;
+    Transform HazardT, ForceDir;
     Rigidbody PlayerRb;
 
     public bool collided, Inactive = false, cantTakeDamage, jumpedOn, DangerousFall, HasFallen;//, takeAwayHealth;
@@ -14,7 +14,7 @@ public class PlayerKnockback : MonoBehaviour {
     public int totalDamage;
 
     private float TimeLeft, currentKnockBackJumpForce;
-    private Vector3 KnockBackOrientation, hitVector;
+    private Vector3 KnockBackOrientation, hitVector, ExForceVector;
 
     // Use this for initialization
     void Start () {
@@ -28,14 +28,13 @@ public class PlayerKnockback : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //ThisIsATest();
-        //Debug.Log("Collided?: "+collided);
-        if (this.GetComponent<PlayerHealth>().IsDead == true)
+        if (PlayerH.IsDead == true)
         {
             Inactive = true;
             KnockBackOrientation = Vector3.zero;
             currentKnockBackJumpForce = 0.0f;
             ForceAdder();
+            DangerousFall = false;
         }
         else {
             Inactive = false;
@@ -80,7 +79,6 @@ public class PlayerKnockback : MonoBehaviour {
     }
 
 	void FallDamage(){
-        //Debug.Log (PlayerRb.velocity.y);
             if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerRb.velocity.y <= -PlayerP.terminalSpeed)
             {
                 DangerousFall = true;
@@ -91,14 +89,11 @@ public class PlayerKnockback : MonoBehaviour {
                 DangerousFall = false;
             }
 
-        if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true && PlayerH.IsDead != true)
+        if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true)
         {
             totalDamage += 1;
             DangerousFall = false;
             HasFallen = true;
-        }
-        else {
-            DangerousFall = false;
         }
 
 	}
@@ -117,13 +112,21 @@ public class PlayerKnockback : MonoBehaviour {
             }
             //KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
         }
+        if (other.tag == "BoulderHazard") {
+            collided = true;
+            // takeAwayHealth = true;
+            HazardT = other.GetComponent<Transform>();
+            hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
+            KnockBackOrientation = hitVector * -1.0f;
+            if (cantTakeDamage == false)
+            {
+                totalDamage += 1;
+            }
+        }
         if (other.tag == "hazard")
         {
             collided = true;
-           // takeAwayHealth = true;
             HazardT = other.GetComponent<Transform>();
-            //hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
-            //KnockBackOrientation = hitVector * -1.0f;
             KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
             if (cantTakeDamage == false)
             {
@@ -144,20 +147,22 @@ public class PlayerKnockback : MonoBehaviour {
 			currentKnockBackJumpForce = KnockBackJumpForce*1.2f;
 		}
 
+        if (other.tag == "WindyArea")
+        {
+            ForceDir = other.GetComponent<Transform>();
+            ExForceVector = ForceDir.rotation* Vector3.forward * other.GetComponent<WindSetter>().WindSpeed;
+            //Debug.Log(ForceDir.rotation.y);
+            PlayerP.ExForceVelocity = ExForceVector;
+        }
+
     }
 
-    /*  void OnTriggerExit(Collider other)
-       {
-           //check for collision with anything tagged "NPC_Collider"
-           if (other.tag == "EpicentralHazard")
-           {
-            takeAwayHealth = false;
-           }
-           if (other.tag == "hazard")
-           {
-            takeAwayHealth = false;
-           }
-       }*/
+    void OnTriggerExit(Collider other) {
+        if (other.tag == "WindyArea")
+        {
+            PlayerP.ExForceVelocity = Vector3.zero;
+        }
+    }
 
     void ForceAdder() {
         if (PlayerP.isGrounded == true)

@@ -87,7 +87,8 @@ public class PlayerLavaDeath : MonoBehaviour {
 
     public void RestartFromBeginning() {
         //Reloading scene works ... the buttons I still need to fix tho ;-;
-        SceneManager.LoadScene("Bugfixer_0_0_1");
+        //SceneManager.LoadScene("Bugfixer_0_0_1");
+        SceneManager.LoadScene("DJB_0_0_1_StartScene");
     }
 
     public void BackToTheMenu() {

@@ -16,10 +16,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero;
 
-    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght;
-	public Vector3 BottomPlatVel;
+    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght, BottomPlatVel;
+	public Vector3 FinalVel,VelRelativeToPlay, ExForceVelocity;
 
     private Quaternion _lookRotation, surfaceAngle;
+
 
     public float rotationSpeed = 20.0f;
     public float MoveSpeed = 10.0f;
@@ -38,10 +39,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float floorDist;
 
     public GameObject theRunningGuy;
-    //Animation runner;
 
-
-    // Use this for initialization
     void Start () {
 
         PlayerRb = this.GetComponent<Rigidbody>();
@@ -195,11 +193,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 
 		//DrawRAY!!!!!!
-       // Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+       //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
 
-        //Debug.Log (UpHillValue);
-        //Debug.Log(surfaceAngle.eulerAngles.x + "," + surfaceAngle.eulerAngles.z); -- not yeet
-        //PlayerRb.AddRelativeForce(finalDirection *ActualSpeed);
         if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f) {
             airTime = 0.0f;
             initialAirSpeed = 0.0f;
@@ -220,17 +215,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
             }
         }
-       
 
-        vel = vel + BottomPlatVel;
+        //ForMechanim
+        VelRelativeToPlay = vel;
+        //ForMechanim
+        FinalVel = vel + BottomPlatVel + ExForceVelocity;
 
         // KnockBack Will move the player instead of the player Itself...
         if (DontMove == true)
         {
-            vel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed * 1.05f) + fallLenght.y, KnockBack.FinalKnockBack.z);
+            FinalVel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed * 1.05f) + fallLenght.y, KnockBack.FinalKnockBack.z);
         }
 
-        PlayerRb.velocity = vel;
+        PlayerRb.velocity = FinalVel;
 
     }
 
@@ -324,18 +321,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
 
     }
-
-    /*void Animator() {
-        Vector3 RelativPlayerMove = PlayerRb.velocity - BottomPlatVel;
-        if ( RelativPlayerMove.magnitude >= 2.0f)
-        {
-            runner.Play();
-        }
-        else
-        {
-            runner.Stop();
-        }
-    }*/
 
     void GravityApplyer() {
 

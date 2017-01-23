@@ -50,13 +50,15 @@
      <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\CoinSpinner.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ExitScore.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\LeaveMovement.cs" />
-     <Compile Include="Assets\Scripts\Environment_Scripts\PressSpaceToContinue.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\RelativGrav.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\WindSetter.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
@@ -74,6 +76,7 @@
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerScore.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\SpotShadowScript.cs" />
+     <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

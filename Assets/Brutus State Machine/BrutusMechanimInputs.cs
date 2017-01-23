@@ -41,14 +41,14 @@ public class BrutusMechanimInputs : MonoBehaviour
 
 	void RunningAnim(){
 
-		Vector3 RelativPlayerMove = new Vector3(PlayRb.velocity.x,0.0f,PlayRb.velocity.z)- new Vector3(Player.BottomPlatVel.x,0.0f,Player.BottomPlatVel.z);
+		Vector3 RelativPlayerMove = new Vector3(Player.VelRelativeToPlay.x,0.0f,Player.VelRelativeToPlay.z);
 		//Debug.Log (RelativPlayerMove.magnitude);
 		if (Player.isGrounded == true) {
 			thisAnimator.SetBool("Jumps", false);
 			if (RelativPlayerMove.magnitude > 2.0f) {
 				thisAnimator.SetTrigger ("Runs");
 				thisAnimator.SetBool ("Stops", false);
-			} else {
+			} else { 
 				thisAnimator.SetTrigger ("Stops");
 				thisAnimator.SetBool ("Runs", false);
 			}
