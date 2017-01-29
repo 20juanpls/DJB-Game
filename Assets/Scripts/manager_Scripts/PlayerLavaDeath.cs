@@ -149,9 +149,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 		GameObject.FindGameObjectWithTag ("CamMovement_2.0").GetComponent<TestCameraMovement> ().AssignPlayer (_p);
         //Both of these are cameraMovements;
 
-        //Brutus mechanim inputs
-        //GameObject.FindGameObjectWithTag("BrutusMechAnim").GetComponent<BrutusMechanimInputs>().AssignPlayer(_p);
-        //_p.transform.FindChild("Brutus_idle_Bake").GetComponent<BrutusMechanimInputs>().AssignPlayer(_p);
+        this.GetComponent<ThePause>().AssignPlayer(_p);
 
         GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
         GameObject.Find("HealthCanvas").GetComponent<HeartContainer_Script>().PlayerHeartIllustratorReset(_p);

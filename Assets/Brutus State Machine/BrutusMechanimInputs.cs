@@ -5,40 +5,32 @@ public class BrutusMechanimInputs : MonoBehaviour
 {
     public Animator thisAnimator;
 
+    public GameObject ThePlayer;
 	public Rigidbody PlayRb;
 	public PlayerMovement_Ver2 Player;
+
+    public float AnimSpeed;
 
     void Start () 
     {
         thisAnimator = GetComponent<Animator>();
-		Player = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<PlayerMovement_Ver2> ();
-		PlayRb = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<Rigidbody> ();
+        ThePlayer = GameObject.FindGameObjectWithTag("PlayerMesh");
+        Player = ThePlayer.GetComponent<PlayerMovement_Ver2> ();
+		PlayRb = ThePlayer.GetComponent<Rigidbody> ();
+        AnimSpeed = thisAnimator.speed;
     }
 
-    /*public void AssignPlayer(GameObject p) {
-        Player = p.GetComponent<PlayerMovement_Ver2>();
-        PlayRb = p.GetComponent<Rigidbody>();
-    }*/
+
 
     void Update () 
     {
         if (Player == null || PlayRb == null) {
             Player = this.transform.GetComponentInParent<PlayerMovement_Ver2>();
             PlayRb = this.transform.GetComponentInParent<Rigidbody>();
+            thisAnimator.speed = AnimSpeed;
         }
-		/*if(Input.GetButton("Fire1"))
-        {
-			Debug.Log("HowMem");
-            thisAnimator.SetBool("Jumps", true);
-        }
-		else
-        {
-            thisAnimator.SetBool("Jumps", false);
-        }*/
-
 		RunningAnim ();
     }
-
 	void RunningAnim(){
 
 		Vector3 RelativPlayerMove = new Vector3(Player.VelRelativeToPlay.x,0.0f,Player.VelRelativeToPlay.z);
@@ -58,4 +50,16 @@ public class BrutusMechanimInputs : MonoBehaviour
 			thisAnimator.SetTrigger ("Jumps");
 		}
 	}
+
+    public void OnPause( bool Paused) {
+        //Debug.Log(thisAnimator.speed);
+        //Debug.Log(AnimSpeed);
+        if (Paused == true)
+        {
+            thisAnimator.speed = 0.0f;
+        }
+        else {
+            thisAnimator.speed = AnimSpeed;
+        }
+    }
 }

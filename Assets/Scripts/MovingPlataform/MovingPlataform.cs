@@ -13,10 +13,13 @@ public class MovingPlataform : MonoBehaviour {
 	void Start () {
         thisPlataform = this.GetComponent<Rigidbody>();
         originalPos = thisPlataform.position;
+
+        HorizMoveSpeed = HorizMoveSpeed * (1/Time.deltaTime);
+        VertMoveSpeed = VertMoveSpeed * (1 / Time.deltaTime);
         //forwardOrBack = false;
         //topOrBottom = false;
         //false for back and bottom ... true for forward and top...
-	}
+    }
 	void Update () {
         //Debug.Log(Vector3.Distance(thisPlataform.position, originalPos));
         HorizwhereIsIt();
@@ -24,7 +27,7 @@ public class MovingPlataform : MonoBehaviour {
 
         ForwardToBack();
          TopToBottom();
-        thisPlataform.velocity = HorizVel + VertVel;
+        thisPlataform.velocity = (HorizVel + VertVel)*Time.deltaTime;
 
 
     }

@@ -8,7 +8,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool DontMove, forKnockBack, GroundCannotKill;
+    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill;
 
     private bool isMove, lastYSpeed, touching, canJump;
     public bool hasJumped, isGrounded;
@@ -17,7 +17,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     private Vector3 lookDirection = Vector3.zero;
 
     private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght, BottomPlatVel;
-	public Vector3 FinalVel,VelRelativeToPlay, ExForceVelocity;
+	public Vector3 FinalVel,VelRelativeToPlay, ExForceVelocity, CurrentOldVel;
 
     private Quaternion _lookRotation, surfaceAngle;
 
@@ -58,57 +58,77 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log("is it grounded?: "+isGrounded);
-        GravityApplyer();
-
-        //Animator();
-
-        FloorMeasure();
-        IsGrounded();
-
-        float HorizMov = Input.GetAxis("Horizontal");
-        float VertMov = Input.GetAxis("Vertical");
-        if (HorizMov != 0.00f || VertMov != 0.00f)
+        //Debug.Log("is it grounded?: "+isGrounded);
+        
+        if (Paused == true)
         {
-            HorizLook = HorizMov;
-            VertLook = VertMov;
-            isMove = false;
+                //Debug.Log("IsPaused???");
+                Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+                PlayerRb.velocity = Vector3.zero;
+                UnPaused = false;
         }
         else
         {
-            isMove = true;
-        }
+            if (UnPaused == false) {
+                PlayerRb.velocity = CurrentOldVel;
+                UnPaused = true;
+            }
+            CurrentOldVel = PlayerRb.velocity;
+            //PlayerRb.velocity = CurrentOldVel;
 
-        moveDirection = new Vector3(HorizMov, 0, VertMov);
-        lookDirection = new Vector3(HorizLook, 0, VertLook);
-        ControlOrientation();
+            GravityApplyer();
 
-        ApplyingDirection();
+            //Animator();
 
-        JumpNow();
+            FloorMeasure();
+            IsGrounded();
 
-        //Debug.Log(isGrounded);
-
-        //PlayerRb.velocity = vel;
-        if (isGrounded == true)
-        {
-            airTime = 0.0f;
-
-            if (hasJumped == true)
+            float HorizMov = Input.GetAxis("Horizontal");
+            float VertMov = Input.GetAxis("Vertical");
+            if (HorizMov != 0.00f || VertMov != 0.00f)
             {
-                forKnockBack = true;
-                initialAirSpeed = 0.0f;
-                hasJumped = false;
+                HorizLook = HorizMov;
+                VertLook = VertMov;
+                isMove = false;
             }
-            else {
-                CurrentMidAirJumpCount = InitialMidAirJumpCount;
-                forKnockBack = false;
+            else
+            {
+                isMove = true;
             }
-            canJump = true;
-        }
-        else {
-            airTime += Time.deltaTime;
-            canJump = false;
+
+            moveDirection = new Vector3(HorizMov, 0, VertMov);
+            lookDirection = new Vector3(HorizLook, 0, VertLook);
+            ControlOrientation();
+
+            ApplyingDirection();
+
+            JumpNow();
+
+            //Debug.Log(isGrounded);
+
+            //PlayerRb.velocity = vel;
+            if (isGrounded == true)
+            {
+                airTime = 0.0f;
+
+                if (hasJumped == true)
+                {
+                    forKnockBack = true;
+                    initialAirSpeed = 0.0f;
+                    hasJumped = false;
+                }
+                else
+                {
+                    CurrentMidAirJumpCount = InitialMidAirJumpCount;
+                    forKnockBack = false;
+                }
+                canJump = true;
+            }
+            else
+            {
+                airTime += Time.deltaTime;
+                canJump = false;
+            }
         }
 
         //Physics.gravity = new Vector3(0.0f, setGrav, 0.0f);

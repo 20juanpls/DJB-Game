@@ -40,6 +40,8 @@ public class NPC_Follow : MonoBehaviour {
 
         SpikesChild = this.gameObject.transform.GetChild(0);
 
+        atkForce = atkForce * (1 / Time.deltaTime);
+
          OldAtkForce = atkForce;
         OldRotationSpeed = RotationSpeed;
         spikeSpeed = 0.3f;
@@ -89,7 +91,7 @@ public class NPC_Follow : MonoBehaviour {
 
 				//if player is being watched and gets too close...
 				if (distance <= atkDistance) {
-					rb.AddForce (rb.transform.forward * atkForce);
+					rb.AddForce (rb.transform.forward * atkForce * Time.deltaTime);
 				}
 				//Debug.Log(atkForce);
 				if (rb.velocity.magnitude > 1.0f) {

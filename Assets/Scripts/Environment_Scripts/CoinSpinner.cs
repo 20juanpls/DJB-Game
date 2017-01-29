@@ -22,7 +22,9 @@ public class CoinSpinner : MonoBehaviour {
 		coin = this.gameObject;
 
         OrigPos = this.gameObject.GetComponent<Transform>().position;
-        //rotateSpeed = 3.0f;
+
+        rotateSpeed = rotateSpeed * (1/Time.deltaTime);
+        
         //Cam = GameObject.Find("Main Camera").GetComponent<Transform>();
 	}
 	
@@ -30,18 +32,18 @@ public class CoinSpinner : MonoBehaviour {
 	void Update () {
         if (X_axis == true)
         {
-            coin.transform.Rotate(new Vector3(rotateSpeed, 0.0f, 0.0f));
+            coin.transform.Rotate(new Vector3(rotateSpeed, 0.0f, 0.0f)* Time.deltaTime);
         }
         else if (Z_axis == true)
         {
-            coin.transform.Rotate(new Vector3(0.0f, 0.0f, rotateSpeed));
+            coin.transform.Rotate(new Vector3(0.0f, 0.0f, rotateSpeed)* Time.deltaTime);
         }
         else if (Y_axis == true)
         {
-            coin.transform.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f));
+            coin.transform.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f)* Time.deltaTime);
         }
         else {
-            coin.transform.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f));
+            coin.transform.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f)* Time.deltaTime);
         }
 
         if (DoNotHop != true)

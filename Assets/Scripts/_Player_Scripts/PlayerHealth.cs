@@ -62,23 +62,26 @@ public class PlayerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        UpRayShooter();
-        //Debug.Log("total damage "+ KnockKnock.totalDamage);
-        if (IsDead == true)
+        if (PlayerScript.Paused == false)
         {
-            //Debug.Log("GO AWAY!!!");
-            //takenaway mb later
-            //PlayerTrn.GetChild(1).gameObject.SetActive(true);
+            UpRayShooter();
+            //Debug.Log("total damage "+ KnockKnock.totalDamage);
+            if (IsDead == true)
+            {
+                //Debug.Log("GO AWAY!!!");
+                //takenaway mb later
+                //PlayerTrn.GetChild(1).gameObject.SetActive(true);
 
-        }
-        else if (IsDead == false)
-        {
-           
-            if (ItisInvincible == false) {
-				currentHealth = StartHealth - KnockKnock.totalDamage;
-			}
+            }
+            else if (IsDead == false)
+            {
+
+                if (ItisInvincible == false)
+                {
+                    currentHealth = StartHealth - KnockKnock.totalDamage;
+                }
                 //Activates INvincibility Frames
-                if (KnockKnock.collided == true) 
+                if (KnockKnock.collided == true)
                 {
                     IsInvincible = true;
                 }
@@ -87,11 +90,11 @@ public class PlayerHealth : MonoBehaviour {
                 {
                     InvinsibilityFrames();
                 }
-            //else {
-            //    currentInviTime = InvincibiltyFramesTime;
-            //}
+                //else {
+                //    currentInviTime = InvincibiltyFramesTime;
+                //}
 
-            //Activates SquishWobble
+                //Activates SquishWobble
 
                 if (KnockKnock.HasFallen == true)
                 {
@@ -101,33 +104,36 @@ public class PlayerHealth : MonoBehaviour {
                 if (SquishWobble == true)
                 {
                     if (currentHealth == 0.0f) { PlayerScript.ActualSpeedSetter(0.0f); }
-                    else {
+                    else
+                    {
                         PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.1f);
                     }
                     SquishWobbleFrames();
                 }
 
-            if (IsInvincible == false && SquishWobble == false && Crushing == false) {
-                currentInviTime = InvincibiltyFramesTime;
-                PlayerTrn.localScale = OrigScale;
-                PlayerScript.ActualSpeedSetter(OriginalMoveSpeed);
-                PlayerScript.AcceptedFloorDist = OrigAcceptedFloorDist;
-                //PlayerColl.radius = OrigCollRad;
-            }
-
-
-            //Makes sure player doesn't move when dead
-            if (currentHealth == 0.0f)
-            {
-                if (KnockKnock.collided == false && BlinkingF == false)
+                if (IsInvincible == false && SquishWobble == false && Crushing == false)
                 {
-                    IsDead = true;
+                    currentInviTime = InvincibiltyFramesTime;
+                    PlayerTrn.localScale = OrigScale;
+                    PlayerScript.ActualSpeedSetter(OriginalMoveSpeed);
+                    PlayerScript.AcceptedFloorDist = OrigAcceptedFloorDist;
+                    //PlayerColl.radius = OrigCollRad;
                 }
-                PlayerScript.DontMove = true;
-            }
 
-            //Debug.Log(Crushing);
-            GettingCrushed();
+
+                //Makes sure player doesn't move when dead
+                if (currentHealth == 0.0f)
+                {
+                    if (KnockKnock.collided == false && BlinkingF == false)
+                    {
+                        IsDead = true;
+                    }
+                    PlayerScript.DontMove = true;
+                }
+
+                //Debug.Log(Crushing);
+                GettingCrushed();
+            }
         }
 
 	}

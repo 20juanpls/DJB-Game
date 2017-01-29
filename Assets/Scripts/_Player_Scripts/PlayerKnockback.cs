@@ -28,73 +28,78 @@ public class PlayerKnockback : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (PlayerH.IsDead == true)
+        if (PlayerP.Paused == false)
         {
-            Inactive = true;
-            KnockBackOrientation = Vector3.zero;
-            currentKnockBackJumpForce = 0.0f;
-            ForceAdder();
-            DangerousFall = false;
-        }
-        else {
-            Inactive = false;
-        }
-
-        if (Inactive == false)
-        {
-
-			FallDamage ();
-
-
-            if (collided == true)//&& itStoppedMoving == false)
+            if (PlayerH.IsDead == true)
             {
-
-                PlayerP.DontMove = true;
+                Inactive = true;
+                KnockBackOrientation = Vector3.zero;
+                currentKnockBackJumpForce = 0.0f;
                 ForceAdder();
-                
+                DangerousFall = false;
             }
             else
             {
-                if (this.GetComponent<PlayerHealth>().IsDead == false && this.GetComponent<PlayerHealth>().Crushing == false)
+                Inactive = false;
+            }
+
+            if (Inactive == false)
+            {
+
+                FallDamage();
+
+
+                if (collided == true)//&& itStoppedMoving == false)
                 {
-                    PlayerP.DontMove = false;
+
+                    PlayerP.DontMove = true;
+                    ForceAdder();
+
                 }
-                currentKnockBackJumpForce = KnockBackJumpForce;
+                else
+                {
+                    if (this.GetComponent<PlayerHealth>().IsDead == false && this.GetComponent<PlayerHealth>().Crushing == false)
+                    {
+                        PlayerP.DontMove = false;
+                    }
+                    currentKnockBackJumpForce = KnockBackJumpForce;
+                }
+
+                //Debug.Log (PlayerP.forKnockBack);
+                //Debug.Log ("de jamp:"+jumpedOn);
+                if (jumpedOn == true)
+                {
+                    PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
+
+                    if (PlayerP.forKnockBack == true)
+                    {
+                        PlayerP.initialAirSpeed = 0.0f;
+                        jumpedOn = false;
+                    }
+                }
+                //JumpingC.IsItGrounded();
             }
-
-			//Debug.Log (PlayerP.forKnockBack);
-			//Debug.Log ("de jamp:"+jumpedOn);
-			if (jumpedOn == true) {
-				PlayerP.initialAirSpeed = currentKnockBackJumpForce*2.0f;
-
-				if (PlayerP.forKnockBack == true)
-				{
-					PlayerP.initialAirSpeed = 0.0f;
-					jumpedOn = false;
-				}
-			}
-            //JumpingC.IsItGrounded();
         }
 
-    }
+        }
 
-	void FallDamage(){
-            if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerRb.velocity.y <= -PlayerP.terminalSpeed)
-            {
-                DangerousFall = true;
-            }
+	    void FallDamage(){
+                if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerP.CurrentOldVel.y <= -PlayerP.terminalSpeed)
+                {
+                    DangerousFall = true;
+                }
 
-            if (PlayerRb.velocity.y >= 0.0f && DangerousFall == true && PlayerP.isGrounded == false)
+                if (PlayerP.CurrentOldVel.y >= 0.0f && DangerousFall == true && PlayerP.isGrounded == false)
+                {
+                    DangerousFall = false;
+                }
+
+            if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true)
             {
+                totalDamage += 1;
                 DangerousFall = false;
+                HasFallen = true;
             }
-
-        if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true)
-        {
-            totalDamage += 1;
-            DangerousFall = false;
-            HasFallen = true;
-        }
 
 	}
 

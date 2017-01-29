@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 
 public class HeartContainer_Script : MonoBehaviour {
-	PlayerHealth PlayHP;
+    GameObject Player;
+    PlayerHealth PlayHP;
 	GameObject thisHeartCanvas;
 	public GameObject heartContainer;
 	public GameObject heart;
@@ -32,7 +33,8 @@ public class HeartContainer_Script : MonoBehaviour {
             PositionList = new ArrayList();
 
         thisHeartCanvas = this.gameObject;
-		PlayHP = GameObject.FindGameObjectWithTag ("PlayerMesh").GetComponent<PlayerHealth> ();
+        Player = GameObject.FindGameObjectWithTag("PlayerMesh");
+        PlayHP = Player.GetComponent<PlayerHealth> ();
 
 		for (int i = 0; i < PlayHP.StartHealth; i++) {
             Vector3 _OrigHeartPos;
@@ -105,7 +107,7 @@ public class HeartContainer_Script : MonoBehaviour {
     }
 
     void MovingHeartsInAndOut(){
-        if (PlayHP.currentHealth == Hrts.Count)
+        if (PlayHP.currentHealth == Hrts.Count && Player.GetComponent<PlayerMovement_Ver2>().Paused != true)
         {
             CurrentOnScreenTimer -= Time.deltaTime;
             if (CurrentOnScreenTimer <= 0.0f)
@@ -144,6 +146,7 @@ public class HeartContainer_Script : MonoBehaviour {
         //     Hrts = new ArrayList();
         //if (HrtsC == null)
         //   HrtsC = new ArrayList();
+        Player = p;
         PlayHP = p.GetComponent<PlayerHealth>();
 
         for (int i = 0; i < PlayHP.currentHealth; i++)
