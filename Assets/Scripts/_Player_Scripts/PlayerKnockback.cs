@@ -56,27 +56,50 @@ public class PlayerKnockback : MonoBehaviour {
                     ForceAdder();
 
                 }
+                //
+                //
                 else
                 {
                     if (this.GetComponent<PlayerHealth>().IsDead == false && this.GetComponent<PlayerHealth>().Crushing == false)
                     {
                         PlayerP.DontMove = false;
                     }
-                    currentKnockBackJumpForce = KnockBackJumpForce;
+                    //partofsqueze
+                    if (jumpedOn == true)
+                    {
+                        PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
+                        Debug.Log("ayy wot?");
+
+                        if (PlayerP.forKnockBack == true)
+                        {
+                            Debug.Log("why tho?");
+                            PlayerP.initialAirSpeed = 0.0f;
+                            jumpedOn = false;
+                        }
+                    }
+                    else
+                    {
+                    //---------------
+                        currentKnockBackJumpForce = KnockBackJumpForce;
+                    //----------------
+                    }
+                    //--------------------
                 }
 
                 //Debug.Log (PlayerP.forKnockBack);
                 //Debug.Log ("de jamp:"+jumpedOn);
-                if (jumpedOn == true)
+                /*if (jumpedOn == true)
                 {
                     PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
+                    Debug.Log("ayy wot?");
 
                     if (PlayerP.forKnockBack == true)
                     {
                         PlayerP.initialAirSpeed = 0.0f;
                         jumpedOn = false;
                     }
-                }
+                }*/
+
                 //JumpingC.IsItGrounded();
             }
         }
@@ -147,10 +170,10 @@ public class PlayerKnockback : MonoBehaviour {
             }
         }
 
-		if (other.tag == "JumpCollider") {
+		/*if (other.tag == "JumpCollider") {
 			jumpedOn = true;
 			currentKnockBackJumpForce = KnockBackJumpForce*1.2f;
-		}
+		}*/
 
         if (other.tag == "WindyArea")
         {

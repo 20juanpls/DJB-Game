@@ -18,6 +18,7 @@ public class BrutusMechanimInputs : MonoBehaviour
         Player = ThePlayer.GetComponent<PlayerMovement_Ver2> ();
 		PlayRb = ThePlayer.GetComponent<Rigidbody> ();
         AnimSpeed = thisAnimator.speed;
+
     }
 
 
@@ -36,18 +37,22 @@ public class BrutusMechanimInputs : MonoBehaviour
 		Vector3 RelativPlayerMove = new Vector3(Player.VelRelativeToPlay.x,0.0f,Player.VelRelativeToPlay.z);
 		//Debug.Log (RelativPlayerMove.magnitude);
 		if (Player.isGrounded == true) {
-			thisAnimator.SetBool("Jumps", false);
+            thisAnimator.SetBool("Jumps", false);
 			if (RelativPlayerMove.magnitude > 2.0f) {
-				thisAnimator.SetTrigger ("Runs");
+                //thisAnimator.SetTrigger ("Runs");
+                thisAnimator.SetBool("Runs", true);
 				thisAnimator.SetBool ("Stops", false);
-			} else { 
-				thisAnimator.SetTrigger ("Stops");
+			} else {
+                //thisAnimator.SetTrigger ("Stops");
+                thisAnimator.SetBool("Stops", true);
 				thisAnimator.SetBool ("Runs", false);
 			}
 		} else {
 			thisAnimator.SetBool ("Stops", false);
 			thisAnimator.SetBool ("Runs", false);
-			thisAnimator.SetTrigger ("Jumps");
+            thisAnimator.SetBool("Jumps", true);
+            //thisAnimator.SetTrigger ("Jumps");
+            //thisAnimator.GetComponent<Animation>()["Jumps"].time = 1.0f;
 		}
 	}
 

@@ -107,7 +107,7 @@ public class HeartContainer_Script : MonoBehaviour {
     }
 
     void MovingHeartsInAndOut(){
-        if (PlayHP.currentHealth == Hrts.Count && Player.GetComponent<PlayerMovement_Ver2>().Paused != true)
+        if (PlayHP.currentHealth == Hrts.Count && GameObject.Find("SpawnManager").GetComponent <ThePause>().Paused != true)
         {
             CurrentOnScreenTimer -= Time.deltaTime;
             if (CurrentOnScreenTimer <= 0.0f)

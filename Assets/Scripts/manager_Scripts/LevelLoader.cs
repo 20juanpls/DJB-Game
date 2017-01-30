@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour {
+    public string sceneName;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,7 @@ public class LevelLoader : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "PlayerMesh") {
-            SceneManager.LoadScene("Bugfixer_0_0_1");
+            SceneManager.LoadScene(sceneName);
         }
 
     }

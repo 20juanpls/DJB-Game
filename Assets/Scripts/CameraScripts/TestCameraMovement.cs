@@ -8,8 +8,12 @@ public class TestCameraMovement : MonoBehaviour
     public Transform thisPos;
     public GameObject Target;
     public Vector3 CameraOffset = new Vector3(0.0f, 10.0f, -20.0f);
+    public float CameraDistance;
+    public float ZoomInDistance;
+    public float ZoomOutDistance;
     public float OrigCameraSpeed = 10f;
-    private float CurrentCamSpeed;
+
+    private float CurrentCamSpeed, OrigDistance;
 
     public float CamXSpeed;
     public float CamYSpeed;
@@ -30,6 +34,10 @@ public class TestCameraMovement : MonoBehaviour
         _camera.transform.position = thisPos.position;
         _camera.transform.rotation = thisPos.rotation;
         CurrentCamSpeed = OrigCameraSpeed;
+        OrigDistance = 1.0f;
+        CameraDistance = OrigDistance;
+
+
 
     }
 
@@ -47,6 +55,7 @@ public class TestCameraMovement : MonoBehaviour
     {
         if (_camera != null && Target != null)
         {
+            ZoomInOut();
             CamXRotSpeed();
             CamYRotSpeed();
 
@@ -57,20 +66,29 @@ public class TestCameraMovement : MonoBehaviour
 
             float cameraAngle = _camera.transform.eulerAngles.y;
 
-            offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset;
+            offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset * CameraDistance;
 
+            //Important
             thisPos.transform.position = Vector3.Lerp(_camera.transform.position, targetPos + offset, CurrentCamSpeed * Time.deltaTime);
+            //Important
+            /*thisPos.transform.position = Vector3.Lerp(new Vector3(_camera.transform.position.x,0.0f,_camera.transform.position.z),
+                new Vector3(targetPos.x,0.0f,targetPos.z) + new Vector3(offset.x,0.0f,offset.z), CurrentCamSpeed * Time.deltaTime)
+                + Vector3.Lerp(new Vector3(0.0f,_camera.transform.position.y,0.0f), 
+                new Vector3(0.0f, targetPos.y,0.0f) + new Vector3(0.0f,offset.y,0.0f),CurrentCamSpeed*0.1f*Time.deltaTime);
+            */
+
             thisPos.transform.LookAt(targetPos);
+
 
             //Debug.Log(Vector3.Distance(thisPos.transform.position, targetPos + offset));
 
-                if (Vector3.Distance(thisPos.transform.position, targetPos + offset) > 5.0f)
-                {
-                    CurrentCamSpeed = OrigCameraSpeed * 0.2f;
-                }
-                else {
-                    CurrentCamSpeed = OrigCameraSpeed;
-                }
+            /*if (Vector3.Distance(thisPos.transform.position, targetPos + offset) > 5.0f)
+            {
+                CurrentCamSpeed = OrigCameraSpeed * 0.2f;
+            }
+            else {
+                CurrentCamSpeed = OrigCameraSpeed;
+            }*/
 
             if (DoNotMove == false)
             {
@@ -99,6 +117,34 @@ public class TestCameraMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.P))
         {
             CurrentCamYSpeed -= CamYSpeed;
+        }
+    }
+
+    void ZoomInOut()
+    {
+        //ZoomIn..
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (CameraDistance == OrigDistance)
+            {
+                CameraDistance = ZoomInDistance;
+            }
+            else if (CameraDistance == ZoomOutDistance)
+            {
+                CameraDistance = OrigDistance;
+            }
+        }
+        //Zoom Out...
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (CameraDistance == OrigDistance)
+            {
+                CameraDistance = ZoomOutDistance;
+            }
+            else if (CameraDistance == ZoomInDistance)
+            {
+                CameraDistance = OrigDistance;
+            }
         }
     }
 }

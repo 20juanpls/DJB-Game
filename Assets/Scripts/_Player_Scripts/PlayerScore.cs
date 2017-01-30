@@ -38,6 +38,10 @@ public class PlayerScore : MonoBehaviour {
         {
 			other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
+
+        if (other.tag == "GoalCollectable") {
+            GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PlayerLavaDeath>().PlayerWinState = true;
+        }
     }
 
 }

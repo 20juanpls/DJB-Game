@@ -21,6 +21,8 @@ public class PlayerLavaDeath : MonoBehaviour {
 	GameObject[] hearts;
 	public GameObject heartPrefab;
 
+    public bool PlayerWinState;
+
 
 
 	public int Deaths;
@@ -59,6 +61,11 @@ public class PlayerLavaDeath : MonoBehaviour {
 				loseScreen.gameObject.SetActive (false);
 			}
 		}
+
+        if (PlayerWinState == true) {
+            Debug.Log("GOAL!!!");
+            SceneManager.LoadScene("DJB_0_0_1_StartScene");
+        }
     }
 
     void AssignPlayer(GameObject p, GameObject pF)
