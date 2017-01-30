@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{6925368C-0E79-CB28-290D-1BD0AD2D116F}") = "DJB-Game", "Assembly-CSharp.csproj", "{BDE549B1-DE22-BB63-1D07-3DF33E10C95E}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DJB-Game", "Assembly-CSharp.csproj", "{BDE549B1-DE22-BB63-1D07-3DF33E10C95E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,7 +17,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																														GlobalSection(MonoDevelopProperties) = preSolution
+																																GlobalSection(MonoDevelopProperties) = preSolution
 =======
 							GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> Stashed changes
