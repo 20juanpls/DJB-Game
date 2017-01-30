@@ -66,6 +66,17 @@ public class PlayerLavaDeath : MonoBehaviour {
             Debug.Log("GOAL!!!");
             SceneManager.LoadScene("DJB_0_0_1_StartScene");
         }
+
+		if (loseScreen.gameObject.activeSelf) {
+			if (Input.GetKeyDown("joystick button 11")){
+				loseScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
+			}
+		}
+		if (gameOverScreen.gameObject.activeSelf) {
+			if (Input.GetKeyDown("joystick button 11")){
+				gameOverScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
+			}
+		}
     }
 
     void AssignPlayer(GameObject p, GameObject pF)

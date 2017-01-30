@@ -20,6 +20,8 @@ public class TestCameraMovement : MonoBehaviour
     public float MinHeight = 0.0f;
     public float MaxHeight = 10.0f;
 
+	public float joystickDeadzone = 0.1f;
+
     private float CurrentCamXSpeed;
     private float CurrentCamYSpeed;
 
@@ -53,6 +55,7 @@ public class TestCameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+		Debug.Log(Input.GetAxis("XB1_RightLeft"));
         if (_camera != null && Target != null)
         {
             ZoomInOut();
@@ -99,22 +102,24 @@ public class TestCameraMovement : MonoBehaviour
     }
 
     void CamXRotSpeed(){
-        if (Input.GetKey(KeyCode.I))
+		//Clockwise
+		if (Input.GetKey(KeyCode.I) || Input.GetAxis("XB1_RightLeft") > joystickDeadzone)
         {
             CurrentCamXSpeed += CamXSpeed;
         }
-        else if (Input.GetKey(KeyCode.O))
+		//counterclockwise
+		else if (Input.GetKey(KeyCode.O) || Input.GetAxis("XB1_RightLeft") < -joystickDeadzone)
         {
             CurrentCamXSpeed -= CamXSpeed;
         }
     }
 
     void CamYRotSpeed() {
-        if (Input.GetKey(KeyCode.U))
+		if (Input.GetKey(KeyCode.U) || Input.GetAxis("XB1_UpDown") > joystickDeadzone)
         {
             CurrentCamYSpeed += CamYSpeed;
         }
-        else if (Input.GetKey(KeyCode.P))
+		else if (Input.GetKey(KeyCode.P) || Input.GetAxis("XB1_UpDown") < -joystickDeadzone)
         {
             CurrentCamYSpeed -= CamYSpeed;
         }
@@ -122,8 +127,18 @@ public class TestCameraMovement : MonoBehaviour
 
     void ZoomInOut()
     {
+		if (Input.GetKeyDown ("joystick button 7")) {
+			if (CameraDistance == OrigDistance) {
+				CameraDistance = ZoomInDistance;
+			} else if (CameraDistance == ZoomInDistance) {
+				CameraDistance = ZoomOutDistance;
+			} else if (CameraDistance == ZoomOutDistance) {
+				CameraDistance = OrigDistance;
+			}
+		}
+		/*
         //ZoomIn..
-        if (Input.GetKeyDown(KeyCode.J))
+		if (Input.GetKeyDown(KeyCode.J))
         {
             if (CameraDistance == OrigDistance)
             {
@@ -146,5 +161,6 @@ public class TestCameraMovement : MonoBehaviour
                 CameraDistance = OrigDistance;
             }
         }
+		*/
     }
 }
