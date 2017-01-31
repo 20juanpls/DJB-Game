@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Bugfixer_0_0_1.unity
+- path: Assets/z_SpecialPackage/Level.unity
   isLoaded: 1
   isActive: 1
