@@ -55,7 +55,7 @@ public class TestCameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-		Debug.Log(Input.GetAxis("XB1_RightLeft"));
+		//Debug.Log(Input.GetAxis("XB1_RightLeft"));
         if (_camera != null && Target != null)
         {
             ZoomInOut();

@@ -10,10 +10,10 @@ public class PlayerKnockback : MonoBehaviour {
 
     public bool collided, Inactive = false, cantTakeDamage, jumpedOn, DangerousFall, HasFallen;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage;
+    public float knockbackMultiplier, RecoverTime, AirRecovTime, KnockBackJumpForce, MinFloorDistFallDamage;
     public int totalDamage;
 
-    private float TimeLeft, currentKnockBackJumpForce;
+    private float TimeLeft, AirRecovLeft, currentKnockBackJumpForce;
     private Vector3 KnockBackOrientation, hitVector, ExForceVector;
 
     // Use this for initialization
@@ -24,6 +24,7 @@ public class PlayerKnockback : MonoBehaviour {
         collided = false;
 
         TimeLeft = RecoverTime;
+		AirRecovLeft = AirRecovTime;
     }
 
     // Update is called once per frame
@@ -65,40 +66,52 @@ public class PlayerKnockback : MonoBehaviour {
                         PlayerP.DontMove = false;
                     }
                     //partofsqueze
-                    if (jumpedOn == true)
+                    /*if (jumpedOn == true)
                     {
                         PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
-                        Debug.Log("ayy wot?");
+                        //Debug.Log("ayy wot?");
 
-                        if (PlayerP.forKnockBack == true)
+						if (PlayerP.forKnockBack == true && PlayerP.isGrounded == true)
                         {
-                            Debug.Log("why tho?");
+                            //Debug.Log("why tho?");
                             PlayerP.initialAirSpeed = 0.0f;
                             jumpedOn = false;
                         }
                     }
                     else
-                    {
+                    {*/
                     //---------------
                         currentKnockBackJumpForce = KnockBackJumpForce;
                     //----------------
-                    }
+                    //}
                     //--------------------
                 }
 
                 //Debug.Log (PlayerP.forKnockBack);
                 //Debug.Log ("de jamp:"+jumpedOn);
-                /*if (jumpedOn == true)
+                if (jumpedOn == true)
                 {
+					AirRecovLeft -= Time.deltaTime;
                     PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
-                    Debug.Log("ayy wot?");
-
-                    if (PlayerP.forKnockBack == true)
+					/*if (PlayerP.forKnockBack == true || PlayerP.initialAirSpeed < currentKnockBackJumpForce*2.0f)
                     {
                         PlayerP.initialAirSpeed = 0.0f;
                         jumpedOn = false;
-                    }
-                }*/
+                    }*/
+
+					//Testing!!!
+					if (PlayerP.forKnockBack == true && PlayerP.initialAirSpeed == currentKnockBackJumpForce*2.0f && AirRecovLeft < 0.0f && PlayerP.isGrounded == true){
+						//Debug.Log ("Landing!!");
+						AirRecovLeft = AirRecovTime;
+						PlayerP.initialAirSpeed = 0.0f;
+						jumpedOn = false;
+					}
+
+					if (PlayerP.forKnockBack == true && !PlayerP.isGrounded) {
+						Debug.Log ("Jumping again!!");
+					}
+					//Testing!!!
+                }
 
                 //JumpingC.IsItGrounded();
             }

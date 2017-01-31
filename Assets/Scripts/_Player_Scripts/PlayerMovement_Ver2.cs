@@ -10,7 +10,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill;
 
-    private bool isMove, lastYSpeed, touching, canJump;
+    private bool isMove, lastYSpeed, touching;
+	public bool canJump;
     public bool hasJumped, isGrounded;
 
     private Vector3 moveDirection = Vector3.zero;
