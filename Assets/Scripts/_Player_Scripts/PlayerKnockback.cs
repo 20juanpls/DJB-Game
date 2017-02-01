@@ -10,10 +10,10 @@ public class PlayerKnockback : MonoBehaviour {
 
     public bool collided, Inactive = false, cantTakeDamage, jumpedOn, DangerousFall, HasFallen;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-    public float knockbackMultiplier, RecoverTime, AirRecovTime, KnockBackJumpForce, MinFloorDistFallDamage;
+    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage;
     public int totalDamage;
 
-    private float TimeLeft, AirRecovLeft, currentKnockBackJumpForce;
+    private float TimeLeft, currentKnockBackJumpForce;
     private Vector3 KnockBackOrientation, hitVector, ExForceVector;
 
     // Use this for initialization
@@ -24,7 +24,6 @@ public class PlayerKnockback : MonoBehaviour {
         collided = false;
 
         TimeLeft = RecoverTime;
-		AirRecovLeft = AirRecovTime;
     }
 
     // Update is called once per frame
@@ -89,15 +88,16 @@ public class PlayerKnockback : MonoBehaviour {
 
                 //Debug.Log (PlayerP.forKnockBack);
                 //Debug.Log ("de jamp:"+jumpedOn);
-                if (jumpedOn == true)
+                /*if (jumpedOn == true)
                 {
 					AirRecovLeft -= Time.deltaTime;
                     PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
-					/*if (PlayerP.forKnockBack == true || PlayerP.initialAirSpeed < currentKnockBackJumpForce*2.0f)
+					//
+                    if (PlayerP.forKnockBack == true || PlayerP.initialAirSpeed < currentKnockBackJumpForce*2.0f)
                     {
                         PlayerP.initialAirSpeed = 0.0f;
                         jumpedOn = false;
-                    }*/
+                    }
 
 					//Testing!!!
 					if (PlayerP.forKnockBack == true && PlayerP.initialAirSpeed == currentKnockBackJumpForce*2.0f && AirRecovLeft < 0.0f && PlayerP.isGrounded == true){
@@ -111,7 +111,7 @@ public class PlayerKnockback : MonoBehaviour {
 						Debug.Log ("Jumping again!!");
 					}
 					//Testing!!!
-                }
+                }*/
 
                 //JumpingC.IsItGrounded();
             }

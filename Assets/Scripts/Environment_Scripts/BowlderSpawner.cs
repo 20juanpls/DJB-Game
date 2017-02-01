@@ -6,6 +6,8 @@ public class BowlderSpawner : MonoBehaviour {
     public GameObject BoulderPrefab;
     public Transform BoulderSpawn;
 
+    public float allotedTime = 6.0f;
+
     GameObject Boulder;
 
     public bool dropBoulder = true;
@@ -29,7 +31,7 @@ public class BowlderSpawner : MonoBehaviour {
 
         if (Boulder != null)
         {
-            Destroy(Boulder, 6.0f);
+            Destroy(Boulder, allotedTime);
         }
         else {
             dropBoulder = true;
