@@ -12,7 +12,7 @@ public class PressSpaceToContinue : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space) ||Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 1")) {
             //SceneManager.LoadScene("Bugfixer_0_0_1");//, LoadSceneMode.Additive);
             SceneManager.LoadScene("DJB_0_0_1_StartScene");
             Destroy (this.gameObject);
