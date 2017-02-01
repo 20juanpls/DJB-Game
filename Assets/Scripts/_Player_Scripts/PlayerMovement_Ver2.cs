@@ -115,6 +115,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 if (hasJumped == true)
                 {
                     forKnockBack = true;
+                    KnockBack.jumpedOn = false;
                     initialAirSpeed = 0.0f;
                     hasJumped = false;
                 }
@@ -255,7 +256,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void JumpNow() {
         if (DontMove == false)
         {
+<<<<<<< HEAD
 			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 1")) && canJump == true)
+=======
+            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true)||KnockBack.jumpedOn == true)
+>>>>>>> bc93c012ead79a8e7725fd50b76625db1ca26daa
             {
                 initialAirSpeed = JumpSpeed;
             }
@@ -284,7 +289,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         if (Physics.Raycast(PlayerRb.position, new Vector3(0.0f,-1.0f,0.0f), out hit))
         {
-			if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill" || hit.transform.tag == "StompNPC"/*|| hit.transform.tag == "NPC_charge" || hit.transform.tag == "JumpCollider"*/)
+			if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill" || hit.transform.tag == "StompNPC"/*|| hit.transform.tag == "NPC_charge"*/)
             {
                 floorDist = hit.distance;
                 surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
@@ -300,11 +305,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 else {
                     GroundCannotKill = true;
                 }
-            }
-
-            if ((hit.transform.tag == "NPC_charge" || hit.transform.tag == "JumpCollider")/* && hit.distance <= AcceptedFloorDist*/) {
-                //KnockBack.jumpedOn = true;
-                isGrounded = false;
             }
 
         }

@@ -1,0 +1,148 @@
+fileFormatVersion: 2
+guid: 688b5308f0cfa8d43aeba741bf8494f0
+timeCreated: 1485966163
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: behemithmountain
+    100002: //RootNode
+    100004: Island_002
+    100006: Island_003
+    100008: Island_01
+    100010: LongWay
+    100012: LongWay002
+    100014: pedestal
+    100016: Piramid1
+    100018: Plataform
+    100020: Plataform001
+    100022: Plataform002
+    100024: Plataform003
+    100026: Plataform004
+    100028: Plataform005
+    400000: behemithmountain
+    400002: //RootNode
+    400004: Island_002
+    400006: Island_003
+    400008: Island_01
+    400010: LongWay
+    400012: LongWay002
+    400014: pedestal
+    400016: Piramid1
+    400018: Plataform
+    400020: Plataform001
+    400022: Plataform002
+    400024: Plataform003
+    400026: Plataform004
+    400028: Plataform005
+    2300000: behemithmountain
+    2300002: Island_002
+    2300004: Island_003
+    2300006: Island_01
+    2300008: LongWay
+    2300010: LongWay002
+    2300012: pedestal
+    2300014: Piramid1
+    2300016: Plataform
+    2300018: Plataform001
+    2300020: Plataform002
+    2300022: Plataform003
+    2300024: Plataform004
+    2300026: Plataform005
+    3300000: behemithmountain
+    3300002: Island_002
+    3300004: Island_003
+    3300006: Island_01
+    3300008: LongWay
+    3300010: LongWay002
+    3300012: pedestal
+    3300014: Piramid1
+    3300016: Plataform
+    3300018: Plataform001
+    3300020: Plataform002
+    3300022: Plataform003
+    3300024: Plataform004
+    3300026: Plataform005
+    4300000: Island_01
+    4300002: Piramid1
+    4300004: Plataform
+    4300006: Plataform001
+    4300008: Plataform002
+    4300010: Plataform003
+    4300012: Plataform004
+    4300014: Plataform005
+    4300016: behemithmountain
+    4300018: LongWay
+    4300020: Island_002
+    4300022: LongWay002
+    4300024: pedestal
+    4300026: Island_003
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

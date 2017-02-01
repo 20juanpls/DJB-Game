@@ -99,7 +99,9 @@ public class NPCStomper : MonoBehaviour {
             CurrentTimeOnGround -= Time.deltaTime;
             if (CurrentTimeOnGround <= 0.0f)
             {
-                ThisStompRb.velocity = Vector3.MoveTowards(OrigStompPos, ThisStompRb.position, RecoverySpeed);
+                //ThisStompRb.position = Vector3.MoveTowards(ThisStompRb.position, OrigStompPos, RecoverySpeed *Time.deltaTime);
+                ThisStompRb.velocity = new Vector3(0.0f, RecoverySpeed, 0.0f);
+                //Debug.Log(currentfallSpeed);
                 if (ThisStompRb.position.y >= OrigStompPos.y) {
                     CurrentTimeOnAir -= Time.deltaTime;
                     ThisStompRb.velocity = Vector3.zero;

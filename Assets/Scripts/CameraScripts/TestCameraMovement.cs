@@ -51,6 +51,7 @@ public class TestCameraMovement : MonoBehaviour
         _camera.transform.rotation = thisPos.rotation;
         CurrentCamXSpeed = 0.0f;
         CurrentCamYSpeed = 0.0f;
+        CameraDistance = OrigDistance;
     }
 
     void FixedUpdate()
@@ -136,7 +137,9 @@ public class TestCameraMovement : MonoBehaviour
 				CameraDistance = OrigDistance;
 			}
 		}
-		/*
+
+
+		
         //ZoomIn..
 		if (Input.GetKeyDown(KeyCode.J))
         {
@@ -161,6 +164,6 @@ public class TestCameraMovement : MonoBehaviour
                 CameraDistance = OrigDistance;
             }
         }
-		*/
+		
     }
 }
