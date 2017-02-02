@@ -68,12 +68,12 @@ public class PlayerLavaDeath : MonoBehaviour {
         }
 
 		if (loseScreen.gameObject.activeSelf) {
-			if (Input.GetKeyDown("joystick button 11")){
+			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 1")){
 				loseScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
 			}
 		}
 		if (gameOverScreen.gameObject.activeSelf) {
-			if (Input.GetKeyDown("joystick button 11")){
+			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 1")){
 				gameOverScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
 			}
 		}

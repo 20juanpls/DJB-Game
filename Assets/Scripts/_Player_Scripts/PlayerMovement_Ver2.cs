@@ -256,12 +256,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void JumpNow() {
         if (DontMove == false)
         {
-            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true)||KnockBack.jumpedOn == true)
+            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && canJump == true)||KnockBack.jumpedOn == true)
             {
                 initialAirSpeed = JumpSpeed;
             }
 
-            if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && isGrounded == false && CurrentMidAirJumpCount > 0)
             {
                 initialAirSpeed = JumpSpeed;
                 airTime = 0.0f;

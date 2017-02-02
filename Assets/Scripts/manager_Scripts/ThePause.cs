@@ -32,6 +32,14 @@ public class ThePause : MonoBehaviour {
         IsItPaused();
         MechAnim.OnPause(Paused);
 
+        if (PauseCanvas.activeSelf)
+        {
+            if (Input.GetKeyDown("joystick button 7"))
+            {
+                Paused = false;
+            }
+        }
+
         if (Paused == true)
         {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
@@ -43,11 +51,13 @@ public class ThePause : MonoBehaviour {
             Time.timeScale = 1.0f;
             PauseCanvas.SetActive(false);
         }
+
+
        
     }
 
     void IsItPaused() {
-        if (Input.GetKeyDown(KeyCode.Return))
+		if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 7"))
         {
             if (Paused == false)
             {
