@@ -68,14 +68,18 @@ public class PlayerLavaDeath : MonoBehaviour {
         }
 
 		if (loseScreen.gameObject.activeSelf) {
-			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 1")){
+			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 0")){
 				loseScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
 			}
 		}
 		if (gameOverScreen.gameObject.activeSelf) {
-			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 1")){
-				gameOverScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
-			}
+			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 0")){
+                //gameOverScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
+                gameOverScreen.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>().onClick.Invoke();
+            }
+            if (Input.GetKeyDown("joystick button 1")) {
+                gameOverScreen.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>().onClick.Invoke();
+            }
 		}
     }
 
