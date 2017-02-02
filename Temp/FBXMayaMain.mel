@@ -7,30 +7,30 @@ if (getApplicationVersionAsFloat() >= 8.0)
 {
 	// Use unqualified path to support Maya 2013, 2015 and future version
 	loadPlugin "fbxmaya";
-	eval ("source \"/Users/s582060/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
+	eval ("source \"C:/Users/Omar/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
 }
 else if (getApplicationVersionAsFloat() >= 7.0)
 {
-	loadPlugin "/Applications/Autodesk/maya2015/Maya.app/Contents/MacOS/plug-ins/fbxmaya.lib";
-	eval ("source \"/Users/s582060/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
+	loadPlugin "C:/PROGRA~1/Autodesk/Maya2015/bin/Contents/MacOS/plug-ins/fbxmaya.lib";
+	eval ("source \"C:/Users/Omar/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
 }
 else if (getApplicationVersionAsFloat() >= 6.5)
 {
-	loadPlugin "/Applications/Unity/Unity.app/Contents/Tools/fbxmaya65.lib";
-	eval ("source \"/Users/s582060/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
+	loadPlugin "C:/PROGRA~1/Unity/Editor/Unity.exe/Contents/Tools/fbxmaya65.lib";
+	eval ("source \"C:/Users/Omar/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
 }
 else if (getApplicationVersionAsFloat() >= 6.0) 
 {
-	loadPlugin "/Applications/Unity/Unity.app/Contents/Tools/fbxmaya60.lib";
-	eval ("source \"/Users/s582060/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
+	loadPlugin "C:/PROGRA~1/Unity/Editor/Unity.exe/Contents/Tools/fbxmaya60.lib";
+	eval ("source \"C:/Users/Omar/Desktop/DJB-Game/Temp/FBXMayaExport.mel\"");
 }
 else if (getApplicationVersionAsFloat() >= 5.0)
 {
-	loadPlugin "/Applications/Unity/Unity.app/Contents/Tools/fbxmaya50.lib";
-	eval ("source \"/Users/s582060/Desktop/DJB-Game/Temp/FBXMayaExport5.mel\"");
+	loadPlugin "C:/PROGRA~1/Unity/Editor/Unity.exe/Contents/Tools/fbxmaya50.lib";
+	eval ("source \"C:/Users/Omar/Desktop/DJB-Game/Temp/FBXMayaExport5.mel\"");
 }
 else if (getApplicationVersionAsFloat() >= 4.5) 
 {
-	loadPlugin "/Applications/Unity/Unity.app/Contents/Tools/fbxmaya45.lib";
-	eval ("source \"/Users/s582060/Desktop/DJB-Game/Temp/FBXMayaExport5.mel\"");
+	loadPlugin "C:/PROGRA~1/Unity/Editor/Unity.exe/Contents/Tools/fbxmaya45.lib";
+	eval ("source \"C:/Users/Omar/Desktop/DJB-Game/Temp/FBXMayaExport5.mel\"");
 }

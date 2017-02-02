@@ -27,6 +27,8 @@ public class TestCameraMovement : MonoBehaviour
 
     private Camera _camera;
 
+    private bool zoomLock;
+
     void Start()
     {
         Target = GameObject.FindGameObjectWithTag("PlayerMesh");
@@ -38,7 +40,7 @@ public class TestCameraMovement : MonoBehaviour
         CurrentCamSpeed = OrigCameraSpeed;
         OrigDistance = 1.0f;
         CameraDistance = OrigDistance;
-
+        zoomLock = true;
 
 
     }
@@ -127,42 +129,43 @@ public class TestCameraMovement : MonoBehaviour
     }
 
     void ZoomInOut()
-    {
-		if (Input.GetKeyDown ("joystick button 7")) {
-			if (CameraDistance == OrigDistance) {
-				CameraDistance = ZoomInDistance;
-			} else if (CameraDistance == ZoomInDistance) {
-				CameraDistance = ZoomOutDistance;
-			} else if (CameraDistance == ZoomOutDistance) {
-				CameraDistance = OrigDistance;
-			}
-		}
-
-
-		
+    {	
+        
         //ZoomIn..
-		if (Input.GetKeyDown(KeyCode.J))
+		if (Input.GetKeyDown(KeyCode.J) || Input.GetAxis("XB1_Zoom") > 0.0f)
         {
-            if (CameraDistance == OrigDistance)
+            if (zoomLock)
             {
-                CameraDistance = ZoomInDistance;
-            }
-            else if (CameraDistance == ZoomOutDistance)
-            {
-                CameraDistance = OrigDistance;
+                if (CameraDistance == OrigDistance)
+                {
+                    CameraDistance = ZoomInDistance;
+                }
+                else if (CameraDistance == ZoomOutDistance)
+                {
+                    CameraDistance = OrigDistance;
+                }
+                zoomLock = false;
             }
         }
         //Zoom Out...
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.K) || Input.GetAxis("XB1_Zoom") < 0.0f)
         {
-            if (CameraDistance == OrigDistance)
+            if (zoomLock)
             {
-                CameraDistance = ZoomOutDistance;
+                if (CameraDistance == OrigDistance)
+                {
+                    CameraDistance = ZoomOutDistance;
+                }
+                else if (CameraDistance == ZoomInDistance)
+                {
+                    CameraDistance = OrigDistance;
+                }
+                zoomLock = false;
             }
-            else if (CameraDistance == ZoomInDistance)
-            {
-                CameraDistance = OrigDistance;
-            }
+        }
+        else
+        {
+            zoomLock = true;
         }
 		
     }
