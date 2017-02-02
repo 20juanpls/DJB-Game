@@ -93,7 +93,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         //Debug.Log ("Heyo!: "+ gameOverScreen.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>());
 
-        b.onClick.AddListener (delegate {Restart ();});
+		b.onClick.AddListener (delegate {Restart ();});
         reStartHard.onClick.AddListener(delegate { RestartFromBeginning(); });
         BackToMenu.onClick.AddListener(delegate { BackToTheMenu(); });
 
@@ -114,8 +114,6 @@ public class PlayerLavaDeath : MonoBehaviour {
     }
 
 	public void Restart(){
-
-		//Debug.Log("RESTARTING");
 
 		//Reset coins
 		ResetCollectables();
