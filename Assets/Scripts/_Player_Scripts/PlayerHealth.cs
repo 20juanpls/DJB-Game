@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour {
     Transform PlayerTrn;
     CapsuleCollider PlayerColl;
     PlayerKnockback KnockKnock;
+    //Rigidbody PlayerRb;
 
     public int StartHealth = 3, Lives = 3;//, BlinkFrameBuffer = 5;
 
@@ -46,6 +47,7 @@ public class PlayerHealth : MonoBehaviour {
         PlayerTrn = this.GetComponent<Transform>();
         PlayerColl = this.GetComponent<CapsuleCollider>();
         KnockKnock = this.GetComponent<PlayerKnockback>();
+        //PlayerRb = this.GetComponent<Rigidbody>();
         currentHealth = StartHealth;
 
         currentInviTime = InvincibiltyFramesTime;
@@ -146,6 +148,7 @@ public class PlayerHealth : MonoBehaviour {
             PlayerScript.AcceptedFloorDist = 0.1f;
             KnockKnock.Inactive = true;
             PlayerScript.DontMove = true;
+            //PlayerRb.velocity = Vector3.zero;
 
             if (PlayerTrn.localScale.y <= 0.01f) {
                 CurrentCrushRealizationTime -= Time.deltaTime;

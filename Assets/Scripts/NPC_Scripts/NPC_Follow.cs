@@ -81,7 +81,7 @@ public class NPC_Follow : MonoBehaviour {
 			if (distance <= minDistance) {
 
 				//npc looks at player 
-				if (rb.velocity == Vector3.zero) {
+				if (rb.velocity.magnitude <= 0.5f) {
 					//ChilDCollin.SetActive(false);
 					rb.transform.rotation = Quaternion.Slerp (
 						rb.transform.rotation,

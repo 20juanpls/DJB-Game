@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/z_SpecialPackage/Level.unity
-=======
-- path: Assets/Scenes/FirstScene.unity
->>>>>>> 52d9daeeb8545dbc5679c439608d3f2432e18a60
+- path: Assets/Scenes/DJB_Stg_00.unity
   isLoaded: 1
   isActive: 1

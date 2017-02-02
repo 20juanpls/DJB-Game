@@ -169,7 +169,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         this.GetComponent<ThePause>().AssignPlayer(_p);
 
-        GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
+        //GameObject.FindGameObjectWithTag("InRoom").GetComponent<InRoomScript>().AssignPlayer(_p);
         GameObject.Find("HealthCanvas").GetComponent<HeartContainer_Script>().PlayerHeartIllustratorReset(_p);
 
         //GameObject.FindGameObjectWithTag("P_SpotShadow").GetComponent<SpotShadowScript>().AssignPlayer(_p);
