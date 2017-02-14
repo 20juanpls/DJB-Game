@@ -54,18 +54,20 @@ public class NPC_Death : MonoBehaviour {
 		float f = deathTime/deathInterval;
 		count = Mathf.RoundToInt(f);
 
+
 		while(deathTime >= 0){
 			//Debug.Log("Toot: " + deathTime);
 			yield return new WaitForSeconds(deathInterval);
 			deathTime -= deathInterval;
 			//rotate alon the y axis every interval "angleInterval"
 			this.transform.Rotate(new Vector3(0.0f,angleInterval,0.0f));
-			//reduce size by "sizeInterval" every interval
-			if (this.transform.localScale.magnitude <= 0.01){
+            //reduce size by "sizeInterval" every interval
+            if (this.transform.localScale.magnitude <= 0.1f || deathTime <= 0.5f ){
                 //Destroy(this.gameObject);
                 //nf.enabled = false;
 				nf.Disabled  = true;
                 this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                //this.gameObject.bgetChi
 			}
 			else{
 				this.transform.localScale -= new Vector3(sizeInterval,sizeInterval,sizeInterval);

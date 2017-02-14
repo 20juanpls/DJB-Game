@@ -28,9 +28,22 @@ public class PlayerKnockback : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        //Debug.Log(DangerousFall);
+        if (PlayerH.IsDead == true)
+        {
+            Inactive = true;
+            KnockBackOrientation = Vector3.zero;
+            currentKnockBackJumpForce = 0.0f;
+            ForceAdder();
+            DangerousFall = false;
+        }
+        else
+        {
+            Inactive = false;
+        }
         if (PlayerP.Paused == false)
         {
-            if (PlayerH.IsDead == true)
+            /*if (PlayerH.IsDead == true)
             {
                 Inactive = true;
                 KnockBackOrientation = Vector3.zero;
@@ -41,7 +54,7 @@ public class PlayerKnockback : MonoBehaviour {
             else
             {
                 Inactive = false;
-            }
+            }*/
 
             if (Inactive == false)
             {

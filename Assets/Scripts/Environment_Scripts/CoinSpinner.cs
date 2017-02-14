@@ -23,7 +23,7 @@ public class CoinSpinner : MonoBehaviour {
 
         OrigPos = this.gameObject.GetComponent<Transform>().position;
 
-        rotateSpeed = rotateSpeed * (1/Time.deltaTime);
+        rotateSpeed = rotateSpeed * 80.0f;
         
         //Cam = GameObject.Find("Main Camera").GetComponent<Transform>();
 	}

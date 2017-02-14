@@ -57,6 +57,7 @@ public class NPC_Follow : MonoBehaviour {
 	//ANother Noah Squeeze
 	public void AssignPlayer(GameObject p){
         this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
         TheDeath.NPCIsDead = false;
 		Disabled = false;
         prb = p;
@@ -91,7 +92,8 @@ public class NPC_Follow : MonoBehaviour {
 
 				//if player is being watched and gets too close...
 				if (distance <= atkDistance) {
-					rb.AddForce (rb.transform.forward * atkForce * Time.deltaTime);
+                    //rb.AddForce (rb.transform.forward * atkForce * Time.deltaTime);
+                    rb.velocity = rb.transform.forward * atkForce * Time.deltaTime;
 				}
 				//Debug.Log(atkForce);
 				if (rb.velocity.magnitude > 1.0f) {
@@ -112,12 +114,13 @@ public class NPC_Follow : MonoBehaviour {
 			}
 
 			if (ColIn.AmIHitting == true) {
+                Debug.Log("I am hitting");
 				StartCoroutine (WaitingForNextAttack (2.0f));
 			}
 
-			//Debug.Log(ColIn.IsHitting());
-			//Debug.Log(LedgeDist);
-
+            //Debug.Log(ColIn.IsHitting());
+            //Debug.Log(LedgeDist);
+           // Debug.Log(InHeightRange);
 			if (LedgeDist >= 2.15f && LedgeDist <= 2.7f) {//(LedgeDist >= 1.95f && LedgeDist <= 2.05f)<-- FOR ORIGINAL CUBE
 				InHeightRange = true;
 			} else {
