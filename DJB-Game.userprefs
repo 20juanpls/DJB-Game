@@ -1,9 +1,8 @@
-﻿<Properties StartupItem="DJB-Game.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MovingPlataform\MovingPlataform.cs">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Canvas_Scripts/HeartContainer_Script.cs">
     <Files>
-      <File FileName="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MovingPlataform\MovingPlataform.cs" Line="78" Column="1" />
+      <File FileName="Assets/Scripts/Canvas_Scripts/HeartContainer_Script.cs" Line="3" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
