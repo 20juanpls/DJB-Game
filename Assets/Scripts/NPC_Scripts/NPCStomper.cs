@@ -88,6 +88,7 @@ public class NPCStomper : MonoBehaviour {
             CurrentTimeOnAir = OrigTimeOnAir;
         }
 
+        //Debug.Log(touching);
         if (touching == true){
             Recover = true;
             CanFall = false;
@@ -97,6 +98,7 @@ public class NPCStomper : MonoBehaviour {
         {
             ThisStompRb.velocity = Vector3.zero;
             CurrentTimeOnGround -= Time.deltaTime;
+            touching = false;
             if (CurrentTimeOnGround <= 0.0f)
             {
                 //ThisStompRb.position = Vector3.MoveTowards(ThisStompRb.position, OrigStompPos, RecoverySpeed *Time.deltaTime);
@@ -123,10 +125,10 @@ public class NPCStomper : MonoBehaviour {
         }
     }
 
-    void OnCollisionExit(Collision collision){
+    /*void OnCollisionExit(Collision collision){
         if (collision.gameObject.name != "Player")
         {
             touching = false;
         }
-    }
+    }*/
 }

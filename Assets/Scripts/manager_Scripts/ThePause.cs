@@ -52,6 +52,10 @@ public class ThePause : MonoBehaviour {
             PauseCanvas.SetActive(false);
         }
 
+        if (ThePlayer.GetComponent<PlayerHealth>().IsDead == true) {
+            ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
+        }
+
 
        
     }

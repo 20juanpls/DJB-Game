@@ -108,7 +108,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //Debug.Log(isGrounded);
 
             //PlayerRb.velocity = vel;
-            if (isGrounded == true)
+            if (isGrounded/*touching*/ == true)
             {
                 airTime = 0.0f;
 
@@ -287,14 +287,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
 			if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill" || hit.transform.tag == "StompNPC"/*|| hit.transform.tag == "NPC_charge"*/)
             {
-                floorDist = hit.distance;
+                    floorDist = hit.distance;
                 surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
                 if (hit.rigidbody && isGrounded == true)
                     BottomPlatVel = hit.rigidbody.velocity;
                 else
                     BottomPlatVel = Vector3.zero;
 
-                if (hit.transform.tag != "Untagged")
+                if (hit.transform.tag != "Untagged" && hit.transform.tag != "StompNPC")
                 {
                     GroundCannotKill = false;
                 }
@@ -333,7 +333,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     void IsGrounded() {
         //Debug.Log(floorDist);
-        if (floorDist <= AcceptedFloorDist)
+        if (floorDist <= AcceptedFloorDist && GroundCannotKill != false)
         {
             isGrounded = true;
         }
@@ -368,4 +368,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 			touching = false;
 		}	
 	}
+
+    //ThisIs a test
+    //PLEASE CONSIDER THE POTENTIAL HERE!!!!!!
+    /*private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject)
+        {
+            touching = true;
+            Debug.Log(collision.gameObject.transform.tag);
+        }
+        else {
+            touching = false;
+        }
+    }*/
+    
 }
