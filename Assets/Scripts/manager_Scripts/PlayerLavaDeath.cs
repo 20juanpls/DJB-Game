@@ -92,6 +92,9 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	void assignButton(){
 		Button b = loseScreen.transform.GetChild (0).transform.GetChild (1).GetComponent<Button> ();
+		if (b == null) {
+			Debug.Log ("ERR");
+		}
         Button reStartHard = gameOverScreen.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>();//GameObject.Find("RestartFromBeginning").GetComponent<Button>();
         Button BackToMenu = gameOverScreen.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();//GameObject.Find("BackToMenu").GetComponent<Button>();
 
