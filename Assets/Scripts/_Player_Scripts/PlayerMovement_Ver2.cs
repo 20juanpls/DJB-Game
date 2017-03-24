@@ -108,7 +108,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //Debug.Log(isGrounded);
 
             //PlayerRb.velocity = vel;
-            if (isGrounded == true)
+            if (isGrounded/*touching*/ == true)
             {
                 airTime = 0.0f;
 
@@ -368,4 +368,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 			touching = false;
 		}	
 	}
+
+    //ThisIs a test
+    //PLEASE CONSIDER THE POTENTIAL HERE!!!!!!
+    /*private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject)
+        {
+            touching = true;
+            Debug.Log(collision.gameObject.transform.tag);
+        }
+        else {
+            touching = false;
+        }
+    }*/
+    
 }

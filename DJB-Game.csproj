@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
     <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
     <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
+    <Compile Include="Assets\Scripts\CollisionTestScript.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
