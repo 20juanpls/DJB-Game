@@ -6,21 +6,23 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     Transform Camera_Rot;
     PlayerKnockback KnockBack;
 
-    private float HorizLook, VertLook, /*floorDist,*/ ActualSpeed, UpHillValue, currentRotationSpeed;
+    private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
     public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill;
 
-    private bool isMove, lastYSpeed, touching;
-	public bool canJump;
-    public bool hasJumped, isGrounded;
+    private bool isMove;
+	public bool canJump, CantClimb, Sliding, Climbing;
+    public bool hasJumped, isGrounded/*Do not erase yet...*/, IsGround_2;
 
     private Vector3 moveDirection = Vector3.zero;
-    private Vector3 lookDirection = Vector3.zero;
+    private Vector3 lookDirection = Vector3.zero, HitWallVector;
 
-    private Vector3 rotatedDirection, FinalDirection, rtY, TmD, ForwardRotatedDirection, fallLenght, BottomPlatVel;
+    private Vector3 rotatedDirection, FinalDirection, /*UseThis*/TheMovingPlaneVect, rtY, fallLenght, BottomPlatVel;
 	public Vector3 FinalVel,VelRelativeToPlay, ExForceVelocity, CurrentOldVel;
 
-    private Quaternion _lookRotation, surfaceAngle;
+    private Quaternion _lookRotation;
+
+    public Quaternion surfaceAngle, processedAngle;
 
 
     public float rotationSpeed = 20.0f;
@@ -108,7 +110,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //Debug.Log(isGrounded);
 
             //PlayerRb.velocity = vel;
-            if (isGrounded/*touching*/ == true)
+            if (/*isGrounded*/IsGround_2 == true)
             {
                 airTime = 0.0f;
 
@@ -149,30 +151,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         float cameraRot = Camera_Rot.rotation.eulerAngles.y;
         //Debug.Log (surfaceAngle.eulerAngles);
 
-        float EulerX = surfaceAngle.eulerAngles.x;
-        float EulerZ = surfaceAngle.eulerAngles.z;
+        processedAngle = Quaternion.Inverse(surfaceAngle);//Quaternion.Euler(EulerX,180, EulerZ);
 
-        Quaternion qx = Quaternion.AngleAxis(EulerX, Vector3.right);
-        Quaternion qz = Quaternion.AngleAxis(EulerZ, Vector3.forward);
         Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
-        Quaternion q = qx * qz * qy;
 
+        //test
+        Debug.DrawRay(PlayerRb.position, processedAngle * _lookRotation * Vector3.forward*moveDirection.magnitude, Color.red);
+
+        TheMovingPlaneVect = processedAngle * _lookRotation * Vector3.forward * moveDirection.magnitude;
         //Added this so that the player stops moving with the camera if player doesn't give input
         if (isMove == false)
         {
             rtY = qy * lookDirection;
         }
-
-        TmD = q * moveDirection;
-
-        // adds uphill/downhill only if on ground
-        if (isGrounded == true)
-            {
-                UpHillValue = TmD.y;
-            }
-            else {
-                UpHillValue = 0.0f;
-            }
 
         if (rtY.magnitude != 0.0f)
         {
@@ -188,55 +179,50 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
 
         PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, _lookRotation, Time.deltaTime * currentRotationSpeed);
-        // Check this
-        //
 
-        //ForwardRotatedDirection = _lookRotation * Vector3.forward * 2;
+
     }
 
     void ApplyingDirection()
     {
 		Vector3 vel = PlayerRb.velocity;
 
-        //This Helps with uphill and downhill travel
-                float TotalUphillValue;
-                if (FinalDirection.y < 0.0f)
-                {
-                    TotalUphillValue = UpHillValue * ActualSpeed * 1.3f;
-                }
-                else {
-                    TotalUphillValue = UpHillValue * ActualSpeed * 1.05f;
-                }
-        //This Helps with uphill and downhill travel
+		Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
+        FinalDirection = /* _lookRotation */ finalDirection * ActualSpeed;
 
-		Vector3 finalDirection = new Vector3(rotatedDirection.x, TotalUphillValue+fallLenght.y, rotatedDirection.z);
-		FinalDirection = _lookRotation * finalDirection;
+        if (/*(IsGround_2 == true && floorDist > 5.0f && Climbing == false)||*/ CantClimb == true) {
+            //Debug.Log("considerfalling");
+            IsGround_2 = false;
+            FinalDirection = Vector3.zero;
+            //Debug.Log(AngleHitWall);
+            //Debug.Log(_lookRotation.y*Mathf.Rad2Deg);
+            Vector3 TPlayRot = _lookRotation * Vector3.forward;
+            Vector3 TWallVect = new Vector3(HitWallVector.x, 0.0f, HitWallVector.z);
 
+            float AngleDiff_T = Quaternion.FromToRotation(TWallVect, TPlayRot).eulerAngles.y;
 
+            Debug.DrawRay(PlayerRb.position, _lookRotation*Vector3.forward*10.0f, Color.blue);
+            Debug.DrawRay(PlayerRb.position, new Vector3(HitWallVector.x,0.0f,HitWallVector.z) * 10.0f, Color.red);
+            //Debug.Log(AngleDiff_T);
+
+            if (!(AngleDiff_T < 45 || AngleDiff_T > 315)) {
+                //Debug.Log("Let Go ... ;(");
+                FinalDirection = finalDirection * ActualSpeed;
+            }
+        }
 
 		//DrawRAY!!!!!!
-       //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+        //Debug.DrawRay(PlayerRb.position, FinalDirection, Color.green);
+        ///Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.blue);
 
         if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f) {
             airTime = 0.0f;
             initialAirSpeed = 0.0f;
         }
 
-        vel = new Vector3(FinalDirection.x * ActualSpeed, FinalDirection.y , FinalDirection.z * ActualSpeed);
+        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y,FinalDirection.z);
 
-        if (touching == true || forwardDist <= 1.0f)
-        {
-            if (isGrounded == false && DontMove == false)
-            {
-                //Debug.Log ("WallKick?");
-                vel = new Vector3(0.0f, FinalDirection.y, 0.0f);
-                if (forwardDist >= 1.2f)
-                {
-                    vel = new Vector3(FinalDirection.x * ActualSpeed, FinalDirection.y, FinalDirection.z * ActualSpeed);
-                }
-
-            }
-        }
+        
 
         //ForMechanim
         VelRelativeToPlay = vel;
@@ -277,8 +263,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void FloorMeasure()
     {
         RaycastHit hit;
-        RaycastHit hit_2;
-        RaycastHit hit_3;
 
         //Debug.DrawRay(new Vector3 (PlayerRb.position.x, PlayerRb.position.y-1.0f,PlayerRb.position.z), _lookRotation * Vector3.forward*10.0f, Color.red);
         //Debug.DrawRay(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward * 10.0f, Color.yellow);
@@ -288,12 +272,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 			if (hit.transform.tag == "Untagged" || hit.transform.tag == "Kill" || hit.transform.tag == "StompNPC"/*|| hit.transform.tag == "NPC_charge"*/)
             {
                     floorDist = hit.distance;
-                surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
-                if (hit.rigidbody && isGrounded == true)
+                //surfaceAngle = Quaternion.FromToRotation(hit.normal, new Vector3(0.0f, -1.0f, 0.0f));
+                /*if (hit.rigidbody && isGrounded == true)
                     BottomPlatVel = hit.rigidbody.velocity;
                 else
                     BottomPlatVel = Vector3.zero;
-
+                */
                 if (hit.transform.tag != "Untagged" && hit.transform.tag != "StompNPC")
                 {
                     GroundCannotKill = false;
@@ -302,33 +286,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                     GroundCannotKill = true;
                 }
             }
+        }
 
-        }
-        if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y - 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_2)
-            && Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_3))
-        {
-            //Debug.Log(hit_2.transform.tag);
-            if (hit_2.transform.tag == "Untagged" || hit_3.transform.tag == "Untagged"|| hit_2.transform.tag == "StompNPC"|| hit_3.transform.tag == "StompNPC")
-            {
-                if (hit_2.distance < hit_3.distance)
-                {
-                    forwardDist = hit_2.distance;
-                }
-                else if (hit_3.distance < hit_2.distance)
-                {
-                    forwardDist = hit_3.distance;
-                }
-                else
-                {
-                    forwardDist = hit_2.distance;
-                }
-            }
-        }
-        /*else
-        if (Physics.Raycast(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward, out hit_3))  {
-            forwardDist = hit_3.distance;
-        }*/
-        //Debug.Log(forwardDist);
     }
 
     void IsGrounded() {
@@ -358,29 +317,85 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		//Debug.Log (collision.relativeVelocity);
-		if (collision.gameObject) {
-			touching = true;
-		}	
+		/*if (collision.gameObject) {
+		}	*/
 	}
 
-	void OnCollisionExit(Collision collision){
-		if (collision.gameObject) {
-			touching = false;
-		}	
-	}
 
     //ThisIs a test
     //PLEASE CONSIDER THE POTENTIAL HERE!!!!!!
-    /*private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject)
+        //Debug.Log("hello?");
+        /*if (collision.gameObject)
         {
             touching = true;
             Debug.Log(collision.gameObject.transform.tag);
         }
         else {
             touching = false;
+        }*/
+        //Debug.Log(collision.contacts.Length);
+
+        
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            string Other_Tag = contact.otherCollider.gameObject.transform.tag;
+            //Debug.DrawRay(contact.point, contact.normal * 10, Color.white);
+            if (Other_Tag == "wall")
+            {
+                //Debug.Log("We Need to build a wall");
+                CantClimb = true;
+                HitWallVector = -contact.normal;
+
+            }
+            else {
+                CantClimb = false;
+            }
+
+            if (Other_Tag == "slide")
+            {
+                Sliding = true;
+            }
+            else {
+                Sliding = false;
+            }
+
+            if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb")
+            {
+                IsGround_2 = true;
+
+                if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
+                {
+                    BottomPlatVel = contact.otherCollider.gameObject.GetComponent<Rigidbody>().velocity;
+                }
+                else {
+                    BottomPlatVel = Vector3.zero;
+                }
+
+                if (Other_Tag == "climb")
+                {
+                    Climbing = true;
+                }
+                else
+                {
+                    Climbing = false;
+                }
+            }
+
+            if (Other_Tag != "wall")
+                surfaceAngle = Quaternion.FromToRotation(contact.normal, new Vector3(0.0f, 1.0f, 0.0f));
         }
-    }*/
-    
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        /*if (collision.gameObject)
+        {
+        }*/
+
+            IsGround_2 = false;
+            surfaceAngle = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+    }
+
 }
