@@ -106,23 +106,23 @@ public class TestCameraMovement : MonoBehaviour
 
     void CamXRotSpeed(){
 		//Clockwise
-		if (Input.GetKey(KeyCode.I) || Input.GetAxis("XB1_RightLeft") > joystickDeadzone)
+		if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("XB1_RightLeft") > joystickDeadzone)
         {
             CurrentCamXSpeed += CamXSpeed;
         }
 		//counterclockwise
-		else if (Input.GetKey(KeyCode.O) || Input.GetAxis("XB1_RightLeft") < -joystickDeadzone)
+		else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("XB1_RightLeft") < -joystickDeadzone)
         {
             CurrentCamXSpeed -= CamXSpeed;
         }
     }
 
     void CamYRotSpeed() {
-		if (Input.GetKey(KeyCode.U) || Input.GetAxis("XB1_UpDown") > joystickDeadzone)
+		if (Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("XB1_UpDown") > joystickDeadzone)
         {
             CurrentCamYSpeed += CamYSpeed;
         }
-		else if (Input.GetKey(KeyCode.P) || Input.GetAxis("XB1_UpDown") < -joystickDeadzone)
+		else if (Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("XB1_UpDown") < -joystickDeadzone)
         {
             CurrentCamYSpeed -= CamYSpeed;
         }
