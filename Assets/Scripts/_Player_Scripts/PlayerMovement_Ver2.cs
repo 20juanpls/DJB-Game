@@ -10,7 +10,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill;
 
-    private bool isMove;
+    private bool isMove, JumpBack;
 	public bool canJump, CantClimb, Sliding, Climbing;
     public bool hasJumped, isGrounded/*Do not erase yet...*/, IsGround_2;
 
@@ -178,15 +178,18 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             currentRotationSpeed = rotationSpeed;
         }
 
+        Quaternion PlayRot = _lookRotation;
+
         if (Climbing == true)
         {
-            //PlayerRb.rotation = Quaternion.LookRotation(HitWallVector);
-            Debug.DrawRay(PlayerRb.position, HitWallVector * 10.0f, Color.red);
+            PlayRot = Quaternion.LookRotation(new Vector3(HitWallVector.x,0.0f,HitWallVector.z));
+           // currentRotationSpeed = rotationSpeed / 3.0f;
         }
-        else
-        {
-            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, _lookRotation, Time.deltaTime * currentRotationSpeed);
-        }
+        /*else {
+            currentRotationSpeed = rotationSpeed;
+        }*/
+
+        PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * currentRotationSpeed);
 
 
     }
@@ -195,8 +198,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     {
         Vector3 vel = PlayerRb.velocity;
 
+        if (Climbing == true)
+        {
+            //Debug.Log("Zulda climb");
+            ActualSpeed = MoveSpeed / 2.0f;
+        }
+        else
+        {
+            ActualSpeed = MoveSpeed;
+        }
+
         Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
         FinalDirection = /* _lookRotation */ finalDirection * ActualSpeed;
+
 
         if (/*(IsGround_2 == true && floorDist > 5.0f && Climbing == false)||*/ CantClimb == true) {
             //Debug.Log("considerfalling");
@@ -207,16 +221,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
             float AngleDiff_T = Quaternion.FromToRotation(TWallVect, TPlayRot).eulerAngles.y;
             //Debug.DrawRay(PlayerRb.position, _lookRotation * Vector3.forward * 10.0f, Color.blue);
-            if (!(AngleDiff_T < 45 || AngleDiff_T > 315)||((HitWallVector.y > HitWallVector.x) && (HitWallVector.y > HitWallVector.z))) {
+            if (!(AngleDiff_T < 45 || AngleDiff_T > 315) || ((HitWallVector.y > HitWallVector.x) && (HitWallVector.y > HitWallVector.z))) {
                 //Debug.Log("Let Go ... ;(");
                 FinalDirection = finalDirection * ActualSpeed;
             }
-        }
-
-        if (Climbing == true)
-        {
-            Debug.Log("Zulda climb");
-          
         }
 
         //DrawRAY!!!!!!
@@ -228,9 +236,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             initialAirSpeed = 0.0f;
         }
 
-        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y,FinalDirection.z);
+        //Decides to jump bek or nah
+        if (JumpBack == true)
+        {
+            Debug.Log("Begin - BEKWARD JEMP sequence!!");
+        }
 
-        
+        //pre-vel
+        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y, FinalDirection.z);
 
         //ForMechanim
         VelRelativeToPlay = vel;
@@ -253,6 +266,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && canJump == true)||KnockBack.jumpedOn == true)
             {
                 initialAirSpeed = JumpSpeed;
+                if (Climbing == true)
+                {
+                    JumpBack = true;
+                }
             }
 
 			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && isGrounded == false && CurrentMidAirJumpCount > 0)
@@ -261,10 +278,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 airTime = 0.0f;
                 CurrentMidAirJumpCount--;
             }
+
+            //if (hasJumped == true)
         }
         if (airTime > 0.0f)
         {
             hasJumped = true;
+            JumpBack = false;
         }
     }
 
@@ -294,7 +314,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 }
             }
         }
-
     }
 
     void IsGrounded() {
@@ -403,6 +422,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }*/
 
             IsGround_2 = false;
+            Climbing = false;
             surfaceAngle = Quaternion.Euler(0.0f, 0.0f, 0.0f);
     }
 
