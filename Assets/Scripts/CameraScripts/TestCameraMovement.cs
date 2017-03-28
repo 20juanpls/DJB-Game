@@ -122,7 +122,7 @@ public class TestCameraMovement : MonoBehaviour
         {
             CurrentCamYSpeed += CamYSpeed;
         }
-		else if (Input.GetKey(KeyCode.P) || Input.GetAxis("XB1_UpDown") < -joystickDeadzone)
+		else if (Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("XB1_UpDown") < -joystickDeadzone)
         {
             CurrentCamYSpeed -= CamYSpeed;
         }
@@ -132,7 +132,7 @@ public class TestCameraMovement : MonoBehaviour
     {	
         
         //ZoomIn..
-		if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("XB1_Zoom") > 0.0f)
+		if (Input.GetKeyDown(KeyCode.J) || Input.GetAxis("XB1_Zoom") > 0.0f)
         {
             if (zoomLock)
             {
