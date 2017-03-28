@@ -1,13 +1,21 @@
 while (1)
 {	
+<<<<<<< HEAD
 	if (`filetest -r "/Users/s116971/Desktop/DJB-Game/Temp/CommandPipe"`)
+=======
+	if (`filetest -r "/Users/s430626/Desktop/DJB-Game/Temp/CommandPipe"`)
+>>>>>>> 55963d59c60f371766d53f4d2cffbf6071df7778
 	{
 		$exportNormals = 0;
 		$exportTangents = 0;
 		$bakeCommand = "";
 	
 		// Parse settings
+<<<<<<< HEAD
 		$waitpipe = `fopen "/Users/s116971/Desktop/DJB-Game/Temp/CommandPipe" "r"`;
+=======
+		$waitpipe = `fopen "/Users/s430626/Desktop/DJB-Game/Temp/CommandPipe" "r"`;
+>>>>>>> 55963d59c60f371766d53f4d2cffbf6071df7778
 		$filename = `fgetline $waitpipe`;
 		$fbxFilename = `fgetline $waitpipe`;
 		
@@ -144,9 +152,15 @@ while (1)
 			else
 				print "Could not open Maya file.";
 
+<<<<<<< HEAD
 			sysFile -delete "/Users/s116971/Desktop/DJB-Game/Temp/CommandPipe";
 
 			$donepipe = `fopen "/Users/s116971/Desktop/DJB-Game/Temp/SyncPipe" "w"`;
+=======
+			sysFile -delete "/Users/s430626/Desktop/DJB-Game/Temp/CommandPipe";
+
+			$donepipe = `fopen "/Users/s430626/Desktop/DJB-Game/Temp/SyncPipe" "w"`;
+>>>>>>> 55963d59c60f371766d53f4d2cffbf6071df7778
 			fwrite $donepipe "Done";
 			fclose $donepipe;
 			print "Finished maya loading and fbx conversion \n";
