@@ -178,40 +178,48 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             currentRotationSpeed = rotationSpeed;
         }
 
-        PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, _lookRotation, Time.deltaTime * currentRotationSpeed);
+        if (Climbing == true)
+        {
+            //PlayerRb.rotation = Quaternion.LookRotation(HitWallVector);
+            Debug.DrawRay(PlayerRb.position, HitWallVector * 10.0f, Color.red);
+        }
+        else
+        {
+            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, _lookRotation, Time.deltaTime * currentRotationSpeed);
+        }
 
 
     }
 
     void ApplyingDirection()
     {
-		Vector3 vel = PlayerRb.velocity;
+        Vector3 vel = PlayerRb.velocity;
 
-		Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
+        Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
         FinalDirection = /* _lookRotation */ finalDirection * ActualSpeed;
 
         if (/*(IsGround_2 == true && floorDist > 5.0f && Climbing == false)||*/ CantClimb == true) {
             //Debug.Log("considerfalling");
             IsGround_2 = false;
             FinalDirection = Vector3.zero;
-            //Debug.Log(AngleHitWall);
-            //Debug.Log(_lookRotation.y*Mathf.Rad2Deg);
             Vector3 TPlayRot = _lookRotation * Vector3.forward;
             Vector3 TWallVect = new Vector3(HitWallVector.x, 0.0f, HitWallVector.z);
 
             float AngleDiff_T = Quaternion.FromToRotation(TWallVect, TPlayRot).eulerAngles.y;
-
-            Debug.DrawRay(PlayerRb.position, _lookRotation*Vector3.forward*10.0f, Color.blue);
-            Debug.DrawRay(PlayerRb.position, new Vector3(HitWallVector.x,0.0f,HitWallVector.z) * 10.0f, Color.red);
-            //Debug.Log(AngleDiff_T);
-
-            if (!(AngleDiff_T < 45 || AngleDiff_T > 315)) {
+            //Debug.DrawRay(PlayerRb.position, _lookRotation * Vector3.forward * 10.0f, Color.blue);
+            if (!(AngleDiff_T < 45 || AngleDiff_T > 315)||((HitWallVector.y > HitWallVector.x) && (HitWallVector.y > HitWallVector.z))) {
                 //Debug.Log("Let Go ... ;(");
                 FinalDirection = finalDirection * ActualSpeed;
             }
         }
 
-		//DrawRAY!!!!!!
+        if (Climbing == true)
+        {
+            Debug.Log("Zulda climb");
+          
+        }
+
+        //DrawRAY!!!!!!
         //Debug.DrawRay(PlayerRb.position, FinalDirection, Color.green);
         ///Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.blue);
 
@@ -263,7 +271,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void FloorMeasure()
     {
         RaycastHit hit;
-
         //Debug.DrawRay(new Vector3 (PlayerRb.position.x, PlayerRb.position.y-1.0f,PlayerRb.position.z), _lookRotation * Vector3.forward*10.0f, Color.red);
         //Debug.DrawRay(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward * 10.0f, Color.yellow);
 
@@ -376,6 +383,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 if (Other_Tag == "climb")
                 {
                     Climbing = true;
+                    HitWallVector = -contact.normal;
                 }
                 else
                 {
