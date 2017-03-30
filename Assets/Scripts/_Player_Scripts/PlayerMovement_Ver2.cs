@@ -8,14 +8,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill;
+    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill, InstaJamp;
 
-    private bool isMove, JumpBack;
+    private bool isMove, JumpBack, JumpBackSeq;
 	public bool canJump, CantClimb, Sliding, Climbing;
     public bool hasJumped, isGrounded/*Do not erase yet...*/, IsGround_2;
 
     private Vector3 moveDirection = Vector3.zero;
-    private Vector3 lookDirection = Vector3.zero, HitWallVector;
+    private Vector3 lookDirection = Vector3.zero, HitWallVector, JumpBackVect;
 
     private Vector3 rotatedDirection, FinalDirection, /*UseThis*/TheMovingPlaneVect, rtY, fallLenght, BottomPlatVel;
 	public Vector3 FinalVel,VelRelativeToPlay, ExForceVelocity, CurrentOldVel;
@@ -35,9 +35,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float AcceptedFloorDist = 1.7f;
 
     float currentFallAccel;
-	private float forwardDist;
+	private float forwardDist, CurrJumpBTime;
 	float CurrentMidAirJumpCount;
-    public float airTime, initialAirSpeed;
+    public float airTime, initialAirSpeed, JumpBackTime;
 
     public float floorDist;
 
@@ -52,6 +52,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         ActualSpeed = MoveSpeed;
 		hasJumped = false;
 		CurrentMidAirJumpCount = InitialMidAirJumpCount;
+        CurrJumpBTime = JumpBackTime;
         _lookRotation = PlayerRb.transform.rotation;
     }
 
@@ -114,7 +115,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             {
                 airTime = 0.0f;
 
-                if (hasJumped == true)
+                if (hasJumped == true && InstaJamp == true)
                 {
                     forKnockBack = true;
                     KnockBack.jumpedOn = false;
@@ -132,10 +133,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             {
                 airTime += Time.deltaTime;
                 canJump = false;
+                InstaJamp = true;
             }
         }
 
-        //Physics.gravity = new Vector3(0.0f, setGrav, 0.0f);
     }
 
     void ControlOrientation()
@@ -159,6 +160,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         Debug.DrawRay(PlayerRb.position, processedAngle * _lookRotation * Vector3.forward*moveDirection.magnitude, Color.red);
 
         TheMovingPlaneVect = processedAngle * _lookRotation * Vector3.forward * moveDirection.magnitude;
+        
         //Added this so that the player stops moving with the camera if player doesn't give input
         if (isMove == false)
         {
@@ -170,26 +172,29 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             _lookRotation = Quaternion.LookRotation(rtY);
         }
 
-        if (DontMove == true)
-        {
-            currentRotationSpeed = 0.0f;
-        }
-        else {
-            currentRotationSpeed = rotationSpeed;
-        }
-
         Quaternion PlayRot = _lookRotation;
 
         if (Climbing == true)
         {
             PlayRot = Quaternion.LookRotation(new Vector3(HitWallVector.x,0.0f,HitWallVector.z));
-           // currentRotationSpeed = rotationSpeed / 3.0f;
         }
-        /*else {
-            currentRotationSpeed = rotationSpeed;
-        }*/
 
-        PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * currentRotationSpeed);
+        if (KnockBack.collided == true) {
+            PlayRot = KnockBack.hitRotation;
+        }
+
+        if (DontMove == true)
+        {
+            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * rotationSpeed);
+            currentRotationSpeed = 0.0f;
+        }
+        else
+        {
+            currentRotationSpeed = rotationSpeed;
+            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * currentRotationSpeed);
+        }
+
+        //Debug.DrawRay(PlayerRb.position, PlayRot * Vector3.forward * 2.0f, Color.yellow);
 
 
     }
@@ -212,7 +217,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         FinalDirection = /* _lookRotation */ finalDirection * ActualSpeed;
 
 
-        if (/*(IsGround_2 == true && floorDist > 5.0f && Climbing == false)||*/ CantClimb == true) {
+        if (CantClimb == true) {
             //Debug.Log("considerfalling");
             IsGround_2 = false;
             FinalDirection = Vector3.zero;
@@ -229,17 +234,37 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         //DrawRAY!!!!!!
         //Debug.DrawRay(PlayerRb.position, FinalDirection, Color.green);
-        ///Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.blue);
-
-        if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f) {
-            airTime = 0.0f;
-            initialAirSpeed = 0.0f;
-        }
+        //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.blue);
 
         //Decides to jump bek or nah
         if (JumpBack == true)
         {
-            Debug.Log("Begin - BEKWARD JEMP sequence!!");
+            //Debug.Log("Begin - BEKWARD JEMP sequence!!");
+            Debug.DrawRay(PlayerRb.position, -HitWallVector, Color.green);
+            JumpBackVect = new Vector3(-HitWallVector.x, 0.0f, -HitWallVector.z);
+            JumpBackSeq = true;
+        }
+
+        if (JumpBackSeq == true)
+        {
+            CurrJumpBTime -= Time.deltaTime;
+            ExForceVelocity = CurrJumpBTime*JumpBackVect * 15.0f;
+
+            if (CurrJumpBTime <= 0.0f)
+            {
+                CurrJumpBTime = JumpBackTime;
+                JumpBackSeq = false;
+                ExForceVelocity = Vector3.zero;
+            }
+        }
+
+        //Important: this is so the momentum doesn't gather up when close to ledges...
+        if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f)
+        {
+            airTime = 0.0f;
+            initialAirSpeed = 0.0f;
+            //Debug.Log("ImStuck!!!"); potentially create a function where the player is slightly pushed back away
+            //from the edge, just make sure it doesn't do that on walls...
         }
 
         //pre-vel
@@ -254,6 +279,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (DontMove == true)
         {
             FinalVel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed * 1.05f) + fallLenght.y, KnockBack.FinalKnockBack.z);
+            Debug.DrawRay(PlayerRb.position, FinalVel, Color.blue);
         }
 
         PlayerRb.velocity = FinalVel;
