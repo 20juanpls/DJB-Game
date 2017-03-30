@@ -212,10 +212,12 @@ public class PlayerLavaDeath : MonoBehaviour {
 	void ResetCollectables(){
 		for (int x = 0; x < coins.Length; x++){
 			coins[x].GetComponent<MeshRenderer>().enabled = true;
-		}
+            coins[x].GetComponent<Collider>().enabled = true;
+        }
 		for (int y = 0; y < hearts.Length; y++){
 			hearts[y].GetComponent<MeshRenderer>().enabled = true;
-		}
+            hearts[y].GetComponent<Collider>().enabled = true;
+        }
 	}
 
 

@@ -32,11 +32,13 @@ public class PlayerScore : MonoBehaviour {
 		if (other.tag == "Coin" && other.gameObject.GetComponent<MeshRenderer>().enabled == true) {
 			ScoreUpdate ();
 			other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            other.gameObject.GetComponent<Collider>().enabled = false;
 		}
 
         if (other.tag == "HeartHP" && other.gameObject.GetComponent<MeshRenderer>().enabled == true)
         {
 			other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            other.gameObject.GetComponent<Collider>().enabled = false;
         }
 
         if (other.tag == "GoalCollectable") {

@@ -19,7 +19,10 @@ public class ThePause : MonoBehaviour {
 
         PauseCanvas = GameObject.Find("PauseCanvas");
 		OptionsCanvas = GameObject.Find ("OptionsCanvas");
-		OptionsCanvas.SetActive (false);
+        if (OptionsCanvas != null)
+        {
+            OptionsCanvas.SetActive(false);
+        }
 
     }
 

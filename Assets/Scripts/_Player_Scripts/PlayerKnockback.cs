@@ -8,13 +8,15 @@ public class PlayerKnockback : MonoBehaviour {
     Transform HazardT, ForceDir;
     Rigidbody PlayerRb;
 
-    public bool collided, Inactive = false, cantTakeDamage, jumpedOn, DangerousFall, HasFallen;//, takeAwayHealth;
+    public bool collided, Inactive = false, cantTakeDamage, jumpedOn, DangerousFall, HasFallen, InstaJamp;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage;
+    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage, recovOngroundT;
     public int totalDamage;
 
     private float TimeLeft, currentKnockBackJumpForce;
     private Vector3 KnockBackOrientation, hitVector, ExForceVector;
+
+    public Quaternion hitRotation;
 
     // Use this for initialization
     void Start () {
@@ -24,6 +26,7 @@ public class PlayerKnockback : MonoBehaviour {
         collided = false;
 
         TimeLeft = RecoverTime;
+        recovOngroundT = RecoverTime * 0.4f;
     }
 
     // Update is called once per frame
@@ -77,56 +80,10 @@ public class PlayerKnockback : MonoBehaviour {
                     {
                         PlayerP.DontMove = false;
                     }
-                    //partofsqueze
-                    /*if (jumpedOn == true)
-                    {
-                        PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
-                        //Debug.Log("ayy wot?");
 
-						if (PlayerP.forKnockBack == true && PlayerP.isGrounded == true)
-                        {
-                            //Debug.Log("why tho?");
-                            PlayerP.initialAirSpeed = 0.0f;
-                            jumpedOn = false;
-                        }
-                    }
-                    else
-                    {*/
-                    //---------------
                         currentKnockBackJumpForce = KnockBackJumpForce;
-                    //----------------
-                    //}
-                    //--------------------
                 }
 
-                //Debug.Log (PlayerP.forKnockBack);
-                //Debug.Log ("de jamp:"+jumpedOn);
-                /*if (jumpedOn == true)
-                {
-					AirRecovLeft -= Time.deltaTime;
-                    PlayerP.initialAirSpeed = currentKnockBackJumpForce * 2.0f;
-					//
-                    if (PlayerP.forKnockBack == true || PlayerP.initialAirSpeed < currentKnockBackJumpForce*2.0f)
-                    {
-                        PlayerP.initialAirSpeed = 0.0f;
-                        jumpedOn = false;
-                    }
-
-					//Testing!!!
-					if (PlayerP.forKnockBack == true && PlayerP.initialAirSpeed == currentKnockBackJumpForce*2.0f && AirRecovLeft < 0.0f && PlayerP.isGrounded == true){
-						//Debug.Log ("Landing!!");
-						AirRecovLeft = AirRecovTime;
-						PlayerP.initialAirSpeed = 0.0f;
-						jumpedOn = false;
-					}
-
-					if (PlayerP.forKnockBack == true && !PlayerP.isGrounded) {
-						Debug.Log ("Jumping again!!");
-					}
-					//Testing!!!
-                }*/
-
-                //JumpingC.IsItGrounded();
             }
         }
 
@@ -138,12 +95,12 @@ public class PlayerKnockback : MonoBehaviour {
                     DangerousFall = true;
                 }
 
-                if (PlayerP.CurrentOldVel.y >= 0.0f && DangerousFall == true && PlayerP.isGrounded == false)
+                if (PlayerP.CurrentOldVel.y >= 0.0f && DangerousFall == true && PlayerP.IsGround_2 == false)
                 {
                     DangerousFall = false;
                 }
 
-            if (DangerousFall == true && PlayerP.isGrounded == true && PlayerP.GroundCannotKill == true)
+            if (DangerousFall == true && PlayerP.IsGround_2 == true && PlayerP.GroundCannotKill == true)
             {
                 totalDamage += 1;
                 DangerousFall = false;
@@ -154,11 +111,12 @@ public class PlayerKnockback : MonoBehaviour {
 
     void OnTriggerEnter(Collider other){
 
-        if (other.tag == "EpicentralHazard") {
+        if (other.tag == "EpicentralHazard"|| other.tag =="BoulderHazard") {
             collided = true;
            // takeAwayHealth = true;
             HazardT = other.GetComponent<Transform>();
-            hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
+            hitRotation = Quaternion.LookRotation(new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z));
+            hitVector = hitRotation * Vector3.forward;
             KnockBackOrientation = hitVector*-1.0f;
             if (cantTakeDamage == false)
             {
@@ -166,22 +124,25 @@ public class PlayerKnockback : MonoBehaviour {
             }
             //KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
         }
-        if (other.tag == "BoulderHazard") {
+        /*if (other.tag == "BoulderHazard") {
             collided = true;
             // takeAwayHealth = true;
             HazardT = other.GetComponent<Transform>();
-            hitVector = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
+            Vector3 tempVect = new Vector3(HazardT.transform.position.x - PlayerRb.transform.position.x, 0.0f, HazardT.transform.position.z - PlayerRb.transform.position.z);
+            hitVector = Quaternion.LookRotation(tempVect) * Vector3.forward;
             KnockBackOrientation = hitVector * -1.0f;
             if (cantTakeDamage == false)
             {
                 totalDamage += 1;
             }
-        }
+        }*/
         if (other.tag == "hazard")
         {
             collided = true;
             HazardT = other.GetComponent<Transform>();
-            KnockBackOrientation = HazardT.transform.rotation * Vector3.forward;
+            Vector3 direction = HazardT.transform.rotation * -Vector3.forward;
+            hitRotation = Quaternion.LookRotation(direction);
+            KnockBackOrientation = hitRotation * Vector3.forward*-1;
             if (cantTakeDamage == false)
             {
                 totalDamage += 1;
@@ -219,25 +180,42 @@ public class PlayerKnockback : MonoBehaviour {
     }
 
     void ForceAdder() {
-        if (PlayerP.isGrounded == true)
-        {
+        //if (PlayerP.IsGround_2 == true)
+        //{
             TimeLeft -= Time.deltaTime;
 
-            FinalKnockBack = KnockBackOrientation * TimeLeft * knockbackMultiplier;
+            FinalKnockBack = KnockBackOrientation * (TimeLeft*0.6f) * knockbackMultiplier;
             PlayerP.initialAirSpeed = currentKnockBackJumpForce;
 
-            if (PlayerP.forKnockBack == true)
+            if (PlayerP.IsGround_2 == false)
+                InstaJamp = true;
+
+
+            if (InstaJamp == true && PlayerP.IsGround_2 == true)
             {
                 currentKnockBackJumpForce = 0.0f;
+                InstaJamp = false;
+            }
+
+            if (PlayerP.IsGround_2 == true) {
+                recovOngroundT -= Time.deltaTime;
+                if (recovOngroundT <= 0.0f) {
+                    recovOngroundT = 0.4f * RecoverTime;
+                    collided = false;
+                }
             }
 
 
-            if (TimeLeft <= 0.0f)
+            if (TimeLeft <= 0.0f )
             {
-                TimeLeft = RecoverTime;
-                collided = false;
+                TimeLeft = 0.0f;
+                if (collided == false) {
+                    TimeLeft = RecoverTime;
+                }
             }
-        }
+        //}
+
+        //Debug.DrawRay(PlayerP.transform.position,new Vector3(FinalKnockBack.x, FinalKnockBack.y, FinalKnockBack.z),Color.blue);
     }
 
 
