@@ -8,7 +8,7 @@ public class BrutusMechanimInputs : MonoBehaviour
     public GameObject ThePlayer;
 	public Rigidbody PlayRb;
 	public PlayerMovement_Ver2 Player;
-
+	public int beforeStart = 0;
     public float AnimSpeed;
 
     void Start () 
@@ -25,12 +25,17 @@ public class BrutusMechanimInputs : MonoBehaviour
 
     void Update () 
     {
+		beforeStart++;
         if (Player == null || PlayRb == null) {
             Player = this.transform.GetComponentInParent<PlayerMovement_Ver2>();
             PlayRb = this.transform.GetComponentInParent<Rigidbody>();
             thisAnimator.speed = AnimSpeed;
         }
-		RunningAnim ();
+		if (beforeStart % 6 == 0)
+		{
+			RunningAnim ();
+			beforeStart--;
+		}
     }
 	void RunningAnim(){
 

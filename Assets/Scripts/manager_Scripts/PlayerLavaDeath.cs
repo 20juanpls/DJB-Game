@@ -23,7 +23,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
     public bool PlayerWinState;
 
-
+	public PlayerMovement_Ver2 playerMovementVer2;
 
 	public int Deaths;
 
@@ -197,6 +197,8 @@ public class PlayerLavaDeath : MonoBehaviour {
         //Debug.Log ("Old player destroyed");
         //assignes to main camera script the new player, _p
         //Debug.Log ("Camera re-assigned");
+
+		playerMovementVer2.IsGround_2 = false;
 
         //for each player, assign new player
 
