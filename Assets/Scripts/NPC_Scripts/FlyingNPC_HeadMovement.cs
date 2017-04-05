@@ -8,25 +8,21 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
     Transform Home;
     Transform Target;
     Transform Propeller;
-    CollisionIndicator CollHitBox;
 
     public float HLookRotSpeed, IdleRotSpeed, HStunnedRotSpeed, HomeDistance = 5.0f, AttakSpeed, IdleSpeed, CoolDownTime;
-    public bool lookInactive, Attack, IsCoolTime, CanLookAtPlayer, AmStuck, StartTurning1, StartTurning2;
-    Vector3 FinalVel, FinalHeight, AntiWall;
+    public bool lookInactive, Attack, CurrentCoolTime;
+    Vector3 FinalVel;
 
     Quaternion HLook, VLook, FHorizLook, FVertLook;//, FinalLookRot;
 
-    float CurrentRotationSpeed, PlayDistFromHome, NPCFDistFromHome, CurrentSpeed, groundDist, PropellerSpeed, CurrentCooldownT;
-    float DownRayPosY;
-    // Use this for initialization
+    float CurrentRotationSpeed, PlayDistFromHome, NPCFDistFromHome, CurrentSpeed, groundDist, PropellerSpeed;
+
+	// Use this for initialization
 	void Start () {
         FlyNPC_Head = this.gameObject.GetComponent<Rigidbody>();
         PlayerT = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
         Home = this.transform.parent.gameObject.GetComponent<Transform>();
         Propeller = this.transform.GetChild(0).gameObject.GetComponent<Transform>();
-        CollHitBox = Propeller.GetComponent<CollisionIndicator>();
-
-        CurrentCooldownT = CoolDownTime;
 
     }
 	
@@ -34,14 +30,11 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
 	void Update () {
         HomeDistanceMeasurer();
         FloorMeasure();
-        IsThereCoolDown();
 
-        //Debug.Log(IsCoolTime);
-
-        if (PlayDistFromHome <= HomeDistance && CanLookAtPlayer == true)
+        if (PlayDistFromHome <= HomeDistance)
             Attack = true;
 
-        if (((NPCFDistFromHome >= HomeDistance)&&(PlayDistFromHome>= HomeDistance)) || IsCoolTime == true || CanLookAtPlayer == false)
+        if (NPCFDistFromHome >= HomeDistance)
             Attack = false;
 
         if (Attack == true)
@@ -59,9 +52,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
         PropellerSpinner();
         LookingRotation();
         VelocitySetter();
-
         FlyNPC_Head.velocity = FinalVel;
-        FlyNPC_Head.position = new Vector3(FlyNPC_Head.position.x, FinalHeight.y, FlyNPC_Head.position.z);
     }
 
     void LookingRotation() {
@@ -73,36 +64,6 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
             }
             //Debug.Log(TarGate.magnitude);
             HLook = Quaternion.LookRotation(TarGate);
-            
-            //EVERYTHING BELOW IS BOUND TO BE USED!!!!
-            /*
-            if (AmStuck == true) {
-                //HLook = Quaternion.LookRotation(new Vector3(AntiWall.x,0.0f, AntiWall.y));
-                StartTurning1 = true;
-                IsCoolTime = true;
-                Debug.Log("StartTime");
-            }
-            if (AmStuck == false && FlyNPC_Head.velocity.magnitude <= 0.1f) {
-                //HLook = Quaternion.LookRotation(-TarGate);
-                StartTurning2 = true;
-                IsCoolTime = true;
-                Debug.Log("StartTime");
-            }
-
-            if (StartTurning1) {
-                if (!IsCoolTime) {
-                    Debug.Log("EndTime");
-                }
-            }
-            if (StartTurning2) {
-                if (!IsCoolTime)
-                {
-                    Debug.Log("EndTime");
-                }
-            }*/
-
-
-            Debug.DrawRay(FlyNPC_Head.position, HLook * Vector3.forward * 5.0f, Color.blue);
 
             //VLook = Quaternion.LookRotation(Target.position - FlyNPC_Head.position);
 
@@ -115,26 +76,28 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
 
     }
     void VelocitySetter() {
-        float TargetPosY;
-        float DecentSpeed;
-
+        Vector3 DecendingSpeed;
         if (Target == PlayerT)
         {
-            DecentSpeed = 2.0f;
-            TargetPosY = PlayerT.position.y + 1.0f;
+            //Debug.Log(groundDist);
+            DecendingSpeed = new Vector3(0.0f, -4.0f, 0.0f);
+            if (groundDist <= 2.0f)
+            {
+                DecendingSpeed = Vector3.zero;
+            }
         }
         else {
-            DecentSpeed = 1.0f;
-            TargetPosY = Target.position.y;
+            if (FlyNPC_Head.position.y <= Home.position.y)
+            {
+                DecendingSpeed = new Vector3(0.0f, 2.0f, 0.0f);
+            }
+            else
+            {
+                DecendingSpeed = Vector3.zero;
+            }
         }
+        FinalVel = (FlyNPC_Head.rotation * Vector3.forward * CurrentSpeed)+(DecendingSpeed);
 
-        if (groundDist <= 2.0f) {
-            TargetPosY = -DownRayPosY + 2.0f;
-            //Debug.Log("DragRacin!: " + DownRayPosY);
-        }
-
-        FinalVel = (FlyNPC_Head.rotation * Vector3.forward * CurrentSpeed);
-        FinalHeight = Vector3.Lerp(new Vector3(0.0f, FlyNPC_Head.position.y, 0.0f), new Vector3(0.0f, TargetPosY, 0.0f), DecentSpeed * Time.deltaTime);
         //Debug.Log(FinalVel);
     }
 
@@ -146,42 +109,12 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
 
     void FloorMeasure()
     {
-        RaycastHit PlayHit;
-        RaycastHit Homehit;
         RaycastHit hit;
-        if (Physics.Raycast(FlyNPC_Head.position, PlayerT.position - FlyNPC_Head.position, out PlayHit))
-        {
-            //Debug.Log(PlayHit.transform.tag);
-            //Debug.DrawRay(FlyNPC_Head.position, PlayerT.position - FlyNPC_Head.position, Color.red);
-            if (PlayHit.transform.tag != "PlayerMesh")
-            {
-                //Debug.Log("is this happening?");
-                CanLookAtPlayer = false;
-            }
-            else {
-                CanLookAtPlayer = true;
-            }
-        }
-        if (Physics.Raycast(FlyNPC_Head.position, Home.position - FlyNPC_Head.position, out Homehit)) {
-            if (Homehit.transform.tag != "PlayerMesh" && Attack == false) {
-                if (Homehit.distance <= 3.0f)
-                {
-                    Debug.Log("AmStuck");
-                    AmStuck = true;
-                    AntiWall = Homehit.normal;
-                }
-                else {
-                    AmStuck = false;
-                }
-            }
-
-        }
         if (Physics.Raycast(FlyNPC_Head.position, new Vector3(0.0f, -1.0f, 0.0f), out hit))
         {
             if (hit.transform.tag != "PlayerMesh" )
             {
                 groundDist = hit.distance;
-                DownRayPosY = hit.transform.position.y;
             }
         }
     }
@@ -196,25 +129,6 @@ public class FlyingNPC_HeadMovement : MonoBehaviour {
         }
 
         Propeller.RotateAround(Propeller.position, Propeller.right, PropellerSpeed * Time.deltaTime);
-    }
 
-    void IsThereCoolDown() {
-        if (CollHitBox.HitsPlayer == true)
-        {
-            IsCoolTime = true;
-        }
-
-        //Debug.Log(CurrentCooldownT);
-        if (IsCoolTime == true)
-        {
-            CurrentCooldownT -= Time.deltaTime;
-            if (CurrentCooldownT <= 0.0f)
-            {
-                IsCoolTime = false;
-            }
-        }
-        else {
-            CurrentCooldownT = CoolDownTime;
-        }
     }
 }

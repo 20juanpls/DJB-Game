@@ -43,6 +43,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     public GameObject theRunningGuy;
 
+	public bool jumpOnEnemy = false;
+
     void Start () {
 
         PlayerRb = this.GetComponent<Rigidbody>();
@@ -286,10 +288,24 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     }
 
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "JumpCollider")
+		{
+			initialAirSpeed = JumpSpeed;
+
+			if (Climbing == true)
+				JumpBack = true;
+
+			canJump = false;
+		}
+		
+	}
+
     void JumpNow() {
         if (DontMove == false)
         {
-            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true)||KnockBack.jumpedOn == true)
+            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && canJump == true)||KnockBack.jumpedOn == true)
             {
                 initialAirSpeed = JumpSpeed;
                 if (Climbing == true)
@@ -298,7 +314,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 }
             }
 
-			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && isGrounded == false && CurrentMidAirJumpCount > 0)
             {
                 initialAirSpeed = JumpSpeed;
                 airTime = 0.0f;
@@ -389,7 +405,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }*/
         //Debug.Log(collision.contacts.Length);
 
-
+        
         foreach (ContactPoint contact in collision.contacts)
         {
             string Other_Tag = contact.otherCollider.gameObject.transform.tag;
@@ -417,7 +433,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             {
                 IsGround_2 = true;
 
-                if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
+				if (Other_Tag == "Untagged") {
+					Climbing = false;
+					IsGround_2 = true;
+					Sliding = false;
+				}
+                else if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
                 {
                     BottomPlatVel = contact.otherCollider.gameObject.GetComponent<Rigidbody>().velocity;
                 }
@@ -430,7 +451,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                     Climbing = true;
                     HitWallVector = -contact.normal;
                 }
-                else
+				else
                 {
                     Climbing = false;
                 }
