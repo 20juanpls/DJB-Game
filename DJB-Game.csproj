@@ -75,12 +75,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
+    <Compile Include="Assets\Brutus State Machine\BrutusMechanimInputs.cs" />
     <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
     <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
     <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
     <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
+    <Compile Include="Assets\Scripts\CollisionTestScript.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
@@ -92,7 +93,6 @@
     <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
     <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
-    <Compile Include="Assets\Scripts\NPC_Scripts\CollisionIndicator.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\FlyingNPC_HeadMovement.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\FollowNPCSpawn.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\NPCStomper.cs" />
@@ -103,17 +103,15 @@
     <Compile Include="Assets\Scripts\Player_Scripts\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Player_Scripts\PlayerDash.cs" />
     <Compile Include="Assets\Scripts\Player_Scripts\PlayerNPCKill.cs" />
-    <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
-    <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerKnockback.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerScore.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\SpotShadowScript.cs" />
-    <Compile Include="Assets\Scripts\manager_Scripts\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
+    <Compile Include="Assets\testMovingPlane.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

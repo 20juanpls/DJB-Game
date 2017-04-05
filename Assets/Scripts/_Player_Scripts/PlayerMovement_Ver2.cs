@@ -289,7 +289,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void JumpNow() {
         if (DontMove == false)
         {
-            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true)||KnockBack.jumpedOn == true)
+            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && canJump == true)||KnockBack.jumpedOn == true)
             {
                 initialAirSpeed = JumpSpeed;
                 if (Climbing == true)
@@ -298,7 +298,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 }
             }
 
-			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 0")) && isGrounded == false && CurrentMidAirJumpCount > 0)
             {
                 initialAirSpeed = JumpSpeed;
                 airTime = 0.0f;
@@ -389,7 +389,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }*/
         //Debug.Log(collision.contacts.Length);
 
-
+        
         foreach (ContactPoint contact in collision.contacts)
         {
             string Other_Tag = contact.otherCollider.gameObject.transform.tag;
