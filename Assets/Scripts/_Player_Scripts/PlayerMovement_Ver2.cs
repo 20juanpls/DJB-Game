@@ -43,6 +43,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     public GameObject theRunningGuy;
 
+	public bool jumpOnEnemy = false;
+
     void Start () {
 
         PlayerRb = this.GetComponent<Rigidbody>();
@@ -286,6 +288,20 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     }
 
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "JumpCollider")
+		{
+			initialAirSpeed = JumpSpeed;
+
+			if (Climbing == true)
+				JumpBack = true;
+
+			canJump = false;
+		}
+		
+	}
+
     void JumpNow() {
         if (DontMove == false)
         {
@@ -417,7 +433,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             {
                 IsGround_2 = true;
 
-                if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
+				if (Other_Tag == "Untagged") {
+					Climbing = false;
+					IsGround_2 = true;
+					Sliding = false;
+				}
+                else if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
                 {
                     BottomPlatVel = contact.otherCollider.gameObject.GetComponent<Rigidbody>().velocity;
                 }
@@ -430,7 +451,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                     Climbing = true;
                     HitWallVector = -contact.normal;
                 }
-                else
+				else
                 {
                     Climbing = false;
                 }
