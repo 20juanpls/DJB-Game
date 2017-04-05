@@ -67,7 +67,11 @@ public class NPC_Death : MonoBehaviour {
                 //nf.enabled = false;
 				nf.Disabled  = true;
                 this.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                //this.gameObject.bgetChi
+				for(int i = 0; i < 6; i++)
+				{
+					this.transform.GetChild(0).transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+				}
+				//this.gameObject.bgetChi
 			}
 			else{
 				this.transform.localScale -= new Vector3(sizeInterval,sizeInterval,sizeInterval);
