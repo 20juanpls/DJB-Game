@@ -171,6 +171,12 @@ public class PlayerHealth : MonoBehaviour {
             IsDead = true;
         }
 
+		if (other.tag == "1UP")
+		{
+			Lives++;
+			Destroy (other.gameObject);
+			Debug.Log (Lives);
+		}
     }
 
     void UpRayShooter() {
