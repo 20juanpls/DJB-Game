@@ -154,6 +154,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         _p.GetComponent<PlayerHealth>().PlayerHealthReset();
 
+
 		//>>>>
         //_SptSh.GetComponent<SpotShadowScript>().ResetShadow(_p);
 		//<<<<
@@ -180,13 +181,6 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         //GameObject.FindGameObjectWithTag("P_SpotShadow").GetComponent<SpotShadowScript>().AssignPlayer(_p);
 
-        GameObject[] StompEnemies = GameObject.FindGameObjectsWithTag("StompNPC");
-        for (int i = 0; i < StompEnemies.Length; i++)
-        {
-            StompEnemies[i].GetComponent<NPCStomper>().AssignPlayer(_p);
-        }
-
-
         Destroy(playerFolder.gameObject);
         //loseScreen.gameObject.SetActive(false);
 
@@ -198,11 +192,23 @@ public class PlayerLavaDeath : MonoBehaviour {
         //assignes to main camera script the new player, _p
         //Debug.Log ("Camera re-assigned");
 
-		playerMovementVer2.IsGround_2 = false;
+        //playerMovementVer2.IsGround_2 = false;
 
         //for each player, assign new player
 
-		GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC_charge");
+        GameObject[] StompEnemies = GameObject.FindGameObjectsWithTag("StompNPC");
+        for (int i = 0; i < StompEnemies.Length; i++)
+        {
+            StompEnemies[i].GetComponent<NPCStomper>().AssignPlayer(_p);
+        }
+
+        GameObject[] FlyNPCs = GameObject.FindGameObjectsWithTag("FlyEnemy");
+        for (int i = 0; i < FlyNPCs.Length; i++)
+        {
+            FlyNPCs[i].transform.GetChild(0).GetComponent<FlyingNPC_HeadMovement>().AssignPlayer(_p);
+        }
+
+        GameObject[] listOfNPCs = GameObject.FindGameObjectsWithTag ("NPC_charge");
 		for (int x = 0; x < listOfNPCs.Length; x++) {
 			listOfNPCs [x].GetComponent<NPC_Follow> ().AssignPlayer (_p);
 			//Debug.Log ("Assignment attempted");

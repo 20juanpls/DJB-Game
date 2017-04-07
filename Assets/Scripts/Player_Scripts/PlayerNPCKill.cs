@@ -17,8 +17,11 @@ public class PlayerNPCKill : MonoBehaviour {
 	}
 	void OnTriggerExit(Collider other){
 		if (other.tag == "JumpCollider"){
-			//NPC_Death nd = other.gameObject.transform.parent.gameObject.GetComponent<NPC_Death>();
-			nd.activateDeath();
+            //NPC_Death nd = other.gameObject.transform.parent.gameObject.GetComponent<NPC_Death>();
+            if (nd != null)
+            {
+                nd.activateDeath();
+            }
 			this.gameObject.GetComponent<PlayerKnockback>().jumpedOn = true;
 		}
 	}
