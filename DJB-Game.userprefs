@@ -2,6 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraScripts/TestCameraMovement.cs">
     <Files>
+<<<<<<< HEAD
       <File FileName="Assets/Scripts/NPC_Scripts/NPC_Death.cs" Line="70" Column="5" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
@@ -10,6 +11,13 @@
       <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Environment_Scripts/ButtonActivator.cs" Line="27" Column="1" />
       <File FileName="Assets/Scripts/CameraScripts/TestCameraMovement.cs" Line="158" Column="53" />
+=======
+      <File FileName="Assets/Scripts/CameraScripts/CameraScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CameraScripts/TestCameraMovement.cs" Line="182" Column="1" />
+>>>>>>> f1662d1260d156bdab3bb43e10a68e208b8a36ff
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
