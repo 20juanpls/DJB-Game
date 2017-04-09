@@ -11,12 +11,16 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
     Transform Propeller;
     CollisionIndicator CollHitBox, DeathHitBox;
 
+    public AudioClip DeathSound;
+    AudioSource  EnemySoundSource;
+
     public float HLookRotSpeed, IdleRotSpeed, HStunnedRotSpeed, HomeDistance = 5.0f, AttakSpeed, IdleSpeed, CoolDownTime;
     public bool lookInactive, Attack, IsCoolTime, CanLookAtPlayer, AmStuck, StartTurning1, StartTurning2, IsDead, isMoving;
     Vector3 FinalVel, FinalHeight, AntiWall, OriginalPos;
 
     Quaternion HLook, VLook, FHorizLook, FVertLook,OriginalRot;//, FinalLookRot;
 
+    bool PlayClip, PlayingClip;
     float CurrentRotationSpeed, PlayDistFromHome, NPCFDistFromHome, CurrentSpeed, groundDist, PropellerSpeed, CurrentCooldownT;
     float DownRayPosY;
     // Use this for initialization
@@ -28,6 +32,8 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
         Propeller = this.transform.GetChild(0).gameObject.GetComponent<Transform>();
         CollHitBox = Propeller.GetComponent<CollisionIndicator>();
         DeathHitBox = this.transform.GetChild(1).gameObject.GetComponent<CollisionIndicator>();
+
+        EnemySoundSource = this.GetComponent<AudioSource>();
 
         OriginalPos = FlyNPC_Head.position;
         OriginalRot = FlyNPC_Head.rotation;
@@ -41,6 +47,11 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(IsDead);
+        //Do an audio 
+        AudioManagementNPC();
+
+
         HomeDistanceMeasurer();
         FloorMeasure();
         IsThereCoolDown();
@@ -78,6 +89,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
         }
     }
     public void AssignPlayer(GameObject p) {
+
         PlayerT = p.transform;
         FlyNPC_Head.position = OriginalPos;
         FlyNPC_Head.rotation = OriginalRot;
@@ -265,7 +277,8 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
             FlyNPC_Head.GetComponent<MeshRenderer>().enabled = false;
             FlyNPC_Head.GetComponent<Collider>().enabled = false;
             for (int j = 0; j < this.transform.childCount; j++) {
-                this.transform.GetChild(j).gameObject.SetActive(false);
+                if (this.transform.GetChild(j).gameObject.tag != "JumpCollider")
+                    this.transform.GetChild(j).gameObject.SetActive(false);
             }
             isMoving = false;
             lookInactive = true;
@@ -274,5 +287,25 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
     }
     void BeginDeathSequence() {
 
+    }
+
+    void AudioManagementNPC() {
+        if (IsDead == true)
+        {
+            if (!PlayingClip)
+                PlayClip = true;
+        }
+        else
+        {
+            PlayingClip = false;
+        }
+        if (PlayClip == true)
+        {
+            EnemySoundSource.clip = DeathSound;
+            EnemySoundSource.Play();
+            Debug.Log("LOUD");
+            PlayingClip = true;
+            PlayClip = false;
+        }
     }
 }

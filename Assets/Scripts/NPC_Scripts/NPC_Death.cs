@@ -10,10 +10,15 @@ public class NPC_Death : MonoBehaviour {
 	public NPC_Follow nf;
 	public GameObject collider;
 	int count;
-	public bool flag, NPCIsDead;
+	public bool flag, NPCIsDead, PlayingClip, PlayClip;
 
-	void Start(){
-		if (deathTime == 0.0f){
+    public AudioClip DeathSound;
+    AudioSource EnemySoundSource;
+
+    void Start(){
+        EnemySoundSource = this.GetComponent<AudioSource>();
+
+        if (deathTime == 0.0f){
 			deathTime = 3.0f;
 			Debug.Log("Deathtime not initialized, auto-setting to 3 in :" + this.ToString());
 		}
@@ -32,6 +37,8 @@ public class NPC_Death : MonoBehaviour {
 	}
 
     void Update() {
+        AudioManagementNPC();
+
         if (flag == false)
         {
             NPCIsDead = true;
@@ -79,6 +86,25 @@ public class NPC_Death : MonoBehaviour {
 		}
 	}
 
-
+    void AudioManagementNPC()
+    {
+        if (NPCIsDead == true)
+        {
+            if (!PlayingClip)
+                PlayClip = true;
+        }
+        else
+        {
+            PlayingClip = false;
+        }
+        if (PlayClip == true)
+        {
+            EnemySoundSource.clip = DeathSound;
+            EnemySoundSource.Play();
+            Debug.Log("LOUD");
+            PlayingClip = true;
+            PlayClip = false;
+        }
+    }
 
 }

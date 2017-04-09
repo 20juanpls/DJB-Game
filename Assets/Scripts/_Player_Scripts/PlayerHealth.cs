@@ -130,6 +130,7 @@ public class PlayerHealth : MonoBehaviour {
                     {
                         IsDead = true;
                     }
+                    Debug.Log(currentHealth);
                     PlayerScript.DontMove = true;
                 }
 
