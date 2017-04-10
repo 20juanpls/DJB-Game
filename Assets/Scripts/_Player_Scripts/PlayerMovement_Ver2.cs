@@ -7,16 +7,16 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     PlayerKnockback KnockBack;
     PlayerHealth PlayHealth;
 
-    private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed, currentSlidingSpeed, SlidingTime;
+    private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill, InstaJamp;
+    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill, InstaJamp, SlideSequence;
 
-    private bool isMove, JumpBack, JumpBackSeq;
+    private bool isMove, JumpBack, JumpBackSeq, JumpSlide;
 	public bool canJump, CantClimb, Sliding, Climbing;
-    public bool hasJumped, isGrounded/*Do not erase yet...*/, IsGround_2;
+    public bool hasJumped, JumpActiveButton, isGrounded/*Do not erase yet...*/, IsGround_2;
 
     private Vector3 moveDirection = Vector3.zero;
-    private Vector3 lookDirection = Vector3.zero, HitWallVector, JumpBackVect, slideDownVect;
+    private Vector3 lookDirection = Vector3.zero, HitWallVector, JumpBackVect, CslideDownVect;
 
     private Vector3 rotatedDirection, FinalDirection, /*UseThis*/TheMovingPlaneVect, rtY, fallLenght, BottomPlatVel;
 	public Vector3 FinalVel,VelRelativeToPlay, ExForceVelocity, CurrentOldVel;
@@ -35,7 +35,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	public float InitialMidAirJumpCount = 1.0f;
     public float AcceptedFloorDist = 1.7f;
     public float MaxSlideSpeed = 15.0f;
-    public float SlideAccel = 20.0f;
 
     float currentFallAccel;
 	private float forwardDist, CurrJumpBTime;
@@ -210,17 +209,25 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (KnockBack.collided == true) {
             PlayRot = KnockBack.hitRotation;
         }
+        if (SlideSequence == true) {
+            PlayRot = Quaternion.LookRotation(new Vector3(CslideDownVect.x, 0.0f, CslideDownVect.z));
+            currentRotationSpeed = rotationSpeed * 0.3f;
+        }
 
         if (DontMove == true)
         {
-            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * rotationSpeed);
+            //PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * rotationSpeed);
             currentRotationSpeed = 0.0f;
         }
-        else
+
+        if (!DontMove && !SlideSequence)
         {
             currentRotationSpeed = rotationSpeed;
-            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * currentRotationSpeed);
         }
+        //else
+        //{
+            PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * currentRotationSpeed);
+        //}
 
         //Debug.DrawRay(PlayerRb.position, PlayRot * Vector3.forward * 2.0f, Color.yellow);
 
@@ -233,7 +240,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         if (Climbing == true)
         {
-            //Debug.Log("Zulda climb");
             ActualSpeed = MoveSpeed / 2.0f;
         }
         else
@@ -260,8 +266,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             }
         }
 
-        if (Sliding == true) {
-
+        if (Sliding == true)
+        {
+            SlideSequence = true;
             //All of this normalizes the vector downward direction
             Vector3 momentaryVectXZ = new Vector3(-HitWallVector.x, 0.0f, -HitWallVector.z);
             Vector3 momentaryVectY = new Vector3(0.0f, HitWallVector.y, 0.0f);
@@ -269,11 +276,19 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             Vector3 FVectXZ = momentaryVectXZ.normalized * momentaryVectY.magnitude;
             Vector3 FVectY = momentaryVectY.normalized * momentaryVectXZ.magnitude;
 
+            Vector3 SlideDownVect = (FVectXZ + FVectY) * MaxSlideSpeed;
 
-            slideDownVect = FVectXZ+ FVectY; //- new Vector3(0.0f, HitWallVector.y,0.0f);
+            CslideDownVect = Vector3.Lerp(CslideDownVect,SlideDownVect,2.0f*Time.deltaTime); //- new Vector3(0.0f, HitWallVector.y,0.0f);
             //Quaternion downAng = processedAngle;
-            Debug.DrawRay(PlayerRb.position, slideDownVect * currentfallSpeed, Color.yellow);
-           // Debug.DrawRay(PlayerRb.position, ayyddabs*Vector3.right * 10.0f, Color.blue);
+            Debug.DrawRay(PlayerRb.position, CslideDownVect, Color.yellow);
+            // Debug.DrawRay(PlayerRb.position, ayyddabs*Vector3.right * 10.0f, Color.blue);
+        }
+        else {
+            CslideDownVect = Vector3.Lerp(CslideDownVect, Vector3.zero, 2.0f * Time.deltaTime);
+        }
+
+        if (!SlideSequence) {
+            JumpSlide = false;
         }
 
         //DrawRAY!!!!!!
@@ -312,12 +327,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
 
         //pre-vel
-        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y, FinalDirection.z);
+        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y, FinalDirection.z) + CslideDownVect;
 
         //ForMechanim
         VelRelativeToPlay = vel;
 
-        FinalVel = vel + BottomPlatVel + ExForceVelocity;
+        FinalVel = vel + BottomPlatVel + ExForceVelocity;// + CslideDownVect;
+
+        //Debug.Log(FinalVel);
 
         // KnockBack Will move the player instead of the player Itself...
         if (DontMove == true)
@@ -325,6 +342,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             FinalVel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed * 1.05f) + fallLenght.y, KnockBack.FinalKnockBack.z) + BottomPlatVel + ExForceVelocity;
             Debug.DrawRay(PlayerRb.position, FinalVel, Color.blue);
         }
+
+        /*if (Sliding == true) {
+            FinalVel = CslideDownVect;
+        }*/
 
         PlayerRb.velocity = FinalVel;
 
@@ -347,13 +368,24 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void JumpNow() {
         if (DontMove == false)
         {
-            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true)||KnockBack.jumpedOn == true)
+            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true) || KnockBack.jumpedOn == true)
             {
-                initialAirSpeed = JumpSpeed;
+                JumpActiveButton = true;
+                if (!JumpSlide)
+                    initialAirSpeed = JumpSpeed;
+
+
                 if (Climbing == true)
                 {
                     JumpBack = true;
                 }
+                if (SlideSequence == true)
+                {
+                    JumpSlide = true;
+                }
+            }
+            else {
+                JumpActiveButton = false;
             }
 
 			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
@@ -472,7 +504,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 HitWallVector = -contact.normal;
             }
 
-            if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb")
+            if (Other_Tag != "slide") {
+                SlideSequence = false;
+            }
+
+            if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb"||Other_Tag == "slide")
             {
                 IsGround_2 = true;
 

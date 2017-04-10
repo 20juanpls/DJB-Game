@@ -124,7 +124,7 @@ public class PlayerHealth : MonoBehaviour {
 
 
                 //Makes sure player doesn't move when dead
-                if (currentHealth == 0.0f)
+                if (currentHealth <= 0.0f)
                 {
                     if (KnockKnock.collided == false && BlinkingF == false)
                     {

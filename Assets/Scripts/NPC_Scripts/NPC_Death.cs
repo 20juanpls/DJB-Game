@@ -101,7 +101,7 @@ public class NPC_Death : MonoBehaviour {
         {
             EnemySoundSource.clip = DeathSound;
             EnemySoundSource.Play();
-            Debug.Log("LOUD");
+            //Debug.Log("LOUD");
             PlayingClip = true;
             PlayClip = false;
         }
