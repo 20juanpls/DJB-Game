@@ -246,7 +246,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             ActualSpeed = MoveSpeed;
         }
-
         Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
         FinalDirection = /* _lookRotation */ finalDirection * ActualSpeed;
 
@@ -325,10 +324,15 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //Debug.Log("ImStuck!!!"); potentially create a function where the player is slightly pushed back away
             //from the edge, just make sure it doesn't do that on walls...
         }
+        //Test
+        //Vector3 CurrFinalVel = Vector3.Lerp(new Vector3(PlayerRb.velocity.x, 0.0f, PlayerRb.velocity.z),
+        //    new Vector3(FinalDirection.x,0.0f,FinalDirection.z), 30.0f*Time.deltaTime);
+
 
         //pre-vel
-        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y, FinalDirection.z) + CslideDownVect;
+        vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y,FinalDirection.z) + CslideDownVect;
 
+        //Debug.DrawRay(PlayerRb.position, CurrFinalVel*5.0f, Color.green);
         //ForMechanim
         VelRelativeToPlay = vel;
 
