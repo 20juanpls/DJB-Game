@@ -23,9 +23,9 @@ public class PlayerNPCKill : MonoBehaviour {
         }
 	}
 	void OnTriggerExit(Collider other){
-		if (other.tag == "JumpCollider"){
+		//if (other.tag == "JumpCollider"){
             //Debug.Log("OutOfCollider");
             InCollider = false;
-        }
+        //}
 	}
 }
