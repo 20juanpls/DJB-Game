@@ -6,7 +6,6 @@ public class CollisionIndicator : MonoBehaviour {
     public bool HitsPlayer;
 	// Use this for initialization
 	void Start () {
-		
 	}
 	// Update is called once per frame
 	void Update () {	
@@ -21,9 +20,6 @@ public class CollisionIndicator : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "PlayerMesh")
-        {
             HitsPlayer = false;
-        }
     }
 }

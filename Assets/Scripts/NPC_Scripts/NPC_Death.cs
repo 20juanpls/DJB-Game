@@ -9,11 +9,18 @@ public class NPC_Death : MonoBehaviour {
 	public float sizeInterval;
 	public NPC_Follow nf;
 	public GameObject collider;
+    CollisionIndicator CollIndie;
 	int count;
-	public bool flag, NPCIsDead;
+	public bool flag, DeathSet, NPCIsDead, PlayingClip, PlayClip;
 
-	void Start(){
-		if (deathTime == 0.0f){
+    public AudioClip DeathSound;
+    AudioSource EnemySoundSource;
+
+    void Start(){
+        EnemySoundSource = this.GetComponent<AudioSource>();
+        CollIndie = transform.Find("ChargeJumpCollider").gameObject.GetComponent<CollisionIndicator>();
+
+        if (deathTime == 0.0f){
 			deathTime = 3.0f;
 			Debug.Log("Deathtime not initialized, auto-setting to 3 in :" + this.ToString());
 		}
@@ -24,7 +31,7 @@ public class NPC_Death : MonoBehaviour {
 		}
 
 		collider = this.transform.GetChild(2).gameObject;
-		if (collider.name != "JumpCollider"){
+		if (collider.name != "ChargeJumpCollider"){
 			Debug.Log("Jump Collider not initalized! :" + this.ToString());
 		}
         count = -1;
@@ -32,6 +39,14 @@ public class NPC_Death : MonoBehaviour {
 	}
 
     void Update() {
+        AudioManagementNPC();
+
+        if (CollIndie.HitsPlayer)
+            DeathSet = true;
+
+        if (DeathSet == true)
+            activateDeath();
+
         if (flag == false)
         {
             NPCIsDead = true;
@@ -41,11 +56,18 @@ public class NPC_Death : MonoBehaviour {
 
 	public void activateDeath(){
 		//nf.enabled = false;
-		collider.SetActive(false);
+        if (!CollIndie.HitsPlayer)
+		    collider.SetActive(false);
 
 		if (flag){
-            StartCoroutine(deathCycle(deathTime));
-		}
+            //StartCoroutine(deathCycle(deathTime)); Noah ... we'll fix this later
+            nf.Disabled = true;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            for (int i = 0; i < 6; i++)
+            {
+                this.transform.GetChild(0).transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
 		flag = false;
 	}
 
@@ -79,6 +101,25 @@ public class NPC_Death : MonoBehaviour {
 		}
 	}
 
-
+    void AudioManagementNPC()
+    {
+        if (NPCIsDead == true)
+        {
+            if (!PlayingClip)
+                PlayClip = true;
+        }
+        else
+        {
+            PlayingClip = false;
+        }
+        if (PlayClip == true)
+        {
+            EnemySoundSource.clip = DeathSound;
+            EnemySoundSource.Play();
+            //Debug.Log("LOUD");
+            PlayingClip = true;
+            PlayClip = false;
+        }
+    }
 
 }
