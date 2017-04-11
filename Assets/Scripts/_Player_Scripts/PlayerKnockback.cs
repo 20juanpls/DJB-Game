@@ -111,7 +111,6 @@ public class PlayerKnockback : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other){
-
         if (other.tag == "EpicentralHazard"|| other.tag =="BoulderHazard") {
             collided = true;
             InCollision = true;
@@ -172,6 +171,9 @@ public class PlayerKnockback : MonoBehaviour {
             //Debug.Log(ForceDir.rotation.y);
             PlayerP.ExForceVelocity = ExForceVector;
         }
+		if (other == null) {
+			Debug.Log ("ters notinh");
+		}
 
     }
 
@@ -180,8 +182,10 @@ public class PlayerKnockback : MonoBehaviour {
         {
             PlayerP.ExForceVelocity = Vector3.zero;
         }
-        if (other.tag == "EpicentralHazard" || other.tag == "BoulderHazard" || other.tag == "hazard")
-            InCollision = false;
+
+		Debug.Log (other);
+        //if (other.tag == "EpicentralHazard" || other.tag == "BoulderHazard" || other.tag == "hazard")
+        InCollision = false;
     }
 
     void ForceAdder() {
