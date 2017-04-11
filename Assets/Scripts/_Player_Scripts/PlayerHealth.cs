@@ -106,7 +106,9 @@ public class PlayerHealth : MonoBehaviour {
 
                 if (SquishWobble == true)
                 {
-                    if (currentHealth == 0.0f) { PlayerScript.ActualSpeedSetter(0.0f); }
+                    if (currentHealth == 0.0f) {
+                        PlayerScript.ActualSpeedSetter(0.0f);
+                    }
                     else
                     {
                         PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.1f);
@@ -128,8 +130,11 @@ public class PlayerHealth : MonoBehaviour {
                 if (currentHealth <= 0.0f)
                 {
                     //make a timer if collided is not false in 2 secs later
-                    if (KnockKnock.InCollision/*collided*/ == false && BlinkingF == false)
+                    if (KnockKnock.InCollision/*collided*/ == false && BlinkingF == false && PlayerScript.QuickDeath == true)
                     {
+                        IsDead = true;
+                    }
+                    else if (KnockKnock.collided == false) {
                         IsDead = true;
                     }
                     Debug.Log(currentHealth);

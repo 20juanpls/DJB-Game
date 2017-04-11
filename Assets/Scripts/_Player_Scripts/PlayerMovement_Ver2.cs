@@ -10,7 +10,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill, InstaJamp, SlideSequence;
+    public bool Paused, UnPaused, DontMove, forKnockBack, GroundCannotKill, InstaJamp, SlideSequence, QuickDeath;
 
     private bool isMove, JumpBack, JumpBackSeq, JumpSlide;
 	public bool canJump, CantClimb, Sliding, Climbing;
@@ -454,6 +454,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 else {
                     GroundCannotKill = true;
                 }
+            }
+            if (hit.transform.tag == "hazard" || hit.transform.tag == "EpicentralHazard")
+            {
+                QuickDeath = true;
+            }
+            else {
+                QuickDeath = false;
             }
         }
     }

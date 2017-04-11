@@ -37,7 +37,7 @@ public class PlayerKnockback : MonoBehaviour {
         {
             Inactive = true;
             KnockBackOrientation = Vector3.zero;
-            //currentKnockBackJumpForce = 0.0f;
+            PlayerP.initialAirSpeed = 0.0f;
             ForceAdder();
             DangerousFall = false;
         }
