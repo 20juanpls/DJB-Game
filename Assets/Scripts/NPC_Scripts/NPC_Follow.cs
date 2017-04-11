@@ -57,8 +57,11 @@ public class NPC_Follow : MonoBehaviour {
 	//ANother Noah Squeeze
 	public void AssignPlayer(GameObject p){
         this.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+        this.gameObject.transform.Find("ChargeJumpCollider").gameObject.SetActive(true);
         TheDeath.NPCIsDead = false;
+        //ayy
+        TheDeath.DeathSet = false;
+        //not gud
 		Disabled = false;
         prb = p;
 

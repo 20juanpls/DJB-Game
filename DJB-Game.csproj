@@ -76,7 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
-    <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
+    <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerButtonActivator.cs" />
+    <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerControls.cs" />
+    <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerDash.cs" />
+    <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerNPCKill.cs" />
     <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
     <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
     <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
@@ -93,18 +97,16 @@
     <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\CollisionIndicator.cs" />
+    <Compile Include="Assets\Scripts\NPC_Scripts\FlyNPC_SoundManagement.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\FlyingNPC_HeadMovement.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\FollowNPCSpawn.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\NPCStomper.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Death.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
-    <Compile Include="Assets\Scripts\Player_Scripts\ColliderIndicatorPlayer.cs" />
-    <Compile Include="Assets\Scripts\Player_Scripts\PlayerButtonActivator.cs" />
-    <Compile Include="Assets\Scripts\Player_Scripts\PlayerControls.cs" />
-    <Compile Include="Assets\Scripts\Player_Scripts\PlayerDash.cs" />
-    <Compile Include="Assets\Scripts\Player_Scripts\PlayerNPCKill.cs" />
+    <Compile Include="Assets\Scripts\Test_Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
+    <Compile Include="Assets\Scripts\_Player_Scripts\PlayerAudioManagementScript.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerKnockback.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />

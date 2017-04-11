@@ -12,7 +12,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
     CollisionIndicator CollHitBox, DeathHitBox;
 
     public float HLookRotSpeed, IdleRotSpeed, HStunnedRotSpeed, HomeDistance = 5.0f, AttakSpeed, IdleSpeed, CoolDownTime;
-    public bool lookInactive, Attack, IsCoolTime, CanLookAtPlayer, AmStuck, StartTurning1, StartTurning2, IsDead, isMoving;
+    public bool lookInactive, Attack, IsCoolTime, CanLookAtPlayer, AmStuck, StartTurning1, StartTurning2, IsDead, isMoving, PlayerHasIntruded;
     Vector3 FinalVel, FinalHeight, AntiWall, OriginalPos;
 
     Quaternion HLook, VLook, FHorizLook, FVertLook,OriginalRot;//, FinalLookRot;
@@ -41,11 +41,20 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         HomeDistanceMeasurer();
         FloorMeasure();
         IsThereCoolDown();
 
         //Debug.Log(IsCoolTime);
+        //This is for Sound
+        if (PlayDistFromHome < HomeDistance) {
+            PlayerHasIntruded = true;
+        }
+        if (PlayDistFromHome > HomeDistance && Attack == false) {
+            PlayerHasIntruded = false;
+        }
+        //only for sound
 
         if (PlayDistFromHome <= HomeDistance && CanLookAtPlayer == true)
             Attack = true;
@@ -78,6 +87,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
         }
     }
     public void AssignPlayer(GameObject p) {
+
         PlayerT = p.transform;
         FlyNPC_Head.position = OriginalPos;
         FlyNPC_Head.rotation = OriginalRot;
@@ -265,7 +275,8 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
             FlyNPC_Head.GetComponent<MeshRenderer>().enabled = false;
             FlyNPC_Head.GetComponent<Collider>().enabled = false;
             for (int j = 0; j < this.transform.childCount; j++) {
-                this.transform.GetChild(j).gameObject.SetActive(false);
+                if (this.transform.GetChild(j).gameObject.tag != "JumpCollider")
+                    this.transform.GetChild(j).gameObject.SetActive(false);
             }
             isMoving = false;
             lookInactive = true;
