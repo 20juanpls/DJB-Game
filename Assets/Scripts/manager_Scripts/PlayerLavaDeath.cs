@@ -64,7 +64,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         if (PlayerWinState == true) {
             Debug.Log("GOAL!!!");
-            SceneManager.LoadScene("DJB_0_0_1_StartScene");
+            SceneManager.LoadScene("Stage_Hub");
         }
 
 		if (loseScreen.gameObject.activeSelf) {
@@ -114,7 +114,7 @@ public class PlayerLavaDeath : MonoBehaviour {
     public void RestartFromBeginning() {
         //Reloading scene works ... the buttons I still need to fix tho ;-;
         //SceneManager.LoadScene("Bugfixer_0_0_1");
-        SceneManager.LoadScene("DJB_0_0_1_StartScene");
+        SceneManager.LoadScene("Stage_Hub");
     }
 
     public void BackToTheMenu() {
