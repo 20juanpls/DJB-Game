@@ -7,24 +7,41 @@ public class PlayerAudioManagementScript : MonoBehaviour {
     PlayerMovement_Ver2 MovementScript;
     PlayerKnockback PlayKnockScript;
     AudioSource PlayAudioSource;
+    PlayerNPCKill PlayNPCK;
 
-    public AudioClip JumpSound, HitSound, DFallSound, HasFallSound;
+    public AudioClip JumpSound, DoubleJumpSound, HitSound, DFallSound, HasFallSound, JumpO_s1, JumpO_s2, JumpO_s3;
 
-    bool HitPlayClip, HPlayingClip , DFallPlayClip, DFallPlayingClip, GrndPlayClip, GrndPlayingClip;
+    public ArrayList JumpedOnSounds;
+
+    AudioClip CurrJumpO;
+
+    bool HitPlayClip, HPlayingClip , DFallPlayClip, DFallPlayingClip, GrndPlayClip, GrndPlayingClip, JPC, JPingC;
+
+    int countJO;
 	// Use this for initialization
 	void Start () {
         MovementScript = this.GetComponent <PlayerMovement_Ver2 > ();
         PlayKnockScript = this.GetComponent<PlayerKnockback>();
         PlayAudioSource = this.GetComponent<AudioSource>();
+        PlayNPCK = this.GetComponent<PlayerNPCKill>();
+
+        if (JumpedOnSounds == null)
+            JumpedOnSounds = new ArrayList();
+
+        JumpedOnSounds.Add(JumpO_s1);
+        JumpedOnSounds.Add(JumpO_s2);
+        JumpedOnSounds.Add(JumpO_s3);
     }
 	
 	// Update is called once per frame
 	void Update () {
         //Sound when it jumps
         JumpSoundF();
+        DoubleJumpSoundF();
         HitSoundF();
         DangerousFallSoundF();
         HasFallenSoundF();
+        JumpedOnSoundF();
 
     }
 
@@ -33,6 +50,12 @@ public class PlayerAudioManagementScript : MonoBehaviour {
         {
             PlayAudioSource.clip = JumpSound;
             PlayAudioSource.PlayOneShot(JumpSound);
+        }
+    }
+    void DoubleJumpSoundF() {
+        if (MovementScript.DJumpActive) {
+            PlayAudioSource.clip = DoubleJumpSound;
+            PlayAudioSource.PlayOneShot(DoubleJumpSound);
         }
     }
     void HitSoundF() {
@@ -53,7 +76,6 @@ public class PlayerAudioManagementScript : MonoBehaviour {
             HitPlayClip = false;
         }
     }
-
     void DangerousFallSoundF() {
         //Debug.Log(PlayKnockScript.DangerousFall);
         if (PlayKnockScript.DangerousFall == true)
@@ -73,7 +95,6 @@ public class PlayerAudioManagementScript : MonoBehaviour {
             DFallPlayClip = false;
         }
     }
-
     void HasFallenSoundF() {
         if (PlayKnockScript.HasFallen == true)
         {
@@ -90,6 +111,33 @@ public class PlayerAudioManagementScript : MonoBehaviour {
             PlayAudioSource.Play();
             GrndPlayingClip = true;
             GrndPlayClip = false;
+        }
+    }
+    void JumpedOnSoundF()
+    {
+        if (PlayNPCK.InCollider == true)
+        {
+            if (!JPingC)
+                JPC = true;
+        }
+        else
+        {
+            JPingC = false;
+        }
+        if (JPC == true)
+        {    
+            AudioClip currentJOsound = (AudioClip)JumpedOnSounds[countJO];
+            PlayAudioSource.clip = currentJOsound;
+            PlayAudioSource.Play();
+
+            countJO++;
+            if (countJO > 2)
+            {
+                countJO = 0;
+            }
+
+            JPingC = true;
+            JPC = false;
         }
     }
 }

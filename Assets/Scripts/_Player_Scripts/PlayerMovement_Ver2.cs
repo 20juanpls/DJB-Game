@@ -6,6 +6,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     Transform Camera_Rot;
     PlayerKnockback KnockBack;
     PlayerHealth PlayHealth;
+    PlayerNPCKill PlayNPCK;
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
@@ -13,7 +14,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private bool isMove, JumpBack, JumpBackSeq, JumpSlide;
 	public bool canJump, CantClimb, Sliding, Climbing;
-    public bool hasJumped, JumpActiveButton, isGrounded/*Do not erase yet...*/, IsGround_2;
+    public bool hasJumped, JumpActiveButton, DJumpActive, isGrounded/*Do not erase yet...*/, IsGround_2;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 lookDirection = Vector3.zero, HitWallVector, JumpBackVect, CslideDownVect;
@@ -37,7 +38,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float MaxSlideSpeed = 15.0f;
 
     float currentFallAccel;
-	private float forwardDist, CurrJumpBTime;
+	private float forwardDist, CurrJumpBTime, currentGrav;
 	float CurrentMidAirJumpCount;
     public float airTime, initialAirSpeed, JumpBackTime;
 
@@ -53,12 +54,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         KnockBack = this.GetComponent<PlayerKnockback>();
         PlayHealth = this.GetComponent<PlayerHealth>();
+        PlayNPCK = this.GetComponent<PlayerNPCKill>();
         //runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
 		hasJumped = false;
 		CurrentMidAirJumpCount = InitialMidAirJumpCount;
         CurrJumpBTime = JumpBackTime;
         _lookRotation = PlayerRb.transform.rotation;
+        currentGrav = setGrav;
     }
 
     public void ActualSpeedSetter(float MoveSped) {
@@ -72,7 +75,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (Paused == true)
         {
                 //Debug.Log("IsPaused???");
-                Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+                //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
                 PlayerRb.velocity = Vector3.zero;
                 UnPaused = false;
         }
@@ -131,7 +134,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 if (hasJumped == true && InstaJamp == true)
                 {
                     forKnockBack = true;
-                    KnockBack.jumpedOn = false;
+                    //KnockBack.jumpedOn = false;
                     initialAirSpeed = 0.0f;
                     hasJumped = false;
                 }
@@ -184,7 +187,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
 
         //test
-        Debug.DrawRay(PlayerRb.position, processedAngle * _lookRotation * Vector3.forward*VectMeasure, Color.red);
+        //Debug.DrawRay(PlayerRb.position, processedAngle * _lookRotation * Vector3.forward*VectMeasure, Color.red);
 
         TheMovingPlaneVect = processedAngle * _lookRotation * Vector3.forward * VectMeasure;
         
@@ -279,7 +282,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
             CslideDownVect = Vector3.Lerp(CslideDownVect,SlideDownVect,2.0f*Time.deltaTime); //- new Vector3(0.0f, HitWallVector.y,0.0f);
             //Quaternion downAng = processedAngle;
-            Debug.DrawRay(PlayerRb.position, CslideDownVect, Color.yellow);
+            //Debug.DrawRay(PlayerRb.position, CslideDownVect, Color.yellow);
             // Debug.DrawRay(PlayerRb.position, ayyddabs*Vector3.right * 10.0f, Color.blue);
         }
         else {
@@ -290,15 +293,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             JumpSlide = false;
         }
 
-        //DrawRAY!!!!!!
-        //Debug.DrawRay(PlayerRb.position, FinalDirection, Color.green);
-        //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.blue);
-
         //Decides to jump bek or nah
         if (JumpBack == true)
         {
             //Debug.Log("Begin - BEKWARD JEMP sequence!!");
-            Debug.DrawRay(PlayerRb.position, -HitWallVector, Color.green);
+            //Debug.DrawRay(PlayerRb.position, -HitWallVector, Color.green);
             JumpBackVect = new Vector3(-HitWallVector.x, 0.0f, -HitWallVector.z);
             JumpBackSeq = true;
         }
@@ -316,6 +315,34 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             }
         }
 
+        //Debug.Log(PlayNPCK.InCollider);
+        if (PlayNPCK.InCollider == true)
+        {
+            currentGrav = 0.0f;
+            airTime = 0.0f;
+            if (IsGround_2 == true|| initialAirSpeed==0.0f) {
+                initialAirSpeed = JumpSpeed;
+            }
+        }
+        else {
+            currentGrav = setGrav;
+        }
+
+        if (KnockBack.InCollision == true)
+        {
+            currentGrav = 0.0f;
+            airTime = 0.0f;
+            initialAirSpeed = KnockBack.KnockBackJumpForce;
+            if (IsGround_2 == true || initialAirSpeed == 0.0f)
+            {
+                initialAirSpeed = KnockBack.KnockBackJumpForce;
+            }
+        }
+        else
+        {
+            currentGrav = setGrav;
+        }
+
         //Important: this is so the momentum doesn't gather up when close to ledges...
         if (PlayerRb.velocity.magnitude <= 0.1f && airTime > 0.1f)
         {
@@ -327,52 +354,43 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         //Test
         //Vector3 CurrFinalVel = Vector3.Lerp(new Vector3(PlayerRb.velocity.x, 0.0f, PlayerRb.velocity.z),
         //    new Vector3(FinalDirection.x,0.0f,FinalDirection.z), 30.0f*Time.deltaTime);
-
-
         //pre-vel
         vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y,FinalDirection.z) + CslideDownVect;
+
+        if (DontMove == true) {
+            vel = new Vector3(KnockBack.FinalKnockBack.x, fallLenght.y, KnockBack.FinalKnockBack.z);
+        }
 
         //Debug.DrawRay(PlayerRb.position, CurrFinalVel*5.0f, Color.green);
         //ForMechanim
         VelRelativeToPlay = vel;
 
-        FinalVel = vel + BottomPlatVel + ExForceVelocity;// + CslideDownVect;
-
-        //Debug.Log(FinalVel);
-
-        // KnockBack Will move the player instead of the player Itself...
-        if (DontMove == true)
-        {
-            FinalVel = new Vector3(KnockBack.FinalKnockBack.x, (UpHillValue * ActualSpeed * 1.05f) + fallLenght.y, KnockBack.FinalKnockBack.z) + BottomPlatVel + ExForceVelocity;
-            Debug.DrawRay(PlayerRb.position, FinalVel, Color.blue);
-        }
-
-        /*if (Sliding == true) {
-            FinalVel = CslideDownVect;
-        }*/
+        FinalVel = vel + BottomPlatVel + ExForceVelocity;
 
         PlayerRb.velocity = FinalVel;
 
     }
 
-	void OnTriggerEnter(Collider other)
+	/*void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "JumpCollider")
 		{
-			initialAirSpeed = JumpSpeed;
-
-			if (Climbing == true)
-				JumpBack = true;
-
-			canJump = false;
+            Debug.Log("InCollider");
 		}
 		
 	}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "JumpCollider")
+        {
+            Debug.Log("OutOfCollider");
+        }
+    }*/
 
     void JumpNow() {
         if (DontMove == false)
         {
-            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true) || KnockBack.jumpedOn == true)
+            if (((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && canJump == true) /*|| KnockBack.jumpedOn == true*/)
             {
                 JumpActiveButton = true;
                 if (!JumpSlide)
@@ -392,11 +410,15 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 JumpActiveButton = false;
             }
 
-			if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && isGrounded == false && CurrentMidAirJumpCount > 0)
+            if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 11")) && IsGround_2 == false && CurrentMidAirJumpCount > 0)
             {
+                DJumpActive = true;
                 initialAirSpeed = JumpSpeed;
                 airTime = 0.0f;
                 CurrentMidAirJumpCount--;
+            }
+            else {
+                DJumpActive = false;
             }
 
             //if (hasJumped == true)
@@ -451,7 +473,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     void GravityApplyer() {
 
-        currentfallSpeed = initialAirSpeed + (setGrav * airTime);
+        currentfallSpeed = initialAirSpeed + (currentGrav * airTime);
 
         fallLenght = Vector3.down * currentfallSpeed;
 
@@ -518,7 +540,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 				if (Other_Tag == "Untagged") {
 					Climbing = false;
-					IsGround_2 = true;
+					//IsGround_2 = true;
 					Sliding = false;
 				}
                 else if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
