@@ -1,13 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraScripts/TestCameraMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC_Scripts/FlyingNPC_HeadMovement.cs">
     <Files>
+<<<<<<< HEAD
       <File FileName="Assets/Scripts/CameraScripts/CameraScript.cs" Line="16" Column="31" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="317" Column="74" />
       <File FileName="Assets/Scripts/CameraScripts/TestCameraMovement.cs" Line="20" Column="28" />
       <File FileName="Assets/Scripts/Player_Scripts/PlayerControls.cs" Line="1" Column="1" />
+=======
+      <File FileName="Assets/Scripts/NPC_Scripts/FlyingNPC_HeadMovement.cs" Line="247" Column="4" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerKnockback.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Follow.cs" Line="1" Column="1" />
+>>>>>>> c6e2c2864d2fe9bd3b3114e582bf047f85d55887
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
