@@ -83,11 +83,12 @@ public class PlayerHealth : MonoBehaviour {
                     currentHealth = StartHealth - KnockKnock.totalDamage;
                 }
                 //Activates INvincibility Frames
-                if (KnockKnock.collided == true)
+                if (KnockKnock.InCollision == true && IsInvincible == false)
                 {
                     IsInvincible = true;
                 }
 
+                //Debug.Log(KnockKnock.cantTakeDamage);
                 if (IsInvincible == true)
                 {
                     InvinsibilityFrames();
@@ -105,7 +106,9 @@ public class PlayerHealth : MonoBehaviour {
 
                 if (SquishWobble == true)
                 {
-                    if (currentHealth == 0.0f) { PlayerScript.ActualSpeedSetter(0.0f); }
+                    if (currentHealth == 0.0f) {
+                        PlayerScript.ActualSpeedSetter(0.0f);
+                    }
                     else
                     {
                         PlayerScript.ActualSpeedSetter(OriginalMoveSpeed / 1.1f);
@@ -124,12 +127,17 @@ public class PlayerHealth : MonoBehaviour {
 
 
                 //Makes sure player doesn't move when dead
-                if (currentHealth == 0.0f)
+                if (currentHealth <= 0.0f)
                 {
-                    if (KnockKnock.collided == false && BlinkingF == false)
+                    //make a timer if collided is not false in 2 secs later
+                    if (KnockKnock.InCollision/*collided*/ == false && BlinkingF == false && PlayerScript.QuickDeath == true)
                     {
                         IsDead = true;
                     }
+                    else if (KnockKnock.collided == false) {
+                        IsDead = true;
+                    }
+                    Debug.Log(currentHealth);
                     PlayerScript.DontMove = true;
                 }
 
@@ -194,20 +202,18 @@ public class PlayerHealth : MonoBehaviour {
         if (KnockKnock.collided == false && Blinking == false) { Blinking = true; }
         Blinker();
 
-        //Debug.Log(currentInviTime);
-        currentInviTime -= Time.deltaTime;
-        if (currentInviTime <= 0.0f) {
-            KnockKnock.cantTakeDamage = false;
-			KnockKnock.HasFallen = false;
-            IsInvincible = false;
-            Blinking = false;
-            //This Is just a placeholder for momentary blinking
-            //PlayerTrn.GetChild(1).gameObject.SetActive(true);
-            //BlinkFrameCount = 0;
-            //This Is just a placeholder for momentary blinking
-            
-
-        }
+            currentInviTime -= Time.deltaTime;
+            if (currentInviTime <= 0.0f)
+            {
+                KnockKnock.cantTakeDamage = false;
+                KnockKnock.HasFallen = false;
+                IsInvincible = false;
+                Blinking = false;
+                //This Is just a placeholder for momentary blinking
+                //PlayerTrn.GetChild(1).gameObject.SetActive(true);
+                //BlinkFrameCount = 0;
+                //This Is just a placeholder for momentary blinking
+            }
     }
 
     void Blinker() {

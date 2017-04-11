@@ -14,14 +14,14 @@ public class PressSpaceToContinue : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Space) ||Input.GetKeyDown("joystick button 0")) {
             //SceneManager.LoadScene("Bugfixer_0_0_1");//, LoadSceneMode.Additive);
-            SceneManager.LoadScene("DJB_0_0_1_StartScene");
+            SceneManager.LoadScene("Stage_Hub");
             Destroy (this.gameObject);
 		}
 
 	}
 
 	public void Restart(){
-        SceneManager.LoadScene("DJB_0_0_1_StartScene");
+        SceneManager.LoadScene("Stage_Hub");
     }
 
 }
