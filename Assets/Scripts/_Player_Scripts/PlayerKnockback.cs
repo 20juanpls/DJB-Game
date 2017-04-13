@@ -91,7 +91,7 @@ public class PlayerKnockback : MonoBehaviour {
         }
 
    void FallDamage(){
-                if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerP.CurrentOldVel.y <= -PlayerP.terminalSpeed)
+                if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerP.CurrentOldVel.y <= -PlayerP.terminalSpeed/*extraleeway*/+3.0f)
                 {
                     DangerousFall = true;
                 }

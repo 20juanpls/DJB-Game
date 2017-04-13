@@ -211,7 +211,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
             {
                 if (Homehit.distance <= 3.0f)
                 {
-                    Debug.Log("AmStuck");
+                    //Debug.Log("AmStuck");
                     AmStuck = true;
                     AntiWall = Homehit.normal;
                 }
