@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Environment_Scripts\WindSetter.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
     <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
+    <Compile Include="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\CollisionIndicator.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\FlyNPC_SoundManagement.cs" />
