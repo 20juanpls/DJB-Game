@@ -211,7 +211,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
             {
                 if (Homehit.distance <= 3.0f)
                 {
-                    Debug.Log("AmStuck");
+                    //Debug.Log("AmStuck");
                     AmStuck = true;
                     AntiWall = Homehit.normal;
                 }
@@ -241,6 +241,10 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
         {
             PropellerSpeed = IdleSpeed * 300.0f;
         }
+
+		if (IsDead == true) {
+			PropellerSpeed = 0.0f;
+		}
 
         Propeller.RotateAround(Propeller.position, Propeller.right, PropellerSpeed * Time.deltaTime);
     }
@@ -275,8 +279,19 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
             FlyNPC_Head.GetComponent<MeshRenderer>().enabled = false;
             FlyNPC_Head.GetComponent<Collider>().enabled = false;
             for (int j = 0; j < this.transform.childCount; j++) {
-                if (this.transform.GetChild(j).gameObject.tag != "JumpCollider")
-                    this.transform.GetChild(j).gameObject.SetActive(false);
+				if (this.transform.GetChild (j).gameObject.tag == "JumpCollider") {
+					if (this.transform.GetChild (j).gameObject.GetComponent<CollisionIndicator> ().HitsPlayer == false) {
+						this.transform.GetChild (j).gameObject.SetActive (false);
+					}
+				} else if (this.transform.GetChild (j).gameObject.tag == "EpicentralHazard") {
+					if (this.transform.GetChild (j).gameObject.GetComponent<CollisionIndicator> ().HitsPlayer == false) {
+						this.transform.GetChild (j).gameObject.SetActive (false);
+					}
+				} else {
+					this.transform.GetChild (j).gameObject.SetActive (false);
+				}
+                    
+				
             }
             isMoving = false;
             lookInactive = true;

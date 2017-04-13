@@ -515,7 +515,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }*/
         //Debug.Log(collision.contacts.Length);
 
-        
+
         foreach (ContactPoint contact in collision.contacts)
         {
             string Other_Tag = contact.otherCollider.gameObject.transform.tag;
