@@ -40,7 +40,7 @@ public class ThePause : MonoBehaviour {
 
         if (PauseCanvas.activeSelf)
         {
-            if (Input.GetKeyDown("joystick button 7"))
+            if (Input.GetKeyDown("joystick button 4"))
             {
                 Paused = false;
             }
@@ -67,7 +67,7 @@ public class ThePause : MonoBehaviour {
     }
 
     void IsItPaused() {
-		if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 7"))
+		if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 4"))
         {
             if (Paused == false)
             {
