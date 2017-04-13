@@ -17,25 +17,9 @@ Platform assembly: C:\Users\Omar\Desktop\DJB-Game\TestBuild_Data\Managed\UnityEn
 Loading C:\Users\Omar\Desktop\DJB-Game\TestBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\Omar\Desktop\DJB-Game\TestBuild_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
 Loading C:\Users\Omar\Desktop\DJB-Game\TestBuild_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.184 seconds
+- Completed reload, in  2.917 seconds
 Platform assembly: C:\Users\Omar\Desktop\DJB-Game\TestBuild_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Omar\Desktop\DJB-Game\TestBuild_Data\Managed\System.dll (this message is harmless)
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-<RI> Initialized touch support.
-UnloadTime: 3.912812 ms
-Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1e88 -> priority: 1 
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.294382 ms
-
-Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 1314.
-Total: 0.640549 ms (FindLiveObjects: 0.082109 ms CreateObjectMapping: 0.031724 ms MarkObjects: 0.484261 ms  DeleteObjects: 0.035456 ms)
-
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.403797 ms
-
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 1702.
-Total: 0.745053 ms (FindLiveObjects: 0.079777 ms CreateObjectMapping: 0.050852 ms MarkObjects: 0.567770 ms  DeleteObjects: 0.046186 ms)
-
