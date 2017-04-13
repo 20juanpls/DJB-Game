@@ -1,18 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_Player_Scripts/PlayerHealth.cs">
     <Files>
       <File FileName="Assets/Scripts/NPC_Scripts/FlyingNPC_HeadMovement.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="183" Column="3" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC_Scripts/FlyingNPC_HeadMovement.cs">
-    <Files>
-      <File FileName="Assets/Scripts/NPC_Scripts/FlyingNPC_HeadMovement.cs" Line="247" Column="4" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerKnockback.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Follow.cs" Line="1" Column="1" />
->>>>>>> c6e2c2864d2fe9bd3b3114e582bf047f85d55887
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
