@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs" />
+     <Compile Include="Assets\Scripts\MovingPlataform\RotatingPlataforms.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\CollisionIndicator.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\FlyNPC_SoundManagement.cs" />
@@ -79,6 +80,7 @@
      <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerAudioManagementScript.cs" />
+     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerFolderFollowsPlayer.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerKnockback.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />
@@ -88,17 +90,17 @@
      <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.PlaymodeTestsRunner">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
