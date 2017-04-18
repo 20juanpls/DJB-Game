@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs">
@@ -7,6 +8,11 @@
       <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="174" Column="91" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+=======
+﻿<Properties StartupItem="DJB-Game.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench />
+>>>>>>> 5771c1267284f698b857f877c89ffb6452020616
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

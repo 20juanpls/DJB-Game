@@ -13,7 +13,7 @@ public class CameraScript : MonoBehaviour {
     public float ZoomOutDistance = 20.0f;
     public float CamXSpeed = 2.0f;
     public float CamYSpeed = 2.0f;
-    public float MaxHeight = 3.0f;
+    public float MaxHeight = 6.0f;
     public float MinHeight = 0.0f;
     public float RecalibrationSpeed = 1.0f;
 
