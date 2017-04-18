@@ -8,7 +8,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public GameObject loseScreen;
 	public GameObject gameOverScreen;
-	public GameObject playerFolder;
+	//public GameObject playerFolder;
   	public GameObject player;
 	Transform respawn;
   	Quaternion PlayerRot;
@@ -35,7 +35,7 @@ public class PlayerLavaDeath : MonoBehaviour {
         loseScreen.SetActive (false);
 		gameOverScreen.SetActive (false);
         player = GameObject.FindGameObjectWithTag("PlayerMesh");
-		playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
+		//playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
         PlayerRot = player.transform.rotation;
 
 		//coin resetting stuff
@@ -84,9 +84,9 @@ public class PlayerLavaDeath : MonoBehaviour {
 		}
     }
 
-    void AssignPlayer(GameObject p, GameObject pF)
+    void AssignPlayer(GameObject p)
     {
-        playerFolder = pF.gameObject;
+        //playerFolder = pF.gameObject;
         player = p.gameObject;
         //Debug.Log(player.ToString());
     }
@@ -132,11 +132,11 @@ public class PlayerLavaDeath : MonoBehaviour {
         //New instance of Player is assigned to _p
         //folder is destroyed first!!!
 
-        GameObject pF = (GameObject)Instantiate(playerFolder);
+        GameObject _p = (GameObject)Instantiate(player);
         //GameObject _p = (GameObject)Instantiate(player);
 		//Debug.Log(_p.ToString());
 
-        GameObject _p = pF.transform.FindChild("Player").gameObject;
+        //GameObject _p = pF.transform.FindChild("Player").gameObject;
         //Debug.Log(_p.ToString());
 
 		//>>>>
@@ -181,12 +181,12 @@ public class PlayerLavaDeath : MonoBehaviour {
 
         //GameObject.FindGameObjectWithTag("P_SpotShadow").GetComponent<SpotShadowScript>().AssignPlayer(_p);
 
-        Destroy(playerFolder.gameObject);
+        Destroy(player.gameObject);
         //loseScreen.gameObject.SetActive(false);
 
         Deaths++;
 
-        AssignPlayer(_p, pF);
+        AssignPlayer(_p);
 
         //Debug.Log ("Old player destroyed");
         //assignes to main camera script the new player, _p
