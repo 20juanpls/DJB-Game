@@ -9,6 +9,7 @@ public class CoinSpinner : MonoBehaviour {
     public bool Y_axis;
     public bool Z_axis;
     public bool DoNotHop;
+    public bool NotCoin;
 
 	public float rotateSpeed = 3.0f;
     public float speedOfHop = 1.0f;
@@ -23,6 +24,7 @@ public class CoinSpinner : MonoBehaviour {
 
         OrigPos = this.gameObject.GetComponent<Transform>().position;
 
+        if (!NotCoin)
         rotateSpeed = rotateSpeed * 80.0f;
         
         //Cam = GameObject.Find("Main Camera").GetComponent<Transform>();
