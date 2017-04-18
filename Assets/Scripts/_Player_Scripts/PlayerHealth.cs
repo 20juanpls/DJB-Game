@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour {
     public float TimeCrushed = 1.0f;
     public float CrushRealizationTime = 1.0f;
     public bool IsDead = false;
+    bool AboutToDie;
 	public bool GameOver = false;
 
     public bool IsInvincible = false;
@@ -129,15 +130,21 @@ public class PlayerHealth : MonoBehaviour {
                 //Makes sure player doesn't move when dead
                 if (currentHealth <= 0.0f)
                 {
-                    //make a timer if collided is not false in 2 secs later
-                    if (KnockKnock.InCollision/*collided*/ == false && BlinkingF == false && PlayerScript.QuickDeath == true)
+                    if (KnockKnock.InCollision/*collided*/ == false && BlinkingF == false)// && PlayerScript.QuickDeath == true)
                     {
-                        IsDead = true;
+                        //IsDead = true;
+                        AboutToDie = true;
                     }
-                    else if (KnockKnock.collided == false) {
-                        IsDead = true;
+
+                    if (AboutToDie) {
+                        if (!KnockKnock.collided) {
+                            IsDead = true;
+                        }
+                        else if (PlayerScript.QuickDeath|| KnockKnock.InCollision) {
+                            //make a timer if collided is not false in 2 secs later
+                            IsDead = true;
+                        }
                     }
-                    Debug.Log(currentHealth);
                     PlayerScript.DontMove = true;
                 }
 
@@ -151,20 +158,23 @@ public class PlayerHealth : MonoBehaviour {
     void GettingCrushed() {
         if (Crushing == true) {
             CurrentTimeCrushed -= Time.deltaTime;
-            PlayerTrn.localScale = new Vector3(PlayerTrn.localScale.x, PlayerTrn.localScale.y*TimeCrushed* CrushSpeedMultiplier, PlayerTrn.localScale.z);
             PlayerColl.radius = 0.01f;
             PlayerScript.AcceptedFloorDist = 0.1f;
             KnockKnock.Inactive = true;
-            PlayerScript.DontMove = true;
+            PlayerScript.Freeze = true;
             //PlayerRb.velocity = Vector3.zero;
 
-            if (PlayerTrn.localScale.y <= 0.01f) {
+            if (PlayerTrn.localScale.y <= 0.01f)
+            {
                 CurrentCrushRealizationTime -= Time.deltaTime;
                 if (CurrentCrushRealizationTime <= 0.0f)
                 {
                     Crushing = false;
                     IsDead = true;
                 }
+            }
+            else {
+                PlayerTrn.localScale = new Vector3(PlayerTrn.localScale.x, PlayerTrn.localScale.y * TimeCrushed * CrushSpeedMultiplier, PlayerTrn.localScale.z);
             }
         }
         
@@ -277,6 +287,7 @@ public class PlayerHealth : MonoBehaviour {
 
         IsDead = false;
         PlayerScript.DontMove = false;
+        PlayerScript.Freeze = false;
         KnockKnock.totalDamage = 0;
 
         CurrentTimeCrushed = TimeCrushed;
