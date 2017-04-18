@@ -26,12 +26,12 @@ public class NewMovingPlatform : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		if (attatched) {
-			Debug.Log ("Ow");
 			other.gameObject.GetComponent<Rigidbody> ().velocity += this.gameObject.GetComponent<Rigidbody> ().velocity;
+			Debug.Log ("Boosted " + other);
 		}
-		Debug.Log (Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position));
+		//Debug.Log ("DIST TO CDI: " + Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position));
 		if (Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position) <= deadzone) {
 			Debug.Log ("LOOP");
 			CDI++;
@@ -51,12 +51,12 @@ public class NewMovingPlatform : MonoBehaviour {
 
 
 	void OnCollisionEnter (Collision _other){
-		Debug.Log ("Hello, " + _other.ToString ());
+		Debug.Log ("Hello, " + _other.ToString());
 		attatched = true;
 		other = _other;
 	}
 	void OnCollisionExit(Collision _other){
-		Debug.Log ("Goodbye, " + _other.ToString ());
+		Debug.Log ("Goodbye, " + _other.ToString());
 		attatched = false;
 	}
 }
