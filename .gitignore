@@ -30,5 +30,6 @@ sysinfo.txt
 *.unitypackage
 
 #god damn this thing
-
+Assembly-CSharp-vs.csproj
+Assembly-CSharp.csproj
 .DS_Store
