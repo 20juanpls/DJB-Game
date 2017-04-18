@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestCameraMovement : MonoBehaviour
+public class OfficialCameraMovement: MonoBehaviour
 {
 	public bool DoNotMove;
 
