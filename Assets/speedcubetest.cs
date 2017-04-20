@@ -11,10 +11,12 @@ public class speedcubetest : MonoBehaviour {
     public float LerpSpeed = 1.0f;
 
     public bool MoveWithFollowThis;
+    public bool UpDOwn;
 
     float TimeSwitch;
     Vector3 MoveToPos;
     Vector3 origPos;
+    Vector3 Direction;
 
 
     Vector3 previous;
@@ -41,7 +43,12 @@ public class speedcubetest : MonoBehaviour {
 
             //MoveToPos += Vector3.right * Speed * Time.deltaTime;
             //CenterOfMass.velocity = Vector3.right*Speed;
-            CenterOfMass.velocity = Vector3.Lerp(CenterOfMass.velocity, Vector3.up*Speed, LerpSpeed * Time.deltaTime);
+            if (UpDOwn)
+                Direction = Vector3.up;
+            else
+                Direction = Vector3.right;
+
+            CenterOfMass.velocity = Vector3.Lerp(CenterOfMass.velocity, Direction*Speed, LerpSpeed * Time.deltaTime);
 
             if (TimeSwitch < 0.0f)
             {

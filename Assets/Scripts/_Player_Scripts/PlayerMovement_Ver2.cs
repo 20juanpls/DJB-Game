@@ -13,7 +13,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool Paused, UnPaused, DontMove, DontClimb, Freeze, forKnockBack, GroundCannotKill, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;
+    public bool Paused, UnPaused, DontMove, Freeze, forKnockBack, GroundCannotKill, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;
 
     private bool isMove, JumpBack, JumpBackSeq, JumpSlide, /*HoldClimb,*/ ClimbBugPatch_1, MoveWithPLatClimbPatch_2;
 	public bool canJump, CantClimb, Sliding, Climbing;
@@ -49,6 +49,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	public bool jumpOnEnemy = false;
     Vector3 RelvSped;
     Rigidbody TheRigidBod;
+
+    int jumpCount;
     //int HierchyNum;
 
     void Start () {
@@ -251,6 +253,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             _lookRotation = Quaternion.LookRotation(rtY);
         }
+        else {
+            _lookRotation = Quaternion.identity;
+        }
 
         PlayRot = _lookRotation;
 
@@ -293,20 +298,36 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         if (Climbing == true)
         {
-            ActualSpeed = MoveSpeed / 2.0f;
             ClimbSequence = true;
-            //this is supposed to prevent the zelda botw swim up waterfall glitch
-            if (vel.magnitude > (MoveSpeed / 2.0f)+0.5f) {
+            //this is supposed to prevent the zelda botw swim up waterfall glitch - CHANGE THIS LATER!!!!!!!!!!!!!!!!!!!!!
+            float momcurr = vel.y + initialAirSpeed + MovingPlatVel.y + BottomPlatVel.y;
+
+            if ((PlayerRb.velocity.y > momcurr) && PlayerRb.velocity.y > 0.0f && momcurr > 0.0f)
+            {
+                jumpCount++;
+                //Debug.Log(vel.y+","+ initialAirSpeed + "," + MovingPlatVel.y + "," + BottomPlatVel.y+"="+momcurr);
+            }
+            else
+                jumpCount = 0;
+
+            //Debug.Log(jumpCount);
+            //if (vel.y >= initialAirSpeed + MovingPlatVel.y + BottomPlatVel.y && jumpCount > 5) {
+            if ((PlayerRb.velocity.y > momcurr) && PlayerRb.velocity.y > 0.0f && momcurr > 0.0f) {
                 ClimbBugPatch_1 = true;
             }
             else{
                 ClimbBugPatch_1 = false;
             }
         }
+        //momentary solution
+        if (OnNormalG) {
+            ClimbBugPatch_1 = false;
+        }
 
-        //Debug.Log(forwardDist);
+        //Debug.Log(ClimbBugPatch_1);
         if (ClimbSequence)
         {
+            ActualSpeed = MoveSpeed / 2.0f;
             currentGrav = 0.0f;
             if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f)
             {
@@ -316,6 +337,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         else {
             ActualSpeed = MoveSpeed;
         }
+
+        //Debug.Log(ActualSpeed);
 
 
         Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
@@ -448,7 +471,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         //pre-vel
         vel = new Vector3(FinalDirection.x, FinalDirection.y + fallLenght.y,FinalDirection.z) + CslideDownVect;
 
-        if (DontMove||DontClimb) {
+        if (DontMove) {
             vel = new Vector3(KnockBack.FinalKnockBack.x, fallLenght.y, KnockBack.FinalKnockBack.z);
         }
         //ForMechanim
