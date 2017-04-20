@@ -1,18 +1,10 @@
-<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/ThePause.cs">
     <Files>
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="220" Column="30" />
-      <File FileName="Assets/Scripts/CameraScripts/InRoomScript.cs" Line="17" Column="100" />
-      <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="174" Column="91" />
+      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="41" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-=======
-﻿<Properties StartupItem="DJB-Game.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
->>>>>>> 5771c1267284f698b857f877c89ffb6452020616
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
