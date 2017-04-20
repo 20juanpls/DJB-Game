@@ -1,6 +1,11 @@
-﻿<Properties StartupItem="DJB-Game.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MovingPlataform/NewMovingPlatform.cs">
+    <Files>
+      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="41" Column="1" />
+      <File FileName="Assets/Scripts/MovingPlataform/NewMovingPlatform.cs" Line="31" Column="58" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

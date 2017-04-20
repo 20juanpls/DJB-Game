@@ -28,7 +28,9 @@ public class NewMovingPlatform : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		if (attatched) {
+			float yVos = this.gameObject.GetComponent<Rigidbody> ().velocity.y;
 			other.gameObject.GetComponent<Rigidbody> ().velocity += this.gameObject.GetComponent<Rigidbody> ().velocity;
+			this.gameObject.GetComponent<Rigidbody> ().velocity = new Vector3(this.gameObject.GetComponent<Rigidbody>().velocity.x,yVos,this.gameObject.GetComponent<Rigidbody>().velocity.z);
 			Debug.Log ("Boosted " + other);
 		}
 		//Debug.Log ("DIST TO CDI: " + Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position));
@@ -42,9 +44,9 @@ public class NewMovingPlatform : MonoBehaviour {
 			if (MPI >= checkpoints.Capacity) {
 				MPI = 0;
 			}
-			Vector3 velo = new Vector3 (checkpoints [CDI].transform.position.x - checkpoints [MPI].transform.position.x, checkpoints [CDI].transform.position.y - checkpoints [MPI].transform.position.y, checkpoints [CDI].transform.position.z - checkpoints [MPI].transform.position.z);
-			this.GetComponent<Rigidbody> ().velocity = (velo * buffer);
 		}
+		Vector3 velo = new Vector3 (checkpoints [CDI].transform.position.x - checkpoints [MPI].transform.position.x, checkpoints [CDI].transform.position.y - checkpoints [MPI].transform.position.y, checkpoints [CDI].transform.position.z - checkpoints [MPI].transform.position.z);
+		this.GetComponent<Rigidbody> ().velocity = (velo * buffer);
 
 
 	}
