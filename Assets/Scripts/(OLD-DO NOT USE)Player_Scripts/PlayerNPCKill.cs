@@ -33,7 +33,7 @@ public class PlayerNPCKill : MonoBehaviour {
         {
             //Debug.Log("InCollider");
             InCollider = true;
-            Debug.Log(other.gameObject.activeSelf);
+//            Debug.Log(other.gameObject.activeSelf);
             //if (other.gameObject.activeSelf)
             InCollisionCount++;
         }
