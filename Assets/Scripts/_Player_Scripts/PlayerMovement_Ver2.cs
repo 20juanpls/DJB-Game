@@ -9,15 +9,17 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     PlayerHealth PlayHealth;
     PlayerNPCKill PlayNPCK;
 
+    Vector3 momentprevVect, momentVel;
+
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed;
 
-    public bool Paused, UnPaused, DontMove, DontClimb, Freeze, forKnockBack, GroundCannotKill, SlideSequence, InRotatingPlat/*,ClimbSequence*/, QuickDeath;
+    public bool Paused, UnPaused, DontMove, DontClimb, Freeze, forKnockBack, GroundCannotKill, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;
 
-    private bool isMove, JumpBack, JumpBackSeq, JumpSlide, /*HoldClimb,*/ ClimbBugPatch_1;
+    private bool isMove, JumpBack, JumpBackSeq, JumpSlide, /*HoldClimb,*/ ClimbBugPatch_1, MoveWithPLatClimbPatch_2;
 	public bool canJump, CantClimb, Sliding, Climbing;
-    public bool hasJumped, JumpActiveButton, DJumpActive, isGrounded/*Do not erase yet...*/, IsGround_2;
+    public bool hasJumped, JumpActiveButton, DJumpActive, isGrounded/*Do not erase yet...*/, IsGround_2, OnNormalG;
 
-    private Vector3 moveDirection = Vector3.zero/*, LastClimbDir*/;
+    private Vector3 moveDirection = Vector3.zero ,MovingPlatVel/*, LastClimbDir*/;
     private Vector3 lookDirection = Vector3.zero, HitWallVector, JumpBackVect, CslideDownVect;
 
     private Vector3 rotatedDirection, FinalDirection, /*UseThis*/TheMovingPlaneVect, rtY, fallLenght, BottomPlatVel, moveforward;
@@ -45,7 +47,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     public float floorDist;
     public GameObject theRunningGuy;
 	public bool jumpOnEnemy = false;
-
+    Vector3 RelvSped;
+    Rigidbody TheRigidBod;
     //int HierchyNum;
 
     void Start () {
@@ -72,7 +75,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     }
 
 	void Update () {
-        //Debug.Log(InRotatingPlat);
+        //Debug.Log(PlayerRb.velocity.magnitude);
+
         if (PlayHealth.IsDead)
             InRotatingPlat = false;
 
@@ -89,7 +93,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 PlayerRb.velocity = CurrentOldVel;
                 UnPaused = true;
             }
-            InRotationPlatform();
+            InMovingPlatform();
 
             CurrentOldVel = PlayerRb.velocity;
             GravityApplyer();
@@ -129,7 +133,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //Debug.Log(isGrounded);
 
             //PlayerRb.velocity = vel;
-            if (/*isGrounded*/IsGround_2 == true /*|| ClimbSequence*/)
+            if (/*isGrounded*/IsGround_2 == true || ClimbSequence)
             {
                 airTime = 0.0f;
 
@@ -157,15 +161,42 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     }
 
-    void InRotationPlatform() {
-        Debug.Log(InRotatingPlat);
-        if (InRotatingPlat)
+    void InMovingPlatform() {
+
+        //Debug.Log(surfaceAngle.eulerAngles);
+
+        if (InRotatingPlat|| MoveWithPLatClimbPatch_2)
         {
-            PlayerRb.transform.parent = RotatingParent.transform;
+            //Momentary SOlution
+            TheRigidBod = RotatingParent.GetComponent<speedcubetest>().followThis.GetComponent<Rigidbody>();
+
+            if (Climbing)
+            {
+                MoveWithPLatClimbPatch_2 = true;
+            }
+            else if (InRotatingPlat)
+            {
+                MovingPlatVel = TheRigidBod.velocity;
+            }
+            //    MoveWithPLatClimbPatch_2 = false;
+            //Debug.Log(TheRigidBod);
+            
+
         }
         else
         {
-            PlayerRb.transform.parent = null;
+            MoveWithPLatClimbPatch_2 = false;
+            MovingPlatVel = Vector3.zero;
+        }
+
+        if (MoveWithPLatClimbPatch_2) {
+            //Debug.Log(RelvSped);
+            MovingPlatVel = TheRigidBod.velocity;
+            if (!ClimbSequence) {
+                MoveWithPLatClimbPatch_2 = false;
+                ClimbBugPatch_1 = false;
+                MovingPlatVel = Vector3.zero;
+            }
         }
     }
 
@@ -197,8 +228,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         float cameraRot = Camera_Rot.rotation.eulerAngles.y;
         //Debug.Log (surfaceAngle.eulerAngles);
 
-        //if (!ClimbSequence)
-            processedAngle = Quaternion.Inverse(surfaceAngle);//Quaternion.Euler(EulerX,180, EulerZ);
+        if (!ClimbSequence&&!IsGround_2) {
+            surfaceAngle = Quaternion.identity;
+        }
+
+        processedAngle = Quaternion.Inverse(surfaceAngle);//Quaternion.Euler(EulerX,180, EulerZ);
 
         Quaternion qy = Quaternion.AngleAxis(cameraRot, Vector3.up);
 
@@ -220,7 +254,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         PlayRot = _lookRotation;
 
-        if (/*ClimbSequence*/Climbing == true)
+        if (ClimbSequence/*Climbing*/ == true)
         {
             PlayRot = Quaternion.LookRotation(new Vector3(HitWallVector.x,0.0f,HitWallVector.z));
         }
@@ -260,7 +294,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (Climbing == true)
         {
             ActualSpeed = MoveSpeed / 2.0f;
-            //ClimbSequence = true;
+            ClimbSequence = true;
             //this is supposed to prevent the zelda botw swim up waterfall glitch
             if (vel.magnitude > (MoveSpeed / 2.0f)+0.5f) {
                 ClimbBugPatch_1 = true;
@@ -269,60 +303,28 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 ClimbBugPatch_1 = false;
             }
         }
-        else
+
+        //Debug.Log(forwardDist);
+        if (ClimbSequence)
         {
-            ActualSpeed = MoveSpeed;
-
-            ClimbBugPatch_1 = false;
-            /*if (ClimbSequence == true && !isGrounded)
-            {
-                HoldClimb = true;
-            }
-
-            if (JumpBack || KnockBack.InCollision || isGrounded)
-            {
-                HoldClimb = false;
-                ClimbSequence = false;
-            }*/
-        }
-
-        //Debug.DrawRay(PlayerRb.position, LastClimbDir*10.0f, Color.yellow);
-        //Debug.DrawRay(PlayerRb.position, FinalDirection * 10.0f, Color.red);
-
-            /*if (HoldClimb)
-            {
-                DontClimb = true;
-                //Debug.Log(Vector3.Dot(FinalDirection, LastClimbDir));
-                if (Vector3.Dot(FinalDirection, LastClimbDir) < 0)
-                {
-                    HoldClimb = false;
-                    DontClimb = false;
-                }
-            }
-            else {
-                LastClimbDir = vel;
-                DontClimb = false;
-            }*/
-
-        //Debug.Log("DontClimb: "+DontClimb);
-        //Debug.Log("Climb Sequence: "+ClimbSequence);
-        /*if (ClimbSequence)
-        {
-            ActualSpeed = MoveSpeed / 2.0f;
             currentGrav = 0.0f;
-            if (JumpBack || KnockBack.InCollision || isGrounded)
+            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f)
             {
-                HoldClimb = false;
                 ClimbSequence = false;
             }
         }
         else {
             ActualSpeed = MoveSpeed;
-        }*/
+        }
 
 
         Vector3 finalDirection = new Vector3(/*rotatedDirection.x*/TheMovingPlaneVect.x, TheMovingPlaneVect.y, TheMovingPlaneVect.z);
-        _PlaneRotation = Quaternion.LookRotation(finalDirection);
+
+        if (finalDirection != Vector3.zero)
+            _PlaneRotation = Quaternion.LookRotation(finalDirection);
+        else
+            _PlaneRotation = Quaternion.identity;
+
         FinalDirection = _PlaneRotation * moveforward * ActualSpeed;
 
        //Debug.Log(FinalDirection.magnitude);
@@ -398,7 +400,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (JumpBackSeq == true)
         {
             CurrJumpBTime -= Time.deltaTime;
-            ExForceVelocity = CurrJumpBTime*JumpBackVect * 15.0f;
+            ExForceVelocity = CurrJumpBTime*(JumpBackVect/*+new Vector3(MovingPlatVel.x,0.0f, MovingPlatVel.z)*/) * 15.0f;
 
             if (CurrJumpBTime <= 0.0f)
             {
@@ -429,7 +431,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             }
         }
 
-        if (!KnockBack.InCollision && !PlayNPCK.InCollider /*&& !ClimbSequence*/)
+        if (!KnockBack.InCollision && !PlayNPCK.InCollider && !ClimbSequence)
             currentGrav = setGrav;
 
         //Important: this is so the momentum doesn't gather up when close to ledges...
@@ -449,12 +451,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (DontMove||DontClimb) {
             vel = new Vector3(KnockBack.FinalKnockBack.x, fallLenght.y, KnockBack.FinalKnockBack.z);
         }
-
-        Debug.DrawRay(PlayerRb.position, vel*5.0f, Color.green);
         //ForMechanim
         VelRelativeToPlay = vel;
 
-        FinalVel = vel + BottomPlatVel + ExForceVelocity;
+        FinalVel = vel + BottomPlatVel +MovingPlatVel+ ExForceVelocity;
 
         if (!Freeze)
         {
@@ -463,6 +463,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         else {
             PlayerRb.velocity = Vector3.zero;
         }
+
+        Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
 
     }
 
@@ -476,7 +478,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                     initialAirSpeed = JumpSpeed;
 
 
-                if (/*ClimbSequence*/Climbing == true)
+                if (ClimbSequence == true)
                 {
                     JumpBack = true;
                 }
@@ -512,6 +514,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     void FloorMeasure()
     {
         RaycastHit hit;
+        RaycastHit Fhit;
         //Debug.DrawRay(new Vector3 (PlayerRb.position.x, PlayerRb.position.y-1.0f,PlayerRb.position.z), _lookRotation * Vector3.forward*10.0f, Color.red);
         //Debug.DrawRay(new Vector3(PlayerRb.position.x, PlayerRb.position.y + 1.0f, PlayerRb.position.z), _lookRotation * Vector3.forward * 10.0f, Color.yellow);
 
@@ -541,6 +544,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             else {
                 QuickDeath = false;
             }
+        }
+
+        Debug.DrawRay(PlayerRb.position, PlayerRb.rotation * Vector3.forward,Color.yellow);
+        if (Physics.Raycast(PlayerRb.position, PlayerRb.rotation * Vector3.forward, out hit)) {
+            forwardDist = hit.distance;
         }
     }
 
@@ -613,9 +621,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 IsGround_2 = true;
 
 				if (Other_Tag == "Untagged") {
-					Climbing = false;				
-                    //IsGround_2 = true;
-					Sliding = false;
+					Climbing = false;
+                    OnNormalG = true;
+                    Sliding = false;
 				}
                 else if (contact.otherCollider.gameObject.GetComponent<Rigidbody>() != null)
                 {
@@ -642,10 +650,11 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     {
         InRotatingPlat = false;
         IsGround_2 = false;
+        OnNormalG = false;
         Climbing = false;
         CantClimb = false;
         Sliding = false;
-        surfaceAngle = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        //surfaceAngle = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         BottomPlatVel = Vector3.zero;
     }
 
