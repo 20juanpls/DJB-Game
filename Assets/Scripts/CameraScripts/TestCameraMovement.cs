@@ -18,7 +18,7 @@ public class TestCameraMovement : MonoBehaviour
 	public float CamXSpeed;
 	public float CamYSpeed;
 	public float MinHeight = -5.0f;
-	public float MaxHeight = 15.0f;
+	public float MaxHeight = 6000f;
 
 	public float joystickDeadzone = 0.1f;
 
