@@ -1,9 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MovingPlataform/NewMovingPlatform.cs">
     <Files>
       <File FileName="Assets/Scripts/MovingPlataform/NewMovingPlatform.cs" Line="33" Column="164" />
       <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/ThePause.cs">
+    <Files>
+      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="41" Column="1" />
+>>>>>>> eb877d628f011e9a0b6e69bc0afb5e58c30aafd2
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
