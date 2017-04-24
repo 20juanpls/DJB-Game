@@ -63,6 +63,7 @@ public class NPC_Death : MonoBehaviour {
             //StartCoroutine(deathCycle(deathTime)); Noah ... we'll fix this later
             nf.Disabled = true;
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+			this.gameObject.GetComponent<BoxCollider>().enabled = false;
             for (int i = 0; i < 6; i++)
             {
                 this.transform.GetChild(0).transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
