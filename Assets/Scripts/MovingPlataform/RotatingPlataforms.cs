@@ -6,15 +6,14 @@ public class RotatingPlataforms : MonoBehaviour {
 
 
     //Transform Cam;
-    Transform DirRotT;
+    Rigidbody DirRotT;
     //GameObject Platforms;
-    public bool X_axis;
-    public bool Y_axis;
-    public bool Z_axis;
+    public float X_axisSpeed;
+    public float Y_axisSpeed;
+    public float Z_axisSpeed;
     //public bool DoNotHop;
 
-    Quaternion RotationTo;
-    public float rotateSpeed = 3.0f;
+    Vector3 eulerAngleDir;
 
     float CurrentAngle;
     //public float speedOfHop = 1.0f;
@@ -26,48 +25,14 @@ public class RotatingPlataforms : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //Platforms = this.gameObject;
-
-        DirRotT = this.transform;
-
+        DirRotT = this.GetComponent<Rigidbody>();
         OrigPos = this.gameObject.GetComponent<Transform>().position;
-
-        //Cam = GameObject.Find("Main Camera").GetComponent<Transform>();
+        eulerAngleDir = new Vector3(X_axisSpeed, Y_axisSpeed, Z_axisSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        SpeedCounter();
-        if (X_axis == true)
-        {
-            //DirRotT.Rotate(new Vector3(rotateSpeed, 0.0f, 0.0f) * Time.deltaTime);
-            RotationTo = Quaternion.AngleAxis(CurrentAngle, Vector3.right);
-        }
-        else if (Z_axis == true)
-        {
-            //DirRotT.Rotate(new Vector3(0.0f, 0.0f, rotateSpeed) * Time.deltaTime);
-            RotationTo = Quaternion.AngleAxis(CurrentAngle, Vector3.forward);
-        }
-        else if (Y_axis == true)
-        {
-            //DirRotT.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f) * Time.deltaTime);
-            RotationTo = Quaternion.AngleAxis(CurrentAngle,Vector3.up);
-        }
-        else
-        {
-            //DirRotT.Rotate(new Vector3(0.0f, rotateSpeed, 0.0f) * Time.deltaTime);
-            RotationTo = Quaternion.AngleAxis(CurrentAngle, Vector3.up);
-        }
-
-        DirRotT.rotation = Quaternion.Slerp(DirRotT.rotation, RotationTo, 1.0f * Time.deltaTime);
-    }
-
-    void SpeedCounter() {
-        //Debug.Log(CurrentAngle);
-        CurrentAngle = CurrentAngle + (Time.deltaTime*rotateSpeed);
-        if (CurrentAngle > 360)
-            CurrentAngle = 0.0f;
-
+        DirRotT.angularVelocity = eulerAngleDir * Time.deltaTime;
     }
 }
