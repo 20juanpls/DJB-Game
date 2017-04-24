@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
+     <Compile Include="Assets\speedcubetest.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
