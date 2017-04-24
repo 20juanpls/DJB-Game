@@ -17,8 +17,8 @@ public class OfficialCameraMovement: MonoBehaviour
 
 	public float CamXSpeed;
 	public float CamYSpeed;
-	public float MinHeight = -5.0f;
-	public float MaxHeight = 6000f;
+	float MinHeight = -70.0f;
+	float MaxHeight = 60.0f;
 
 
 	public float joystickDeadzone = 0.1f;
