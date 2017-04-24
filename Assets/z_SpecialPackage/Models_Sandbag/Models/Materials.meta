@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/z_SpecialPackage/Models_Sandbag/Models/Materials.meta
+guid: e0d6a545e0d774093b8d91f3a0d66914
+folderAsset: yes
+timeCreated: 1491414549
+=======
 guid: cf51509625ca84b2e9911bf47b41eb3e
 folderAsset: yes
 timeCreated: 1491417174
+>>>>>>> f1662d1260d156bdab3bb43e10a68e208b8a36ff:Assets/z_SpecialPackage/Models_Sandbag/Models/Materials.meta
 licenseType: Free
 DefaultImporter:
   userData: 

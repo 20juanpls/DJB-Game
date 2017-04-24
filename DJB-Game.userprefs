@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/ThePause.cs">
@@ -9,6 +10,11 @@
       <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="70" Column="78" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+=======
+﻿<Properties StartupItem="DJB-Game.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench />
+>>>>>>> 372648aa40b25f8a077b9f7f14029a9aac5e3514
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

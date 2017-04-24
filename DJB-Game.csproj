@@ -95,6 +95,8 @@
     <Compile Include="Assets\Scripts\Environment_Scripts\WindSetter.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
     <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
+    <Compile Include="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\MovingPlataform\RotatingPlataforms.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\ColliderIndicator.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\CollisionIndicator.cs" />
     <Compile Include="Assets\Scripts\NPC_Scripts\FlyNPC_SoundManagement.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerAudioManagementScript.cs" />
+    <Compile Include="Assets\Scripts\_Player_Scripts\PlayerFolderFollowsPlayer.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerKnockback.cs" />
     <Compile Include="Assets\Scripts\_Player_Scripts\PlayerMovement_Ver2.cs" />
