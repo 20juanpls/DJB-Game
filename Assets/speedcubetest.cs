@@ -35,6 +35,7 @@ public class speedcubetest : MonoBehaviour {
         if (MoveWithFollowThis)
         {
             this.transform.position = followThis.transform.position;
+            this.transform.rotation = followThis.transform.rotation;
             //this.transform.position = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>().position + Vector3.up*4.0f;
         }
         else
