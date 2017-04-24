@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour {
     public float OrigAcceptedFloorDist;
     public float OrigCollRad;
     private float UpDist;
-    public Vector3 OrigScale;
+    public Vector3 OrigScale, CrushedPos;
 
 	// Use this for initialization
 	void Start () {
@@ -156,7 +156,8 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
     void GettingCrushed() {
-        if (Crushing == true) {
+        if (Crushing == true)
+        {
             CurrentTimeCrushed -= Time.deltaTime;
             PlayerColl.radius = 0.01f;
             PlayerScript.AcceptedFloorDist = 0.1f;
@@ -173,7 +174,8 @@ public class PlayerHealth : MonoBehaviour {
                     IsDead = true;
                 }
             }
-            else {
+            else
+            {
                 PlayerTrn.localScale = new Vector3(PlayerTrn.localScale.x, PlayerTrn.localScale.y * TimeCrushed * CrushSpeedMultiplier, PlayerTrn.localScale.z);
             }
         }
