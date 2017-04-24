@@ -17,8 +17,8 @@ public class OfficialCameraMovement: MonoBehaviour
 
 	public float CamXSpeed;
 	public float CamYSpeed;
-	public float MinHeight = -5.0f;
-	public float MaxHeight = 15.0f;
+	public float MinHeight = -15.0f;
+	public float MaxHeight = 20.0f;
 
 	public float joystickDeadzone = 0.1f;
 
@@ -64,16 +64,18 @@ public class OfficialCameraMovement: MonoBehaviour
 		//Debug.Log(Input.GetAxis("XB1_RightLeft"));
 		if (_camera != null && Target != null)
 		{
-			ZoomInOut();
-			CamXRotSpeed();
-			CamYRotSpeed();
+			//Call Interior Functions
+			ZoomInOut();	//Detect Zoom button clicking
+			CamXRotSpeed();	//Detect horizontal input, add/subtract x speed
+			CamYRotSpeed(); //Detect vertical input, add/subtract y speed
 
-			CurrentCamYSpeed = Mathf.Clamp(CurrentCamYSpeed, MinHeight, MaxHeight);
+			CurrentCamYSpeed = Mathf.Clamp(CurrentCamYSpeed, MinHeight, MaxHeight);	//Clamp the camera's Y angle
 
 			Vector3 targetPos = Target.transform.position;
 			Vector3 offset = CameraOffset;
 
-			float cameraAngle = _camera.transform.eulerAngles.y;
+			//Actually unused
+			//float cameraAngle = _camera.transform.eulerAngles.y;
 
 			offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset * CameraDistance;
 
