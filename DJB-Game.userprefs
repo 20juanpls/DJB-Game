@@ -1,9 +1,17 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b4a118151675f007a760d65c889042bbcd2de674
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
+=======
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/(OLD-DO NOT USE)Player_Scripts/PlayerNPCKill.cs">
+    <Files>
+      <File FileName="Assets/Scripts/(OLD-DO NOT USE)Player_Scripts/PlayerNPCKill.cs" Line="36" Column="3" />
+>>>>>>> 01645e2e1b7482ba38ed5420610cc697a6158b42
 =======
 <Properties StartupItem="Assembly-CSharp.csproj">
 >>>>>>> 932f5934fa7a91fba9d3eaa64bace592e666bd22
@@ -32,6 +40,7 @@
 >>>>>>> 372648aa40b25f8a077b9f7f14029a9aac5e3514
 =======
       <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="41" Column="1" />
+>>>>>>> 932f5934fa7a91fba9d3eaa64bace592e666bd22
     </Files>
   </MonoDevelop.Ide.Workbench>
 >>>>>>> b4a118151675f007a760d65c889042bbcd2de674
