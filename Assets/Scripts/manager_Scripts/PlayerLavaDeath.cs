@@ -171,7 +171,7 @@ public class PlayerLavaDeath : MonoBehaviour {
         //Both of these are cameraMovements;
         //GameObject.FindGameObjectWithTag("MainCameraMovement").GetComponent<CameraScript> ().AssignPlayer (_p);
         //Both of these are cameraMovements;
-		GameObject.FindGameObjectWithTag ("CamMovement_2.0").GetComponent<TestCameraMovement> ().AssignPlayer (_p);
+		GameObject.FindGameObjectWithTag ("CamMovement_2.0").GetComponent<OfficialCameraMovement> ().AssignPlayer (_p);
         //Both of these are cameraMovements;
 
         this.GetComponent<ThePause>().AssignPlayer(_p);
