@@ -29,6 +29,8 @@ public class TestCameraMovement : MonoBehaviour
 
 	private bool zoomLockIn,zoomLockOut;
 
+    Vector3 VeloZ, previous;
+
 	void Start()
 	{
 		Target = GameObject.FindGameObjectWithTag("PlayerMesh");
@@ -76,7 +78,7 @@ public class TestCameraMovement : MonoBehaviour
 			offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset * CameraDistance;
 
 			//Important
-			thisPos.transform.position = Vector3.Lerp(_camera.transform.position, targetPos + offset, CurrentCamSpeed * Time.deltaTime);
+			thisPos.transform.position = Vector3.Lerp(_camera.transform.position, targetPos + offset, CurrentCamSpeed * /*Time.deltaTime*/0.2f);
 			//Important
 			/*thisPos.transform.position = Vector3.Lerp(new Vector3(_camera.transform.position.x,0.0f,_camera.transform.position.z),
                 new Vector3(targetPos.x,0.0f,targetPos.z) + new Vector3(offset.x,0.0f,offset.z), CurrentCamSpeed * Time.deltaTime)
@@ -87,8 +89,14 @@ public class TestCameraMovement : MonoBehaviour
 			thisPos.transform.LookAt(targetPos);
 
 
-			//Debug.Log(Vector3.Distance(thisPos.transform.position, targetPos + offset));
 
+            VeloZ = (transform.position - previous) / Time.deltaTime;
+            previous = transform.position;
+
+
+            //Debug.Log(Vector3.Distance(thisPos.transform.position, targetPos + offset));
+            Debug.DrawRay(_camera.transform.position, VeloZ, Color.blue);
+            Debug.DrawRay(_camera.transform.position, _camera.transform.rotation*Vector3.forward*10.0f, Color.yellow);
 			/*if (Vector3.Distance(thisPos.transform.position, targetPos + offset) > 5.0f)
             {
                 CurrentCamSpeed = OrigCameraSpeed * 0.2f;

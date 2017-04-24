@@ -2,35 +2,58 @@
 using System.Collections;
 
 public class MovingPlataform : MonoBehaviour {
-    Rigidbody thisPlataform;
-    Vector3 originalPos, thisForward, thisUp, HorizVel, VertVel;
+    Transform thisPlataform;
+    Vector3 originalPos, thisForward, thisUp, HorizVel, VertVel, newPosition;
     public bool forwardOrBack, topOrBottom;
     public bool IsitBehind, IsitBelow;
     public float HorizMoveSpeed = 100.0f; 
     public float VertMoveSpeed = 100.0f;
     public float limDistance = 10.0f;
-	// Use this for initialization
-	void Start () {
-        thisPlataform = this.GetComponent<Rigidbody>();
+
+
+    Vector3 previous;
+    Vector3 velocityV;
+    float velocityf;
+    // Use this for initialization
+    void Start () {
+        thisPlataform = this.GetComponent<Transform>();
         originalPos = thisPlataform.position;
 
-        HorizMoveSpeed = HorizMoveSpeed * (1/Time.deltaTime);
-        VertMoveSpeed = VertMoveSpeed * (1 / Time.deltaTime);
+        //HorizMoveSpeed = HorizMoveSpeed * (1/Time.deltaTime);
+       // VertMoveSpeed = VertMoveSpeed * (1 / Time.deltaTime);
         //forwardOrBack = false;
         //topOrBottom = false;
         //false for back and bottom ... true for forward and top...
     }
 	void Update () {
+        GetVelocity();
         //Debug.Log(Vector3.Distance(thisPlataform.position, originalPos));
         HorizwhereIsIt();
         VertwhereIsIt();
 
         ForwardToBack();
          TopToBottom();
-        thisPlataform.velocity = (HorizVel + VertVel)*Time.deltaTime;
+        //thisPlataform.position = ((HorizVel + VertVel)*Time.deltaTime)+originalPos;
+        //newPosition = new Vector3(0.0f,(Mathf.Cos(Time.time * HorizMoveSpeed) * (1 / limDistance) * VertMoveSpeed), 0.0f) + originalPos;
+        newPosition = ((HorizVel + VertVel) * Time.deltaTime) + originalPos;
+
+        thisPlataform.position = newPosition;//Vector3.Lerp(thisPlataform.position, newPosition, 1.0f * Time.deltaTime);
+
+    }
+    void GetVelocity()
+    {
+        velocityV = (transform.position - previous) / Time.deltaTime;
+        velocityf = ((transform.position - previous).magnitude) / Time.deltaTime;
+
+        previous = transform.position;
+
+        Debug.DrawRay(transform.position, velocityV * 10.0f, Color.green);
+
+        //Debug.Log(velocityf);
 
 
     }
+
 
     void ForwardToBack() {
         if (forwardOrBack == false)

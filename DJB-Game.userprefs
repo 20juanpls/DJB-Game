@@ -1,56 +1,6 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC_Scripts/NPC_Death.cs">
-    <Files>
-      <File FileName="Assets/Scripts/NPC_Scripts/NPC_Death.cs" Line="109" Column="33" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
-      <File FileName="Assets/Animations/Brutus State Machine/BrutusMechanimInputs.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Environment_Scripts/ButtonActivator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CameraScripts/TestCameraMovement.cs" Line="1" Column="1" />
-=======
->>>>>>> e74baca881f4c9d236b5da783d22f2b406c355d7
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/ThePause.cs">
-    <Files>
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CameraScripts/TestCameraMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="70" Column="78" />
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_Player_Scripts/PlayerHealth.cs">
-    <Files>
-      <File FileName="Assets/Scripts/NPC_Scripts/FlyingNPC_HeadMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="183" Column="3" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MovingPlataform/NewMovingPlatform.cs">
-    <Files>
-      <File FileName="Assets/Scripts/MovingPlataform/NewMovingPlatform.cs" Line="46" Column="63" />
->>>>>>> 31ddd3f96f30728c1f29f34221d65c68f723b8f1
->>>>>>> 1f6dde87a9a639f627fd9b6ab855cee05b0fd1b0
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_Player_Scripts/PlayerKnockback.cs">
-    <Files>
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerKnockback.cs" Line="94" Column="138" />
->>>>>>> d960ca655c3df704e7e41a2d41890b7a631589c6
-<<<<<<< HEAD
-=======
->>>>>>> 7f1717cff8f21278e7f4c79304c9f399ca37edc1
->>>>>>> 1f6dde87a9a639f627fd9b6ab855cee05b0fd1b0
->>>>>>> e74baca881f4c9d236b5da783d22f2b406c355d7
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+﻿<Properties StartupItem="DJB-Game.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
