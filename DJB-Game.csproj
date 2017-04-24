@@ -119,6 +119,7 @@
     <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
+    <Compile Include="Assets\speedcubetest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
