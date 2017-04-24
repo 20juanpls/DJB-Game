@@ -9,8 +9,13 @@ public class MovingPlataform : MonoBehaviour {
     public float HorizMoveSpeed = 100.0f; 
     public float VertMoveSpeed = 100.0f;
     public float limDistance = 10.0f;
-	// Use this for initialization
-	void Start () {
+
+
+    Vector3 previous;
+    Vector3 velocityV;
+    float velocityf;
+    // Use this for initialization
+    void Start () {
         thisPlataform = this.GetComponent<Transform>();
         originalPos = thisPlataform.position;
 
@@ -21,6 +26,7 @@ public class MovingPlataform : MonoBehaviour {
         //false for back and bottom ... true for forward and top...
     }
 	void Update () {
+        GetVelocity();
         //Debug.Log(Vector3.Distance(thisPlataform.position, originalPos));
         HorizwhereIsIt();
         VertwhereIsIt();
@@ -28,11 +34,26 @@ public class MovingPlataform : MonoBehaviour {
         ForwardToBack();
          TopToBottom();
         //thisPlataform.position = ((HorizVel + VertVel)*Time.deltaTime)+originalPos;
-        newPosition = new Vector3(0.0f,(Mathf.Cos(Time.time * HorizMoveSpeed) * (1 / limDistance) * VertMoveSpeed), 0.0f) + originalPos;
+        //newPosition = new Vector3(0.0f,(Mathf.Cos(Time.time * HorizMoveSpeed) * (1 / limDistance) * VertMoveSpeed), 0.0f) + originalPos;
+        newPosition = ((HorizVel + VertVel) * Time.deltaTime) + originalPos;
 
-        thisPlataform.position = Vector3.Lerp(thisPlataform.position, newPosition, 1.0f * Time.deltaTime);
+        thisPlataform.position = newPosition;//Vector3.Lerp(thisPlataform.position, newPosition, 1.0f * Time.deltaTime);
 
     }
+    void GetVelocity()
+    {
+        velocityV = (transform.position - previous) / Time.deltaTime;
+        velocityf = ((transform.position - previous).magnitude) / Time.deltaTime;
+
+        previous = transform.position;
+
+        Debug.DrawRay(transform.position, velocityV * 10.0f, Color.green);
+
+        //Debug.Log(velocityf);
+
+
+    }
+
 
     void ForwardToBack() {
         if (forwardOrBack == false)

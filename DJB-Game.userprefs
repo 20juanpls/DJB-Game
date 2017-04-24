@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b4a118151675f007a760d65c889042bbcd2de674
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/ThePause.cs">
     <Files>
+<<<<<<< HEAD
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerMovement_Ver2.cs" Line="1" Column="1" />
@@ -15,6 +19,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench />
 >>>>>>> 372648aa40b25f8a077b9f7f14029a9aac5e3514
+=======
+      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="41" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+>>>>>>> b4a118151675f007a760d65c889042bbcd2de674
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

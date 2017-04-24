@@ -53,7 +53,7 @@
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerNPCKill.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
-     <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
+     <Compile Include="Assets\Scripts\CameraScripts\OfficialCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
+     <Compile Include="Assets\speedcubetest.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

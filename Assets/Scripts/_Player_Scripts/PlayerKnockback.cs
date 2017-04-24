@@ -88,7 +88,7 @@ public class PlayerKnockback : MonoBehaviour {
                   DangerousFall = true;
               }
 
-              if ((/*PlayerP.DJumpActive||PlayNPCK.InCollider*/PlayerP.CurrentOldVel.y >= 0.0f) &&(DangerousFall == true && PlayerP.isGrounded == false)) {
+              if ((PlayerP.CurrentOldVel.y >= 0.0f) &&(DangerousFall == true && PlayerP.isGrounded == false)||(PlayerP.ClimbSequence)) {
                   DangerousFall = false;
               }
 
@@ -186,7 +186,7 @@ public class PlayerKnockback : MonoBehaviour {
             if (TimeLeft <= 0.0f )
             {
                 TimeLeft = 0.0f;
-                if (PlayerP.IsGround_2 == true){
+                if (PlayerP.IsGround_2 == true || PlayerP.isGrounded == true){
                     recovOngroundT -= Time.deltaTime;
                     if (recovOngroundT <= 0.0f)
                     {
