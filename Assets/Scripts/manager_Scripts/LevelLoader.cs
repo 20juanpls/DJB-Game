@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour {
     public string sceneName;
-
+	AddingLoading lScreen; 
 	// Use this for initialization
 	void Start () {
 	
@@ -18,7 +18,8 @@ public class LevelLoader : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.tag == "PlayerMesh") {
             SceneManager.LoadScene(sceneName);
-        }
+			lScreen.newLoad();
+		}
 
     }
 }
