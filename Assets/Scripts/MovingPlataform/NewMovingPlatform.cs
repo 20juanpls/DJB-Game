@@ -26,12 +26,14 @@ public class NewMovingPlatform : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		if (attatched) {
-			Debug.Log ("Ow");
+			float yVos = this.gameObject.GetComponent<Rigidbody> ().velocity.y;
 			other.gameObject.GetComponent<Rigidbody> ().velocity += this.gameObject.GetComponent<Rigidbody> ().velocity;
+			this.gameObject.GetComponent<Rigidbody> ().velocity = new Vector3(this.gameObject.GetComponent<Rigidbody>().velocity.x,yVos,this.gameObject.GetComponent<Rigidbody>().velocity.z);
+			Debug.Log ("Boosted " + other);
 		}
-		Debug.Log (Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position));
+		//Debug.Log ("DIST TO CDI: " + Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position));
 		if (Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position) <= deadzone) {
 			Debug.Log ("LOOP");
 			CDI++;
@@ -42,21 +44,21 @@ public class NewMovingPlatform : MonoBehaviour {
 			if (MPI >= checkpoints.Capacity) {
 				MPI = 0;
 			}
-			Vector3 velo = new Vector3 (checkpoints [CDI].transform.position.x - checkpoints [MPI].transform.position.x, checkpoints [CDI].transform.position.y - checkpoints [MPI].transform.position.y, checkpoints [CDI].transform.position.z - checkpoints [MPI].transform.position.z);
-			this.GetComponent<Rigidbody> ().velocity = (velo * buffer);
 		}
+		Vector3 velo = new Vector3 (checkpoints [CDI].transform.position.x - checkpoints [MPI].transform.position.x, checkpoints [CDI].transform.position.y - checkpoints [MPI].transform.position.y, checkpoints [CDI].transform.position.z - checkpoints [MPI].transform.position.z);
+		this.GetComponent<Rigidbody> ().velocity = (velo * buffer);
 
 
 	}
 
 
 	void OnCollisionEnter (Collision _other){
-		Debug.Log ("Hello, " + _other.ToString ());
+		Debug.Log ("Hello, " + _other.ToString());
 		attatched = true;
 		other = _other;
 	}
 	void OnCollisionExit(Collision _other){
-		Debug.Log ("Goodbye, " + _other.ToString ());
+		Debug.Log ("Goodbye, " + _other.ToString());
 		attatched = false;
 	}
 }
