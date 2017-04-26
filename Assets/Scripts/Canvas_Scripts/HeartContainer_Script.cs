@@ -76,7 +76,7 @@ public class HeartContainer_Script : MonoBehaviour {
         //Debug.Log("Count in heart list: "+Hrts.Count);
         //Debug.Log("Hearts Left: "+ HrtsLeft.Count);
 
-        if (PlayHP.currentHealth < HrtsLeft.Count)//Hrts.Count)
+        if ((PlayHP.currentHealth < HrtsLeft.Count)&&(PlayHP.currentHealth > -1))//Hrts.Count)
         {
             //Debug.Log("Ouch!");
 
