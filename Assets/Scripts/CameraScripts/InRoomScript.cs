@@ -6,7 +6,7 @@ public class InRoomScript : MonoBehaviour {
     Transform Player;
     Vector3 CamPositionForThisRoom;
     Vector3 OriginalCamPos;
-    TestCameraMovement OrigCam;
+    OfficialCameraMovement OrigCam;
     //Transform OriginalCam;
     Camera OriginalCam;
 
@@ -14,7 +14,7 @@ public class InRoomScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        OrigCam = GameObject.FindGameObjectWithTag("CamMovement_2.0").GetComponent<TestCameraMovement>();
+		OrigCam = GameObject.FindGameObjectWithTag("CamMovement_2.0").GetComponent<OfficialCameraMovement>();
         //OriginalCam = GameObject.FindGameObjectWithTag("CamMovement_2.0").GetComponent<Transform>(); 
         OriginalCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         Player = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>();
