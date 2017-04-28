@@ -1,13 +1,24 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
+guid: da4e080676d29482c9f17fcb6d22acdb
+folderAsset: yes
+timeCreated: 1491414147
+=======
 <<<<<<< HEAD:Assets/z_SpecialPackage/Models_Sandbag/Models/Materials.meta
 guid: e0d6a545e0d774093b8d91f3a0d66914
 folderAsset: yes
 timeCreated: 1491414549
+>>>>>>> d960ca655c3df704e7e41a2d41890b7a631589c6
 =======
 guid: cf51509625ca84b2e9911bf47b41eb3e
 folderAsset: yes
 timeCreated: 1491417174
+<<<<<<< HEAD
+>>>>>>> 872beb653b38fdd1f1180a5a199793317fbe8320
+=======
 >>>>>>> f1662d1260d156bdab3bb43e10a68e208b8a36ff:Assets/z_SpecialPackage/Models_Sandbag/Models/Materials.meta
+>>>>>>> d960ca655c3df704e7e41a2d41890b7a631589c6
 licenseType: Free
 DefaultImporter:
   userData: 
