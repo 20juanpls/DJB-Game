@@ -17,6 +17,8 @@ public class ThePause : MonoBehaviour {
 	public EventSystem ES;
 	private GameObject storeSelected;
 
+	private bool isOptions = false;
+
     // Use this for initialization
     void Start()
     {
@@ -30,7 +32,7 @@ public class ThePause : MonoBehaviour {
             OptionsCanvas.SetActive(false);
         }
 			
-		ES.firstSelectedGameObject = GameObject.Find ("Resume Button");
+		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
 
     }
@@ -51,6 +53,7 @@ public class ThePause : MonoBehaviour {
         {
             if (Input.GetKeyDown("joystick button 4"))
             {
+				Debug.Log ("unpaused");
                 Paused = false;
             }
         }
@@ -71,14 +74,18 @@ public class ThePause : MonoBehaviour {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
         }
 
-		if (ES.currentSelectedGameObject != storeSelected)
+		if (Input.GetKeyDown ("joystick button 12") && isOptions == true)
+		{
+			OptionsCanvas.SetActive (false);
+		}
+			
+		if (ES.currentSelectedGameObject != storeSelected && !isOptions)
 		{
 			if (ES.currentSelectedGameObject == null)
 				ES.SetSelectedGameObject (storeSelected);
 			else
 				storeSelected = ES.currentSelectedGameObject;
 		}
-       
     }
 
     void IsItPaused() {
@@ -105,10 +112,14 @@ public class ThePause : MonoBehaviour {
 	}
 	public void options() {
 		OptionsCanvas.SetActive (true);
+		isOptions = true;
 	}
 
 	public void unOptions() {
 		OptionsCanvas.SetActive (false);
+
+		ES.firstSelectedGameObject = GameObject.Find ("Settings Button");
+		storeSelected = ES.firstSelectedGameObject;
 	}
 
 	public void main()

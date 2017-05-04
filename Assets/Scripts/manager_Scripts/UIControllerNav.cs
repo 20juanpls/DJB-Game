@@ -17,7 +17,7 @@ public class UIControllerNav : MonoBehaviour
 	{
 		if (ES.currentSelectedGameObject != storeSelected)
 		{
-			if (ES.SetSelectedGameObject (storeSelected) == null)
+			if (ES.currentSelectedGameObject == null)
 				ES.SetSelectedGameObject (storeSelected);
 			else
 				storeSelected = ES.currentSelectedGameObject;
