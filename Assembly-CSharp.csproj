@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
+     <Compile Include="Assets\BoulderGoalScript.cs" />
+     <Compile Include="Assets\ButtonPlatforms.cs" />
+     <Compile Include="Assets\ButtonScript.cs" />
+     <Compile Include="Assets\LegMovement.cs" />
+     <Compile Include="Assets\PointMovementSpeed.cs" />
+     <Compile Include="Assets\RigidFollowPoint.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerControls.cs" />
@@ -92,7 +98,10 @@
      <Compile Include="Assets\Scripts\manager_Scripts\FPSCounter.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
+     <Compile Include="Assets\Scripts\manager_Scripts\TeleporterScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
+     <Compile Include="Assets\ToogleTouchScript.cs" />
+     <Compile Include="Assets\TriggeredBoulder.cs" />
      <Compile Include="Assets\speedcubetest.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
