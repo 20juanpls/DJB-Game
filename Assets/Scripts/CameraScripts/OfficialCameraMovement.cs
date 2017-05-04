@@ -29,6 +29,7 @@ public class OfficialCameraMovement: MonoBehaviour
 	private Camera _camera;
 
 	private bool zoomLockIn,zoomLockOut;
+	bool OnGround;
 
     Vector3 VeloZ, previous;
 
@@ -67,8 +68,13 @@ public class OfficialCameraMovement: MonoBehaviour
 		{
 
 			//Call Interior Functions
+
+			//Debug.Log (OnGround);
+
 			ZoomInOut();	//Detect Zoom button clicking
 			CamXRotSpeed();	//Detect horizontal input, add/subtract x speed
+			//momentary if conditional
+			//if (!OnGround)
 			CamYRotSpeed(); //Detect vertical input, add/subtract y speed
 
 			CurrentCamYSpeed = Mathf.Clamp(CurrentCamYSpeed, MinHeight, MaxHeight);	//Clamp the camera's Y angle
@@ -115,6 +121,21 @@ public class OfficialCameraMovement: MonoBehaviour
 				_camera.transform.position = thisPos.transform.position;
 				_camera.transform.rotation = thisPos.transform.rotation;
 			}
+		}
+	}
+
+	private void OnCollisionStay(Collision collision)
+	{
+		//_camera.transform.position = new Vector3(_camera.transform.position.x,collision.transform.position.y,_camera.transform.position.z);
+		foreach (ContactPoint contact in collision.contacts) {
+			GameObject Other_GmObj = contact.otherCollider.gameObject;
+			string Other_Tag = Other_GmObj.transform.tag;
+
+			Debug.Log (Other_Tag);
+			if (Other_Tag == "Untagged") {
+				OnGround = true;
+			}
+		
 		}
 	}
 
