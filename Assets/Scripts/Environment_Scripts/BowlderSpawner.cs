@@ -6,17 +6,25 @@ public class BowlderSpawner : MonoBehaviour {
     public GameObject BoulderPrefab;
     public Transform BoulderSpawn;
 
+    GameObject ThePlayer;
+
     public float allotedTime = 6.0f;
+
+    public bool DontUseTimer;
 
     GameObject Boulder;
 
     public bool dropBoulder = true;
 	// Use this for initialization
 	void Start () {
+        ThePlayer = GameObject.FindGameObjectWithTag("PlayerMesh");
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    void FindThePlayer() {
+        ThePlayer  = GameObject.FindGameObjectWithTag("PlayerMesh");
+    }
+
+    // Update is called once per frame
+    void Update () {
         //BoulderDrop();
 
         if (dropBoulder == true && Boulder == null)
@@ -31,10 +39,22 @@ public class BowlderSpawner : MonoBehaviour {
 
         if (Boulder != null)
         {
-            Destroy(Boulder, allotedTime);
+            if (!DontUseTimer)
+                Destroy(Boulder, allotedTime);
+            else {
+                if (Boulder.GetComponent<TriggeredBoulder>().boulderDead) {
+                    Destroy(Boulder);
+                }
+            }
+
+            if (ThePlayer == null)
+                    Destroy(Boulder);
         }
         else {
             dropBoulder = true;
         }
+
+        if (ThePlayer == null)
+            FindThePlayer();
     }
 }
