@@ -53,9 +53,12 @@
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerNPCKill.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
-     <Compile Include="Assets\Scripts\CameraScripts\TestCameraMovement.cs" />
+     <Compile Include="Assets\Scripts\CameraScripts\OfficialCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\SceneLoader.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\TitleScreen.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
