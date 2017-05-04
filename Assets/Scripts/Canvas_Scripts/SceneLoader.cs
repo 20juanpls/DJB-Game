@@ -23,7 +23,7 @@ public class SceneLoader : MonoBehaviour {
 		Time.timeScale = 0.0f;
 		loadingCanvas.SetActive (true);
 
-		yield return new WaitForSeconds (3);
+		yield return new WaitForSeconds (1);
 
 		Time.timeScale = 1.0f;
 		loadingCanvas.SetActive (false);

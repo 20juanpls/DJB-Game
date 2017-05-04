@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ThePause : MonoBehaviour {
 
@@ -11,6 +13,9 @@ public class ThePause : MonoBehaviour {
     public GameObject PauseCanvas;
 	public GameObject OptionsCanvas;
     public bool Paused;
+
+	public EventSystem ES;
+	private GameObject storeSelected;
 
     // Use this for initialization
     void Start()
@@ -24,6 +29,9 @@ public class ThePause : MonoBehaviour {
         {
             OptionsCanvas.SetActive(false);
         }
+			
+		ES.firstSelectedGameObject = GameObject.Find ("Resume Button");
+		storeSelected = ES.firstSelectedGameObject;
 
     }
 
@@ -63,7 +71,13 @@ public class ThePause : MonoBehaviour {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
         }
 
-
+		if (ES.currentSelectedGameObject != storeSelected)
+		{
+			if (ES.currentSelectedGameObject == null)
+				ES.SetSelectedGameObject (storeSelected);
+			else
+				storeSelected = ES.currentSelectedGameObject;
+		}
        
     }
 
@@ -79,19 +93,22 @@ public class ThePause : MonoBehaviour {
             {
                // Debug.Log("Unpaused");
                 Paused = false;
+				OptionsCanvas.SetActive (false);
             }
         }
     }
 
+	public void resume()
+	{
+		Paused = false;
+		OptionsCanvas.SetActive (false);
+	}
 	public void options() {
 		OptionsCanvas.SetActive (true);
-		Time.timeScale = 0.0f;
-		Paused = false;
 	}
 
 	public void unOptions() {
 		OptionsCanvas.SetActive (false);
-		Paused = true;
 	}
 
 	public void main()
