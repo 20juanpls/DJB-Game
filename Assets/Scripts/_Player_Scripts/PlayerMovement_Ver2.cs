@@ -13,7 +13,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed, downLedgeDist;
 
-    public bool Paused, UnPaused, DontMove, Freeze, forKnockBack, GroundCannotKill, GroundSequence, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;
+    public bool Paused, UnPaused, DontMove, Freeze, forKnockBack, GroundCannotKill, GroundSequence, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;//, OnToggle;
 
     private bool isMove, JumpBack, JumpBackSeq, JumpSlide, /*HoldClimb,*/ ClimbBugPatch_1, MoveWithPlat;
 	public bool canJump, CantClimb, Sliding, Climbing;
@@ -180,8 +180,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 MoveWithPlat = true;
             }
         }*/
-        //Debug.Log(MoveWithPlat);
-
+        
         if (InRotatingPlat || thereIsFrontMovePlatClimb || InTransfromClimbtoGround) {
             TheRigidBod = RotatingParent.GetComponent<speedcubetest>().followThis.GetComponent<Rigidbody>();
             MoveWithPlat = true;
@@ -199,7 +198,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 GroundInMovPlat = true;
 
             Vector3 currRotVel = Vector3.Cross(distFromRigidBod, TheRigidBod.angularVelocity) * -1.0f;
-            //Debug.DrawRay(PlayerRb.position, currRotVel, Color.red);
+            Debug.DrawRay(PlayerRb.position, currRotVel, Color.red);
             MovingPlatVel = TheRigidBod.velocity + currRotVel;
         }
         else {
@@ -677,12 +676,14 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 }
             }
             if (hit.transform.tag == "hazard" || hit.transform.tag == "EpicentralHazard")
-            {
                 QuickDeath = true;
-            }
-            else {
+            else 
                 QuickDeath = false;
-            }
+
+            /*if (hit.transform.tag == "toggle")
+                OnToggle = true;
+            else
+                OnToggle = false;*/
         }
 
         Vector3 ForwardRotatedDirection = PlayerRb.rotation * Vector3.forward;

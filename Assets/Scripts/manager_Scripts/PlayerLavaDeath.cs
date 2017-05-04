@@ -214,6 +214,19 @@ public class PlayerLavaDeath : MonoBehaviour {
 			//Debug.Log ("Assignment attempted");
 		}
 
+        GameObject[] Teleporters = GameObject.FindGameObjectsWithTag("teleporter");
+        for (int j = 0; j < Teleporters.Length; j++) {
+            Teleporters[j].GetComponent<TeleporterScript>().AssignPlayer(_p);
+        }
+
+        /*GameObject[] BoulderSpawners = GameObject.FindGameObjectsWithTag("BowlderSpawner");
+        for (int j = 0; j < BoulderSpawners.Length; j++)
+        {
+            BoulderSpawners[j].GetComponent<BowlderSpawner>().AssignPlayer(_p);
+        }*/
+
+
+
     }
 
 

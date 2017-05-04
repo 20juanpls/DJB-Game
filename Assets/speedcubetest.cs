@@ -11,7 +11,7 @@ public class speedcubetest : MonoBehaviour {
     public float LerpSpeed = 1.0f;
 
     public bool MoveWithFollowThis, harshmovement;
-    public bool UpDOwn;
+    public bool UpDOwn, dontRotate;
 
     float TimeSwitch;
     Vector3 MoveToPos;
@@ -35,7 +35,8 @@ public class speedcubetest : MonoBehaviour {
         if (MoveWithFollowThis)
         {
             this.transform.position = followThis.transform.position;
-            this.transform.rotation = followThis.transform.rotation;
+            if (!dontRotate)
+                this.transform.rotation = followThis.transform.rotation;
             //this.transform.position = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>().position + Vector3.up*4.0f;
         }
         else
