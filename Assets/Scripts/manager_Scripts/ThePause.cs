@@ -31,7 +31,7 @@ public class ThePause : MonoBehaviour {
         {
             OptionsCanvas.SetActive(false);
         }
-			
+
 		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
 
