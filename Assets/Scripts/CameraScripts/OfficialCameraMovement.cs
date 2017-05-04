@@ -17,8 +17,9 @@ public class OfficialCameraMovement: MonoBehaviour
 
 	public float CamXSpeed;
 	public float CamYSpeed;
-	public float MinHeight = -15.0f;
-	public float MaxHeight = 20.0f;
+	float MinHeight = -70.0f;
+	float MaxHeight = 60.0f;
+
 
 	public float joystickDeadzone = 0.1f;
 
@@ -65,6 +66,7 @@ public class OfficialCameraMovement: MonoBehaviour
 		//Debug.Log(Input.GetAxis("XB1_RightLeft"));
 		if (_camera != null && Target != null)
 		{
+
 			//Call Interior Functions
 
 			//Debug.Log (OnGround);
@@ -80,6 +82,7 @@ public class OfficialCameraMovement: MonoBehaviour
 			Vector3 targetPos = Target.transform.position;
 			Vector3 offset = CameraOffset;
 
+			float cameraAngle = _camera.transform.eulerAngles.y;
 			//Actually unused
 			//float cameraAngle = _camera.transform.eulerAngles.y;
 
