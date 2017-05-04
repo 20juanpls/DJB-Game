@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\NPC_Scripts\NPCStomper.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Death.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
+     <Compile Include="Assets\Scripts\SaveLoad\SavefileManager.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
