@@ -86,8 +86,8 @@ public class SavefileManager : MonoBehaviour {
 				all = all.Substring (0, loc);
 				//All the way to the loc of the screen name + 3
 				//Debug.Log(all.Length + " vs " + (loc+sceneName.Length+3));
-				Debug.Log("Score is " + all);
-				GameObject.Find("Player").GetComponent<PlayerScore>().score = int.Parse(all);
+				//Debug.Log("Score is " + all);
+				//GameObject.Find("Player").GetComponent<PlayerScore>().score = int.Parse(all);
 
 			}
 		}
