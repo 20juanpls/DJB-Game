@@ -18,10 +18,10 @@ public class NewMovingPlatform : MonoBehaviour {
 		MPI = 0;
 		CDI = 1;
 		this.transform.position = checkpoints [MPI].transform.position;
-		Debug.Log (checkpoints [CDI].transform.position + " - " + checkpoints [MPI].transform.position);
+		//Debug.Log (checkpoints [CDI].transform.position + " - " + checkpoints [MPI].transform.position);
 		Vector3 velo = new Vector3 (checkpoints [CDI].transform.position.x - checkpoints [MPI].transform.position.x, checkpoints [CDI].transform.position.y - checkpoints [MPI].transform.position.y, checkpoints [CDI].transform.position.z - checkpoints [MPI].transform.position.z);
 		this.GetComponent<Rigidbody> ().velocity = (velo * buffer);
-		Debug.Log (this.GetComponent<Rigidbody> ().velocity);
+		//Debug.Log (this.GetComponent<Rigidbody> ().velocity);
 		attatched = false;
 	}
 	

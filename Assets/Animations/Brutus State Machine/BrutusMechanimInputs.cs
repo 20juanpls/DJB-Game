@@ -4,7 +4,7 @@ using System.Collections;
 public class BrutusMechanimInputs : MonoBehaviour 
 {
     public Animator thisAnimator;
-
+    ThePause pauser;
     public GameObject ThePlayer;
 	public Rigidbody PlayRb;
 	public PlayerMovement_Ver2 Player;
@@ -14,7 +14,8 @@ public class BrutusMechanimInputs : MonoBehaviour
     void Start () 
     {
         thisAnimator = GetComponent<Animator>();
-        ThePlayer = GameObject.FindGameObjectWithTag("PlayerMesh");
+        ThePlayer = transform.parent.gameObject;//GameObject.FindGameObjectWithTag("PlayerMesh");
+        pauser = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<ThePause>();
         Player = ThePlayer.GetComponent<PlayerMovement_Ver2> ();
 		PlayRb = ThePlayer.GetComponent<Rigidbody> ();
         AnimSpeed = thisAnimator.speed;
@@ -36,6 +37,7 @@ public class BrutusMechanimInputs : MonoBehaviour
 			RunningAnim ();
 			beforeStart--;
 		}
+        OnPause();
     }
 	void RunningAnim(){
 
@@ -61,10 +63,8 @@ public class BrutusMechanimInputs : MonoBehaviour
 		}
 	}
 
-    public void OnPause( bool Paused) {
-        //Debug.Log(thisAnimator.speed);
-        //Debug.Log(AnimSpeed);
-        if (Paused == true)
+    void OnPause() {
+        if (pauser.Paused == true)
         {
             thisAnimator.speed = 0.0f;
         }
