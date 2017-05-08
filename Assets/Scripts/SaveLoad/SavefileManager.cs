@@ -45,6 +45,10 @@ public class SavefileManager : MonoBehaviour {
 		status = 0;
 		for (int x = 0; x < 15; x++) {
 			finalChar = allText.IndexOf (" ");
+			if (finalChar < 0) {
+				Debug.Log ("ERR");
+				break;
+			}
 			//Debug.Log ("Final Char: " + finalChar);
 			sub = allText.Substring (1, finalChar);
 			sub = sub.Substring (0, sub.Length-1);
@@ -115,6 +119,10 @@ public class SavefileManager : MonoBehaviour {
 		fileWriter.Close();
 
 
+	}
+
+	public int GetStatus(){
+		return -1;
 	}
 
 
