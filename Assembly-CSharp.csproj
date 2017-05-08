@@ -101,6 +101,10 @@
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\TeleporterScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
+<<<<<<< HEAD
+=======
+     <Compile Include="Assets\Scripts\manager_Scripts\UIControllerNav.cs" />
+>>>>>>> 03ddb73f3a5811be97fcdc9eea6b8c1e7e2a6cf3
      <Compile Include="Assets\ToogleTouchScript.cs" />
      <Compile Include="Assets\TriggeredBoulder.cs" />
      <Compile Include="Assets\speedcubetest.cs" />

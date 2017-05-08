@@ -1,18 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MainMenu : MonoBehaviour {
-
+public class UIControllerNav : MonoBehaviour
+{
 	public EventSystem ES;
 	private GameObject storeSelected;
 
 	void Start()
 	{
-		ES.firstSelectedGameObject = GameObject.Find ("NewGame_Button");
 		storeSelected = ES.firstSelectedGameObject;
 	}
 
@@ -25,20 +22,5 @@ public class MainMenu : MonoBehaviour {
 			else
 				storeSelected = ES.currentSelectedGameObject;
 		}
-	}
-
-	public void NewGame()
-	{
-		SceneManager.LoadScene ("Stage_Hub");
-	}
-
-	public void LoadGame()
-	{
-		
-	}
-
-	public void Quit()
-	{
-		Application.Quit ();
 	}
 }

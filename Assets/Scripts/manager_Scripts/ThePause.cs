@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ThePause : MonoBehaviour {
 
@@ -11,6 +13,11 @@ public class ThePause : MonoBehaviour {
     public GameObject PauseCanvas;
 	public GameObject OptionsCanvas;
     public bool Paused;
+
+	public EventSystem ES;
+	private GameObject storeSelected;
+
+	private bool isOptions = false;
 
     // Use this for initialization
     void Start()
@@ -24,6 +31,9 @@ public class ThePause : MonoBehaviour {
         {
             OptionsCanvas.SetActive(false);
         }
+
+		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
+		storeSelected = ES.firstSelectedGameObject;
 
     }
 
@@ -43,6 +53,7 @@ public class ThePause : MonoBehaviour {
         {
             if (Input.GetKeyDown("joystick button 4"))
             {
+				Debug.Log ("unpaused");
                 Paused = false;
             }
         }
@@ -63,8 +74,18 @@ public class ThePause : MonoBehaviour {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
         }
 
-
-       
+		if (Input.GetKeyDown ("joystick button 12") && isOptions == true)
+		{
+			OptionsCanvas.SetActive (false);
+		}
+			
+		if (ES.currentSelectedGameObject != storeSelected && !isOptions)
+		{
+			if (ES.currentSelectedGameObject == null)
+				ES.SetSelectedGameObject (storeSelected);
+			else
+				storeSelected = ES.currentSelectedGameObject;
+		}
     }
 
     void IsItPaused() {
@@ -79,19 +100,26 @@ public class ThePause : MonoBehaviour {
             {
                // Debug.Log("Unpaused");
                 Paused = false;
+				OptionsCanvas.SetActive (false);
             }
         }
     }
 
+	public void resume()
+	{
+		Paused = false;
+		OptionsCanvas.SetActive (false);
+	}
 	public void options() {
 		OptionsCanvas.SetActive (true);
-		Time.timeScale = 0.0f;
-		Paused = false;
+		isOptions = true;
 	}
 
 	public void unOptions() {
 		OptionsCanvas.SetActive (false);
-		Paused = true;
+
+		ES.firstSelectedGameObject = GameObject.Find ("Settings Button");
+		storeSelected = ES.firstSelectedGameObject;
 	}
 
 	public void main()
