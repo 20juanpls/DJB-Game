@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
+     <Compile Include="Assets\BoulderGoalScript.cs" />
+     <Compile Include="Assets\ButtonPlatforms.cs" />
+     <Compile Include="Assets\ButtonScript.cs" />
+     <Compile Include="Assets\LegMovement.cs" />
+     <Compile Include="Assets\PointMovementSpeed.cs" />
+     <Compile Include="Assets\RigidFollowPoint.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerControls.cs" />
@@ -55,7 +61,10 @@
      <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\OfficialCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\SceneLoader.cs" />
+     <Compile Include="Assets\Scripts\Canvas_Scripts\TitleScreen.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
@@ -76,6 +85,7 @@
      <Compile Include="Assets\Scripts\NPC_Scripts\NPCStomper.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Death.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
+     <Compile Include="Assets\Scripts\SaveLoad\SavefileManager.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
@@ -89,23 +99,26 @@
      <Compile Include="Assets\Scripts\manager_Scripts\FPSCounter.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
+     <Compile Include="Assets\Scripts\manager_Scripts\TeleporterScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
      <Compile Include="Assets\Scripts\speedcubetest.cs" />
+     <Compile Include="Assets\ToogleTouchScript.cs" />
+     <Compile Include="Assets\TriggeredBoulder.cs" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Emissive Diffuse.shader" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Standard Diffuse Bump.shader" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Transparent Diffuse Bump.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.PlaymodeTestsRunner">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>

@@ -10,8 +10,8 @@ public class speedcubetest : MonoBehaviour {
     public float SwitchTime = 1.0f;
     public float LerpSpeed = 1.0f;
 
-    public bool MoveWithFollowThis;
-    public bool UpDOwn;
+    public bool MoveWithFollowThis, harshmovement;
+    public bool UpDOwn, dontRotate;
 
     float TimeSwitch;
     Vector3 MoveToPos;
@@ -35,7 +35,8 @@ public class speedcubetest : MonoBehaviour {
         if (MoveWithFollowThis)
         {
             this.transform.position = followThis.transform.position;
-            this.transform.rotation = followThis.transform.rotation;
+            if (!dontRotate)
+                this.transform.rotation = followThis.transform.rotation;
             //this.transform.position = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<Transform>().position + Vector3.up*4.0f;
         }
         else
@@ -49,7 +50,10 @@ public class speedcubetest : MonoBehaviour {
             else
                 Direction = Vector3.right;
 
-            CenterOfMass.velocity = Vector3.Lerp(CenterOfMass.velocity, Direction*Speed, LerpSpeed * Time.deltaTime);
+            if (harshmovement)
+                CenterOfMass.velocity = Direction * Speed;//Vector3.Lerp(CenterOfMass.velocity, Direction*Speed, LerpSpeed * Time.deltaTime);
+            else
+                CenterOfMass.velocity = Vector3.Lerp(CenterOfMass.velocity, Direction*Speed, LerpSpeed * Time.deltaTime);
 
             if (TimeSwitch < 0.0f)
             {
