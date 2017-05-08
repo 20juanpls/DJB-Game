@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement_Ver2 : MonoBehaviour {
     Rigidbody PlayerRb;
-    GameObject RotatingParent;
+    GameObject RotatingParent, loadingCanvas;
     Transform Camera_Rot;
     PlayerKnockback KnockBack;
     PlayerHealth PlayHealth;
@@ -51,7 +51,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     Rigidbody TheRigidBod;
     bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround;
     //revised bools...
-    bool GroundInMovPlat, InTransition;
+    bool GroundInMovPlat, InTransition, loadIn;
 
     int jumpCount;
     //int HierchyNum;
@@ -63,6 +63,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         //HeierchyNumber(this.gameObject);
         //Debug.Log(HeierchyNumber(this.gameObject));
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
+        loadingCanvas = GameObject.Find("LoadingScreen_Canvas");
         KnockBack = this.GetComponent<PlayerKnockback>();
         PlayHealth = this.GetComponent<PlayerHealth>();
         PlayNPCK = this.GetComponent<PlayerNPCKill>();
@@ -88,12 +89,18 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             InRotatingPlat = false;
         }
 
-        if (Paused == true)
+        if (loadingCanvas != null)
+            loadIn = loadingCanvas.activeSelf;
+        else
+            loadIn = false;
+
+
+        if (Paused == true || loadIn)
         {
-                //Debug.Log("IsPaused???");
-                //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
-                PlayerRb.velocity = Vector3.zero;
-                UnPaused = false;
+            //Debug.Log("IsPaused???");
+            //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+            PlayerRb.velocity = Vector3.zero;
+            UnPaused = false;
         }
         else
         {
@@ -127,7 +134,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 
 
-            if (PlayHealth.currentHealth== 0.0f) {
+            if (PlayHealth.currentHealth == 0.0f) {
                 moveDirection = Vector3.zero;
                 lookDirection = Vector3.zero;
             }
@@ -142,7 +149,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //-You shoudld not have any airtime when on a ramp on a moving platform
             //PlayerRb.velocity = vel;
             //Debug.Log(ClimbSequence);
-            if (IsGround_2 ||ClimbSequence || GroundInMovPlat)
+            if (IsGround_2 || ClimbSequence || GroundInMovPlat)
             {
                 airTime = 0.0f;
 

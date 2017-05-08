@@ -32,6 +32,8 @@ public class ThePause : MonoBehaviour {
             OptionsCanvas.SetActive(false);
         }
 
+        ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
 		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
 
@@ -47,7 +49,6 @@ public class ThePause : MonoBehaviour {
     void Update()
     {
         IsItPaused();
-        MechAnim.OnPause(Paused);
 
         if (PauseCanvas.activeSelf)
         {
