@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ThePause : MonoBehaviour {
 
@@ -91,5 +92,10 @@ public class ThePause : MonoBehaviour {
 	public void unOptions() {
 		OptionsCanvas.SetActive (false);
 		Paused = true;
+	}
+
+	public void main()
+	{
+		SceneManager.LoadScene ("MainMenu");
 	}
 }

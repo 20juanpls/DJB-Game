@@ -27,12 +27,24 @@ public class RotatingPlataforms : MonoBehaviour {
     {
         DirRotT = this.GetComponent<Rigidbody>();
         OrigPos = this.gameObject.GetComponent<Transform>().position;
-        eulerAngleDir = new Vector3(X_axisSpeed, Y_axisSpeed, Z_axisSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //triggered inclusion
+        //Debug.Log(DirRotT.rotation.x);
+        if (DirRotT.rotation.x * Mathf.Rad2Deg >= 20.0f) {
+            //Debug.Log("agh");
+            X_axisSpeed = X_axisSpeed * -1;
+
+        }
+        if (X_axisSpeed < 0.0f && DirRotT.rotation.x * Mathf.Rad2Deg <= -20.0f) {
+            X_axisSpeed = X_axisSpeed * -1;
+        }
+
+
+        eulerAngleDir = new Vector3(X_axisSpeed, Y_axisSpeed, Z_axisSpeed);
         DirRotT.angularVelocity = eulerAngleDir * Time.deltaTime;
     }
 }
