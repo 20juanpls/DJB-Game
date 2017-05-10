@@ -5,13 +5,16 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour {
     GameObject Toggle;
     ToogleTouchScript ToggleScript;
+	public GameObject MovingRigid;
 
-    Vector3 OrigTogPos;
+	Rigidbody TheRigidOfMove;
+
+    Vector3 OrigTogPos, TheOrg;
 
     public bool ButtonActive, ActivatorB, TimerB, ToggleB, PannelB;
     public float ButtonTime;
 
-    bool instapress, ActivateTimer;
+    bool instapress, ActivateTimer, IsMovingPlat;
     float CurrentTime;
 
     int PannelCount;
@@ -19,13 +22,23 @@ public class ButtonScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Toggle = transform.FindChild("toggle").gameObject;
-        OrigTogPos = Toggle.transform.position;
+		TheOrg = Toggle.transform.position;
         ToggleScript = Toggle.GetComponent<ToogleTouchScript>();
         CurrentTime = ButtonTime;
+		if (MovingRigid != null)
+			TheRigidOfMove = MovingRigid.GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log (OrigTogPos + ", "+Toggle.transform.position);
+
+		if (MovingRigid != null) {
+			OrigTogPos = TheRigidOfMove.position + TheOrg;
+		} else {
+			OrigTogPos = TheOrg;
+		}
+
         ActivatorButtonOpt();
         TimerButtonOpt();
         ToggleButtonOpt();
