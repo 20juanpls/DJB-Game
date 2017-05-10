@@ -50,6 +50,7 @@
      <Compile Include="Assets\BoulderGoalScript.cs" />
      <Compile Include="Assets\ButtonPlatforms.cs" />
      <Compile Include="Assets\ButtonScript.cs" />
+     <Compile Include="Assets\HubPortalColorer.cs" />
      <Compile Include="Assets\LegMovement.cs" />
      <Compile Include="Assets\PointMovementSpeed.cs" />
      <Compile Include="Assets\RigidFollowPoint.cs" />
