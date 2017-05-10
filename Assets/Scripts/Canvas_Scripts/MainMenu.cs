@@ -10,10 +10,22 @@ public class MainMenu : MonoBehaviour {
 	public EventSystem ES;
 	private GameObject storeSelected;
 
+	private GameObject newGameButton;
+	private GameObject quitButton;
+
 	void Start()
 	{
 		ES.firstSelectedGameObject = GameObject.Find ("NewGame_Button");
 		storeSelected = ES.firstSelectedGameObject;
+
+		newGameButton = GameObject.Find ("NewGame_Button");
+		Button btn = newGameButton.GetComponent<Button> ();
+		btn.onClick.AddListener (NewGame);
+
+		quitButton = GameObject.Find ("Quit_Button");
+		Button butonn = quitButton.GetComponent<Button> ();
+		butonn.onClick.AddListener (Quit);
+
 	}
 
 	void Update()

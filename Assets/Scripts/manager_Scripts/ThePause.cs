@@ -19,6 +19,10 @@ public class ThePause : MonoBehaviour {
 
 	private bool isOptions = false;
 
+	private GameObject resumeButton;
+	private GameObject mainMenuButton;
+	private GameObject settingsButton;
+
     // Use this for initialization
     void Start()
     {
@@ -32,10 +36,26 @@ public class ThePause : MonoBehaviour {
             OptionsCanvas.SetActive(false);
         }
 
+<<<<<<< HEAD
+		ES = EventSystem.current;
+=======
         ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 
+>>>>>>> 74ac74b718d77123c7fc245606c6dd1c6b4285b5
 		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
+
+		resumeButton = GameObject.Find ("ResumeButton");
+		Button butonn = resumeButton.GetComponent<Button> ();
+		butonn.onClick.AddListener (resume);
+
+		mainMenuButton = GameObject.Find ("Main Menu Button");
+		Button burton = mainMenuButton.GetComponent<Button> ();
+		burton.onClick.AddListener (main);
+
+		settingsButton = GameObject.Find ("Settings Button");
+		Button buntern = settingsButton.GetComponent<Button> ();
+		buntern.onClick.AddListener (options);
 
     }
 
