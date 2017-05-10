@@ -1,18 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Canvas_Scripts/SceneLoader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_Player_Scripts/PlayerScore.cs">
     <Files>
-      <File FileName="Assets/Scripts/Canvas_Scripts/SceneLoader.cs" Line="26" Column="37" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/manager_Scripts/ThePause.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Canvas_Scripts/TitleScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Canvas_Scripts/MainMenu.cs" Line="23" Column="44" />
-      <File FileName="Assets/Scripts/Canvas_Scripts/SceneLoader.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="82" Column="57" />
-      <File FileName="Assets/Scripts/manager_Scripts/UIControllerNav.cs" Line="19" Column="4" />
->>>>>>> 03ddb73f3a5811be97fcdc9eea6b8c1e7e2a6cf3
+      <File FileName="Assets/Scripts/Canvas_Scripts/SceneLoader.cs" Line="25" Column="1" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="50" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
