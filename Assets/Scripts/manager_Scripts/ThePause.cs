@@ -35,6 +35,7 @@ public class ThePause : MonoBehaviour {
         {
             OptionsCanvas.SetActive(false);
         }
+<<<<<<< HEAD
 
 
 
@@ -42,6 +43,11 @@ public class ThePause : MonoBehaviour {
         ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 
 
+=======
+			
+        ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
+>>>>>>> 4f9fb48ba3d7da58ee9e480c3aa271e21fae5fdf
 		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
 
