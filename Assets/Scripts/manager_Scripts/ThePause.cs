@@ -36,7 +36,12 @@ public class ThePause : MonoBehaviour {
             OptionsCanvas.SetActive(false);
         }
 
+<<<<<<< HEAD
 		ES = EventSystem.current;
+=======
+        ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
+>>>>>>> 74ac74b718d77123c7fc245606c6dd1c6b4285b5
 		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
 
@@ -64,7 +69,6 @@ public class ThePause : MonoBehaviour {
     void Update()
     {
         IsItPaused();
-        MechAnim.OnPause(Paused);
 
         if (PauseCanvas.activeSelf)
         {
