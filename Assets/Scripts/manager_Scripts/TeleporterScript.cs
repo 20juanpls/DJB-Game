@@ -71,11 +71,17 @@ public class TeleporterScript : MonoBehaviour {
             TargetT = Gpos_Top;
             TargetL = Gpos_L;
             TargetR = Gpos_R;
+<<<<<<< HEAD
+			this.transform.FindChild ("PortalFX").gameObject.SetActive (true);
+=======
+
+>>>>>>> master
         }
         else {
             TargetT = OposTop;
             TargetL = OposL;
             TargetR = OposR;
+			this.transform.FindChild ("PortalFX").gameObject.SetActive (false);
         }
 
         T_Top.transform.position = Vector3.MoveTowards(T_Top.transform.position, TargetT, PiecesSpeed * Time.deltaTime);

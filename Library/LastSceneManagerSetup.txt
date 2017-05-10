@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
+- path: Assets/Scenes/TitleScene.unity
+=======
 - path: Assets/Scenes/AirShipThing.unity
+>>>>>>> 74ac74b718d77123c7fc245606c6dd1c6b4285b5
   isLoaded: 1
   isActive: 1

@@ -11,6 +11,7 @@ public class PlayerScore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
 		score = 0;
 		scoreText = GameObject.Find ("ScoreText").GetComponent<Text> ();
 
@@ -18,17 +19,22 @@ public class PlayerScore : MonoBehaviour {
 			Debug.Log("Text for score missing! : "+ this.ToString());
 		}
 
-		scoreText.text = "Score: 0";
+		GameObject.Find ("SceneSaver").GetComponent<SavefileManager> ().UpdateScore ();
 		coins = GameObject.FindGameObjectsWithTag("Coin");
+		if (score == null) {
+			score = 0;
+		}
+		scoreText.text = "Score: " + score;
 	}
 
 	// ScoreUpdate is called whenever a coin is collected
 	void ScoreUpdate () {
 		score++;
 		scoreText.text = "Score: " + score;
-		if(score == 100)
+		if(score >= 100)
 		{
-			playerHealth.Lives++;
+			score -= 100;
+			playerHealth.Lives = playerHealth.Lives + 1;
 		}
 	}
 
