@@ -71,6 +71,7 @@ public class TeleporterScript : MonoBehaviour {
             TargetT = Gpos_Top;
             TargetL = Gpos_L;
             TargetR = Gpos_R;
+
         }
         else {
             TargetT = OposTop;
