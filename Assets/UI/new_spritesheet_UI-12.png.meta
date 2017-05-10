@@ -1,0 +1,2022 @@
+fileFormatVersion: 2
+guid: 2ec55f774dbc349f7bc9330842f9b79e
+timeCreated: 1493406468
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: new_spritesheet_UI-12_0
+    21300002: new_spritesheet_UI-12_1
+    21300004: new_spritesheet_UI-12_2
+    21300006: new_spritesheet_UI-12_3
+    21300008: new_spritesheet_UI-12_4
+    21300010: new_spritesheet_UI-12_5
+    21300012: new_spritesheet_UI-12_6
+    21300014: new_spritesheet_UI-12_7
+    21300016: new_spritesheet_UI-12_8
+    21300018: new_spritesheet_UI-12_9
+    21300020: new_spritesheet_UI-12_10
+    21300022: new_spritesheet_UI-12_11
+    21300024: new_spritesheet_UI-12_12
+    21300026: new_spritesheet_UI-12_13
+    21300028: new_spritesheet_UI-12_14
+    21300030: new_spritesheet_UI-12_15
+    21300032: new_spritesheet_UI-12_16
+    21300034: new_spritesheet_UI-12_17
+    21300036: new_spritesheet_UI-12_18
+    21300038: new_spritesheet_UI-12_19
+    21300040: new_spritesheet_UI-12_20
+    21300042: new_spritesheet_UI-12_21
+    21300044: new_spritesheet_UI-12_22
+    21300046: new_spritesheet_UI-12_23
+    21300048: new_spritesheet_UI-12_24
+    21300050: new_spritesheet_UI-12_25
+    21300052: new_spritesheet_UI-12_26
+    21300054: new_spritesheet_UI-12_27
+    21300056: new_spritesheet_UI-12_28
+    21300058: new_spritesheet_UI-12_29
+    21300060: new_spritesheet_UI-12_30
+    21300062: new_spritesheet_UI-12_31
+    21300064: new_spritesheet_UI-12_32
+    21300066: new_spritesheet_UI-12_33
+    21300068: new_spritesheet_UI-12_34
+    21300070: new_spritesheet_UI-12_35
+    21300072: new_spritesheet_UI-12_36
+    21300074: new_spritesheet_UI-12_37
+    21300076: new_spritesheet_UI-12_38
+    21300078: new_spritesheet_UI-12_39
+    21300080: new_spritesheet_UI-12_40
+    21300082: new_spritesheet_UI-12_41
+    21300084: new_spritesheet_UI-12_42
+    21300086: new_spritesheet_UI-12_43
+    21300088: new_spritesheet_UI-12_44
+    21300090: new_spritesheet_UI-12_45
+    21300092: new_spritesheet_UI-12_46
+    21300094: new_spritesheet_UI-12_47
+    21300096: new_spritesheet_UI-12_48
+    21300098: new_spritesheet_UI-12_49
+    21300100: new_spritesheet_UI-12_50
+    21300102: new_spritesheet_UI-12_51
+    21300104: new_spritesheet_UI-12_52
+    21300106: new_spritesheet_UI-12_53
+    21300108: new_spritesheet_UI-12_54
+    21300110: new_spritesheet_UI-12_55
+    21300112: new_spritesheet_UI-12_56
+    21300114: new_spritesheet_UI-12_57
+    21300116: new_spritesheet_UI-12_58
+    21300118: new_spritesheet_UI-12_59
+    21300120: new_spritesheet_UI-12_60
+    21300122: new_spritesheet_UI-12_61
+    21300124: new_spritesheet_UI-12_62
+    21300126: new_spritesheet_UI-12_63
+    21300128: new_spritesheet_UI-12_64
+    21300130: new_spritesheet_UI-12_65
+    21300132: new_spritesheet_UI-12_66
+    21300134: new_spritesheet_UI-12_67
+    21300136: new_spritesheet_UI-12_68
+    21300138: new_spritesheet_UI-12_69
+    21300140: new_spritesheet_UI-12_70
+    21300142: new_spritesheet_UI-12_71
+    21300144: new_spritesheet_UI-12_72
+    21300146: new_spritesheet_UI-12_73
+    21300148: new_spritesheet_UI-12_74
+    21300150: new_spritesheet_UI-12_75
+    21300152: new_spritesheet_UI-12_76
+    21300154: new_spritesheet_UI-12_77
+    21300156: new_spritesheet_UI-12_78
+    21300158: new_spritesheet_UI-12_79
+    21300160: new_spritesheet_UI-12_80
+    21300162: new_spritesheet_UI-12_81
+    21300164: new_spritesheet_UI-12_82
+    21300166: new_spritesheet_UI-12_83
+    21300168: new_spritesheet_UI-12_84
+    21300170: new_spritesheet_UI-12_85
+    21300172: new_spritesheet_UI-12_86
+    21300174: new_spritesheet_UI-12_87
+    21300176: new_spritesheet_UI-12_88
+    21300178: new_spritesheet_UI-12_89
+    21300180: new_spritesheet_UI-12_90
+    21300182: new_spritesheet_UI-12_91
+    21300184: new_spritesheet_UI-12_92
+    21300186: new_spritesheet_UI-12_93
+    21300188: new_spritesheet_UI-12_94
+    21300190: new_spritesheet_UI-12_95
+    21300192: new_spritesheet_UI-12_96
+    21300194: new_spritesheet_UI-12_97
+    21300196: new_spritesheet_UI-12_98
+    21300198: new_spritesheet_UI-12_99
+    21300200: new_spritesheet_UI-12_100
+    21300202: new_spritesheet_UI-12_101
+    21300204: new_spritesheet_UI-12_102
+    21300206: new_spritesheet_UI-12_103
+    21300208: new_spritesheet_UI-12_104
+    21300210: new_spritesheet_UI-12_105
+    21300212: new_spritesheet_UI-12_106
+    21300214: new_spritesheet_UI-12_107
+    21300216: new_spritesheet_UI-12_108
+    21300218: new_spritesheet_UI-12_109
+    21300220: new_spritesheet_UI-12_110
+    21300222: new_spritesheet_UI-12_111
+    21300224: new_spritesheet_UI-12_112
+    21300226: new_spritesheet_UI-12_113
+    21300228: new_spritesheet_UI-12_114
+    21300230: new_spritesheet_UI-12_115
+    21300232: new_spritesheet_UI-12_116
+    21300234: new_spritesheet_UI-12_117
+    21300236: new_spritesheet_UI-12_118
+    21300238: new_spritesheet_UI-12_119
+    21300240: new_spritesheet_UI-12_120
+    21300242: new_spritesheet_UI-12_121
+    21300244: new_spritesheet_UI-12_122
+    21300246: new_spritesheet_UI-12_123
+    21300248: new_spritesheet_UI-12_124
+    21300250: new_spritesheet_UI-12_125
+    21300252: new_spritesheet_UI-12_126
+    21300254: new_spritesheet_UI-12_127
+    21300256: new_spritesheet_UI-12_128
+    21300258: new_spritesheet_UI-12_129
+    21300260: new_spritesheet_UI-12_130
+    21300262: new_spritesheet_UI-12_131
+    21300264: new_spritesheet_UI-12_132
+    21300266: new_spritesheet_UI-12_133
+    21300268: new_spritesheet_UI-12_134
+    21300270: new_spritesheet_UI-12_135
+    21300272: new_spritesheet_UI-12_136
+    21300274: new_spritesheet_UI-12_137
+    21300276: new_spritesheet_UI-12_138
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_0
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 6780
+        width: 434
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_1
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 7003
+        width: 179
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_2
+      rect:
+        serializedVersion: 2
+        x: 2358
+        y: 7003
+        width: 39
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_3
+      rect:
+        serializedVersion: 2
+        x: 2415
+        y: 7000
+        width: 194
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_4
+      rect:
+        serializedVersion: 2
+        x: 3963
+        y: 6543
+        width: 434
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_5
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 6383
+        width: 434
+        height: 501
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_6
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 6384
+        width: 437
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_7
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 6633
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_8
+      rect:
+        serializedVersion: 2
+        x: 2204
+        y: 6633
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_9
+      rect:
+        serializedVersion: 2
+        x: 2235
+        y: 6633
+        width: 148
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_10
+      rect:
+        serializedVersion: 2
+        x: 2401
+        y: 6633
+        width: 64
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_11
+      rect:
+        serializedVersion: 2
+        x: 2483
+        y: 6633
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_12
+      rect:
+        serializedVersion: 2
+        x: 2516
+        y: 6633
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_13
+      rect:
+        serializedVersion: 2
+        x: 2551
+        y: 6633
+        width: 29
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_14
+      rect:
+        serializedVersion: 2
+        x: 2591
+        y: 6633
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_15
+      rect:
+        serializedVersion: 2
+        x: 2139
+        y: 6561
+        width: 46
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_16
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 6561
+        width: 111
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_17
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 6561
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_18
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 6561
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_19
+      rect:
+        serializedVersion: 2
+        x: 2392
+        y: 6561
+        width: 66
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_20
+      rect:
+        serializedVersion: 2
+        x: 2472
+        y: 6561
+        width: 115
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_21
+      rect:
+        serializedVersion: 2
+        x: 2602
+        y: 6561
+        width: 46
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_22
+      rect:
+        serializedVersion: 2
+        x: 3841
+        y: 6371
+        width: 678
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_23
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 5671
+        width: 438
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_24
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 5822
+        width: 434
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_25
+      rect:
+        serializedVersion: 2
+        x: 2149
+        y: 5416
+        width: 437
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_26
+      rect:
+        serializedVersion: 2
+        x: 2383
+        y: 5822
+        width: 438
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_27
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 5402
+        width: 194
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_28
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 5263
+        width: 434
+        height: 501
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_29
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 5265
+        width: 438
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_30
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 5553
+        width: 194
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_31
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 4937
+        width: 122
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_32
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 4953
+        width: 636
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_33
+      rect:
+        serializedVersion: 2
+        x: 2650
+        y: 5213
+        width: 168
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_34
+      rect:
+        serializedVersion: 2
+        x: 2768
+        y: 5244
+        width: 61
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_35
+      rect:
+        serializedVersion: 2
+        x: 2774
+        y: 5189
+        width: 75
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_36
+      rect:
+        serializedVersion: 2
+        x: 2785
+        y: 5231
+        width: 25
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_37
+      rect:
+        serializedVersion: 2
+        x: 2817
+        y: 5212
+        width: 82
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_38
+      rect:
+        serializedVersion: 2
+        x: 2790
+        y: 5183
+        width: 69
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_39
+      rect:
+        serializedVersion: 2
+        x: 2024
+        y: 4788
+        width: 678
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_40
+      rect:
+        serializedVersion: 2
+        x: 3069
+        y: 4802
+        width: 71
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_41
+      rect:
+        serializedVersion: 2
+        x: 3148
+        y: 4817
+        width: 82
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_42
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 4741
+        width: 104
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_43
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 4748
+        width: 101
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_44
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 4748
+        width: 93
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_45
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 4741
+        width: 86
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_46
+      rect:
+        serializedVersion: 2
+        x: 2024
+        y: 4659
+        width: 678
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_47
+      rect:
+        serializedVersion: 2
+        x: 3069
+        y: 4673
+        width: 71
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_48
+      rect:
+        serializedVersion: 2
+        x: 3144
+        y: 4687
+        width: 93
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_49
+      rect:
+        serializedVersion: 2
+        x: 2024
+        y: 4529
+        width: 678
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_50
+      rect:
+        serializedVersion: 2
+        x: 2853
+        y: 4544
+        width: 654
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_51
+      rect:
+        serializedVersion: 2
+        x: 2024
+        y: 4400
+        width: 678
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_52
+      rect:
+        serializedVersion: 2
+        x: 2789
+        y: 4414
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_53
+      rect:
+        serializedVersion: 2
+        x: 2878
+        y: 4432
+        width: 108
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_54
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 4414
+        width: 76
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_55
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 4432
+        width: 194
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_56
+      rect:
+        serializedVersion: 2
+        x: 3349
+        y: 4414
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_57
+      rect:
+        serializedVersion: 2
+        x: 3442
+        y: 4432
+        width: 118
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_58
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 4260
+        width: 60
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_59
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 4257
+        width: 36
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_60
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 4260
+        width: 36
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_61
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 4260
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_62
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 4260
+        width: 35
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_63
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 4260
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_64
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 4260
+        width: 60
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_65
+      rect:
+        serializedVersion: 2
+        x: 2024
+        y: 4271
+        width: 678
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_66
+      rect:
+        serializedVersion: 2
+        x: 2789
+        y: 4285
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_67
+      rect:
+        serializedVersion: 2
+        x: 2878
+        y: 4303
+        width: 108
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_68
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 4285
+        width: 76
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_69
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 4302
+        width: 194
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_70
+      rect:
+        serializedVersion: 2
+        x: 3349
+        y: 4285
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_71
+      rect:
+        serializedVersion: 2
+        x: 3442
+        y: 4303
+        width: 118
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_72
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 3905
+        width: 190
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_73
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 3811
+        width: 122
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_74
+      rect:
+        serializedVersion: 2
+        x: 2577
+        y: 3833
+        width: 426
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_75
+      rect:
+        serializedVersion: 2
+        x: 2731
+        y: 4014
+        width: 79
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_76
+      rect:
+        serializedVersion: 2
+        x: 2748
+        y: 3992
+        width: 83
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_77
+      rect:
+        serializedVersion: 2
+        x: 2797
+        y: 4002
+        width: 21
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_78
+      rect:
+        serializedVersion: 2
+        x: 2762
+        y: 4010
+        width: 108
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_79
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 3818
+        width: 86
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_80
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 3736
+        width: 43
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_81
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 3657
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_82
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 3574
+        width: 79
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_83
+      rect:
+        serializedVersion: 2
+        x: 2326
+        y: 3574
+        width: 161
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_84
+      rect:
+        serializedVersion: 2
+        x: 2563
+        y: 3567
+        width: 653
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_85
+      rect:
+        serializedVersion: 2
+        x: 3650
+        y: 3567
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_86
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 3431
+        width: 82
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_87
+      rect:
+        serializedVersion: 2
+        x: 2563
+        y: 3416
+        width: 653
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_88
+      rect:
+        serializedVersion: 2
+        x: 3359
+        y: 3441
+        width: 654
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_89
+      rect:
+        serializedVersion: 2
+        x: 2286
+        y: 3283
+        width: 154
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_90
+      rect:
+        serializedVersion: 2
+        x: 2563
+        y: 3269
+        width: 653
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_91
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 3134
+        width: 183
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_92
+      rect:
+        serializedVersion: 2
+        x: 2670
+        y: 3134
+        width: 154
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_93
+      rect:
+        serializedVersion: 2
+        x: 2900
+        y: 3122
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_94
+      rect:
+        serializedVersion: 2
+        x: 2983
+        y: 3140
+        width: 82
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_95
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 2698
+        width: 122
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_96
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 2716
+        width: 607
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_97
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 2973
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_98
+      rect:
+        serializedVersion: 2
+        x: 2543
+        y: 2947
+        width: 147
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_99
+      rect:
+        serializedVersion: 2
+        x: 2612
+        y: 2938
+        width: 62
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_100
+      rect:
+        serializedVersion: 2
+        x: 2596
+        y: 2930
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_101
+      rect:
+        serializedVersion: 2
+        x: 2627
+        y: 2954
+        width: 111
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_102
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 2497
+        width: 740
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_103
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 2497
+        width: 743
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_104
+      rect:
+        serializedVersion: 2
+        x: 3564
+        y: 1869
+        width: 108
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_105
+      rect:
+        serializedVersion: 2
+        x: 3794
+        y: 1869
+        width: 104
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_106
+      rect:
+        serializedVersion: 2
+        x: 3966
+        y: 2476
+        width: 104
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_107
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 2321
+        width: 151
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_108
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 2321
+        width: 100
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_109
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 2321
+        width: 259
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_110
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 2371
+        width: 740
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_111
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 2371
+        width: 743
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_112
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 2242
+        width: 740
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_113
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 2242
+        width: 743
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_114
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 2117
+        width: 740
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_115
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 2117
+        width: 743
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_116
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1991
+        width: 740
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_117
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 1991
+        width: 743
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_118
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 1876
+        width: 61
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_119
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 1876
+        width: 35
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_120
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 1876
+        width: 36
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_121
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 1876
+        width: 38
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_122
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 1876
+        width: 35
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_123
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 1876
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_124
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 1876
+        width: 70
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_125
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 1876
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_126
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 1876
+        width: 61
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_127
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1862
+        width: 740
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_128
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 1862
+        width: 743
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_129
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1567
+        width: 740
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_130
+      rect:
+        serializedVersion: 2
+        x: 2803
+        y: 1567
+        width: 743
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_131
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 1032
+        width: 136
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_132
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1058
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_133
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 1032
+        width: 201
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_134
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1032
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_135
+      rect:
+        serializedVersion: 2
+        x: 2660
+        y: 5160
+        width: 226
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_136
+      rect:
+        serializedVersion: 2
+        x: 2759
+        y: 3994
+        width: 76
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_137
+      rect:
+        serializedVersion: 2
+        x: 2824
+        y: 4043
+        width: 29
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new_spritesheet_UI-12_138
+      rect:
+        serializedVersion: 2
+        x: 4040
+        y: 4643
+        width: 435
+        height: 872
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
