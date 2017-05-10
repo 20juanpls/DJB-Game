@@ -15,7 +15,7 @@ public class SavefileManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		defaultSave = "DJB SAVE FILE \n------------------------- \nLevelOneTutorialThing 0 0 \nWallClimbingandJumping 0 0 \nStage_Babylon 0 0 \nDJB_TestStg_02 0 0 \nEND";
+		defaultSave = "DJB SAVE FILE \n------------------------- \nLevelOneTutorialThing 0 0 \nStage_1_3 0 0 \nWallClimbingandJumping 0 0 \nStage_Babylon 0 0 \nDJB_TestStg_02 0 0 \nEND";
 
 		//Creating save file if doesn't exist, if not just debug out save file exist
 		if (File.Exists ("DJB_SaveFile")) {
@@ -121,8 +121,47 @@ public class SavefileManager : MonoBehaviour {
 
 	}
 
-	public int GetStatus(){
-		return -1;
+	public int GetStatus(String _sceneName){
+
+		Debug.Log ("WOO");
+
+		StreamReader reader = new StreamReader("DJB_SaveFile");
+		String allText = reader.ReadToEnd();
+		String currentLine;
+		int finalChar = 0;
+		String sub;
+		//Debug.Log ("ORIGINAL TEXT\n"+allText);
+		status = 0;
+		for (int x = 0; x < allText.Length; x++) {
+			finalChar = allText.IndexOf (" ");
+			if (finalChar < 0) {
+				Debug.Log ("ERR");
+				break;
+			}
+			//Debug.Log ("Final Char: " + finalChar);
+			sub = allText.Substring (1, finalChar);
+			sub = sub.Substring (0, sub.Length-1);
+			if (sub.Equals ("END")) {
+				Debug.Log ("Level not found! (are you in the hub?)");
+				break;
+			}
+			//Debug.Log ("Sub: <" + sub + ">");
+			if (sub.Equals (_sceneName)) {
+				//Debug.Log ("Found Scene!");
+				allText = allText.Substring (sub.Length+2);
+				allText = allText.Substring (0, 1);
+				//Debug.Log ("Final Text: <" + allText + ">");
+				//Debug.Log("FOUND: " + allText);
+				status = int.Parse (allText);
+				x = 9999;
+			} else {
+				allText = allText.Substring (finalChar + 1);
+				//Debug.Log ("Modified Text\n" + allText);
+			}
+		}
+		reader.Close ();
+
+		return status;
 	}
 
 
