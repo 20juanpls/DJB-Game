@@ -12,7 +12,8 @@ public class ThePause : MonoBehaviour {
 
     public GameObject PauseCanvas;
 	public GameObject OptionsCanvas;
-    public bool Paused;
+    public bool Paused, CinematicPause;
+    bool PauseButtonPressed, TotalFreeze;
 
 	public EventSystem ES;
 	private GameObject storeSelected;
@@ -35,8 +36,18 @@ public class ThePause : MonoBehaviour {
         {
             OptionsCanvas.SetActive(false);
         }
+
+
+
+
+
+        ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
+
+
 			
         ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
 
 		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
 		storeSelected = ES.firstSelectedGameObject;
@@ -68,24 +79,29 @@ public class ThePause : MonoBehaviour {
 
         if (PauseCanvas.activeSelf)
         {
-            if (Input.GetKeyDown("joystick button 4"))
+            if (Input.GetKeyDown("joystick button 4")|| Input.GetKeyDown(KeyCode.Return))
             {
 				Debug.Log ("unpaused");
                 Paused = false;
             }
         }
 
-        if (Paused == true)
+        if (Paused)
         {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
-            Time.timeScale = 0.0f;
+            TotalFreeze = true;
             PauseCanvas.SetActive(true);
         }
         else {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = false;
-            Time.timeScale = 1.0f;
+            TotalFreeze = false;
             PauseCanvas.SetActive(false);
         }
+
+        if (TotalFreeze)
+            Time.timeScale = 0.0f;
+        else
+            Time.timeScale = 1.0f;
 
         if (ThePlayer.GetComponent<PlayerHealth>().IsDead == true) {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
@@ -106,19 +122,20 @@ public class ThePause : MonoBehaviour {
     }
 
     void IsItPaused() {
-		if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 4"))
+        //Debug.Log(PauseButtonPressed);
+        if (!Paused&&(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 4")))
+            PauseButtonPressed = true;
+        else
+            PauseButtonPressed = false;
+
+        if (PauseButtonPressed && Paused)
         {
-            if (Paused == false)
-            {
-                //Debug.Log("Paused");
-                Paused = true;
-            }
-            else
-            {
-               // Debug.Log("Unpaused");
-                Paused = false;
-				OptionsCanvas.SetActive (false);
-            }
+            Paused = false;
+            OptionsCanvas.SetActive(false);
+        }
+        else if (PauseButtonPressed && !Paused)
+        {
+            Paused = true;
         }
     }
 

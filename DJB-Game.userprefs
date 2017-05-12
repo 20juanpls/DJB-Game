@@ -2,9 +2,15 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SaveLoad/SavefileManager.cs">
     <Files>
+<<<<<<< HEAD
       <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="199" Column="3" />
       <File FileName="Assets/Scripts/manager_Scripts/TeleporterScript.cs" Line="78" Column="1" />
       <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="40" Column="3" />
+=======
+      <File FileName="Assets/Scripts/manager_Scripts/ThePause.cs" Line="50" Column="1" />
+      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/manager_Scripts/TeleporterScript.cs" Line="78" Column="4" />
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

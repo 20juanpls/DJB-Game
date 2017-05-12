@@ -13,7 +13,10 @@ public class SavefileManager : MonoBehaviour {
 
 	String defaultSave;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +25,10 @@ public class SavefileManager : MonoBehaviour {
 		defaultSave = "DJB SAVE FILE \n------------------------- \nLevelOneTutorialThing 0 0 \nStage_1_3 0 0 \nWallClimbingandJumping 0 0 \nStage_Babylon 0 0 \nDJB_TestStg_02 0 0 \nEND";
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
 		//Creating save file if doesn't exist, if not just debug out save file exist
 		if (File.Exists ("DJB_SaveFile")) {
 			Debug.Log ("Save file exists!");
@@ -33,10 +39,46 @@ public class SavefileManager : MonoBehaviour {
 			/*fileName.WriteLine ("DJB SAVE FILE ");
 			fileName.WriteLine ("------------------------- ");
 
+<<<<<<< HEAD
 			fileName.WriteLine ("DJB SAVE FILE ");
 			fileName.WriteLine ("-------------------------");
 			fileName.WriteLine ("SceneName 0/1 ");
 
+=======
+			fileName.WriteLine ("DJB SAVE FILE ");
+			fileName.WriteLine ("-------------------------");
+			fileName.WriteLine ("SceneName 0/1 ");
+
+=======
+public class SavefileManager : MonoBehaviour
+{
+
+    public int status;
+    String sceneName;
+    String defaultSave;
+
+    // Use this for initialization
+    void Start()
+    {
+
+        defaultSave = "DJB SAVE FILE \n------------------------- \nLevelOneTutorialThing 0 0 \nStage_1_3 0 0 \nWallClimbingandJumping 0 0 \nStage_Babylon 0 0 \nDJB_TestStg_02 0 0 \nEND";
+
+        //Creating save file if doesn't exist, if not just debug out save file exist
+        if (File.Exists("DJB_SaveFile"))
+        {
+            Debug.Log("Save file exists!");
+        }
+        else
+        {
+            var fileName = File.CreateText("DJB_SaveFile");
+            fileName.Write(defaultSave);
+            /*fileName.WriteLine ("DJB SAVE FILE ");
+			fileName.WriteLine ("------------------------- ");
+			fileName.WriteLine ("DJB SAVE FILE ");
+			fileName.WriteLine ("-------------------------");
+			fileName.WriteLine ("SceneName 0/1 ");
+>>>>>>> 83494f8a1eb18ac1b230dc56dc96f67f4e238c16
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
 			fileName.WriteLine ("LevelOneTutorialThing 0 ");
 			fileName.WriteLine ("WallClimbingandJumping 0 ");
 			fileName.WriteLine ("Stage_Babylon 0 ");
@@ -44,7 +86,10 @@ public class SavefileManager : MonoBehaviour {
 
 			*/
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
 			fileName.Close();
 			Debug.Log ("Created new save file!");
 		}
@@ -94,6 +139,7 @@ public class SavefileManager : MonoBehaviour {
 
 		//SaveFile (1);
 		//Debug.Log (allText);
+<<<<<<< HEAD
 
 		UpdateScore ();
 	}
@@ -146,7 +192,10 @@ public class SavefileManager : MonoBehaviour {
 		reader.Close ();
 		fileWriter.Close();
 
+=======
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
 
+		UpdateScore ();
 	}
 
 	public int GetStatus(String _sceneName){
@@ -190,12 +239,80 @@ public class SavefileManager : MonoBehaviour {
 		reader.Close ();
 
 		return status;
+<<<<<<< HEAD
 	}
+=======
+
+>>>>>>> 4df01a889aaa79588f20a4a87ac3fdb47ba2f7fc
 
 
-	
-	// Update is called once per frame
-	void Update () {
+	}
 		
-	}
+
+    public void UpdateScore()
+    {
+        StreamReader reader = new StreamReader("DJB_SaveFile");
+        String all = reader.ReadToEnd();
+
+        if (sceneName == null)
+        {
+            Debug.Log("NOT FOUND");
+        }
+        else
+        {
+            if (all.Contains(sceneName))
+            {
+                int loc = all.IndexOf(sceneName);
+                all = all.Substring(loc + sceneName.Length + 3);
+                loc = all.IndexOf(" ");
+                all = all.Substring(0, loc);
+                //All the way to the loc of the screen name + 3
+                //Debug.Log(all.Length + " vs " + (loc+sceneName.Length+3));
+                //Debug.Log("Score is " + all);
+                //GameObject.Find("Player").GetComponent<PlayerScore>().score = int.Parse(all);
+
+            }
+        }
+        reader.Close();
+    }
+
+    public void SaveFile(int newState)
+    {
+        StreamReader reader = new StreamReader("DJB_SaveFile");
+        String all = reader.ReadToEnd();
+        int loc = all.IndexOf(sceneName);
+        //All the way to loc of scene name
+        String front = all.Substring(0, loc + sceneName.Length);
+        //Space, status, space
+        //from 3 char after loc to end
+        String back = all.Substring(loc + 4 + sceneName.Length);
+        //Debug.Log (front + " " + newState + " " + back);
+
+        //Remove old file, replace with new one (that has an open filewriter)
+        reader.Close();
+        while (File.Exists("DJB_SaveFile"))
+        {
+            File.Delete("DJB_SaveFile");
+        }
+        //
+        var fileWriter = File.CreateText("DJB_SaveFile");
+        fileWriter.Write(front + " " + newState + " " + GameObject.Find("Player").GetComponent<PlayerScore>().score + back);
+        //while (File.Exists("DJB_SaveFile"))
+        //{
+        //    File.Delete("DJB_SaveFile");
+        //}
+        //var fileWriter 
+
+        fileWriter.Close();
+
+
+    }
+
+
+// Update is called once per frame
+    void Update()
+    {
+
+    }
 }
+
