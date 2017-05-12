@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Environment_Scripts/RigidActivatorButton.cs">
     <Files>
       <File FileName="Assets/Scripts/Environment_Scripts/RigidActivatorButton.cs" Line="27" Column="21" />
       <File FileName="Assets/ButtonPlatforms.cs" Line="9" Column="5" />
+=======
+﻿<Properties StartupItem="DJB-Game.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraScripts/OfficialCameraMovement.cs">
+    <Files>
+      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="22" Column="1" />
+      <File FileName="Assets/Scripts/CameraScripts/OfficialCameraMovement.cs" Line="83" Column="1" />
+>>>>>>> master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

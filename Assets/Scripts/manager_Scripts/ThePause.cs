@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ThePause : MonoBehaviour {
 
@@ -10,7 +12,17 @@ public class ThePause : MonoBehaviour {
 
     public GameObject PauseCanvas;
 	public GameObject OptionsCanvas;
-    public bool Paused;
+    public bool Paused, CinematicPause;
+    bool PauseButtonPressed, TotalFreeze;
+
+	public EventSystem ES;
+	private GameObject storeSelected;
+
+	private bool isOptions = false;
+
+	private GameObject resumeButton;
+	private GameObject mainMenuButton;
+	private GameObject settingsButton;
 
     // Use this for initialization
     void Start()
@@ -24,6 +36,23 @@ public class ThePause : MonoBehaviour {
         {
             OptionsCanvas.SetActive(false);
         }
+			
+        ES = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
+		ES.firstSelectedGameObject = GameObject.Find ("ResumeButton");
+		storeSelected = ES.firstSelectedGameObject;
+
+		resumeButton = GameObject.Find ("ResumeButton");
+		Button butonn = resumeButton.GetComponent<Button> ();
+		butonn.onClick.AddListener (resume);
+
+		mainMenuButton = GameObject.Find ("Main Menu Button");
+		Button burton = mainMenuButton.GetComponent<Button> ();
+		burton.onClick.AddListener (main);
+
+		settingsButton = GameObject.Find ("Settings Button");
+		Button buntern = settingsButton.GetComponent<Button> ();
+		buntern.onClick.AddListener (options);
 
     }
 
@@ -37,61 +66,84 @@ public class ThePause : MonoBehaviour {
     void Update()
     {
         IsItPaused();
-        MechAnim.OnPause(Paused);
 
         if (PauseCanvas.activeSelf)
         {
-            if (Input.GetKeyDown("joystick button 4"))
+            if (Input.GetKeyDown("joystick button 4")|| Input.GetKeyDown(KeyCode.Return))
             {
+				Debug.Log ("unpaused");
                 Paused = false;
             }
         }
 
-        if (Paused == true)
+        if (Paused)
         {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
-            Time.timeScale = 0.0f;
+            TotalFreeze = true;
             PauseCanvas.SetActive(true);
         }
         else {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = false;
-            Time.timeScale = 1.0f;
+            TotalFreeze = false;
             PauseCanvas.SetActive(false);
         }
+
+        if (TotalFreeze)
+            Time.timeScale = 0.0f;
+        else
+            Time.timeScale = 1.0f;
 
         if (ThePlayer.GetComponent<PlayerHealth>().IsDead == true) {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
         }
 
-
-       
+		if (Input.GetKeyDown ("joystick button 12") && isOptions == true)
+		{
+			OptionsCanvas.SetActive (false);
+		}
+			
+		if (ES.currentSelectedGameObject != storeSelected && !isOptions)
+		{
+			if (ES.currentSelectedGameObject == null)
+				ES.SetSelectedGameObject (storeSelected);
+			else
+				storeSelected = ES.currentSelectedGameObject;
+		}
     }
 
     void IsItPaused() {
-		if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 4"))
+        //Debug.Log(PauseButtonPressed);
+        if (!Paused&&(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 4")))
+            PauseButtonPressed = true;
+        else
+            PauseButtonPressed = false;
+
+        if (PauseButtonPressed && Paused)
         {
-            if (Paused == false)
-            {
-                //Debug.Log("Paused");
-                Paused = true;
-            }
-            else
-            {
-               // Debug.Log("Unpaused");
-                Paused = false;
-            }
+            Paused = false;
+            OptionsCanvas.SetActive(false);
+        }
+        else if (PauseButtonPressed && !Paused)
+        {
+            Paused = true;
         }
     }
 
+	public void resume()
+	{
+		Paused = false;
+		OptionsCanvas.SetActive (false);
+	}
 	public void options() {
 		OptionsCanvas.SetActive (true);
-		Time.timeScale = 0.0f;
-		Paused = false;
+		isOptions = true;
 	}
 
 	public void unOptions() {
 		OptionsCanvas.SetActive (false);
-		Paused = true;
+
+		ES.firstSelectedGameObject = GameObject.Find ("Settings Button");
+		storeSelected = ES.firstSelectedGameObject;
 	}
 
 	public void main()
