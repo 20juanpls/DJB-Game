@@ -64,7 +64,7 @@ public class BrutusMechanimInputs : MonoBehaviour
 	}
 
     void OnPause() {
-        if (pauser.Paused == true)
+        if (pauser.Paused == true || ThePlayer.GetComponent<PlayerMovement_Ver2>().CinematicFreeze)
         {
             thisAnimator.speed = 0.0f;
         }
