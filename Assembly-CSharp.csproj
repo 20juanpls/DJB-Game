@@ -50,10 +50,7 @@
      <Compile Include="Assets\BoulderGoalScript.cs" />
      <Compile Include="Assets\ButtonPlatforms.cs" />
      <Compile Include="Assets\ButtonScript.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\HubPortalColorer.cs" />
-=======
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
      <Compile Include="Assets\LegMovement.cs" />
      <Compile Include="Assets\PointMovementSpeed.cs" />
      <Compile Include="Assets\RigidFollowPoint.cs" />
@@ -105,24 +102,21 @@
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\TeleporterScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\manager_Scripts\UIControllerNav.cs" />
-=======
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
      <Compile Include="Assets\ToogleTouchScript.cs" />
      <Compile Include="Assets\TriggeredBoulder.cs" />
      <Compile Include="Assets\speedcubetest.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.PlaymodeTestsRunner">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>

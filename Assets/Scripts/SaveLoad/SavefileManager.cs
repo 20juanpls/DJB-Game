@@ -10,41 +10,34 @@ public class SavefileManager : MonoBehaviour {
 
 	public int status;
 	String sceneName;
-<<<<<<< HEAD
 	String defaultSave;
-=======
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
 
 	// Use this for initialization
 	void Start () {
 
-<<<<<<< HEAD
 		defaultSave = "DJB SAVE FILE \n------------------------- \nLevelOneTutorialThing 0 0 \nStage_1_3 0 0 \nWallClimbingandJumping 0 0 \nStage_Babylon 0 0 \nDJB_TestStg_02 0 0 \nEND";
 
-=======
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
+ 
 		//Creating save file if doesn't exist, if not just debug out save file exist
 		if (File.Exists ("DJB_SaveFile")) {
 			Debug.Log ("Save file exists!");
 		} else {
 			var fileName = File.CreateText ("DJB_SaveFile");
-<<<<<<< HEAD
 			fileName.Write(defaultSave);
 			/*fileName.WriteLine ("DJB SAVE FILE ");
 			fileName.WriteLine ("------------------------- ");
-=======
+ 
 			fileName.WriteLine ("DJB SAVE FILE ");
 			fileName.WriteLine ("-------------------------");
 			fileName.WriteLine ("SceneName 0/1 ");
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
+ 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
 			fileName.WriteLine ("LevelOneTutorialThing 0 ");
 			fileName.WriteLine ("WallClimbingandJumping 0 ");
 			fileName.WriteLine ("Stage_Babylon 0 ");
 			fileName.WriteLine ("DJB_TestStg_02 0 "); //TESTING; REMOVE LATER
 <<<<<<< HEAD
 			*/
-=======
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
+ 
 			fileName.Close();
 			Debug.Log ("Created new save file!");
 		}
@@ -60,7 +53,6 @@ public class SavefileManager : MonoBehaviour {
 		status = 0;
 		for (int x = 0; x < 15; x++) {
 			finalChar = allText.IndexOf (" ");
-<<<<<<< HEAD
 			if (finalChar < 0) {
 				Debug.Log ("ERR");
 				break;
@@ -72,11 +64,10 @@ public class SavefileManager : MonoBehaviour {
 				Debug.Log ("Level not found! (are you in the hub?)");
 				break;
 			}
-=======
+ 
 			//Debug.Log ("Final Char: " + finalChar);
 			sub = allText.Substring (1, finalChar);
 			sub = sub.Substring (0, sub.Length-1);
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
 			//Debug.Log ("Sub: <" + sub + ">");
 			if (sub.Equals (sceneName)) {
 				//Debug.Log ("Found Scene!");
@@ -94,7 +85,6 @@ public class SavefileManager : MonoBehaviour {
 
 		//SaveFile (1);
 		//Debug.Log (allText);
-<<<<<<< HEAD
 		UpdateScore ();
 	}
 
@@ -119,12 +109,8 @@ public class SavefileManager : MonoBehaviour {
 		}
 		reader.Close ();
 	}
-
-=======
-
-	}
 		
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
+		
 	public void SaveFile(int newState){
 		StreamReader reader = new StreamReader("DJB_SaveFile");
 		String all = reader.ReadToEnd ();
@@ -133,7 +119,6 @@ public class SavefileManager : MonoBehaviour {
 		String front = all.Substring (0, loc + sceneName.Length);
 		//Space, status, space
 		//from 3 char after loc to end
-<<<<<<< HEAD
 		String back = all.Substring(loc+4+sceneName.Length);
 		//Debug.Log (front + " " + newState + " " + back);
 		
@@ -190,16 +175,6 @@ public class SavefileManager : MonoBehaviour {
 		reader.Close ();
 
 		return status;
-=======
-		String back = all.Substring(loc+3+sceneName.Length);
-		//Debug.Log (front + " " + newState + " " + back);
-		File.Delete ("DJB_SaveFile");
-		var fileWriter = File.CreateText ("DJB_SaveFile");
-		fileWriter.Write (front + " " + newState + " " + back);
-
-		reader.Close ();
-		fileWriter.Close();
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
 	}
 
 
