@@ -1,19 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-<<<<<<< HEAD
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SaveLoad/SavefileManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="154" Column="7" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Canvas_Scripts/HeartContainer_Script.cs" Line="78" Column="3" />
-      <File FileName="Assets/Scripts/manager_Scripts/TeleporterScript.cs" Line="80" Column="69" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ButtonScript.cs">
-    <Files>
-      <File FileName="Assets/ToogleTouchScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/ButtonScript.cs" Line="39" Column="24" />
->>>>>>> 078d5b2edac86c8ca9f8bdc5f9a7ad3eb0dc2979
+      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
