@@ -8,12 +8,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     PlayerKnockback KnockBack;
     PlayerHealth PlayHealth;
     PlayerNPCKill PlayNPCK;
+    RuneCoinManager RuneCoinManager;
 
     Vector3 momentprevVect, momentVel;
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed, downLedgeDist;
 
-    public bool Paused, UnPaused, DontMove, Freeze, forKnockBack, GroundCannotKill, GroundSequence, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;//, OnToggle;
+    public bool Paused, UnPaused, DontMove, Freeze, CinematicFreeze, forKnockBack, GroundCannotKill, GroundSequence, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;//, OnToggle;
 
     private bool isMove, JumpBack, JumpBackSeq, JumpSlide, /*HoldClimb,*/ ClimbBugPatch_1, MoveWithPlat;
 	public bool canJump, CantClimb, Sliding, Climbing;
@@ -64,17 +65,25 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         //Debug.Log(HeierchyNumber(this.gameObject));
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
         loadingCanvas = GameObject.Find("LoadingScreen_Canvas");
+        try
+        {
+            RuneCoinManager = GameObject.Find("SpecialCoinManager").GetComponent<RuneCoinManager>();
+        }
+        catch
+        {
+            RuneCoinManager = null;
+        }
         KnockBack = this.GetComponent<PlayerKnockback>();
         PlayHealth = this.GetComponent<PlayerHealth>();
         PlayNPCK = this.GetComponent<PlayerNPCKill>();
         //runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
-		hasJumped = false;
-		CurrentMidAirJumpCount = InitialMidAirJumpCount;
+        hasJumped = false;
+        CurrentMidAirJumpCount = InitialMidAirJumpCount;
         CurrJumpBTime = JumpBackTime;
         _lookRotation = PlayerRb.transform.rotation;
         currentGrav = setGrav;
-    }
+        }
 
     public void ActualSpeedSetter(float MoveSped) {
         ActualSpeed = MoveSped;
@@ -108,6 +117,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 PlayerRb.velocity = CurrentOldVel;
                 UnPaused = true;
             }
+            //cinematicpauseportion
+            if (RuneCoinManager!= null && RuneCoinManager.MovementPause)
+                CinematicFreeze = true;
+            else
+                CinematicFreeze = false;
+            //cinematicpauseportionends
             InMovingPlatform();
 
             CurrentOldVel = PlayerRb.velocity;
@@ -369,13 +384,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             currentRotationSpeed = rotationSpeed * 0.3f;
         }
 
-        if (DontMove == true || Freeze == true)
+        if (DontMove == true || Freeze == true || CinematicFreeze)
         {
             //PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * rotationSpeed);
             currentRotationSpeed = 0.0f;
         }
 
-        if (!DontMove && !SlideSequence && !Freeze)
+        if (!DontMove && !SlideSequence && !Freeze && !CinematicFreeze)
         {
             currentRotationSpeed = rotationSpeed;
         }
@@ -599,7 +614,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         FinalVel = vel + BottomPlatVel +MovingPlatVel+ ExForceVelocity;
 
-        if (!Freeze)
+        if (!Freeze && !CinematicFreeze)
         {
             PlayerRb.velocity = FinalVel;
         }

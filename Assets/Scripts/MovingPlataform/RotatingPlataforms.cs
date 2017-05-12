@@ -12,17 +12,21 @@ public class RotatingPlataforms : MonoBehaviour {
     public float X_axisSpeed;
     public float Y_axisSpeed;
     public float Z_axisSpeed;
+    public float CurrentY_axisSpeed;
 
-    public bool LegRoatation;
+    public bool LegRoatation, CounterClock;
 
+    public float HalfPeriodTime;
     public float YAnglePos;
     public float YAngleNeg;
     //public bool DoNotHop;
 
     Vector3 eulerAngleDir;
 
-    float CurrentAngle, YAngP, YAngNeg, Y_Angle;
-    bool InZone, QuickChange;
+    float CurrentAngle, YAngP, YAngNeg, Y_Angle, YSpeedCalculated;
+    public bool InZone, QuickChange;
+
+    int OutZoneCount;
     //public float speedOfHop = 1.0f;
     //public float IntensityofHop = 10.0f;
     //public float LenghtOfHop = 3.0f;
@@ -37,6 +41,10 @@ public class RotatingPlataforms : MonoBehaviour {
         OrigPos = this.gameObject.GetComponent<Transform>().position;
         YAngP = YAnglePos;
         YAngNeg = YAngleNeg + 360;
+        YSpeedCalculated = (YAnglePos - YAngleNeg) / HalfPeriodTime;
+
+        if (CounterClock)
+            YSpeedCalculated = YSpeedCalculated * -1.0f;
     }
 
     // Update is called once per frame
@@ -57,37 +65,35 @@ public class RotatingPlataforms : MonoBehaviour {
 
         Y_Angle = TransRotT.localEulerAngles.y;
 
-        Debug.Log(Y_Angle);
+       // YSpeedCalculated = (YAnglePos - YAngleNeg) / HalfPeriodTime;
+       // Debug.Log(YSpeedCalculated);
 
-        if (Y_Angle >= 300 || Y_Angle <= 30)
+        if (Y_Angle > YAngNeg || Y_Angle < YAngP)
             InZone = true;
         else
             InZone = false;
 
+        Debug.Log(QuickChange);
+        //its stuck on true for somme reason
         if (!InZone)
+        {
             QuickChange = true;
+            if (OutZoneCount > 0)
+                QuickChange = false;
+            OutZoneCount++;
+        }
+        else
+            OutZoneCount = 0;
 
         if (QuickChange)
         {
-            Y_axisSpeed = Y_axisSpeed * -1;
-            QuickChange = false;
+            YSpeedCalculated = YSpeedCalculated * -1;
         }
 
+        CurrentY_axisSpeed = YSpeedCalculated;//Mathf.Lerp(CurrentY_axisSpeed, YSpeedCalculated, Time.deltaTime);
 
-        /*if (DirRotT.rotation.eulerAngles.y <= 320.0f && Y_axisSpeed < 0.0f)
-            Y_axisSpeed = Y_axisSpeed * -1;
-        else if (DirRotT.rotation.eulerAngles.y >= 30.0f && Y_axisSpeed > 0.0f)
-            Y_axisSpeed = Y_axisSpeed * -1;*/
-        //if (DirRotT.rotation.eulerAngles.y >= YAnglePos || DirRotT.rotation.eulerAngles.y <= YAngleNeg)
-        //    Y_axisSpeed = Y_axisSpeed * -1;
-        //else if (DirRotT.rotation.eulerAngles.y <= YAngleNeg)
-        //    Y_axisSpeed = Y_axisSpeed * -1;
-
-
-
-
-
-        eulerAngleDir = new Vector3(X_axisSpeed, Y_axisSpeed, Z_axisSpeed);
+        eulerAngleDir = new Vector3(X_axisSpeed, CurrentY_axisSpeed, Z_axisSpeed);
         DirRotT.angularVelocity = eulerAngleDir * Time.deltaTime;
+        
     }
 }

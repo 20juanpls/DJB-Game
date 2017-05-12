@@ -11,7 +11,7 @@ public class PlayerScore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
+		playerHealth = GameObject.FindGameObjectWithTag("PlayerMesh").GetComponent<PlayerHealth> ();
 		score = 0;
 		scoreText = GameObject.Find ("ScoreText").GetComponent<Text> ();
 
