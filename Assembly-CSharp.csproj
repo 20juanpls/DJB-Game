@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Environment_Scripts\ExitScore.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\LeaveMovement.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\RelativGrav.cs" />
+     <Compile Include="Assets\Scripts\Environment_Scripts\RigidActivatorButton.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\WindSetter.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
