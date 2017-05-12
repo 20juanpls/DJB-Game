@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
+    <Compile Include="Assets\HubPortalColorer.cs" />
     <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
     <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerButtonActivator.cs" />
     <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerControls.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Assets\Scripts\Environment_Scripts\RelativGrav.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\WindSetter.cs" />
     <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
+    <Compile Include="Assets\Scripts\GemMovement.cs" />
     <Compile Include="Assets\Scripts\LegMovement.cs" />
     <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
     <Compile Include="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
     <Compile Include="Assets\Scripts\PointMovementSpeed.cs" />
     <Compile Include="Assets\Scripts\RigidFollowPoint.cs" />
+    <Compile Include="Assets\Scripts\RuneCoinScript.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SavefileManager.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="Assets\Scripts\manager_Scripts\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
+    <Compile Include="Assets\Scripts\manager_Scripts\RuneCoinManager.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\TeleporterScript.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\UIControllerNav.cs" />
