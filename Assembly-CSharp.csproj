@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\BoulderGoalScript.cs" />
      <Compile Include="Assets\ButtonPlatforms.cs" />
      <Compile Include="Assets\ButtonScript.cs" />
@@ -54,11 +55,17 @@
      <Compile Include="Assets\LegMovement.cs" />
      <Compile Include="Assets\PointMovementSpeed.cs" />
      <Compile Include="Assets\RigidFollowPoint.cs" />
+=======
+     <Compile Include="Assets\HubPortalColorer.cs" />
+>>>>>>> 99ea53a54c210c74060c6c796eaffa5ee33d6bf7
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerNPCKill.cs" />
+     <Compile Include="Assets\Scripts\BoulderGoalScript.cs" />
+     <Compile Include="Assets\Scripts\ButtonPlatforms.cs" />
+     <Compile Include="Assets\Scripts\ButtonScript.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\InRoomScript.cs" />
      <Compile Include="Assets\Scripts\CameraScripts\OfficialCameraMovement.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\HeartContainer_Script.cs" />
@@ -75,6 +82,8 @@
      <Compile Include="Assets\Scripts\Environment_Scripts\RelativGrav.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\WindSetter.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ZiplineExit.cs" />
+     <Compile Include="Assets\Scripts\GemMovement.cs" />
+     <Compile Include="Assets\Scripts\LegMovement.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\MovingPlataform.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs" />
      <Compile Include="Assets\Scripts\MovingPlataform\RotatingPlataforms.cs" />
@@ -86,10 +95,15 @@
      <Compile Include="Assets\Scripts\NPC_Scripts\NPCStomper.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Death.cs" />
      <Compile Include="Assets\Scripts\NPC_Scripts\NPC_Follow.cs" />
+     <Compile Include="Assets\Scripts\PointMovementSpeed.cs" />
+     <Compile Include="Assets\Scripts\RigidFollowPoint.cs" />
+     <Compile Include="Assets\Scripts\RuneCoinScript.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\SavefileManager.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\CollisionTestScript.cs" />
      <Compile Include="Assets\Scripts\Test_Scripts\testMovingPlane.cs" />
+     <Compile Include="Assets\Scripts\ToogleTouchScript.cs" />
+     <Compile Include="Assets\Scripts\TriggeredBoulder.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerAudioManagementScript.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerFolderFollowsPlayer.cs" />
      <Compile Include="Assets\Scripts\_Player_Scripts\PlayerHealth.cs" />
@@ -100,14 +114,24 @@
      <Compile Include="Assets\Scripts\manager_Scripts\FPSCounter.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\PlayerLavaDeath.cs" />
+     <Compile Include="Assets\Scripts\manager_Scripts\RuneCoinManager.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\TeleporterScript.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\UIControllerNav.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\ToogleTouchScript.cs" />
      <Compile Include="Assets\TriggeredBoulder.cs" />
      <Compile Include="Assets\speedcubetest.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+=======
+     <Compile Include="Assets\Scripts\speedcubetest.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+>>>>>>> 99ea53a54c210c74060c6c796eaffa5ee33d6bf7
  </Reference>
  <Reference Include="UnityEngine.PlaymodeTestsRunner">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
