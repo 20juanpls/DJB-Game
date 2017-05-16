@@ -112,8 +112,8 @@ public class PlayerScore : MonoBehaviour {
         }
 
         if (other.tag == "GoalCollectable") {
-			SavefileManager sm = GameObject.Find ("SceneSaver").GetComponent<SavefileManager> ();
-			sm.SaveFile (1);
+			//SavefileManager sm = GameObject.Find ("SceneSaver").GetComponent<SavefileManager> ();
+			//sm.SaveFile (1);
             GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PlayerLavaDeath>().PlayerWinState = true;
         }
     }
