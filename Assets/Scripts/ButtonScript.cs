@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonScript : MonoBehaviour {
+    public Material IndicatorLightsM;
     GameObject Toggle;
     ToogleTouchScript ToggleScript;
 	public GameObject MovingRigid;
@@ -12,16 +13,25 @@ public class ButtonScript : MonoBehaviour {
     Vector3 OrigTogPos, TheOrg;
 
     public bool ButtonActive, ActivatorB, TimerB, ToggleB, PannelB;
-    public float ButtonTime;
+    public float ButtonTime, LightsSpeed;
 
     bool instapress, ActivateTimer, IsMovingPlat;
-    float CurrentTime;
+    float CurrentTime, LightsGrayScale;
 
     int PannelCount;
 
 	// Use this for initialization
 	void Start () {
         Toggle = transform.FindChild("toggle").gameObject;
+        try
+        {
+            //IndicatorLights = transform.FindChild("Lights").gameObject;//.GetComponent<Shader>();
+            IndicatorLightsM = transform.FindChild("Lights").gameObject.GetComponent<Renderer>().material;
+            
+        }
+        catch{
+            IndicatorLightsM = null;
+        }
 		TheOrg = Toggle.transform.position;
         ToggleScript = Toggle.GetComponent<ToogleTouchScript>();
         CurrentTime = ButtonTime;
@@ -31,7 +41,18 @@ public class ButtonScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log (OrigTogPos + ", "+Toggle.transform.position);
+        //Debug.Log (OrigTogPos + ", "+Toggle.transform.position);
+        if (IndicatorLightsM != null) {
+            IndicatorLightsM.SetColor("_TintColor", new Color(IndicatorLightsM.GetColor("_TintColor").r, IndicatorLightsM.GetColor("_TintColor").g, IndicatorLightsM.GetColor("_TintColor").b, LightsGrayScale * 0.1f));
+            if (LightsGrayScale * 0.1f >= 0.5f)
+                Debug.Log("Enough");
+            //Debug.Log(IndicatorLightsM.GetColor("_TintColor"));
+            if (ButtonActive)
+                LightsGrayScale = Mathf.Lerp(LightsGrayScale, 5.0f, LightsSpeed * Time.deltaTime);
+            else
+                LightsGrayScale = Mathf.Lerp(LightsGrayScale, 0.0f, LightsSpeed * Time.deltaTime);
+
+        }
 
 		if (MovingRigid != null) {
 			OrigTogPos = TheRigidOfMove.position + TheOrg;
@@ -101,7 +122,7 @@ public class ButtonScript : MonoBehaviour {
     void ToggleMover() {
         if (ButtonActive)
         {
-            Toggle.transform.position = Vector3.MoveTowards(Toggle.transform.position, (Vector3.up * -0.5f) + OrigTogPos, 20.0f * Time.deltaTime);
+            Toggle.transform.position = Vector3.MoveTowards(Toggle.transform.position, (Vector3.up * -0.3f) + OrigTogPos, 20.0f * Time.deltaTime);
         }
         else {
             Toggle.transform.position = Vector3.MoveTowards(Toggle.transform.position, OrigTogPos, 20.0f * Time.deltaTime);
