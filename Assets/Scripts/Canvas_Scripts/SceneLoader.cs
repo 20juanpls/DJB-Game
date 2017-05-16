@@ -5,27 +5,43 @@ using System.Runtime.CompilerServices;
 
 public class SceneLoader : MonoBehaviour {
 
-	public GameObject loadingCanvas;
+	public GameObject loadingCanvas, LoadingText, BlackB;
+    Image BlackBakground;
+    public float FadeOutSpeed, GrayScale;
+    public bool BeginClear;
 
 	void Start() {
 
 		loadingCanvas = GameObject.Find ("LoadingScreen_Canvas");
+        LoadingText = this.transform.FindChild("LoadingText").gameObject;
+        BlackB = this.transform.FindChild("BlackBackground").gameObject;
+        BlackBakground = BlackB.GetComponent<Image>();
 
-		StartCoroutine (LoadingScreen ());
+        GrayScale = BlackBakground.color.a;
 
-	}
+        StartCoroutine (LoadingScreen ());
+
+    }
 	void Update() {
+        if (BeginClear) {
+            BlackBakground.color = new Color(BlackBakground.color.r, BlackBakground.color.g, BlackBakground.color.b, GrayScale);
+            GrayScale = Mathf.Lerp(GrayScale, 0.0f, FadeOutSpeed * Time.deltaTime);
+        }
+
+        if (GrayScale <= 0.01f)
+            loadingCanvas.SetActive(false);
 
 	}
 
 	IEnumerator LoadingScreen()
 	{
 		Time.timeScale = 0.0f;
-		loadingCanvas.SetActive (true);
+        LoadingText.SetActive(true);
 
-		yield return new WaitForSeconds (1);
+        yield return new WaitForSeconds (1);
 
 		Time.timeScale = 1.0f;
-		loadingCanvas.SetActive (false);
-	}
+        LoadingText.SetActive(false);
+        BeginClear = true;
+    }
 }

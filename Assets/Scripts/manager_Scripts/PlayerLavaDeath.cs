@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 public class PlayerLavaDeath : MonoBehaviour {
 
-	public GameObject loseScreen;
-	public GameObject gameOverScreen;
+    //public GameObject loseScreen;
+    //public GameObject gameOverScreen;
+    public bool LoseScreenActive;
+    public bool gameOverScreenActive;
 	//public GameObject playerFolder;
   	public GameObject player;
 	Transform respawn;
@@ -29,11 +31,11 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		loseScreen = GameObject.Find ("LoseScreenCanvas");
-		gameOverScreen = GameObject.Find ("GameOverCanvas");
-        assignButton();
-        loseScreen.SetActive (false);
-		gameOverScreen.SetActive (false);
+		//loseScreen = GameObject.Find ("LoseScreenCanvas");
+		//gameOverScreen = GameObject.Find ("GameOverCanvas");
+        //assignButton();
+        //loseScreen.SetActive (false);
+		//gameOverScreen.SetActive (false);
         player = GameObject.FindGameObjectWithTag("PlayerMesh");
 		//playerFolder = GameObject.FindGameObjectWithTag("PlayerFolder");
         PlayerRot = player.transform.rotation;
@@ -50,16 +52,19 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 		//Debug.Log ("Deaths:"+Deaths);
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
-			gameOverScreen.gameObject.SetActive (true);
-			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+            //gameOverScreen.gameObject.SetActive (true);
+            gameOverScreenActive = true;
+            player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
             //Deaths++;
         } else {
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
-				loseScreen.gameObject.SetActive (true);
+                //loseScreen.gameObject.SetActive (true);
+                LoseScreenActive = true;
                 //Deaths++;
             } else {
-				loseScreen.gameObject.SetActive (false);
-			}
+                //loseScreen.gameObject.SetActive (false);
+                LoseScreenActive = false;
+            }
 		}
 
         if (PlayerWinState == true) {
@@ -67,7 +72,7 @@ public class PlayerLavaDeath : MonoBehaviour {
             SceneManager.LoadScene("Stage_Hub");
         }
 
-		if (loseScreen.gameObject.activeSelf) {
+		/*if (loseScreen.gameObject.activeSelf) {
 			if (Input.GetKeyDown("joystick button 11") || Input.GetKeyDown("joystick button 0")|| Input.GetKeyDown(KeyCode.Return)){
 				loseScreen.transform.GetComponentInChildren<Button>().onClick.Invoke();
 			}
@@ -81,7 +86,7 @@ public class PlayerLavaDeath : MonoBehaviour {
             if (Input.GetKeyDown("joystick button 1")|| Input.GetKeyDown(KeyCode.Backspace)) {
                 gameOverScreen.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>().onClick.Invoke();
             }
-		}
+		}*/
     }
 
     void AssignPlayer(GameObject p)
@@ -91,7 +96,7 @@ public class PlayerLavaDeath : MonoBehaviour {
         //Debug.Log(player.ToString());
     }
 
-	void assignButton(){
+	/*void assignButton(){
 		Button b = loseScreen.transform.GetChild (0).transform.GetChild (1).GetComponent<Button> ();
 		if (b == null) {
 			Debug.Log ("ERR");
@@ -105,7 +110,7 @@ public class PlayerLavaDeath : MonoBehaviour {
         reStartHard.onClick.AddListener(delegate { RestartFromBeginning(); });
         BackToMenu.onClick.AddListener(delegate { BackToTheMenu(); });
 
-    }
+    }*/
 
 	public void checkpointReached(GameObject checkpointReached){
 		respawn = checkpointReached.transform;
@@ -117,9 +122,9 @@ public class PlayerLavaDeath : MonoBehaviour {
         SceneManager.LoadScene("Stage_Hub");
     }
 
-    public void BackToTheMenu() {
+    /*public void BackToTheMenu() {
         SceneManager.LoadScene("FirstScene");
-    }
+    }*/
 
 	public void Restart(){
 

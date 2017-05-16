@@ -50,7 +50,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	public bool jumpOnEnemy = false;
     Vector3 RelvSped, distFromRigidBod, PlayerContactPointDist, PlayerGroundNormal;
     Rigidbody TheRigidBod;
-    bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround;
+    bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround, WallOnFront;
     //revised bools...
     bool GroundInMovPlat, InTransition, loadIn;
 
@@ -99,7 +99,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
 
         if (loadingCanvas != null)
-            loadIn = loadingCanvas.activeSelf;
+        {
+            if (!loadingCanvas.GetComponent<SceneLoader>().BeginClear)
+                loadIn = true;
+            else
+                loadIn = false;
+        }
         else
             loadIn = false;
 
@@ -444,7 +449,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             ActualSpeed = MoveSpeed / 2.0f;
             currentGrav = 0.0f;
-            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f)
+            //PENIS(this is actually relevant)
+            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f || (WallOnFront&&!Climbing))
             {
                 ClimbSequence = false;
             }
@@ -710,7 +716,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         Vector3 ForwardRotatedDirection = PlayerRb.rotation * Vector3.forward;
 
-        //Debug.DrawRay(PlayerRb.position, ForwardRotatedDirection, Color.yellow);
         if (Physics.Raycast(PlayerRb.position, PlayerRb.rotation * Vector3.forward, out hit))
         {
             forwardDist = hit.distance;
@@ -734,6 +739,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 thereIsFrontMovePlatClimb = false;
                 thereIsWallFronMovePlatCantClimb = false;
             }
+
+            if (hit.transform.tag == "wall")
+                WallOnFront = true;
+            else
+                WallOnFront = false;
+
+
         }
 
         //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x *2.0f) + PlayerRb.position.x, PlayerRb.position.y + 2.0f, (ForwardRotatedDirection.z*2.0f) + PlayerRb.position.z), Vector3.down,Color.blue);
@@ -831,6 +843,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 SlideSequence = false;
             }
 
+            //New Update - work on making rotating platforms slide when the surface is at a certain angle 5/15/17
             if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb"||Other_Tag == "slide")
             {
                 IsGround_2 = true;

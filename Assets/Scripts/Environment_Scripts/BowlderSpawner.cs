@@ -10,7 +10,7 @@ public class BowlderSpawner : MonoBehaviour {
 
     public float allotedTime = 6.0f;
 
-    public bool DontUseTimer;
+    public bool DontUseTimer, DestroyBoulderWhenDeath;
 
     GameObject Boulder;
 
@@ -47,7 +47,7 @@ public class BowlderSpawner : MonoBehaviour {
                 }
             }
 
-            if (ThePlayer == null)
+            if (ThePlayer == null && DestroyBoulderWhenDeath)
                     Destroy(Boulder);
         }
         else {

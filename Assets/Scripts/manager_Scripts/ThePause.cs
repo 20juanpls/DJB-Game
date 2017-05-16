@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class ThePause : MonoBehaviour {
 
     GameObject ThePlayer;
+    PlayerLavaDeath SpawnManager;
     BrutusMechanimInputs MechAnim;
     PlayerMovement_Ver2 PlayerMove;
 
     public GameObject PauseCanvas;
 	public GameObject OptionsCanvas;
-    public bool Paused, CinematicPause;
+    public bool Paused, CinematicPause, PlayerCantPause;
     bool PauseButtonPressed, TotalFreeze;
 
 	public EventSystem ES;
@@ -29,6 +30,7 @@ public class ThePause : MonoBehaviour {
     {
         ThePlayer = GameObject.FindGameObjectWithTag("PlayerMesh");  
         MechAnim  = ThePlayer.transform.GetChild(1).GetComponent<BrutusMechanimInputs>();
+        SpawnManager = GameObject.Find("SpawnManager").GetComponent<PlayerLavaDeath>();
 
         PauseCanvas = GameObject.Find("PauseCanvas");
 		OptionsCanvas = GameObject.Find ("OptionsCanvas");
@@ -75,50 +77,61 @@ public class ThePause : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        IsItPaused();
+        if (SpawnManager.LoseScreenActive || SpawnManager.gameOverScreenActive)
+            PlayerCantPause = true;
+        else
+            PlayerCantPause = false;
 
-        if (PauseCanvas.activeSelf)
+        if (!PlayerCantPause)
         {
-            if (Input.GetKeyDown("joystick button 4")|| Input.GetKeyDown(KeyCode.Return))
+
+            IsItPaused();
+
+            if (PauseCanvas.activeSelf)
             {
-				Debug.Log ("unpaused");
-                Paused = false;
+                if (Input.GetKeyDown("joystick button 4") || Input.GetKeyDown(KeyCode.Return))
+                {
+                    Debug.Log("unpaused");
+                    Paused = false;
+                }
+            }
+
+            if (Paused)
+            {
+                ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
+                TotalFreeze = true;
+                PauseCanvas.SetActive(true);
+            }
+            else
+            {
+                ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = false;
+                TotalFreeze = false;
+                PauseCanvas.SetActive(false);
+            }
+
+            if (TotalFreeze)
+                Time.timeScale = 0.0f;
+            else
+                Time.timeScale = 1.0f;
+
+            if (ThePlayer.GetComponent<PlayerHealth>().IsDead == true)
+            {
+                ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
+            }
+
+            if (Input.GetKeyDown("joystick button 12") && isOptions == true)
+            {
+                OptionsCanvas.SetActive(false);
+            }
+
+            if (ES.currentSelectedGameObject != storeSelected && !isOptions)
+            {
+                if (ES.currentSelectedGameObject == null)
+                    ES.SetSelectedGameObject(storeSelected);
+                else
+                    storeSelected = ES.currentSelectedGameObject;
             }
         }
-
-        if (Paused)
-        {
-            ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
-            TotalFreeze = true;
-            PauseCanvas.SetActive(true);
-        }
-        else {
-            ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = false;
-            TotalFreeze = false;
-            PauseCanvas.SetActive(false);
-        }
-
-        if (TotalFreeze)
-            Time.timeScale = 0.0f;
-        else
-            Time.timeScale = 1.0f;
-
-        if (ThePlayer.GetComponent<PlayerHealth>().IsDead == true) {
-            ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
-        }
-
-		if (Input.GetKeyDown ("joystick button 12") && isOptions == true)
-		{
-			OptionsCanvas.SetActive (false);
-		}
-			
-		if (ES.currentSelectedGameObject != storeSelected && !isOptions)
-		{
-			if (ES.currentSelectedGameObject == null)
-				ES.SetSelectedGameObject (storeSelected);
-			else
-				storeSelected = ES.currentSelectedGameObject;
-		}
     }
 
     void IsItPaused() {
