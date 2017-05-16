@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Stage_Babylon.unity
-=======
-- path: Assets/Scenes/Stage_Hub.unity
->>>>>>> 99ea53a54c210c74060c6c796eaffa5ee33d6bf7
   isLoaded: 1
   isActive: 1

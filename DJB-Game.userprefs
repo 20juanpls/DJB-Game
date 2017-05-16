@@ -1,19 +1,8 @@
-<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SaveLoad/SavefileManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="177" Column="17" />
-      <File FileName="Assets/Scripts/manager_Scripts/TeleporterScript.cs" Line="73" Column="30" />
-=======
-﻿<Properties StartupItem="DJB-Game.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraScripts/OfficialCameraMovement.cs">
-    <Files>
-      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/_Player_Scripts/PlayerScore.cs" Line="22" Column="1" />
-      <File FileName="Assets/Scripts/CameraScripts/OfficialCameraMovement.cs" Line="83" Column="1" />
->>>>>>> 99ea53a54c210c74060c6c796eaffa5ee33d6bf7
+      <File FileName="Assets/Scripts/SaveLoad/SavefileManager.cs" Line="9" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
