@@ -11,7 +11,7 @@ public class PlayerKnockback : MonoBehaviour {
 
     public bool collided, InCollision, Inactive = false, cantTakeDamage, /*jumpedOn,*/ DangerousFall, HasFallen;//, InstaJamp;//, takeAwayHealth;
     public Vector3 FinalKnockBack;
-    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage, recovOngroundT;
+    public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage, recovOngroundT, AirtimeTillFall;
     public int totalDamage, UpdateCount, InCollisionCount;
 
     private float TimeLeft;
@@ -34,6 +34,7 @@ public class PlayerKnockback : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        //Debug.Log(DangerousFall);
         if (PlayerH.IsDead == true)
         {
             Inactive = true;
@@ -83,7 +84,7 @@ public class PlayerKnockback : MonoBehaviour {
         }
 
    void FallDamage(){
-              if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerP.CurrentOldVel.y <= -PlayerP.terminalSpeed/*extraleeway*/+3.0f)
+              if (PlayerP.floorDist >= MinFloorDistFallDamage && PlayerP.CurrentOldVel.y <= -PlayerP.terminalSpeed/*extraleeway*/+3.0f && PlayerP.airTime >= AirtimeTillFall)
               {
                   DangerousFall = true;
               }

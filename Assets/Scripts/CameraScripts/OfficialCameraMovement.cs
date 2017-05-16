@@ -5,8 +5,11 @@ public class OfficialCameraMovement: MonoBehaviour
 {
 	public bool DoNotMove;
 
-	public Transform thisPos;
+    RuneCoinManager RuneCoinManager;
+
+    public Transform thisPos;
 	public GameObject Target;
+    public GameObject ThePlayer;
 	public Vector3 CameraOffset = new Vector3(0.0f, 10.0f, -20.0f);
 	public float CameraDistance;
 	public float ZoomInDistance;
@@ -29,14 +32,25 @@ public class OfficialCameraMovement: MonoBehaviour
 	private Camera _camera;
 
 	private bool zoomLockIn,zoomLockOut;
-	bool OnGround;
+	public bool OnGround, NoControls;
+	bool MajorCollectGet;
 
-    Vector3 VeloZ, previous;
+    Vector3 CamNxPos;
 
 	void Start()
 	{
-		Target = GameObject.FindGameObjectWithTag("PlayerMesh");
-		_camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        ThePlayer = GameObject.FindGameObjectWithTag("PlayerMesh");
+        Target = ThePlayer;
+        try
+        {
+            RuneCoinManager = GameObject.Find("SpecialCoinManager").GetComponent<RuneCoinManager>();
+        }
+        catch
+        {
+			//Debug.Log (RuneCoinManager);
+            RuneCoinManager = null;
+        }
+        _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		thisPos = GetComponent<Transform>();
 		thisPos.position = CameraOffset + Target.transform.position;
 		_camera.transform.position = thisPos.position;
@@ -52,7 +66,8 @@ public class OfficialCameraMovement: MonoBehaviour
 
 	public void AssignPlayer(GameObject p)
 	{
-		Target = p;
+        ThePlayer = p;
+        Target = ThePlayer;
 		thisPos.position = CameraOffset + Target.transform.position;
 		_camera.transform.position = thisPos.position;
 		_camera.transform.rotation = thisPos.rotation;
@@ -66,16 +81,27 @@ public class OfficialCameraMovement: MonoBehaviour
 		//Debug.Log(Input.GetAxis("XB1_RightLeft"));
 		if (_camera != null && Target != null)
 		{
+			if (RuneCoinManager != null)
+				MajorCollectGet = RuneCoinManager.MajorCollectableGet;
+			else
+				MajorCollectGet = false;
 
-			//Call Interior Functions
 
-			//Debug.Log (OnGround);
+			if (MajorCollectGet)
+				Target = RuneCoinManager.TheCollect;
+            else
+                Target = ThePlayer;
+            //Call Interior Functions
 
-			ZoomInOut();	//Detect Zoom button clicking
-			CamXRotSpeed();	//Detect horizontal input, add/subtract x speed
-			//momentary if conditional
-			//if (!OnGround)
-			CamYRotSpeed(); //Detect vertical input, add/subtract y speed
+            //Debug.Log (OnGround);
+            if (!NoControls)
+            {
+                ZoomInOut();    //Detect Zoom button clicking
+                CamXRotSpeed(); //Detect horizontal input, add/subtract x speed
+                                //momentary if conditional
+                                //if (!OnGround)
+                CamYRotSpeed(); //Detect vertical input, add/subtract y speed
+            }
 
 			CurrentCamYSpeed = Mathf.Clamp(CurrentCamYSpeed, MinHeight, MaxHeight);	//Clamp the camera's Y angle
 
@@ -83,40 +109,40 @@ public class OfficialCameraMovement: MonoBehaviour
 			Vector3 offset = CameraOffset;
 
 			float cameraAngle = _camera.transform.eulerAngles.y;
-			//Actually unused
-			//float cameraAngle = _camera.transform.eulerAngles.y;
+            //Actually unused
+            //float cameraAngle = _camera.transform.eulerAngles.y;
 
-			offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset * CameraDistance;
+            offset = Quaternion.Euler(CurrentCamYSpeed, CurrentCamXSpeed, 0.0f) * offset * CameraDistance;
 
-			//Important
-			thisPos.transform.position = Vector3.Lerp(_camera.transform.position, targetPos + offset, CurrentCamSpeed * /*Time.deltaTime*/0.2f);
-			//Important
-			/*thisPos.transform.position = Vector3.Lerp(new Vector3(_camera.transform.position.x,0.0f,_camera.transform.position.z),
-                new Vector3(targetPos.x,0.0f,targetPos.z) + new Vector3(offset.x,0.0f,offset.z), CurrentCamSpeed * Time.deltaTime)
-                + Vector3.Lerp(new Vector3(0.0f,_camera.transform.position.y,0.0f), 
-                new Vector3(0.0f, targetPos.y,0.0f) + new Vector3(0.0f,offset.y,0.0f),CurrentCamSpeed*0.1f*Time.deltaTime);
-            */
+            //Important
+            //if (RuneCoinManager.MajorCollectableGet)
+            //{
+            //    offset = Vector3.zero;
+            //}
 
+            CamNxPos = Vector3.Lerp(_camera.transform.position, targetPos + offset, CurrentCamSpeed * /*Time.deltaTime*/0.2f);
+            thisPos.transform.position = CamNxPos;
 			thisPos.transform.LookAt(targetPos);
 
 
 
-            VeloZ = (transform.position - previous) / Time.deltaTime;
-            previous = transform.position;
-
-
             //Debug.Log(Vector3.Distance(thisPos.transform.position, targetPos + offset));
-            Debug.DrawRay(_camera.transform.position, VeloZ, Color.blue);
             Debug.DrawRay(_camera.transform.position, _camera.transform.rotation*Vector3.forward*10.0f, Color.yellow);
-			/*if (Vector3.Distance(thisPos.transform.position, targetPos + offset) > 5.0f)
+            /*if (Vector3.Distance(thisPos.transform.position, targetPos + offset) > 5.0f)
             {
                 CurrentCamSpeed = OrigCameraSpeed * 0.2f;
             }
             else {
                 CurrentCamSpeed = OrigCameraSpeed;
             }*/
+			if (MajorCollectGet) {
+				_camera.transform.LookAt (targetPos);
+				NoControls = true;
+			} else {
+				NoControls = false;
+			}
 
-			if (DoNotMove == false)
+			if (DoNotMove == false && !MajorCollectGet)
 			{
 				_camera.transform.position = thisPos.transform.position;
 				_camera.transform.rotation = thisPos.transform.rotation;

@@ -3,17 +3,18 @@ using System.Collections;
 
 public class PlayerMovement_Ver2 : MonoBehaviour {
     Rigidbody PlayerRb;
-    GameObject RotatingParent;
+    GameObject RotatingParent, loadingCanvas;
     Transform Camera_Rot;
     PlayerKnockback KnockBack;
     PlayerHealth PlayHealth;
     PlayerNPCKill PlayNPCK;
+    RuneCoinManager RuneCoinManager;
 
     Vector3 momentprevVect, momentVel;
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed, downLedgeDist;
 
-    public bool Paused, UnPaused, DontMove, Freeze, forKnockBack, GroundCannotKill, GroundSequence, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;//, OnToggle;
+    public bool Paused, UnPaused, DontMove, Freeze, CinematicFreeze, forKnockBack, GroundCannotKill, GroundSequence, SlideSequence, InRotatingPlat, ClimbSequence, QuickDeath;//, OnToggle;
 
     private bool isMove, JumpBack, JumpBackSeq, JumpSlide, /*HoldClimb,*/ ClimbBugPatch_1, MoveWithPlat;
 	public bool canJump, CantClimb, Sliding, Climbing;
@@ -49,9 +50,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	public bool jumpOnEnemy = false;
     Vector3 RelvSped, distFromRigidBod, PlayerContactPointDist, PlayerGroundNormal;
     Rigidbody TheRigidBod;
-    bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround;
+    bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround, WallOnFront;
     //revised bools...
-    bool GroundInMovPlat, InTransition;
+    bool GroundInMovPlat, InTransition, loadIn;
 
     int jumpCount;
     //int HierchyNum;
@@ -63,17 +64,26 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         //HeierchyNumber(this.gameObject);
         //Debug.Log(HeierchyNumber(this.gameObject));
         Camera_Rot = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
+        loadingCanvas = GameObject.Find("LoadingScreen_Canvas");
+        try
+        {
+            RuneCoinManager = GameObject.Find("SpecialCoinManager").GetComponent<RuneCoinManager>();
+        }
+        catch
+        {
+            RuneCoinManager = null;
+        }
         KnockBack = this.GetComponent<PlayerKnockback>();
         PlayHealth = this.GetComponent<PlayerHealth>();
         PlayNPCK = this.GetComponent<PlayerNPCKill>();
         //runner = theRunningGuy.GetComponent<Animation>();
         ActualSpeed = MoveSpeed;
-		hasJumped = false;
-		CurrentMidAirJumpCount = InitialMidAirJumpCount;
+        hasJumped = false;
+        CurrentMidAirJumpCount = InitialMidAirJumpCount;
         CurrJumpBTime = JumpBackTime;
         _lookRotation = PlayerRb.transform.rotation;
         currentGrav = setGrav;
-    }
+        }
 
     public void ActualSpeedSetter(float MoveSped) {
         ActualSpeed = MoveSped;
@@ -88,12 +98,23 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             InRotatingPlat = false;
         }
 
-        if (Paused == true)
+        if (loadingCanvas != null)
         {
-                //Debug.Log("IsPaused???");
-                //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
-                PlayerRb.velocity = Vector3.zero;
-                UnPaused = false;
+            if (!loadingCanvas.GetComponent<SceneLoader>().BeginClear)
+                loadIn = true;
+            else
+                loadIn = false;
+        }
+        else
+            loadIn = false;
+
+
+        if (Paused == true || loadIn)
+        {
+            //Debug.Log("IsPaused???");
+            //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
+            PlayerRb.velocity = Vector3.zero;
+            UnPaused = false;
         }
         else
         {
@@ -101,6 +122,12 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 PlayerRb.velocity = CurrentOldVel;
                 UnPaused = true;
             }
+            //cinematicpauseportion
+            if (RuneCoinManager!= null && RuneCoinManager.MovementPause)
+                CinematicFreeze = true;
+            else
+                CinematicFreeze = false;
+            //cinematicpauseportionends
             InMovingPlatform();
 
             CurrentOldVel = PlayerRb.velocity;
@@ -127,7 +154,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
 
 
-            if (PlayHealth.currentHealth== 0.0f) {
+            if (PlayHealth.currentHealth == 0.0f) {
                 moveDirection = Vector3.zero;
                 lookDirection = Vector3.zero;
             }
@@ -142,7 +169,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             //-You shoudld not have any airtime when on a ramp on a moving platform
             //PlayerRb.velocity = vel;
             //Debug.Log(ClimbSequence);
-            if (IsGround_2 ||ClimbSequence || GroundInMovPlat)
+            if (IsGround_2 || ClimbSequence || GroundInMovPlat)
             {
                 airTime = 0.0f;
 
@@ -362,13 +389,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             currentRotationSpeed = rotationSpeed * 0.3f;
         }
 
-        if (DontMove == true || Freeze == true)
+        if (DontMove == true || Freeze == true || CinematicFreeze)
         {
             //PlayerRb.transform.rotation = Quaternion.Slerp(PlayerRb.transform.rotation, PlayRot, Time.deltaTime * rotationSpeed);
             currentRotationSpeed = 0.0f;
         }
 
-        if (!DontMove && !SlideSequence && !Freeze)
+        if (!DontMove && !SlideSequence && !Freeze && !CinematicFreeze)
         {
             currentRotationSpeed = rotationSpeed;
         }
@@ -422,7 +449,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             ActualSpeed = MoveSpeed / 2.0f;
             currentGrav = 0.0f;
-            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f)
+            //PENIS(this is actually relevant)
+            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f || (WallOnFront&&!Climbing))
             {
                 ClimbSequence = false;
             }
@@ -592,7 +620,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         FinalVel = vel + BottomPlatVel +MovingPlatVel+ ExForceVelocity;
 
-        if (!Freeze)
+        if (!Freeze && !CinematicFreeze)
         {
             PlayerRb.velocity = FinalVel;
         }
@@ -688,7 +716,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         Vector3 ForwardRotatedDirection = PlayerRb.rotation * Vector3.forward;
 
-        //Debug.DrawRay(PlayerRb.position, ForwardRotatedDirection, Color.yellow);
         if (Physics.Raycast(PlayerRb.position, PlayerRb.rotation * Vector3.forward, out hit))
         {
             forwardDist = hit.distance;
@@ -712,6 +739,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 thereIsFrontMovePlatClimb = false;
                 thereIsWallFronMovePlatCantClimb = false;
             }
+
+            if (hit.transform.tag == "wall")
+                WallOnFront = true;
+            else
+                WallOnFront = false;
+
+
         }
 
         //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x *2.0f) + PlayerRb.position.x, PlayerRb.position.y + 2.0f, (ForwardRotatedDirection.z*2.0f) + PlayerRb.position.z), Vector3.down,Color.blue);
@@ -809,6 +843,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 SlideSequence = false;
             }
 
+            //New Update - work on making rotating platforms slide when the surface is at a certain angle 5/15/17
             if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb"||Other_Tag == "slide")
             {
                 IsGround_2 = true;
