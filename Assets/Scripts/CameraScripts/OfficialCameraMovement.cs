@@ -47,7 +47,7 @@ public class OfficialCameraMovement: MonoBehaviour
         }
         catch
         {
-			Debug.Log (RuneCoinManager);
+			//Debug.Log (RuneCoinManager);
             RuneCoinManager = null;
         }
         _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
