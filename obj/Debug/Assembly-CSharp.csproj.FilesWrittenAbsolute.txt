@@ -74,6 +74,29 @@
 /Users/s430851/Desktop/DJB-Game/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/s430851/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/s430851/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+<<<<<<< HEAD
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/s125454/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll
+/Users/s125454/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEditor.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.VR.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Unity.DataContract.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/s125454/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+=======
 /Users/s582060/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll
 /Users/s582060/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll.mdb
 /Users/s582060/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.dll
@@ -95,6 +118,7 @@
 /Users/s582060/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Mdb.dll
 /Users/s582060/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll.mdb
 /Users/s582060/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll
+<<<<<<< HEAD
 /Users/s116971/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll
 /Users/s116971/Desktop/DJB-Game/obj/Debug/Assembly-CSharp.dll.mdb
 /Users/s116971/Desktop/DJB-Game/Temp/bin/Debug/UnityEngine.dll
@@ -116,3 +140,6 @@
 /Users/s116971/Desktop/DJB-Game/Temp/bin/Debug/Mono.Cecil.Mdb.dll
 /Users/s116971/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll.mdb
 /Users/s116971/Desktop/DJB-Game/Temp/bin/Debug/Assembly-CSharp.dll
+=======
+>>>>>>> 4f9fb48ba3d7da58ee9e480c3aa271e21fae5fdf
+>>>>>>> master
