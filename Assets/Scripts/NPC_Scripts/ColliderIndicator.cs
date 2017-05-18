@@ -6,6 +6,7 @@ public class ColliderIndicator : MonoBehaviour {
     Rigidbody npcRB;
 
     public bool AmIHitting;
+    public bool HitsGround, AmHittingGroundRunnin;
     // Use this for initialization
 	void Start () {
         AmIHitting = false;
