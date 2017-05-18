@@ -204,7 +204,10 @@ public class PlayerLavaDeath : MonoBehaviour {
         GameObject[] StompEnemies = GameObject.FindGameObjectsWithTag("StompNPC");
         for (int i = 0; i < StompEnemies.Length; i++)
         {
-            StompEnemies[i].GetComponent<NPCStomper>().AssignPlayer(_p);
+            if (StompEnemies[i].GetComponent<NPCStomper>() == null)
+                StompEnemies[i].GetComponent<NewNPCStompScript>().AssignPlayer(_p);
+            else
+                StompEnemies[i].GetComponent<NPCStomper>().AssignPlayer(_p);
         }
 
         GameObject[] FlyNPCs = GameObject.FindGameObjectsWithTag("FlyEnemy");
