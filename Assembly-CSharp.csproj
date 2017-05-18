@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
      <Compile Include="Assets\HubPortalColorer.cs" />
+     <Compile Include="Assets\NewNPCStompScript.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerButtonActivator.cs" />
      <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\PlayerControls.cs" />
@@ -64,6 +65,7 @@
      <Compile Include="Assets\Scripts\Canvas_Scripts\PressSpaceToContinue.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\Canvas_Scripts\TitleScreen.cs" />
+     <Compile Include="Assets\Scripts\CheckpointLightsScript.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\BowlderSpawner.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\ButtonActivator.cs" />
      <Compile Include="Assets\Scripts\Environment_Scripts\Checkpoint.cs" />
