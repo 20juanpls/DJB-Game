@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class speedcubetest : MonoBehaviour {
     public GameObject followThis;
+    GameObject BottomFace;
     Rigidbody CenterOfMass;
 
     public float Speed = 5.0f;
@@ -62,22 +63,7 @@ public class speedcubetest : MonoBehaviour {
             }
 
             TimeSwitch = TimeSwitch - Time.deltaTime;
-            //Debug.Log(MoveToPos);
-            //this.transform.Translate(Vector3.right * Speed * Time.deltaTime);
-            //this.transform.position = MoveToPos + origPos;
-            //CenterOfMass.position = Vector3.Lerp(CenterOfMass.position, MoveToPos + origPos, LerpSpeed * Time.deltaTime);
-
-            //Debug.Log(velocity);
-            //Debug.Log((transform.position - previous)/Time.deltaTime);
-            /*if (previous != Vector3.zero)
-            {
-                VeloZ = (transform.position - previous) / Time.deltaTime;
-                velocity = VeloZ.magnitude;
-            }
-            previous = transform.position;*/
-
-            //Debug.DrawRay(transform.position, VeloZ, Color.red);
-            //this.transform.position = Vector3.Slerp(this.transform.position, )
         }
     }
+
 }
