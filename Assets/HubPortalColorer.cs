@@ -19,7 +19,7 @@ public class HubPortalColorer : MonoBehaviour {
 		portalStage_1_3 = this.transform.parent.gameObject.GetComponent<ParticleSystem> ();
 		Debug.Log(sm.GetStatus ("Stage_1_3"));
 		var main = portalStage_1_3.main;
-		if (sm.GetStatus ("Stage_1_3") == 0) {	//IF UNCOMPLETED, RED BUTTHOLE
+		if (sm.GetStatus ("Stage_1_3") <= 1) {	//IF UNCOMPLETED, RED BUTTHOLE
 			//Debug.Log ("cool kat ag");
 			//portalStage_1_3.main.startColor = new Color (255f, 255f, 255f);
 			main.startColor = new Color (254f, 0f, 00f, 81f);

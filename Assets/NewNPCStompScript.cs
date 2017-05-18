@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NPCStomper : MonoBehaviour {
+public class NewNPCStompScript : MonoBehaviour
+{
     Rigidbody ThisStompRb;
-    GameObject Player;
+    GameObject Player, BottomPlane;
     Transform PlayerPos;
     public Vector3 OrigStompPos;
 
@@ -22,17 +23,20 @@ public class NPCStomper : MonoBehaviour {
     public float IntensityOfWarn;
     public float LenghtOfWarnShake;
 
-    
+
     private float airTime;
-    private float Distance;
-    private Vector3 PlayerDist;
+    private float Distance, GroundDist;
+    private Vector3 PlayerDist, BottomPlanePos;
     private float currentfallSpeed;
     public bool CanFall, Recover, Warned;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Player = GameObject.Find("Player");
         PlayerPos = Player.GetComponent<Transform>();
+        BottomPlane = transform.parent.FindChild("MovingPlat").transform.FindChild("ColliderForStompEnemy").transform.FindChild("BottomPlane").gameObject;
+        Debug.Log(BottomPlane);
         ThisStompRb = this.GetComponent<Rigidbody>();
         OrigStompPos = ThisStompRb.transform.position;
         CurrentTimeOnGround = OrigTimeOnGround;
@@ -46,13 +50,17 @@ public class NPCStomper : MonoBehaviour {
     public void AssignPlayer(GameObject p)
     {
         PlayerPos = p.transform;
-       // Debug.Log(Player.ToString());
+        // Debug.Log(Player.ToString());
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
         Distance = Vector3.Distance(new Vector3(PlayerPos.position.x, 0.0f, PlayerPos.position.z), new Vector3(OrigStompPos.x, 0.0f, OrigStompPos.z));
+
+        UpdateCurrentTouchingGround();
+
 
         if (Distance <= MinPlayerDist)
         {
@@ -70,7 +78,8 @@ public class NPCStomper : MonoBehaviour {
                     ThisStompRb.velocity = Vector3.MoveTowards(OrigStompPos, ThisStompRb.position, RecoverySpeed);
                 }
             }
-            else {
+            else
+            {
                 CurrentWarnTime = OrigWarnTime;
             }
 
@@ -81,7 +90,8 @@ public class NPCStomper : MonoBehaviour {
             }
         }
 
-        if (CanFall == true) {
+        if (CanFall == true)
+        {
             currentfallSpeed = initialAirSpeed + (fallAccel * airTime);
 
             ThisStompRb.velocity = new Vector3(0.0f, currentfallSpeed, 0.0f);
@@ -91,7 +101,8 @@ public class NPCStomper : MonoBehaviour {
         }
 
         //Debug.Log(touching);
-        if (touching == true){
+        if (touching == true)
+        {
             Recover = true;
             CanFall = false;
             airTime = 0.0f;
@@ -106,31 +117,35 @@ public class NPCStomper : MonoBehaviour {
                 //ThisStompRb.position = Vector3.MoveTowards(ThisStompRb.position, OrigStompPos, RecoverySpeed *Time.deltaTime);
                 ThisStompRb.velocity = new Vector3(0.0f, RecoverySpeed, 0.0f);
                 //Debug.Log(currentfallSpeed);
-                if (ThisStompRb.position.y >= OrigStompPos.y) {
+                if (ThisStompRb.position.y >= OrigStompPos.y)
+                {
                     CurrentTimeOnAir -= Time.deltaTime;
                     ThisStompRb.velocity = Vector3.zero;
-                    if (CurrentTimeOnAir <= 0.0f) {
+                    if (CurrentTimeOnAir <= 0.0f)
+                    {
                         Recover = false;
                         Warned = false;
                     }
                 }
             }
         }
-	
-	}
 
-    void OnCollisionEnter(Collision collision){
-        //Debug.Log (collision.relativeVelocity);
-        if (collision.gameObject.name != "Player")
-        {
-            touching = true;
-        }
     }
 
-    /*void OnCollisionExit(Collision collision){
-        if (collision.gameObject.name != "Player")
-        {
-            touching = false;
+    void UpdateCurrentTouchingGround(){
+        BottomPlanePos = BottomPlane.transform.position;
+
+        RaycastHit hit;
+        if (Physics.Raycast(BottomPlanePos, Vector3.down, out hit)) {
+            if (hit.transform.tag != "PlayerMesh") {
+                GroundDist = hit.distance;
+            }
         }
-    }*/
+
+        if (GroundDist <= 0.5f)
+            touching = true;
+        else
+            touching = false;
+    }
 }
+

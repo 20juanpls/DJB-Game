@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScore : MonoBehaviour {
 
@@ -112,8 +113,8 @@ public class PlayerScore : MonoBehaviour {
         }
 
         if (other.tag == "GoalCollectable") {
-			//SavefileManager sm = GameObject.Find ("SceneSaver").GetComponent<SavefileManager> ();
-			//sm.SaveFile (1);
+			SavefileManager sm = GameObject.Find ("SceneSaver").GetComponent<SavefileManager> ();
+			sm.SaveFile (sm.GetStatus(SceneManager.GetActiveScene().name) + 1);
             GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<PlayerLavaDeath>().PlayerWinState = true;
         }
     }
