@@ -73,10 +73,6 @@ public class TeleporterScript : MonoBehaviour {
             TargetR = Gpos_R;
 
 			this.transform.FindChild ("PortalFX").gameObject.SetActive (true);
-<<<<<<< HEAD
-=======
-
->>>>>>> 99ea53a54c210c74060c6c796eaffa5ee33d6bf7
         }
         else {
             TargetT = OposTop;

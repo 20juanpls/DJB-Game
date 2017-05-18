@@ -111,13 +111,10 @@
      <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
      <Compile Include="Assets\Scripts\manager_Scripts\UIControllerNav.cs" />
      <Compile Include="Assets\Scripts\speedcubetest.cs" />
-<<<<<<< HEAD
-=======
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Emissive Diffuse.shader" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Standard Diffuse Bump.shader" />
      <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Transparent Diffuse Bump.shader" />
->>>>>>> master
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
