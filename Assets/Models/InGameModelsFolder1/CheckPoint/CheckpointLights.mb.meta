@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0a6079acde37fb14c8db2c04e97ab758
-timeCreated: 1495068199
+guid: 237ae8c9ab71ec048a890eb09f9dfef3
+timeCreated: 1495068231
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Checkpoint
+    4300000: Checkpoint1
     9500000: //RootNode
   materials:
     importMaterials: 1

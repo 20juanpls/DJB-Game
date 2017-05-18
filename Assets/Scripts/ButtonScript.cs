@@ -44,8 +44,8 @@ public class ButtonScript : MonoBehaviour {
         //Debug.Log (OrigTogPos + ", "+Toggle.transform.position);
         if (IndicatorLightsM != null) {
             IndicatorLightsM.SetColor("_TintColor", new Color(IndicatorLightsM.GetColor("_TintColor").r, IndicatorLightsM.GetColor("_TintColor").g, IndicatorLightsM.GetColor("_TintColor").b, LightsGrayScale * 0.1f));
-            if (LightsGrayScale * 0.1f >= 0.5f)
-                Debug.Log("Enough");
+            //if (LightsGrayScale * 0.1f >= 0.5f)
+            //    Debug.Log("Enough");
             //Debug.Log(IndicatorLightsM.GetColor("_TintColor"));
             if (ButtonActive)
                 LightsGrayScale = Mathf.Lerp(LightsGrayScale, 5.0f, LightsSpeed * Time.deltaTime);
