@@ -200,7 +200,6 @@ public class PlayerLavaDeath : MonoBehaviour {
         //playerMovementVer2.IsGround_2 = false;
 
         //for each player, assign new player
-
         GameObject[] StompEnemies = GameObject.FindGameObjectsWithTag("StompNPC");
         for (int i = 0; i < StompEnemies.Length; i++)
         {

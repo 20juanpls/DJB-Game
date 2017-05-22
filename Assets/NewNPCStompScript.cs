@@ -36,21 +36,26 @@ public class NewNPCStompScript : MonoBehaviour
         Player = GameObject.Find("Player");
         PlayerPos = Player.GetComponent<Transform>();
         BottomPlane = transform.parent.FindChild("MovingPlat").transform.FindChild("ColliderForStompEnemy").transform.FindChild("BottomPlane").gameObject;
-        Debug.Log(BottomPlane);
         ThisStompRb = this.GetComponent<Rigidbody>();
         OrigStompPos = ThisStompRb.transform.position;
         CurrentTimeOnGround = OrigTimeOnGround;
         CurrentTimeOnAir = OrigTimeOnAir;
         CurrentWarnTime = OrigWarnTime;
 
-        //ayy not yeet;
-        //CanFall = true;
-
+        RaycastHit hit;
+        BottomPlanePos = BottomPlane.transform.position;
+        if (Physics.Raycast(BottomPlanePos, Vector3.down, out hit))
+        {
+            if (hit.transform.tag != "PlayerMesh")
+            {
+                GroundDist = hit.distance;
+            }
+        }
     }
     public void AssignPlayer(GameObject p)
     {
         PlayerPos = p.transform;
-        // Debug.Log(Player.ToString());
+         Debug.Log(Player.ToString());
     }
 
     // Update is called once per frame
@@ -133,16 +138,7 @@ public class NewNPCStompScript : MonoBehaviour
     }
 
     void UpdateCurrentTouchingGround(){
-        BottomPlanePos = BottomPlane.transform.position;
-
-        RaycastHit hit;
-        if (Physics.Raycast(BottomPlanePos, Vector3.down, out hit)) {
-            if (hit.transform.tag != "PlayerMesh") {
-                GroundDist = hit.distance;
-            }
-        }
-
-        if (GroundDist <= 0.5f)
+        if ((ThisStompRb.position.y - OrigStompPos.y) + GroundDist <= 0.0f)
             touching = true;
         else
             touching = false;

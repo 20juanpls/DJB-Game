@@ -10,7 +10,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     PlayerNPCKill PlayNPCK;
     RuneCoinManager RuneCoinManager;
 
-    Vector3 momentprevVect, momentVel;
+    Vector3 momentprevVect, momentVel, FinalContactPoint;
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed, downLedgeDist;
 
@@ -247,7 +247,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 MoveWithPlat = false;*/
         }
 
-        //add as a later patch ...
+        //add as a later patch ... PENILE DISFUNCTION
         if (InTransition) {
             if (airTime > 0.0f) {
                 Debug.Log("this shouldn't happen");
@@ -626,6 +626,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
         else {
             PlayerRb.velocity = Vector3.zero;
+            if (PlayHealth.Crushing) {
+                //PlayerRb.position = FinalContactPoint;
+                PlayerRb.position = Vector3.Lerp(PlayerRb.transform.position, FinalContactPoint, 20.0f * Time.deltaTime);
+            }
         }
 
         //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
@@ -812,6 +816,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (other.tag == "climbtrans") {
             InTransition = true;
         }
+        Debug.Log(other.tag);
     }
 
     void OnCollisionEnter(Collision collision){
@@ -847,8 +852,9 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
             if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb"||Other_Tag == "slide")
             {
                 IsGround_2 = true;
-
-				if (Other_Tag == "Untagged") {
+                if (!PlayHealth.Crushing)
+                    FinalContactPoint = contact.point;
+                if (Other_Tag == "Untagged") {
 					Climbing = false;
                     OnNormalG = true;
                     Sliding = false;
@@ -891,7 +897,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         BottomPlatVel = Vector3.zero;
     }
 
-    public static GameObject FindParentWithTag(GameObject childObject, string tag)
+    public GameObject FindParentWithTag(GameObject childObject, string tag)
     {
         Transform t = childObject.transform;
         while (t.parent != null)

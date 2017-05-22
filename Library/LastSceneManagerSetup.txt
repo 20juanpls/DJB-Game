@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Unused/NPCTestScene_01.unity
+- path: Assets/Scenes/ShiftingLevel.unity
   isLoaded: 1
   isActive: 1
