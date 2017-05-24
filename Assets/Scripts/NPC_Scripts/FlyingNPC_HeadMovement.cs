@@ -11,6 +11,7 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
     Transform Propeller;
     CollisionIndicator CollHitBox, DeathHitBox;
 
+    public bool AbNormalSpin;
     public float HLookRotSpeed, IdleRotSpeed, HStunnedRotSpeed, HomeDistance = 5.0f, AttakSpeed, IdleSpeed, CoolDownTime;
     public bool lookInactive, Attack, IsCoolTime, CanLookAtPlayer, AmStuck, StartTurning1, StartTurning2, IsDead, isMoving, PlayerHasIntruded;
     Vector3 FinalVel, FinalHeight, AntiWall, OriginalPos;
@@ -245,8 +246,11 @@ public class FlyingNPC_HeadMovement : MonoBehaviour
 		if (IsDead == true) {
 			PropellerSpeed = 0.0f;
 		}
+        if (AbNormalSpin)
+            Propeller.RotateAround(Propeller.position, Propeller.forward, PropellerSpeed * Time.deltaTime);
+        else
+            Propeller.RotateAround(Propeller.position, Propeller.right, PropellerSpeed * Time.deltaTime);
 
-        Propeller.RotateAround(Propeller.position, Propeller.right, PropellerSpeed * Time.deltaTime);
     }
     void IsThereCoolDown()
     {
