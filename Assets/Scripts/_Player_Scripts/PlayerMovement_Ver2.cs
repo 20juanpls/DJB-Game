@@ -96,6 +96,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (PlayHealth.IsDead)
         {
             InRotatingPlat = false;
+            IsGround_2 = false;
         }
 
         if (loadingCanvas != null)
