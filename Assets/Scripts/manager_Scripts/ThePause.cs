@@ -24,6 +24,8 @@ public class ThePause : MonoBehaviour {
 	private GameObject mainMenuButton;
 	private GameObject settingsButton;
 
+	public AudioSource background;
+
     // Use this for initialization
     void Start()
     {
@@ -54,6 +56,7 @@ public class ThePause : MonoBehaviour {
 		Button buntern = settingsButton.GetComponent<Button> ();
 		buntern.onClick.AddListener (options);
 
+		background = GetComponent<AudioSource>();
     }
 
     public void AssignPlayer(GameObject _p) {
@@ -81,11 +84,13 @@ public class ThePause : MonoBehaviour {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = true;
             TotalFreeze = true;
             PauseCanvas.SetActive(true);
+			background.volume = 0.3f;
         }
         else {
             ThePlayer.GetComponent<PlayerMovement_Ver2>().Paused = false;
             TotalFreeze = false;
             PauseCanvas.SetActive(false);
+			background.volume = 1.0f;
         }
 
         if (TotalFreeze)

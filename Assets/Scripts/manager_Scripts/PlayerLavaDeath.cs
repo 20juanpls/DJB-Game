@@ -27,6 +27,12 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public int Deaths;
 
+	public AudioSource background;
+	public AudioClip deathClip;
+	public AudioClip backgroundClip;
+
+	bool playingDed = false;
+
 	// Use this for initialization
 	void Start () {
 		loseScreen = GameObject.Find ("LoseScreenCanvas");
@@ -44,6 +50,10 @@ public class PlayerLavaDeath : MonoBehaviour {
 		//heart resetting stuff
 		hearts = GameObject.FindGameObjectsWithTag("HeartHP");
 
+		background = this.GetComponent<AudioSource> ();
+
+		background.clip = backgroundClip;
+		background.Play();
     }
 
     void Update() {
@@ -52,13 +62,29 @@ public class PlayerLavaDeath : MonoBehaviour {
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
 			gameOverScreen.gameObject.SetActive (true);
 			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+			if (!playingDed){
+				playingDed = true;
+				Debug.Log ("i am ded");
+				background.Stop ();
+				background.clip = deathClip;
+				background.Play();
+				loseScreen.gameObject.SetActive (true);	
+			}
             //Deaths++;
         } else {
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
-				loseScreen.gameObject.SetActive (true);
+				if (!playingDed){
+					playingDed = true;
+					Debug.Log ("i am ded");
+					background.Stop ();
+					background.clip = deathClip;
+					background.Play();
+					loseScreen.gameObject.SetActive (true);	
+				}
                 //Deaths++;
             } else {
 				loseScreen.gameObject.SetActive (false);
+				playingDed = false;
 			}
 		}
 
@@ -123,6 +149,8 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public void Restart(){
 
+		background.clip = backgroundClip;
+		background.Play ();
 		//Reset coins
 		ResetCollectables();
 
