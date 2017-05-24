@@ -10,7 +10,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
     PlayerNPCKill PlayNPCK;
     RuneCoinManager RuneCoinManager;
 
-    Vector3 momentprevVect, momentVel;
+    Vector3 momentprevVect, momentVel, FinalContactPoint;
 
     private float HorizLook, VertLook, ActualSpeed, UpHillValue, currentRotationSpeed, downLedgeDist;
 
@@ -50,7 +50,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 	public bool jumpOnEnemy = false;
     Vector3 RelvSped, distFromRigidBod, PlayerContactPointDist, PlayerGroundNormal;
     Rigidbody TheRigidBod;
-    bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround;
+    bool RampOnPlat, InTransfromClimbtoGround, thereIsFrontMovePlatClimb, thereIsWallFronMovePlatCantClimb, SolidGround, WallOnFront;
     //revised bools...
     bool GroundInMovPlat, InTransition, loadIn;
 
@@ -96,10 +96,16 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (PlayHealth.IsDead)
         {
             InRotatingPlat = false;
+            IsGround_2 = false;
         }
 
         if (loadingCanvas != null)
-            loadIn = loadingCanvas.activeSelf;
+        {
+            if (!loadingCanvas.GetComponent<SceneLoader>().BeginClear)
+                loadIn = true;
+            else
+                loadIn = false;
+        }
         else
             loadIn = false;
 
@@ -242,7 +248,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 MoveWithPlat = false;*/
         }
 
-        //add as a later patch ...
+        //add as a later patch ... PENILE DISFUNCTION
         if (InTransition) {
             if (airTime > 0.0f) {
                 Debug.Log("this shouldn't happen");
@@ -444,7 +450,8 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         {
             ActualSpeed = MoveSpeed / 2.0f;
             currentGrav = 0.0f;
-            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f)
+            //PENIS(this is actually relevant)
+            if (JumpBack || KnockBack.InCollision || OnNormalG || forwardDist > 1.5f || (WallOnFront&&!Climbing))
             {
                 ClimbSequence = false;
             }
@@ -620,6 +627,10 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         }
         else {
             PlayerRb.velocity = Vector3.zero;
+            if (PlayHealth.Crushing) {
+                //PlayerRb.position = FinalContactPoint;
+                PlayerRb.position = Vector3.Lerp(PlayerRb.transform.position, FinalContactPoint, 20.0f * Time.deltaTime);
+            }
         }
 
         //Debug.DrawRay(PlayerRb.position, PlayerRb.velocity, Color.green);
@@ -710,7 +721,6 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
 
         Vector3 ForwardRotatedDirection = PlayerRb.rotation * Vector3.forward;
 
-        //Debug.DrawRay(PlayerRb.position, ForwardRotatedDirection, Color.yellow);
         if (Physics.Raycast(PlayerRb.position, PlayerRb.rotation * Vector3.forward, out hit))
         {
             forwardDist = hit.distance;
@@ -734,6 +744,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 thereIsFrontMovePlatClimb = false;
                 thereIsWallFronMovePlatCantClimb = false;
             }
+
+            if (hit.transform.tag == "wall")
+                WallOnFront = true;
+            else
+                WallOnFront = false;
+
+
         }
 
         //Debug.DrawRay(new Vector3((ForwardRotatedDirection.x *2.0f) + PlayerRb.position.x, PlayerRb.position.y + 2.0f, (ForwardRotatedDirection.z*2.0f) + PlayerRb.position.z), Vector3.down,Color.blue);
@@ -800,6 +817,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (other.tag == "climbtrans") {
             InTransition = true;
         }
+        Debug.Log(other.tag);
     }
 
     void OnCollisionEnter(Collision collision){
@@ -831,11 +849,13 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
                 SlideSequence = false;
             }
 
+            //New Update - work on making rotating platforms slide when the surface is at a certain angle 5/15/17
             if (Other_Tag == "Untagged" || Other_Tag == "StompNPC" || Other_Tag == "climb"||Other_Tag == "slide")
             {
                 IsGround_2 = true;
-
-				if (Other_Tag == "Untagged") {
+                if (!PlayHealth.Crushing)
+                    FinalContactPoint = contact.point;
+                if (Other_Tag == "Untagged") {
 					Climbing = false;
                     OnNormalG = true;
                     Sliding = false;
@@ -878,7 +898,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         BottomPlatVel = Vector3.zero;
     }
 
-    public static GameObject FindParentWithTag(GameObject childObject, string tag)
+    public GameObject FindParentWithTag(GameObject childObject, string tag)
     {
         Transform t = childObject.transform;
         while (t.parent != null)

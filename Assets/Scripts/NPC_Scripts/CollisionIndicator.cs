@@ -20,6 +20,6 @@ public class CollisionIndicator : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-            HitsPlayer = false;
+        HitsPlayer = false;
     }
 }

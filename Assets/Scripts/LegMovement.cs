@@ -54,7 +54,7 @@ public class LegMovement : MonoBehaviour {
 
 
         //triggered inclusion
-        Debug.Log(DirRotT.rotation.eulerAngles.x);
+        //Debug.Log(DirRotT.rotation.eulerAngles.x);
 
         //CurrentXAxis_Speed = InitialX_axisSpeed + (DownMultiplier * airTime);
 

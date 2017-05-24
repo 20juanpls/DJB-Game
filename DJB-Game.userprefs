@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/_Player_Scripts/PlayerAudioManagementScript.cs">
@@ -6,6 +7,13 @@
       <File FileName="Assets/Scripts/manager_Scripts/PlayerLavaDeath.cs" Line="69" Column="21" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerHealth.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/_Player_Scripts/PlayerAudioManagementScript.cs" Line="38" Column="30" />
+=======
+﻿<Properties StartupItem="DJB-Game.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs">
+    <Files>
+      <File FileName="Assets\Scripts\MovingPlataform\NewMovingPlatform.cs" Line="1" Column="1" />
+>>>>>>> ea72e65bd669b9dabc77c0b5b2d6e05abe02f306
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

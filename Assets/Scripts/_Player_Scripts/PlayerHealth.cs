@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour {
     Transform PlayerTrn;
     CapsuleCollider PlayerColl;
     PlayerKnockback KnockKnock;
+    GameObject RotatingParent;
     //Rigidbody PlayerRb;
 
     public int StartHealth = 3, Lives = 3;//, BlinkFrameBuffer = 5;
@@ -202,18 +203,21 @@ public class PlayerHealth : MonoBehaviour {
 			Debug.Log ("SONG");
 			Destroy (other.gameObject);
 		}
-
     }
 
     void UpRayShooter() {
         RaycastHit uphit;
         if (Physics.Raycast(PlayerTrn.position, new Vector3(0.0f, 1.0f, 0.0f), out uphit)) {
 
-            if (uphit.transform.tag == "StompNPC") {
-                UpDist = uphit.distance;
-                //Debug.Log(UpDist);
-                if (UpDist <= 1.5f && PlayerScript.isGrounded == true) {
-                    Crushing = true;
+            RotatingParent = PlayerScript.FindParentWithTag(uphit.transform.gameObject, "ItRotates");
+            if (RotatingParent != null)
+            {
+                if (RotatingParent.GetComponent<speedcubetest>().followThis.transform.tag == "StompNPC") {
+                    UpDist = uphit.distance;
+                    //Debug.Log(UpDist);
+                    if (UpDist <= 1.5f && PlayerScript.isGrounded == true) {
+                         Crushing = true;
+                    }
                 }
             }
         }

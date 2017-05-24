@@ -3,6 +3,7 @@ using System.Collections;
 
 public class NPCStomper : MonoBehaviour {
     Rigidbody ThisStompRb;
+    GameObject Player;
     Transform PlayerPos;
     public Vector3 OrigStompPos;
 
@@ -30,7 +31,8 @@ public class NPCStomper : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PlayerPos = GameObject.Find("Player").GetComponent<Transform>();
+        Player = GameObject.Find("Player");
+        PlayerPos = Player.GetComponent<Transform>();
         ThisStompRb = this.GetComponent<Rigidbody>();
         OrigStompPos = ThisStompRb.transform.position;
         CurrentTimeOnGround = OrigTimeOnGround;

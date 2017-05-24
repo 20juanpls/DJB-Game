@@ -33,6 +33,7 @@ public class OfficialCameraMovement: MonoBehaviour
 
 	private bool zoomLockIn,zoomLockOut;
 	public bool OnGround, NoControls;
+	bool MajorCollectGet;
 
     Vector3 CamNxPos;
 
@@ -46,6 +47,7 @@ public class OfficialCameraMovement: MonoBehaviour
         }
         catch
         {
+			//Debug.Log (RuneCoinManager);
             RuneCoinManager = null;
         }
         _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -79,9 +81,14 @@ public class OfficialCameraMovement: MonoBehaviour
 		//Debug.Log(Input.GetAxis("XB1_RightLeft"));
 		if (_camera != null && Target != null)
 		{
+			if (RuneCoinManager != null)
+				MajorCollectGet = RuneCoinManager.MajorCollectableGet;
+			else
+				MajorCollectGet = false;
 
-            if (RuneCoinManager.MajorCollectableGet && RuneCoinManager != null)
-                Target = RuneCoinManager.TheCollect;
+
+			if (MajorCollectGet)
+				Target = RuneCoinManager.TheCollect;
             else
                 Target = ThePlayer;
             //Call Interior Functions
@@ -128,16 +135,14 @@ public class OfficialCameraMovement: MonoBehaviour
             else {
                 CurrentCamSpeed = OrigCameraSpeed;
             }*/
-            if (RuneCoinManager.MajorCollectableGet && RuneCoinManager != null)
-            {
-                _camera.transform.LookAt(targetPos);
-                NoControls = true;
-            }
-            else {
-                NoControls = false;
-            }
+			if (MajorCollectGet) {
+				_camera.transform.LookAt (targetPos);
+				NoControls = true;
+			} else {
+				NoControls = false;
+			}
 
-			if (DoNotMove == false && !RuneCoinManager.MajorCollectableGet)
+			if (DoNotMove == false && !MajorCollectGet)
 			{
 				_camera.transform.position = thisPos.transform.position;
 				_camera.transform.rotation = thisPos.transform.rotation;

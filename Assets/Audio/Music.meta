@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: ee3ea4f332c7c47a3baecb1e665152e9
 folderAsset: yes
+<<<<<<< HEAD:Assets/Audio/Music.meta
 timeCreated: 1495131358
+=======
+timeCreated: 1495065523
+>>>>>>> ea72e65bd669b9dabc77c0b5b2d6e05abe02f306:Assets/LevelLoader.meta
 licenseType: Free
 DefaultImporter:
   userData: 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoulderGoalScript : MonoBehaviour {
     GameObject ThePlayer;
-    public bool B_GOAL;
+    public bool B_GOAL, StartOverOnDeath;
     bool BoulderIn;
 	// Use this for initialization
 	void Start () {
@@ -22,8 +22,11 @@ public class BoulderGoalScript : MonoBehaviour {
 
         if (ThePlayer == null)
         {
-            B_GOAL = false;
-            BoulderIn = false;
+            if (StartOverOnDeath)
+            {
+                B_GOAL = false;
+                BoulderIn = false;
+            }
             FindThePlayer();
         }
     }
