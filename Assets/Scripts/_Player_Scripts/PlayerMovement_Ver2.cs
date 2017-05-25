@@ -96,6 +96,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         if (PlayHealth.IsDead)
         {
             InRotatingPlat = false;
+
             IsGround_2 = false;
         }
 
@@ -315,8 +316,7 @@ public class PlayerMovement_Ver2 : MonoBehaviour {
         /*if (CurrJumpBTime >= 0.2f && JumpBackSeq == true && (JumpBackVect.magnitude - moveDirection.magnitude) < 0.0f)
         {
             Debug.Log("ayy");
-            VectMeasure = 0.0f;
-            Debug.Log(VectMeasure);
+            VectMeasure = 0.0f            Debug.Log(VectMeasure);
         }*/
 
         //finds angle of camera relative to world & angle of surface

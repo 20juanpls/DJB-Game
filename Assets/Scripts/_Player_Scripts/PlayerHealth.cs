@@ -43,6 +43,9 @@ public class PlayerHealth : MonoBehaviour {
     private float UpDist;
     public Vector3 OrigScale, CrushedPos;
 
+	//sound effects
+	public AudioSource oneup;
+
 	// Use this for initialization
 	void Start () {
         PlayerScript = this.GetComponent<PlayerMovement_Ver2>();
@@ -62,6 +65,7 @@ public class PlayerHealth : MonoBehaviour {
         OriginalMoveSpeed = PlayerScript.MoveSpeed;
         //Debug.Log("OrigScale:" + OrigScale);
 
+		oneup = this.GetComponent<AudioSource> ();
     }
 	
 	// Update is called once per frame
@@ -195,6 +199,8 @@ public class PlayerHealth : MonoBehaviour {
 		if (other.tag == "1UP")
 		{
 			Lives++;
+			oneup.Play();
+			Debug.Log ("SONG");
 			Destroy (other.gameObject);
 		}
     }
