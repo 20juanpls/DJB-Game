@@ -35,7 +35,6 @@ public class NewMovingPlatform : MonoBehaviour {
 		}
 		//Debug.Log ("DIST TO CDI: " + Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position));
 		if (Vector3.Distance (this.transform.position, checkpoints [CDI].transform.position) <= deadzone) {
-			Debug.Log ("LOOP");
 			CDI++;
 			MPI++;
 			if (CDI >= checkpoints.Capacity) {

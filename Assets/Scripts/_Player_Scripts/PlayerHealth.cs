@@ -151,6 +151,7 @@ public class PlayerHealth : MonoBehaviour {
                         }
                     }
                     PlayerScript.DontMove = true;
+                    //IfPLayerDies it doesn't move
                 }
 
                 //Debug.Log(Crushing);

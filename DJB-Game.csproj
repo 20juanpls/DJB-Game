@@ -142,6 +142,7 @@
     <Compile Include="Assets\Scripts\manager_Scripts\ThePause.cs" />
     <Compile Include="Assets\Scripts\manager_Scripts\UIControllerNav.cs" />
     <Compile Include="Assets\Scripts\speedcubetest.cs" />
+    <Compile Include="Assets\satansummon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Emissive Diffuse.shader" />

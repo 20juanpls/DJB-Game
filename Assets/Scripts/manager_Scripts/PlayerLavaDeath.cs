@@ -37,7 +37,7 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//loseScreen = GameObject.Find ("LoseScreenCanvas");
+		loseScreen = GameObject.Find ("LoseScreenCanvas");
 		//gameOverScreen = GameObject.Find ("GameOverCanvas");
         //assignButton();
         //loseScreen.SetActive (false);
@@ -62,16 +62,17 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 		//Debug.Log ("Deaths:"+Deaths);
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
-			gameOverScreen.gameObject.SetActive (true);
-			player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+			//gameOverScreen.gameObject.SetActive (true);
+			//player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
 			if (!playingDed){
 				playingDed = true;
 				Debug.Log ("i am ded");
 				background.Stop ();
 				background.clip = deathClip;
 				background.Play();
-				loseScreen.gameObject.SetActive (true);	
-			}
+                gameOverScreenActive = true;
+                //loseScreen.gameObject.SetActive (true);	
+            }
             //Deaths++;
         } else {
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
@@ -81,12 +82,14 @@ public class PlayerLavaDeath : MonoBehaviour {
 					background.Stop ();
 					background.clip = deathClip;
 					background.Play();
-					loseScreen.gameObject.SetActive (true);	
-				}
+                    LoseScreenActive = true;
+                    //loseScreen.gameObject.SetActive (true);	
+                }
                 //Deaths++;
             } else {
-				loseScreen.gameObject.SetActive (false);
-				playingDed = false;
+                //loseScreen.gameObject.SetActive (false);
+                LoseScreenActive = false;
+                playingDed = false;
 			}
 		}
 

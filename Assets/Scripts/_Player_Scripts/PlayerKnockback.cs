@@ -14,7 +14,7 @@ public class PlayerKnockback : MonoBehaviour {
     public float knockbackMultiplier, RecoverTime, KnockBackJumpForce, MinFloorDistFallDamage, recovOngroundT, AirtimeTillFall;
     public int totalDamage, UpdateCount, InCollisionCount;
 
-    private float TimeLeft;
+    private float TimeLeft, KnockTime;
     private Vector3 KnockBackOrientation, hitVector, ExForceVector;
 
     public Quaternion hitRotation;
@@ -29,6 +29,7 @@ public class PlayerKnockback : MonoBehaviour {
         InCollision = false;
 
         TimeLeft = RecoverTime;
+        KnockTime = RecoverTime;
         recovOngroundT = RecoverTime * 0.4f;
     }
 
@@ -121,7 +122,7 @@ public class PlayerKnockback : MonoBehaviour {
         {
             //StayInEntry
             HazardT = other.GetComponent<Transform>();
-            Vector3 direction = HazardT.transform.rotation * -Vector3.forward;
+            Vector3 direction = HazardT.transform.rotation * -Vector3.up;
             hitRotation = Quaternion.LookRotation(direction);
             KnockBackOrientation = hitRotation * Vector3.forward*-1;
             if (cantTakeDamage == false)
@@ -178,27 +179,48 @@ public class PlayerKnockback : MonoBehaviour {
 
     void ForceAdder() {
 
-            TimeLeft -= Time.deltaTime;
+        TimeLeft -= Time.deltaTime;
+        //KnockTime -= Time.deltaTime;
 
-            FinalKnockBack = KnockBackOrientation * (TimeLeft*0.6f) * knockbackMultiplier;
-            
-            Debug.DrawRay(PlayerRb.position, KnockBackOrientation, Color.blue);
+        FinalKnockBack = KnockBackOrientation * (KnockTime * 0.6f) * knockbackMultiplier;
 
-            if (TimeLeft <= 0.0f )
-            {
-                TimeLeft = 0.0f;
-                if (PlayerP.IsGround_2 == true || PlayerP.isGrounded == true){
-                    recovOngroundT -= Time.deltaTime;
-                    if (recovOngroundT <= 0.0f)
-                    {
-                        recovOngroundT = 0.4f * RecoverTime;
-                        collided = false;
-                    }
-                }
-                if (collided == false) {
-                        TimeLeft = RecoverTime;
+        //Debug.DrawRay(PlayerRb.position, new Vector3(FinalKnockBack.x,0.0f,FinalKnockBack.z), Color.red);
+
+
+        if (InCollision)
+        {
+            KnockTime = RecoverTime;
+        }
+        else
+        {
+            KnockTime -= Time.deltaTime;
+        }
+        //}
+        if (KnockTime <= 0.0f) {
+            //if (PlayerP.IsGround_2 == true || PlayerP.isGrounded == true)
+                    KnockTime = 0.0f;
+            //else
+            //    KnockTime = RecoverTime;
+        }
+
+
+
+        if (TimeLeft <= 0.0f )
+        {
+            TimeLeft = 0.0f;
+            if (PlayerP.IsGround_2 == true || PlayerP.isGrounded == true){
+                recovOngroundT -= Time.deltaTime;
+                if (recovOngroundT <= 0.0f)
+                {
+                     recovOngroundT = 0.4f * RecoverTime;
+                     collided = false;
                 }
             }
+            if (collided == false)
+            {
+                     TimeLeft = RecoverTime;
+            }
+        }
     }
 
 
