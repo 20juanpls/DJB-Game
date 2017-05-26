@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 public class PlayerLavaDeath : MonoBehaviour {
 
-    //public GameObject loseScreen;
-    //public GameObject gameOverScreen;
+    public GameObject loseScreen;
+    public GameObject gameOverScreen;
     public bool LoseScreenActive;
     public bool gameOverScreenActive;
 	//public GameObject playerFolder;
@@ -29,9 +29,15 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public int Deaths;
 
+	public AudioSource background;
+	public AudioClip deathClip;
+	public AudioClip backgroundClip;
+
+	bool playingDed = false;
+
 	// Use this for initialization
 	void Start () {
-		//loseScreen = GameObject.Find ("LoseScreenCanvas");
+		loseScreen = GameObject.Find ("LoseScreenCanvas");
 		//gameOverScreen = GameObject.Find ("GameOverCanvas");
         //assignButton();
         //loseScreen.SetActive (false);
@@ -46,25 +52,45 @@ public class PlayerLavaDeath : MonoBehaviour {
 		//heart resetting stuff
 		hearts = GameObject.FindGameObjectsWithTag("HeartHP");
 
+		background = this.GetComponent<AudioSource> ();
+
+		background.clip = backgroundClip;
+		background.Play();
     }
 
     void Update() {
 
 		//Debug.Log ("Deaths:"+Deaths);
 		if (player.GetComponent<PlayerHealth> ().Lives - 1 == Deaths && player.GetComponent<PlayerHealth> ().IsDead == true) {
-            //gameOverScreen.gameObject.SetActive (true);
-            gameOverScreenActive = true;
-            player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+			//gameOverScreen.gameObject.SetActive (true);
+			//player.GetComponent<PlayerMovement_Ver2> ().DontMove = true;
+			if (!playingDed){
+				playingDed = true;
+				Debug.Log ("i am ded");
+				background.Stop ();
+				background.clip = deathClip;
+				background.Play();
+                gameOverScreenActive = true;
+                //loseScreen.gameObject.SetActive (true);	
+            }
             //Deaths++;
         } else {
 			if (player.GetComponent<PlayerHealth> ().IsDead == true) {
-                //loseScreen.gameObject.SetActive (true);
-                LoseScreenActive = true;
+				if (!playingDed){
+					playingDed = true;
+					Debug.Log ("i am ded");
+					background.Stop ();
+					background.clip = deathClip;
+					background.Play();
+                    LoseScreenActive = true;
+                    //loseScreen.gameObject.SetActive (true);	
+                }
                 //Deaths++;
             } else {
                 //loseScreen.gameObject.SetActive (false);
                 LoseScreenActive = false;
-            }
+                playingDed = false;
+			}
 		}
 
         if (PlayerWinState == true) {
@@ -128,6 +154,8 @@ public class PlayerLavaDeath : MonoBehaviour {
 
 	public void Restart(){
 
+		background.clip = backgroundClip;
+		background.Play ();
 		//Reset coins
 		ResetCollectables();
 
