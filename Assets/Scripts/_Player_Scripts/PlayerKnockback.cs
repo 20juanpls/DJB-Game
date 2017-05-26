@@ -197,10 +197,10 @@ public class PlayerKnockback : MonoBehaviour {
         }
         //}
         if (KnockTime <= 0.0f) {
-            if (PlayerP.IsGround_2 == true || PlayerP.isGrounded == true)
+            //if (PlayerP.IsGround_2 == true || PlayerP.isGrounded == true)
                     KnockTime = 0.0f;
-            else
-                KnockTime = RecoverTime;
+            //else
+            //    KnockTime = RecoverTime;
         }
 
 
