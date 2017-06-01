@@ -41,7 +41,7 @@ public class GemMovement : MonoBehaviour {
             }
         }
         else {
-            Debug.Log(FloorDist);
+            //Debug.Log(FloorDist);
             if (FloorDist >= MinFloorDist) {
                 this.transform.Translate(Vector3.down * DownWardSpeed * Time.deltaTime);
             }

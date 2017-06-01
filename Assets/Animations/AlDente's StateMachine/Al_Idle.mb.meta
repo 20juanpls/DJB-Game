@@ -1,0 +1,1185 @@
+fileFormatVersion: 2
+guid: e8abe9d3736a8465991f642cb08d289d
+timeCreated: 1495825663
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Abs_Control
+    100002: //RootNode
+    100004: AlDenteUved:Brutus
+    100006: Chest_Control
+    100008: ClavicleGrp
+    100010: cluster_ABs
+    100012: cluster_Back
+    100014: cluster_Chest
+    100016: cluster_Hip
+    100018: curve1
+    100020: curve3
+    100022: Global_Control
+    100024: group1
+    100026: group2
+    100028: group3
+    100030: group4
+    100032: grp_All
+    100034: grp_All_Curve_Controls
+    100036: grp_IK_Handles
+    100038: grp_Joints
+    100040: Head_Control
+    100042: Head_End_joint
+    100044: Head_ik_Handle
+    100046: Head_joint
+    100048: Hip_Control
+    100050: Hip_Shake_Control
+    100052: joint4
+    100054: L_Ankle_joint
+    100056: L_Clavicle_Control
+    100058: L_Clavicle_joint
+    100060: L_Elbow_Control
+    100062: L_Elbow_joint
+    100064: L_Foot_joint
+    100066: L_Hand_Control
+    100068: L_Hand_joint
+    100070: L_Hip_joint
+    100072: L_ik_Ankle_Handle
+    100074: L_ik_Clavicle_Handle
+    100076: L_ik_Elbow_Control
+    100078: L_ik_Foot_Handle
+    100080: L_ik_Hand_Handle
+    100082: L_ik_Toe_Handle
+    100084: L_Knee_Control
+    100086: L_Knee_joint
+    100088: L_Leg_Control
+    100090: L_legLock_joint1
+    100092: L_legLock_joint2
+    100094: L_legLock_joint3
+    100096: L_legLock_joint4
+    100098: L_Nub_joint1
+    100100: L_Nub_joint2
+    100102: L_Nub_joint3
+    100104: L_Shoulder_Control
+    100106: L_Shoulder_joint
+    100108: L_Thumb_joint1
+    100110: L_Thumb_joint2
+    100112: L_toe_joint
+    100114: L_Wrist_Control
+    100116: L_Wrist_Control_grp
+    100118: L_Wrist_joint
+    100120: Neck_ik_Handle
+    100122: Neck_joint
+    100124: R_Ankle_joint
+    100126: R_Clavicle_Control
+    100128: R_Clavicle_joint
+    100130: R_Elbow_Control
+    100132: R_Elbow_joint
+    100134: R_Foot_joint
+    100136: R_Hand_Control
+    100138: R_Hand_joint
+    100140: R_Hip_joint
+    100142: R_ik_Ankle_Handle
+    100144: R_ik_Cavicle_Handle
+    100146: R_ik_Elbow_Control
+    100148: R_ik_Foot_Handle
+    100150: R_ik_Hand_Handle
+    100152: R_ik_Toe_Handle
+    100154: R_Knee_Control
+    100156: R_Knee_joint
+    100158: R_Leg_Control
+    100160: R_legLock_joint1
+    100162: R_legLock_joint2
+    100164: R_legLock_joint3
+    100166: R_Nub_joint1
+    100168: R_Nub_joint2
+    100170: R_Nub_joint3
+    100172: R_Shoulder_Control
+    100174: R_Shoulder_joint
+    100176: R_Thumb_joint1
+    100178: R_Thumb_joint2
+    100180: R_toe_joint
+    100182: R_Wrist_Control
+    100184: R_Wrist_Control_grp
+    100186: R_Wrist_joint
+    100188: Root_joint
+    100190: Spine1_joint
+    100192: Spine2_joint
+    100194: Spine3_joint
+    100196: Spine4_joint
+    100198: Spine5_joint
+    100200: Spine_ik_Handle
+    400000: Abs_Control
+    400002: //RootNode
+    400004: AlDenteUved:Brutus
+    400006: Chest_Control
+    400008: ClavicleGrp
+    400010: cluster_ABs
+    400012: cluster_Back
+    400014: cluster_Chest
+    400016: cluster_Hip
+    400018: curve1
+    400020: curve3
+    400022: Global_Control
+    400024: group1
+    400026: group2
+    400028: group3
+    400030: group4
+    400032: grp_All
+    400034: grp_All_Curve_Controls
+    400036: grp_IK_Handles
+    400038: grp_Joints
+    400040: Head_Control
+    400042: Head_End_joint
+    400044: Head_ik_Handle
+    400046: Head_joint
+    400048: Hip_Control
+    400050: Hip_Shake_Control
+    400052: joint4
+    400054: L_Ankle_joint
+    400056: L_Clavicle_Control
+    400058: L_Clavicle_joint
+    400060: L_Elbow_Control
+    400062: L_Elbow_joint
+    400064: L_Foot_joint
+    400066: L_Hand_Control
+    400068: L_Hand_joint
+    400070: L_Hip_joint
+    400072: L_ik_Ankle_Handle
+    400074: L_ik_Clavicle_Handle
+    400076: L_ik_Elbow_Control
+    400078: L_ik_Foot_Handle
+    400080: L_ik_Hand_Handle
+    400082: L_ik_Toe_Handle
+    400084: L_Knee_Control
+    400086: L_Knee_joint
+    400088: L_Leg_Control
+    400090: L_legLock_joint1
+    400092: L_legLock_joint2
+    400094: L_legLock_joint3
+    400096: L_legLock_joint4
+    400098: L_Nub_joint1
+    400100: L_Nub_joint2
+    400102: L_Nub_joint3
+    400104: L_Shoulder_Control
+    400106: L_Shoulder_joint
+    400108: L_Thumb_joint1
+    400110: L_Thumb_joint2
+    400112: L_toe_joint
+    400114: L_Wrist_Control
+    400116: L_Wrist_Control_grp
+    400118: L_Wrist_joint
+    400120: Neck_ik_Handle
+    400122: Neck_joint
+    400124: R_Ankle_joint
+    400126: R_Clavicle_Control
+    400128: R_Clavicle_joint
+    400130: R_Elbow_Control
+    400132: R_Elbow_joint
+    400134: R_Foot_joint
+    400136: R_Hand_Control
+    400138: R_Hand_joint
+    400140: R_Hip_joint
+    400142: R_ik_Ankle_Handle
+    400144: R_ik_Cavicle_Handle
+    400146: R_ik_Elbow_Control
+    400148: R_ik_Foot_Handle
+    400150: R_ik_Hand_Handle
+    400152: R_ik_Toe_Handle
+    400154: R_Knee_Control
+    400156: R_Knee_joint
+    400158: R_Leg_Control
+    400160: R_legLock_joint1
+    400162: R_legLock_joint2
+    400164: R_legLock_joint3
+    400166: R_Nub_joint1
+    400168: R_Nub_joint2
+    400170: R_Nub_joint3
+    400172: R_Shoulder_Control
+    400174: R_Shoulder_joint
+    400176: R_Thumb_joint1
+    400178: R_Thumb_joint2
+    400180: R_toe_joint
+    400182: R_Wrist_Control
+    400184: R_Wrist_Control_grp
+    400186: R_Wrist_joint
+    400188: Root_joint
+    400190: Spine1_joint
+    400192: Spine2_joint
+    400194: Spine3_joint
+    400196: Spine4_joint
+    400198: Spine5_joint
+    400200: Spine_ik_Handle
+    4300000: AlDenteUved:Brutus
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: AlDenteUved:Brutus
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AlDenteUved:Brutus
+        weight: 0
+      - path: Global_Control
+        weight: 0
+      - path: grp_All
+        weight: 1
+      - path: grp_All/grp_All_Curve_Controls
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Abs_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/ClavicleGrp
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/ClavicleGrp/L_Clavicle_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/ClavicleGrp/R_Clavicle_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/curve3
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Chest_Control/curve3/Head_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/Hip_Control/Hip_Shake_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Hand_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_ik_Elbow_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Knee_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_ik_Toe_Handle
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3/L_ik_Foot_Handle
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3/L_legLock_joint4
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Leg_Control/L_legLock_joint1/L_legLock_joint2/L_legLock_joint3/L_legLock_joint4/L_ik_Ankle_Handle
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Shoulder_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Shoulder_Control/L_Elbow_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Wrist_Control_grp
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/L_Wrist_Control_grp/L_Wrist_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Hand_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_ik_Elbow_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Knee_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_ik_Toe_Handle
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3/joint4
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3/joint4/R_ik_Ankle_Handle
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Leg_Control/R_legLock_joint1/R_legLock_joint2/R_legLock_joint3/R_ik_Foot_Handle
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Shoulder_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Shoulder_Control/R_Elbow_Control
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Wrist_Control_grp
+        weight: 0
+      - path: grp_All/grp_All_Curve_Controls/R_Wrist_Control_grp/R_Wrist_Control
+        weight: 0
+      - path: grp_All/grp_IK_Handles
+        weight: 0
+      - path: grp_All/grp_IK_Handles/L_ik_Clavicle_Handle
+        weight: 0
+      - path: grp_All/grp_IK_Handles/L_ik_Hand_Handle
+        weight: 0
+      - path: grp_All/grp_IK_Handles/Neck_ik_Handle
+        weight: 0
+      - path: grp_All/grp_IK_Handles/Neck_ik_Handle/Head_ik_Handle
+        weight: 0
+      - path: grp_All/grp_IK_Handles/R_ik_Cavicle_Handle
+        weight: 0
+      - path: grp_All/grp_IK_Handles/R_ik_Hand_Handle
+        weight: 0
+      - path: grp_All/grp_IK_Handles/Spine_ik_Handle
+        weight: 0
+      - path: grp_All/grp_Joints
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/curve1
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group1
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group1/cluster_Hip
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group2
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group2/cluster_ABs
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group3
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group3/cluster_Chest
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group4
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/group4/cluster_Back
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint/L_Ankle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint/L_Ankle_joint/L_Foot_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/L_Hip_joint/L_Knee_joint/L_Ankle_joint/L_Foot_joint/L_toe_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint/R_Ankle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint/R_Ankle_joint/R_Foot_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/R_Hip_joint/R_Knee_joint/R_Ankle_joint/R_Foot_joint/R_toe_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint/L_Nub_joint1
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint/L_Nub_joint1/L_Nub_joint2
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint/L_Nub_joint1/L_Nub_joint2/L_Nub_joint3
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint/L_Thumb_joint1
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/L_Clavicle_joint/L_Shoulder_joint/L_Elbow_joint/L_Wrist_joint/L_Hand_joint/L_Thumb_joint1/L_Thumb_joint2
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/Neck_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/Neck_joint/Head_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/Neck_joint/Head_joint/Head_End_joint
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint
+        weight: 1
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint/R_Nub_joint1
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint/R_Nub_joint1/R_Nub_joint2
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint/R_Nub_joint1/R_Nub_joint2/R_Nub_joint3
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint/R_Thumb_joint1
+        weight: 0
+      - path: grp_All/grp_Joints/Root_joint/Spine1_joint/Spine2_joint/Spine3_joint/Spine4_joint/Spine5_joint/R_Clavicle_joint/R_Shoulder_joint/R_Elbow_joint/R_Wrist_joint/R_Hand_joint/R_Thumb_joint1/R_Thumb_joint2
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: Root_joint
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Hip_joint
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Hip_joint
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Knee_joint
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Knee_joint
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Ankle_joint
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Ankle_joint
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine2_joint
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine3_joint
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck_joint
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head_joint
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Clavicle_joint
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Clavicle_joint
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Shoulder_joint
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Shoulder_joint
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Elbow_joint
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Elbow_joint
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Wrist_joint
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Wrist_joint
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_toe_joint
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_toe_joint
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Al(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: AlDenteUved:Brutus
+      parentName: Al(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Global_Control
+      parentName: Al(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_All
+      parentName: Al(Clone)
+      position: {x: -0.0028819777, y: 0, z: 3.9055514}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_All_Curve_Controls
+      parentName: grp_All
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hip_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: -0, y: 7.2284584, z: -4.114931}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Abs_Control
+      parentName: Hip_Control
+      position: {x: -3.309858e-15, y: 2.1122842, z: 0.47349992}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chest_Control
+      parentName: Hip_Control
+      position: {x: -0, y: 6.1753798, z: 0.28296232}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.48146272, y: 0.48146272, z: 0.48146272}
+    - name: ClavicleGrp
+      parentName: Chest_Control
+      position: {x: -0, y: -0.04184723, z: -0.0020906925}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 2.077004, y: 2.077004, z: 2.077004}
+    - name: L_Clavicle_Control
+      parentName: ClavicleGrp
+      position: {x: -1.1931844, y: 0.5357378, z: 0.1612095}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Clavicle_Control
+      parentName: ClavicleGrp
+      position: {x: 1.19318, y: 0.5357228, z: 0.16120835}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: curve3
+      parentName: Chest_Control
+      position: {x: -0, y: 5.096613, z: -0.10934925}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 2.077004, y: 2.077004, z: 2.077004}
+    - name: Head_Control
+      parentName: curve3
+      position: {x: -2.9643303e-15, y: 0.83785266, z: 0.09378565}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hip_Shake_Control
+      parentName: Hip_Control
+      position: {x: -2.0405703e-15, y: 0.52121896, z: 0.20953259}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Hand_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: -7.4845333, y: 13.924334, z: -3.60074}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ik_Elbow_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: -4.5043354, y: 13.865451, z: -8.459063}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Knee_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: -1.8239137, y: 3.9589913, z: -0.95947814}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Leg_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: -1.9525002, y: 1.5178083, z: -4.5572505}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_legLock_joint1
+      parentName: L_Leg_Control
+      position: {x: 0.1778636, y: -1.2881438, z: -0.55141354}
+      rotation: {x: 0.033306696, y: 0.5772829, z: 0.023576727, w: 0.8155239}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_legLock_joint2
+      parentName: L_legLock_joint1
+      position: {x: -3.0572515, y: -0.0040881536, z: 0.015074662}
+      rotation: {x: -0.05731683, y: 0.99835604, z: -5.044908e-16, w: 2.8963428e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ik_Toe_Handle
+      parentName: L_legLock_joint2
+      position: {x: -0.000026053132, y: 0, z: 0.000008481813}
+      rotation: {x: -0.06825855, y: 0.997461, z: 0.018681373, w: 0.007955055}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_legLock_joint3
+      parentName: L_legLock_joint2
+      position: {x: -1.3243843, y: -0.18169814, z: -0.024626387}
+      rotation: {x: 0, y: -0, z: -0.32287422, w: 0.9464419}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ik_Foot_Handle
+      parentName: L_legLock_joint3
+      position: {x: -0.000014771129, y: -0.0000309216, z: 0.0000069605935}
+      rotation: {x: 0.03850115, y: 0.999089, z: 0.009018768, w: -0.016046537}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_legLock_joint4
+      parentName: L_legLock_joint3
+      position: {x: -1.7749282, y: 0.13646515, z: 0.058355127}
+      rotation: {x: -0.29279837, y: 0.6436374, z: 0.29279837, w: 0.6436374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ik_Ankle_Handle
+      parentName: L_legLock_joint4
+      position: {x: 4.440892e-16, y: 2.220446e-16, z: 0}
+      rotation: {x: 0.024825128, y: 0.16788475, z: 0.01756114, w: 0.98533756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Shoulder_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: -1.1931844, y: 13.919428, z: -3.6717658}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Elbow_Control
+      parentName: L_Shoulder_Control
+      position: {x: -3.310876, y: -0.053871218, z: 0.05614069}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Wrist_Control_grp
+      parentName: grp_All_Curve_Controls
+      position: {x: -4.505055, y: 13.921336, z: -3.6918359}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Wrist_Control
+      parentName: L_Wrist_Control_grp
+      position: {x: -2.9769971, y: 0.009062933, z: 0.15043579}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Hand_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: 7.48453, y: 13.924319, z: -3.6007364}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ik_Elbow_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: 4.5042915, y: 13.97908, z: -8.46264}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Knee_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: 1.8251735, y: 3.9576864, z: -0.9113355}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Leg_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: 1.9525, y: 1.51783, z: -4.55725}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_legLock_joint1
+      parentName: R_Leg_Control
+      position: {x: -0.17786002, y: -1.288165, z: -0.5514102}
+      rotation: {x: 0.8317109, y: -0.017825963, z: 0.553395, w: -0.041149545}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_legLock_joint2
+      parentName: R_legLock_joint1
+      position: {x: 3.0549834, y: -0.008710295, z: -0.19535217}
+      rotation: {x: -0.05731683, y: 0.99835604, z: -2.0562479e-15, w: 1.1805168e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ik_Toe_Handle
+      parentName: R_legLock_joint2
+      position: {x: -1.7763568e-15, y: -4.718448e-16, z: -2.6645353e-15}
+      rotation: {x: -0.030603496, y: 0.7116852, z: 0.69835895, w: -0.069731295}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_legLock_joint3
+      parentName: R_legLock_joint2
+      position: {x: 1.3215092, y: 0.18845984, z: -0.07555735}
+      rotation: {x: 0, y: -0, z: -0.32287422, w: 0.9464419}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint4
+      parentName: R_legLock_joint3
+      position: {x: 1.7707882, y: -0.13247202, z: -0.13844872}
+      rotation: {x: -0.29279837, y: 0.6436374, z: 0.29279837, w: 0.6436374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ik_Ankle_Handle
+      parentName: joint4
+      position: {x: 5.896674e-10, y: 0.0000000065912005, z: 0.0000000010807484}
+      rotation: {x: 0.98533756, y: 0.01756114, z: -0.16788475, w: -0.024825128}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ik_Foot_Handle
+      parentName: R_legLock_joint3
+      position: {x: -4.440892e-16, y: -8.881784e-16, z: -1.3322676e-15}
+      rotation: {x: 0.053549618, y: 0.7646899, z: 0.6421429, w: -0.005857299}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Shoulder_Control
+      parentName: grp_All_Curve_Controls
+      position: {x: 1.19318, y: 13.919413, z: -3.671767}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Elbow_Control
+      parentName: R_Shoulder_Control
+      position: {x: 3.3108368, y: 0.059569843, z: 0.05256519}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Wrist_Control_grp
+      parentName: grp_All_Curve_Controls
+      position: {x: 4.5050583, y: 13.922675, z: -3.691835}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Wrist_Control
+      parentName: R_Wrist_Control_grp
+      position: {x: 2.9779482, y: 0.011164453, z: 0.16247775}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_IK_Handles
+      parentName: grp_All
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ik_Clavicle_Handle
+      parentName: grp_IK_Handles
+      position: {x: -1.1931844, y: 13.919428, z: -3.6717658}
+      rotation: {x: -0.034475345, y: -1.2670902e-14, z: -1.24026384e-14, w: 0.99940556}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ik_Hand_Handle
+      parentName: grp_IK_Handles
+      position: {x: -7.4845333, y: 13.924334, z: -3.60074}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck_ik_Handle
+      parentName: grp_IK_Handles
+      position: {x: -9.570036e-15, y: 16.69552, z: -3.7908309}
+      rotation: {x: -0.52676165, y: 0.57572806, z: -0.4105328, w: 0.47172257}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_ik_Handle
+      parentName: Neck_ik_Handle
+      position: {x: -4.2976036, y: -0.0033692718, z: -0.0007570542}
+      rotation: {x: -0.0007887552, y: -0.000088387795, z: 0.0003919246, w: 0.99999964}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ik_Cavicle_Handle
+      parentName: grp_IK_Handles
+      position: {x: 1.19318, y: 13.919413, z: -3.671767}
+      rotation: {x: -1.1862782e-14, y: 0.99940556, z: -0.034475345, w: 1.21233115e-14}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ik_Hand_Handle
+      parentName: grp_IK_Handles
+      position: {x: 7.48453, y: 13.924319, z: -3.6007364}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_ik_Handle
+      parentName: grp_IK_Handles
+      position: {x: -7.522195e-15, y: 14.952498, z: -3.8223686}
+      rotation: {x: -0.4984479, y: 0.50154734, z: -0.4984479, w: 0.50154734}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_Joints
+      parentName: grp_All
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root_joint
+      parentName: grp_Joints
+      position: {x: 0, y: 7.4505734, z: -4.114931}
+      rotation: {x: -0.38531205, y: 0.59290355, z: -0.38531205, w: 0.59290355}
+      scale: {x: 1, y: 1, z: 1}
+    - name: curve1
+      parentName: Root_joint
+      position: {x: 4.934217, y: -6.696027, z: -5.6931774e-15}
+      rotation: {x: 0.38531205, y: -0.59290355, z: 0.38531205, w: 0.59290355}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group1
+      parentName: Root_joint
+      position: {x: -0.23476982, y: 1.3706741, z: -0.25}
+      rotation: {x: 0.38531205, y: -0.59290355, z: 0.38531205, w: 0.59290355}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_Hip
+      parentName: group1
+      position: {x: 0.25, y: -0.25, z: 1.3667216}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group2
+      parentName: Root_joint
+      position: {x: -2.2673936, y: 2.249856, z: -0.25}
+      rotation: {x: 0.38531205, y: -0.59290355, z: 0.38531205, w: 0.59290355}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_ABs
+      parentName: group2
+      position: {x: 0.25, y: -0.8734393, z: 1.6085687}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group3
+      parentName: Root_joint
+      position: {x: -4.6463637, y: 3.3071766, z: -0.25}
+      rotation: {x: 0.38531205, y: -0.59290355, z: 0.38531205, w: 0.59290355}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_Chest
+      parentName: group3
+      position: {x: 0.25, y: -1.2622322, z: 1.5511166}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group4
+      parentName: Root_joint
+      position: {x: -6.7884126, y: 4.259197, z: -0.25}
+      rotation: {x: 0.38531205, y: -0.59290355, z: 0.38531205, w: 0.59290355}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_Back
+      parentName: group4
+      position: {x: 0.25, y: -0.20911388, z: 1.4276313}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine1_joint
+      parentName: Root_joint
+      position: {x: -0.56139517, y: 0.020213773, z: -1.4103302e-15}
+      rotation: {x: 5.7577525e-16, y: 1.4723716e-16, z: -0.12656753, w: 0.991958}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine2_joint
+      parentName: Spine1_joint
+      position: {x: -1.6128136, y: -4.440892e-16, z: -8.0080844e-17}
+      rotation: {x: 0.9954745, y: -0.0950292, z: 4.4446333e-16, w: 1.0393971e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine3_joint
+      parentName: Spine2_joint
+      position: {x: -2.2153015, y: 5.551115e-17, z: 2.750603e-16}
+      rotation: {x: 0.9997363, y: 0.02296491, z: -1.8895533e-16, w: -6.4979006e-15}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine4_joint
+      parentName: Spine3_joint
+      position: {x: -1.8533236, y: 1.4126665e-15, z: -2.0509033e-16}
+      rotation: {x: 2.7435196e-15, y: 9.856444e-16, z: 0.03902499, w: 0.99923825}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine5_joint
+      parentName: Spine4_joint
+      position: {x: -1.54869, y: -7.9238535e-16, z: -1.749123e-16}
+      rotation: {x: 2.218891e-15, y: -8.309172e-17, z: -0.037421186, w: 0.9992996}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck_joint
+      parentName: Spine5_joint
+      position: {x: -0.9073071, y: 1.1482413e-15, z: -1.0002942e-16}
+      rotation: {x: -0.109839626, y: -0.009919691, z: 0.08939595, w: 0.9898713}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_joint
+      parentName: Neck_joint
+      position: {x: -0.8633193, y: 5.7868624e-16, z: -9.9843837e-17}
+      rotation: {x: -0.0007887552, y: -0.000024420888, z: 0.00010828584, w: 0.9999997}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_End_joint
+      parentName: Head_joint
+      position: {x: -4.297605, y: -1.4665221e-13, z: -4.970909e-16}
+      rotation: {x: 0.45285875, y: -0.5430645, z: 0.45285875, w: 0.5430645}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Clavicle_joint
+      parentName: Spine5_joint
+      position: {x: 1.0209972, y: -0.08191737, z: -0.55242866}
+      rotation: {x: -0.4930672, y: 0.5087972, z: -0.5066578, w: -0.49123108}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Shoulder_joint
+      parentName: L_Clavicle_joint
+      position: {x: -0.6407557, y: 0, z: 4.440892e-16}
+      rotation: {x: 0.9994633, y: -0.016000718, z: 0.000170223, w: -0.02858503}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Elbow_joint
+      parentName: L_Shoulder_joint
+      position: {x: -3.3119318, y: 0, z: 1.1948775e-14}
+      rotation: {x: -0.000000036090963, y: -0.009212878, z: -0.00000005667669, w: 0.99995756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Wrist_joint
+      parentName: L_Elbow_joint
+      position: {x: -2.5037217, y: 1.7763568e-15, z: -7.993606e-15}
+      rotation: {x: 0.76407474, y: -0.02551742, z: 0.030279348, w: 0.64391136}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Hand_joint
+      parentName: L_Wrist_joint
+      position: {x: -0.47841027, y: 4.440892e-16, z: 0}
+      rotation: {x: 0.6444538, y: -0.067284465, z: -0.00048062162, w: 0.761677}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Thumb_joint1
+      parentName: L_Hand_joint
+      position: {x: -0.13911131, y: 0.40410364, z: -0.0055480325}
+      rotation: {x: 0, y: -0, z: -0.44099197, w: 0.89751107}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Thumb_joint2
+      parentName: L_Thumb_joint1
+      position: {x: -0.6531266, y: 3.1086245e-15, z: 0}
+      rotation: {x: 0, y: 0, z: 0.44099197, w: 0.89751107}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Nub_joint1
+      parentName: L_Hand_joint
+      position: {x: -0.547276, y: -0.02220175, z: -0.0055480325}
+      rotation: {x: 0, y: 0, z: 0.014080319, w: 0.9999009}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Nub_joint2
+      parentName: L_Nub_joint1
+      position: {x: -0.6442487, y: -1.7763568e-15, z: 0}
+      rotation: {x: 0, y: -0, z: -0.0062688785, w: 0.9999804}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Nub_joint3
+      parentName: L_Nub_joint2
+      position: {x: -0.58057183, y: 1.7763568e-15, z: -4.440892e-16}
+      rotation: {x: 0, y: -0, z: -0.0078117847, w: 0.9999695}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Clavicle_joint
+      parentName: Spine5_joint
+      position: {x: 1.0210121, y: -0.08191519, z: 0.552429}
+      rotation: {x: -0.49306715, y: 0.50879735, z: 0.50665784, w: 0.49123102}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Shoulder_joint
+      parentName: R_Clavicle_joint
+      position: {x: -0.640751, y: 0, z: -7.8469364e-17}
+      rotation: {x: 0.9990548, y: -0.016171198, z: -0.00035327033, w: 0.04034842}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Elbow_joint
+      parentName: R_Shoulder_joint
+      position: {x: -3.3119407, y: -4.0542912e-16, z: -7.201989e-15}
+      rotation: {x: 3.335733e-16, y: 0.009214489, z: -1.7321308e-17, w: 0.99995756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Wrist_joint
+      parentName: R_Elbow_joint
+      position: {x: -2.5037181, y: -8.881784e-16, z: 8.881784e-15}
+      rotation: {x: -0.6382328, y: 0.030460885, z: 0.025286822, w: 0.7688248}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Hand_joint
+      parentName: R_Wrist_joint
+      position: {x: -0.47840565, y: -1.7763568e-15, z: -4.440892e-16}
+      rotation: {x: 0.6527414, y: 0.41121978, z: 0.3979698, w: -0.49643445}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Thumb_joint1
+      parentName: R_Hand_joint
+      position: {x: -0.4274099, y: -8.881784e-16, z: 4.440892e-16}
+      rotation: {x: 0.017547201, y: -0.00946328, z: 0.16205904, w: 0.98657966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Thumb_joint2
+      parentName: R_Thumb_joint1
+      position: {x: -0.65312314, y: 0, z: -4.440892e-16}
+      rotation: {x: -3.0825024e-16, y: -1.5007157e-17, z: 0.89751434, w: -0.4409853}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Nub_joint1
+      parentName: R_Hand_joint
+      position: {x: -0.15720719, y: -0.5244618, z: -0.016271604}
+      rotation: {x: 0.011346522, y: -0.01639251, z: 0.59189594, w: 0.8057678}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Nub_joint2
+      parentName: R_Nub_joint1
+      position: {x: -0.6442443, y: 0, z: -4.440892e-16}
+      rotation: {x: 4.4408066e-16, y: -2.758614e-18, z: -0.0062118466, w: 0.99998075}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Nub_joint3
+      parentName: R_Nub_joint2
+      position: {x: -0.5805713, y: 8.881784e-15, z: -1.3322676e-15}
+      rotation: {x: -2.8326825e-16, y: 2.2201401e-18, z: 0.9999693, w: 0.007837349}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Hip_joint
+      parentName: Spine1_joint
+      position: {x: 0.50045866, y: -0.23404343, z: 1.53725}
+      rotation: {x: -0.7147049, y: 0.016168786, z: -0.070487544, w: 0.6956774}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Knee_joint
+      parentName: R_Hip_joint
+      position: {x: 3.2734463, y: 0.0000049136647, z: -0.0000041400754}
+      rotation: {x: -0.047470674, y: -0.09481885, z: -0.017755216, w: 0.99420357}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Ankle_joint
+      parentName: R_Knee_joint
+      position: {x: 2.548879, y: 0.061552893, z: 0.020912016}
+      rotation: {x: -0.050961357, y: 0.41321635, z: 0.00639575, w: 0.9091833}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Foot_joint
+      parentName: R_Ankle_joint
+      position: {x: 1.7811254, y: 0.000000038984652, z: 0.00000035834154}
+      rotation: {x: -0.044903625, y: 0.41934568, z: -0.04997167, w: 0.90533733}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_toe_joint
+      parentName: R_Foot_joint
+      position: {x: 1.3370163, y: 0.0000038824132, z: -0.00000072735503}
+      rotation: {x: 0.4829786, y: -0.51110727, z: -0.49322808, w: 0.51208115}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Hip_joint
+      parentName: Spine1_joint
+      position: {x: 0.500459, y: -0.23404697, z: -1.5372502}
+      rotation: {x: -0.0026773526, y: -0.54619455, z: 0.8343073, w: 0.07480399}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Knee_joint
+      parentName: L_Hip_joint
+      position: {x: -3.2734418, y: -5.551115e-16, z: 8.326673e-17}
+      rotation: {x: -0.73937637, y: -0.09673706, z: -0.041299626, w: 0.6650255}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Ankle_joint
+      parentName: L_Knee_joint
+      position: {x: -2.5529776, y: 6.349088e-16, z: -1.3045121e-15}
+      rotation: {x: 0.8542018, y: 0.4158761, z: -0.057913147, w: 0.30664712}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Foot_joint
+      parentName: L_Ankle_joint
+      position: {x: -1.7811228, y: 1.2490009e-16, z: 3.330669e-16}
+      rotation: {x: -0.0057678903, y: -0.012024131, z: -0.42215773, w: 0.9064243}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_toe_joint
+      parentName: L_Foot_joint
+      position: {x: -1.337017, y: -2.471981e-17, z: 3.330669e-16}
+      rotation: {x: -0.0032685034, y: -0.57150716, z: -0.0046929577, w: 0.82057714}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7f7f72e08f97248e3988b68a3bcc3a7d,
+    type: 3}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

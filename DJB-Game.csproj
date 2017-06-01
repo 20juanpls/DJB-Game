@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -75,7 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Animations\Brutus State Machine\BrutusMechanimInputs.cs" />
+    <Compile Include="Assets\Animations\AlDente&apos;s StateMachine\BrutusMechanimInputs.cs" />
     <Compile Include="Assets\HubPortalColorer.cs" />
     <Compile Include="Assets\NewNPCStompScript.cs" />
     <Compile Include="Assets\Scripts\(OLD-DO NOT USE)Player_Scripts\ColliderIndicatorPlayer.cs" />
