@@ -12,11 +12,18 @@ public class MainMenu : MonoBehaviour {
 
 	private GameObject newGameButton;
 	private GameObject quitButton;
+    private GameObject creditsButton;
+    private GameObject creditsCanvas;
+
+    bool CreditsOpen;
 
 	void Start()
 	{
 		ES.firstSelectedGameObject = GameObject.Find ("NewGame_Button");
 		storeSelected = ES.firstSelectedGameObject;
+
+        creditsCanvas = GameObject.Find("MainMenu_Credits");
+        creditsCanvas.SetActive(false);
 
 		newGameButton = GameObject.Find ("NewGame_Button");
 		Button btn = newGameButton.GetComponent<Button> ();
@@ -26,7 +33,10 @@ public class MainMenu : MonoBehaviour {
 		Button butonn = quitButton.GetComponent<Button> ();
 		butonn.onClick.AddListener (Quit);
 
-	}
+        creditsButton = GameObject.Find("Settings_Button");
+        Button butnon = creditsButton.GetComponent<Button>();
+        butnon.onClick.AddListener(LoadCredits);
+    }
 
 	void Update()
 	{
@@ -37,16 +47,20 @@ public class MainMenu : MonoBehaviour {
 			else
 				storeSelected = ES.currentSelectedGameObject;
 		}
-	}
+        creditsCanvas.SetActive(CreditsOpen);
+    }
 
 	public void NewGame()
 	{
 		SceneManager.LoadScene ("Stage_Hub");
 	}
 
-	public void LoadGame()
+	public void LoadCredits()
 	{
-		
+        if (!CreditsOpen)
+            CreditsOpen = true;
+        else if (CreditsOpen)
+            CreditsOpen = false;
 	}
 
 	public void Quit()
